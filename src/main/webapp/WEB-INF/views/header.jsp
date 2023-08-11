@@ -41,6 +41,7 @@
 				<div class="main_section1">메인1</div>
 				<div class="main_section2">메인2</div>
 				<div class="main_section3">메인3</div>
+				<div class="main_section3">메인4</div>
 			</div>
 		</div>
 	</section>
