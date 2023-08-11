@@ -47,7 +47,7 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}
         port: ${{ secrets.SERVER_PORT }}
         source: webapps/ROOT.war
-        target: /usr/local/tomcat/webapps
+        target: /usr/local/tomcat
 
         
         
