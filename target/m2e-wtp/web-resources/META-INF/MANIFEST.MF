@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: soft7
+=======
+Built-By: yeonji
+>>>>>>> bd80c844f24efb588228059da00f63231e7857ae
 Build-Jdk: 1.8.0_361
 Created-By: Maven Integration for Eclipse
 
