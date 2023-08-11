@@ -33,7 +33,7 @@ jobs:
 
         
     - run: mvn --batch-mode --update-snapshots verify
-    - run: cp webapps/gittest-1.0.0-BUILD-SNAPSHOT.war webapps/ROOT.war
+    - run: mkdir wepapps && cp webapps/gittest-1.0.0-BUILD-SNAPSHOT.war webapps/ROOT.war
     - uses: actions/upload-artifact@v3
       with:
         name: Package
