@@ -26,12 +26,12 @@ jobs:
       with:
         java-version: '8'
         distribution: 'temurin'
+    # 파일권한
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-    
-    # 빌드 및 복사
+  # 스프링 프로젝트를 컴파일후 war파일로 build해서 아키텍트에 업로드
     - run: mvn --batch-mode --update-snapshots verify
     - run: mkdir staging && cp target/*.war staging
     - uses: actions/upload-artifact@v3
