@@ -33,7 +33,7 @@ jobs:
       run: ./gradlew build
   # 스프링 프로젝트를 컴파일후 war파일로 build해서 아키텍트에 업로드
     - run: mvn --batch-mode --update-snapshots verify
-    - run: mkdir webapps && cp webapps/GoCamping-1.0.0-BUILD-SNAPSHOT.war webapps/ROOT.war
+    - run: mkdir webapps && cp target/GoCamping-1.0.0-BUILD-SNAPSHOT.war webapps/ROOT.war
     - uses: actions/upload-artifact@v3
       with:
         name: Package
