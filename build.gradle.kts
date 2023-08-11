@@ -41,8 +41,8 @@ dependencies {
     runtimeOnly("org.slf4j:slf4j-log4j12:1.6.6")
     runtimeOnly("log4j:log4j:1.2.15")
     testImplementation("junit:junit:4.7")
-    providedCompile("javax.servlet:servlet-api:2.5")
-    providedCompile("javax.servlet.jsp:jsp-api:2.1")
+    compileOnly("javax.servlet:servlet-api:2.5")
+    compileOnly("javax.servlet.jsp:jsp-api:2.1")
 }
 
 group = "com.itbank"
