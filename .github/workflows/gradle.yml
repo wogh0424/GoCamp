@@ -46,7 +46,7 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         password: ${{ secrets.SERVER_PASSWORD }}
         port: ${{ secrets.SERVER_PORT }}
-        source: webapps/GoCamping-1.0.0-BUILD-SNAPSHOT.war
+        source: webapps/ROOT.war
         target: /usr/local/tomcat/webapps
 
         
