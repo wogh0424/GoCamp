@@ -30,12 +30,11 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-
-    - name: Prepare staging
-      run: mkdir staging && cp target/*.war staging
-
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v2
+    
+    # 빌드 및 복사
+    - run: mvn --batch-mode --update-snapshots verify
+    - run: mkdir staging && cp target/*.war staging
+    - uses: actions/upload-artifact@v3
       with:
         name: Package
         path: staging
