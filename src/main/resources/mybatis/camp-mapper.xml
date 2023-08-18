@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.itbank.repository.CampDAO">
+	<select id="selectAll" resultType="item" parameterType="searchPage">
+		select * from gocamp
+			where doNm like '%${search.sido}%'
+			and sigunguNm like '%${search.gungu}%'
+			and facltNm like '%${search.keyword}%'
+			and lctcl like '%${search.lctcl}%'
+			<if test='(search.dtl_sido) != null'>
+				and (
+				<foreach collection="search.dtl_sido" item="item1" separator=" or ">
+					doNm = '${item1}'
+				</foreach>
+				)
+			</if>
+			<if test='(search.facltDivNm) != null'>
+				and (
+				<foreach collection="search.facltDivNm" item="item2" separator=" or ">
+					facltDivNm = '${item2}'
+				</foreach>
+				)
+			</if>
+			<if test='(search.dtl_lctcl) != null'>
+				and (
+				<foreach collection="search.dtl_lctcl" item="item3" separator=" or ">
+					lctcl like '%${item3}%'
+				</foreach>
+				)
+			</if>
+			<if test='(search.induty) != null'>
+				and (
+				<foreach collection="search.induty" item="item4" separator=" or ">
+					induty like '%${item4}%'
+				</foreach>
+				)
+			</if>
+			<if test='(search.sbrsCl) != null'>
+				and (
+				<foreach collection="search.sbrsCl" item="item5" separator=" or ">
+					sbrsCl like '%${item5}%'
+				</foreach>
+				)
+			</if>
+			<if test='(search.themaEnvrnCl) != null'>
+				and (
+				<foreach collection="search.themaEnvrnCl" item="item6" separator=" or ">
+					themaEnvrnCl like '%${item6}%'
+				</foreach>
+				)
+			</if>
+			<if test='(search.trlerAcmpnyAt) != null'>
+				and trlerAcmpnyAt = 'Y'
+			</if>
+			<if test='(search.caravAcmpnyAt) != null'>
+				and caravAcmpnyAt = 'Y'
+			</if>
+			<if test='(search.animalCmgCl) != null'>
+				and animalCmgCl like '가능%'
+			</if>
+			order by
+				${page.order} <if test="page.order != 'facltNm'">desc</if>     
+			offset #{page.offset} rows
+			fetch next #{page.perPage} rows only;
+	</select>
+	
+	<select id="selectCnt" resultType="int" parameterType="search">
+		select count(*) from gocamp 
+		    where doNm like '%${sido}%'
+		    and sigunguNm like '%${gungu}%'
+		    and facltNm like '%${keyword}%'
+		    and lctcl like '%${lctcl}%'
+		    <if test='(dtl_sido) != null'>
+				and (
+				<foreach collection="dtl_sido" item="item" separator=" or ">
+					doNm = '${item}'
+				</foreach>
+				)
+			</if>
+			<if test='(facltDivNm) != null'>
+				and (
+				<foreach collection="facltDivNm" item="item2" separator=" or ">
+					facltDivNm = '${item2}'
+				</foreach>
+				)
+			</if>
+			<if test='(dtl_lctcl) != null'>
+				and (
+				<foreach collection="dtl_lctcl" item="item3" separator=" or ">
+					lctcl like '%${item3}%'
+				</foreach>
+				)
+			</if>
+			<if test='(induty) != null'>
+				and (
+				<foreach collection="induty" item="item4" separator=" or ">
+					induty like '%${item4}%'
+				</foreach>
+				)
+			</if>
+			<if test='(sbrsCl) != null'>
+				and (
+				<foreach collection="sbrsCl" item="item5" separator=" or ">
+					sbrsCl like '%${item5}%'
+				</foreach>
+				)
+			</if>
+			<if test='(themaEnvrnCl) != null'>
+				and (
+				<foreach collection="themaEnvrnCl" item="item6" separator=" or ">
+					themaEnvrnCl like '%${item6}%'
+				</foreach>
+				)
+			</if>
+			<if test='(trlerAcmpnyAt) != null'>
+				and trlerAcmpnyAt = 'Y'
+			</if>
+			<if test='(caravAcmpnyAt) != null'>
+				and caravAcmpnyAt = 'Y'
+			</if>
+			<if test='(animalCmgCl) != null'>
+				and animalCmgCl like '가능%'
+			</if>
+	</select>
+	
+	<select id="selectId" resultType="String" parameterType="String">
+		select facltNm from gocamp where contentId = #{contentId}
+	</select>
+ </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
