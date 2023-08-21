@@ -9,7 +9,6 @@
 <meta charset="UTF-8">
 <title>GoCamping</title>
 <style>
-
 .flex {
    display: flex;
    flex-flow: wrap;
@@ -115,12 +114,89 @@ a {
    font-weight: bold;
    cursor: pointer;
 }
+/* 타이틀 로고 부터 navbar까지 시작*/
+.title_logo {
+	display: flex;
+	justify-content: center;
+}
 
+.header_top {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background-color: rgba(0, 116, 60);
+	width: 100%;
+	height: 80px;
+}
+.header_top > ul {
+	display: flex;
+	padding: 10px;
+}
+.header_top > ul > li {
+	font-weight: bold;
+	color: white;
+	transition-duration: 0.5s;
+}
+.header_top > ul > li > a:hover{
+	background-color: white;
+	color: rgba(0, 116, 60);
+	text-decoration: initial;
+	transition-duration: 0.5s;
+}
+.header_top > ul > li > a {
+	text-decoration: none;
+	color: white;
+	padding: 28px;
+}
+/* 타이틀 로고 부터 navbar까지 끝*/
+/* 로그인 헤더 시작*/
+.header_login {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	height: 40px;
+	background-color: rgba(0, 116, 60);
+	border-bottom: 1px solid white;
+}
+.header_login > ul {
+	display: flex;
+	list-style: none;
+}
+.header_login > ul > li {
+	margin: 20px;
+	color: white;
+	font-weight: bold;
+}
+.header_login > ul > li > a{
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
-
-	<h1>
-		<a href="${cpath }/main">프로젝트 기술점검표</a>
-	</h1>
-	<hr>
+	<header>
+		<div class="title_logo">
+			<a href="${cpath }"><img src="${cpath }/resources/image/camping_logo.png"></a>
+		</div>
+		<div class="header_login">
+			<ul>
+				<li>현재 접속 아이디 [ el태그 추가  ]</li> <!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
+				<li><a href="${cpath }/login/loginForm">LOGIN</a></li>
+				<li><a href="">LOGOUT</a></li>
+				<li><a href="">SIGN</a></li>
+			</ul>
+		</div>
+	</header>
+	<nav>
+		<div class="header_top">
+			<ul>
+				<li><a href="${cpath }/main">MENU</a></li>
+				<li><a href="">MENU</a></li>
+				<li><a href="">MENU</a></li>
+				<li><a href="">MENU</a></li>
+				<li><a href="">MENU</a></li>
+			</ul>
+		</div>
+	</nav>
