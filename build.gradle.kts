@@ -9,6 +9,7 @@ plugins {
     `maven-publish`
 }
 
+
 repositories {
     mavenLocal()
     maven {
@@ -37,6 +38,10 @@ dependencies {
     api("commons-io:commons-io:2.13.0")
     api("commons-fileupload:commons-fileupload:1.5")
     api("com.jcraft:jsch:0.1.55")
+    api("com.sun.mail:jakarta.mail:2.0.1")   
+    api("org.springframework.security:spring-security-core:4.2.1.RELEASE")
+	api("org.springframework.security:spring-security-web:4.2.1.RELEASE")
+	api("org.springframework.security:spring-security-taglibs:4.2.1.RELEASE")
     runtimeOnly("org.slf4j:jcl-over-slf4j:1.6.6")
     runtimeOnly("org.slf4j:slf4j-log4j12:1.6.6")
     runtimeOnly("log4j:log4j:1.2.15")

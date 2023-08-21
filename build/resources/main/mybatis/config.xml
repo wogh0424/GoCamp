@@ -8,9 +8,15 @@
 		<setting name="cacheEnabled" value="false" />
 		<setting name="useGeneratedKeys" value="false" />
 		<setting name="mapUnderscoreToCamelCase" value="false"/>
+		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	
 	<typeAliases>
+		<typeAlias type="com.itbank.model.ItemDTO" alias="item"/>
+		<typeAlias type="com.itbank.model.PagingDTO" alias="paging"/>
+		<typeAlias type="com.itbank.model.SearchDTO" alias="search"/>
+		<typeAlias type="com.itbank.model.PageAndSearchDTO" alias="searchPage"/>
+		<typeAlias type="com.itbank.model.MemberDTO" alias="member"/>
 	</typeAliases>
 	
 </configuration>
