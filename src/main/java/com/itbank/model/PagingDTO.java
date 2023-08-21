@@ -27,7 +27,10 @@ public class PagingDTO {
 			page = pageCount;	// 페이지 개수(마지막 페이지)를 대입
 			this.page = page;	// 파라미터를 멤버 필드에 대입
 		}
-		if (page == 0) page = 1;
+		if (page <= 0) {
+			page = 1;
+			this.page = 1;
+		}
 		offset = (page - 1) * perPage;
 		
 		end = ((page - 1) / perSection + 1) * perSection;

@@ -11,6 +11,29 @@
 <meta charset="UTF-8">
 <title>GoCamping</title>
 <style>
+
+<!-- main 영역 -->
+
+#campInfo li {
+	cursor: pointer;
+	border-bottom: 1px dashed grey;
+	margin: 0;
+	padding: 0;
+}
+
+li > p {
+	width: fit-content;
+}
+
+.marker {
+	text-align: center;
+	z-index: 0;
+	margin: auto;
+	padding: 5px;
+	cursor: default;
+	border-radius: 5px;
+}
+
 .flex {
    display: flex;
    flex-flow: wrap;

@@ -18,6 +18,9 @@ public class ItemDTO {
 	private String caravAcmpnyAt = "";
 	private String animalCmgCl = "";
 	private String firstImageUrl="";
+	private String induty="";
+	private String mapX;
+	private String mapY;
 	private int clickCnt;
 	private int recmCnt;
 	
@@ -134,6 +137,24 @@ public class ItemDTO {
 	}
 	public void setRecmCnt(int recmCnt) {
 		this.recmCnt = recmCnt;
+	}
+	public String getInduty() {
+		return induty;
+	}
+	public void setInduty(String induty) {
+		this.induty = induty;
+	}
+	public String getMapX() {
+		return mapX;
+	}
+	public void setMapX(String mapX) {
+		this.mapX = mapX;
+	}
+	public String getMapY() {
+		return mapY;
+	}
+	public void setMapY(String mapY) {
+		this.mapY = mapY;
 	}
 	
 	
