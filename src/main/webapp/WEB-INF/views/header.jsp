@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <c:set var="cpath" value="${pageContext.request.contextPath }" />
 <!DOCTYPE html>
 <html>
@@ -182,10 +184,23 @@ a {
 		</div>
 		<div class="header_login">
 			<ul>
-				<li>현재 접속 아이디 [ el태그 추가  ]</li> <!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
-				<li><a href="${cpath }/login/loginForm">LOGIN</a></li>
-				<li><a href="">LOGOUT</a></li>
-				<li><a href="">SIGN</a></li>
+			<c:if test="${pageContext.request.userPrincipal != null}">
+				<li>현재 접속 아이디 ${pageContext.request.userPrincipal.name}</li> <!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
+			</c:if>
+			<sec:authorize access="isAnonymous()">
+				<p><a href="<c:url value="/login/loginForm" />">로그인</a></p>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+<%-- 			<form:form action="${pageContext.request.contextPath}/logout" method="POST"> --%>
+    				<li><a href="${cpath }/logout">로그아웃</a></li>
+<%-- 			</form:form> --%>
+			</sec:authorize>
+			<c:if test="${pageContext.request.userPrincipal == null}">
+				<li><a href="${cpath }/login/signup">SIGNUP</a></li>
+			</c:if>
+			<c:if test="${pageContext.request.userPrincipal.name == 'admin'}">
+				 <h3><a href="<c:url value="/admin/adminHome" />">관리자 홈</a></h3> 
+			</c:if>
 			</ul>
 		</div>
 	</header>
@@ -199,7 +214,6 @@ a {
 				<li><a href="">MENU</a></li>
 			</ul>
 		</div>
-<<<<<<< HEAD
 	</section>
 	<!-- section end -->
 	<div class="footer_wrap">
@@ -208,16 +222,6 @@ a {
 	<footer>
 		<!-- footer start -->
 
-<<<<<<< HEAD
-<h1>프로젝트 frame</h1>
-<h3>${version }</h3>
 
-<h3>깃허브 커밋16:50</h3>
-<hr>
-=======
 	</footer>
-	<!-- footer end -->
->>>>>>> 957fde022ee7d91f5a4e387ab8837ef4ddb95416
-=======
-	</nav>
->>>>>>> a8f4e0c702c9d8e7f326da40591c2f8de90eabeb
+
