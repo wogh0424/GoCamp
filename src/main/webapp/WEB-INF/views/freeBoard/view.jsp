@@ -18,8 +18,8 @@
 	<hr>
 	<h3>댓글</h3>
 	<form method="POST" >
+		<p><input type="text" name="writer" value="${pageContext.request.userPrincipal.name}" readonly> </p> 
 		<p><textarea name="reply_content" placeholder="댓글작성" required></textarea> </p>
-<!-- 		<p><input type="text" name="writer" value="${login.userid }" readonly> </p>  -->
 		<p><input type="submit" value="댓글 작성"></p>
 	</form> 
 </div>
@@ -28,9 +28,9 @@
 	
 	
 		<c:forEach var="reply" items="${replyList }">
-		<div id="freeBoardReplyview">
+		<div id="freeBoardReplyview">  
+			<h3>${reply.writer} | <fmt:formatDate value="${reply.replydate }"/></h3>                                              
 			<h3>${reply.reply_content }</h3>
-			<h3><fmt:formatDate value="${reply.replydate }"/></h3>
 		</div>
 		</c:forEach>
 	

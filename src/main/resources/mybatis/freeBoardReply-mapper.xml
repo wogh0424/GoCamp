@@ -16,8 +16,8 @@
 	
 		<insert id="insertReply" parameterType="freeboardreply">
 			insert into reply_free_board
-				(reply_content) 
-					values (#{reply_content})
+				(writer, reply_content) 
+					values (#{writer}, #{reply_content})
 		</insert>
 		
 		<select id="getReply" parameterType="int" resultType="freeboardreply">

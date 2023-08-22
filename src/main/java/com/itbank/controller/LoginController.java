@@ -63,4 +63,6 @@ public class LoginController {
 		mav.addObject("list",list);
 		return mav;
 	}
+	
+	@GetMapping("/")
 }
