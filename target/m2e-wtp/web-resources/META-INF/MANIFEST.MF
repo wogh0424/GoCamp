@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: yeonji
+=======
+Built-By: wogh0
+>>>>>>> parent of 44d462e (지도랑 메인화면)
 Build-Jdk: 1.8.0_361
 Created-By: Maven Integration for Eclipse
 

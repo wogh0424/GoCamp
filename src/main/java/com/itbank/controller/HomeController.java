@@ -1,11 +1,11 @@
 package com.itbank.controller;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +26,7 @@ public class HomeController {
 	@Autowired private CampService campService;
 	
 	@RequestMapping("/")
-	public ModelAndView home() {
+	public ModelAndView home(Locale locale, Model model) {
 		ModelAndView mav = new ModelAndView("home");
 		String version = testService.getVersion();
 		mav.addObject("version", version);
@@ -36,7 +36,6 @@ public class HomeController {
 	@GetMapping("/main")
 	public ModelAndView main(@RequestParam(value="page", defaultValue="1") int page, 
 							 @RequestParam(value="order", defaultValue="clickCnt") String order,
-							 @RequestParam(value="listTy", defaultValue="LIST") String listTy,
 							 SearchDTO search){
 		ModelAndView mav = new ModelAndView("main");
 		int campCnt = campService.selectCnt(search);
@@ -45,18 +44,15 @@ public class HomeController {
 		List<ItemDTO> list = campService.selectAll(searchPage);
 		mav.addObject("list", list);
 		mav.addObject("paging", paging);
-		mav.addObject("listTy", listTy);
 		return mav;
 	}
 	
 	@GetMapping("/view/{contentId}")
-	public ModelAndView view(@PathVariable("contentId") String contentId) throws IOException	{
+	public ModelAndView view(@PathVariable("contentId") String contentId)	{
 		ModelAndView mav = new ModelAndView("view");
 		String camp = campService.selectId(contentId);
-		Map<String, Object> view = campService.requestAPI(contentId, camp);
-		List<Map<String, Object>> imgList = campService.requestAPI(contentId); 
-		mav.addObject("view", view);
-		mav.addObject("images", imgList);
+		mav.addObject("contentId", contentId);
+		mav.addObject("camp", camp);
 		return mav;
 	}
 }
