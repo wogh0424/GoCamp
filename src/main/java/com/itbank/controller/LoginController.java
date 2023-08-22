@@ -64,5 +64,14 @@ public class LoginController {
 		return mav;
 	}
 	
-	@GetMapping("/")
+//	@GetMapping("/login/loginForm")
+//	public void login() {}
+//	
+//	@PostMapping("/login/loginForm")
+//	public String login(MemberDTO dto, HttpSession session) {
+//		MemberDTO login = memberService.login(dto);
+//		session.setAttribute("login", login);
+//		return "redirect:/";
+//	}
+	
 }

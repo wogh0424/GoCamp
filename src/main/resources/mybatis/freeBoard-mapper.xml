@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+		"-//mybatis.org//DTD Mapper 3.0//EN"
+		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="com.itbank.repository.FreeBoardDAO">
+		<select id="selectAll" resultType="freeboard" parameterType="paging">
+			select * from free_board
+			
+			where ${column} like '%${search}%'
+				order by 
+					idx desc 
+				offset #{offset} rows
+				fetch next #{perPage} rows only
+		</select>
+	
+		<insert id="insertBoard" parameterType="freeboard">
+			insert into free_board
+				(title, writer, content) 
+					values (#{title}, #{writer}, #{content})
+		</insert>
+		
+		<select id="selectOne" parameterType="int" resultType="freeboard">
+				select * from free_board where idx=#{idx}
+		</select>
+		
+		<update id="updateViewCount" parameterType="int">
+				update free_board
+					set
+						view_cnt = view_cnt + 1
+					where
+						idx = #{idx}
+		</update>
+		
+		<delete id="delete" parameterType="int">
+				delete from free_board where idx=#{idx}
+		</delete>
+		
+		<update id="update"  parameterType="freeboard" >
+				update free_board
+					set title=#{title}, content=#{content} 
+						where idx=#{idx}
+		</update>
+		
+		<select id="selectCount" parameterType="paging" resultType="int">
+				select count(*) from free_board where ${column} like '%${search}%'
+		</select>
+		
+<!-- 		<select id="searchList" parameterType="board"> -->
+<!-- 				select * from board2 where title like '%${search}%' -->
+<!-- 		</select> -->
+		
+</mapper>
+		

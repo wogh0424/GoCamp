@@ -8,12 +8,30 @@ public class PagingDTO {
 	private int boardCount;		// 총 게시글의 개수(select count(*) from board2 where ${column} like '%${search}%')
 	private int pageCount;
 	private String order;
+	private String search;
+	private String column;
 	
 	private int perSection = 10;	// 쪽번호 개수
 	private int begin;				// 쪽번호 시작값
 	private int end;				// 쪽번호 끝값
 	private int section;
 	private boolean prev;
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public String getColumn() {
+		return column;
+	}
+
+	public void setColumn(String column) {
+		this.column = column;
+	}
+
 	private boolean next;
 	
 	public PagingDTO(int page, int boardCount, String order) {
@@ -40,6 +58,52 @@ public class PagingDTO {
 		next = end != pageCount;
 	}
 
+	public PagingDTO(int page, int boardCount, String search, String column) {
+		this.page = page;
+		this.boardCount = boardCount;
+		this.search = search;
+		this.column = column;
+		pageCount = boardCount / perPage;
+		pageCount += (boardCount % perPage != 0) ? 1 : 0;
+		
+		if(page > pageCount) {	// 요청페이지가 최대수를 초과하면
+			page = pageCount;	// 페이지 개수(마지막 페이지)를 대입
+			this.page = page;	// 파라미터를 멤버 필드에 대입
+		}
+		offset = (page - 1) * perPage;
+		if (offset < 0) offset = 0;
+		
+		end = ((page - 1) / perSection + 1) * perSection;
+		begin = end - perSection + 1;
+		section = (end - 1) / 10;
+		prev = section != 0;
+		
+		end = end > pageCount ? pageCount : end;
+		next = end != pageCount;
+	}
+	
+	public PagingDTO(int page, int boardCount) {
+		this.page = page;
+		this.boardCount = boardCount;
+		pageCount = boardCount / perPage;
+		pageCount += (boardCount % perPage != 0) ? 1 : 0;
+		
+		if(page > pageCount) {	// 요청페이지가 최대수를 초과하면
+			page = pageCount;	// 페이지 개수(마지막 페이지)를 대입
+			this.page = page;	// 파라미터를 멤버 필드에 대입
+		}
+		offset = (page - 1) * perPage;
+		if (offset < 0) offset = 0;
+		
+		end = ((page - 1) / perSection + 1) * perSection;
+		begin = end - perSection + 1;
+		section = (end - 1) / 10;
+		prev = section != 0;
+		
+		end = end > pageCount ? pageCount : end;
+		next = end != pageCount;
+	}
+	
 	public int getPage() {
 		return page;
 	}

@@ -6,7 +6,7 @@
 
 <form method="POST">
 	<p><input type="text" name="title" placeholder="제목" required autofocus> </p>
-	<p><input type="text" name="writer" value="${pageContext.request.userPrincipal.name}" readonly> </p>
+<%-- 	<p><input type="text" name="writer" value="${pageContext.request.userPrincipal.name}" readonly> </p> --%>
 	<p><input type="text" name="writer" placeholder="닉네임"> </p>
 	<p><textarea name="content" placeholder="내용" required></textarea> </p>
 	<p><input type="submit"></p>

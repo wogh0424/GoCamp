@@ -1,9 +1,5 @@
 Manifest-Version: 1.0
-Built-By: ok
-Build-Jdk: 11.0.18
-<<<<<<< HEAD
->>>>>>> parent of 529de90 (yeonji_boards)
-=======
->>>>>>> parent of 529de90 (yeonji_boards)
+Built-By: yeonji
+Build-Jdk: 1.8.0_361
 Created-By: Maven Integration for Eclipse
 
