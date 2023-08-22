@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+		"-//mybatis.org//DTD Mapper 3.0//EN"
+		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="com.itbank.repository.FreeBoardReplyDAO">
+<!-- 		<select id="selectAll" resultType="freeboard" parameterType="paging"> -->
+<!-- 			select * from free_board  -->
+			
+<!-- 			where ${column} like '%${search}%' -->
+<!-- 				order by  -->
+<!-- 					idx  -->
+<!-- 				offset #{offset} rows -->
+<!-- 				fetch next #{perPage} rows only -->
+<!-- 		</select> -->
+	
+		<insert id="insertReply" parameterType="freeboardreply">
+			insert into reply_free_board
+				(reply_content) 
+					values (#{reply_content})
+		</insert>
+		
+		<select id="getReply" parameterType="int" resultType="freeboardreply">
+			select * from reply_free_board 
+		</select>
+		
+		
+</mapper>
+		

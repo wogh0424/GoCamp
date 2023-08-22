@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+		"-//mybatis.org//DTD Mapper 3.0//EN"
+		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="com.itbank.repository.NoticeBoardDAO">
+		<select id="selectAll" resultType="noticeboard" parameterType="paging">
+			select * from notice_board 
+			
+			where ${column} like '%${search}%'
+				order by 
+					idx 
+				offset #{offset} rows
+				fetch next #{perPage} rows only
+		</select>
+		
+		<update id="updateViewCount" parameterType="int">
+				update notice_board 
+					set
+						view_cnt = view_cnt + 1
+					where
+						idx = #{idx}
+		</update>
+
+		
+		<select id="selectOne" parameterType="int" resultType="noticeboard">
+				select * from notice_board where idx=#{idx}
+		</select>
+		
+		<select id="selectCount" parameterType="paging" resultType="int">
+				select count(*) from notice_board where ${column} like '%${search}%'
+		</select>
+		
+		
+</mapper>
+		
