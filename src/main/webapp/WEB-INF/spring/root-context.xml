@@ -33,10 +33,6 @@
 				<value>classpath:mybatis/test-mapper.xml</value>
 				<value>classpath:mybatis/camp-mapper.xml</value>
 				<value>classpath:mybatis/member-mapper.xml</value>
-				<value>classpath:mybatis/freeBoard-mapper.xml</value>
-				<value>classpath:mybatis/freeBoardReply-mapper.xml</value>
-				<value>classpath:mybatis/noticeBoard-mapper.xml</value>
-				<value>classpath:mybatis/eventBoard-mapper.xml</value>
 			</list>		
 		</property>
 	</bean>
