@@ -3,7 +3,12 @@ package com.itbank.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +32,6 @@ public class FreeBoardController {
 	
 	@GetMapping("") // 주소는 /freeBoard, jsp는 /freeBoard/list.jsp
 	public ModelAndView list(@RequestParam(value="column", defaultValue = "title") String column, @RequestParam(value="search", defaultValue = "") String search, @RequestParam(value="page", defaultValue = "1") int page) {  // page를 받을건데 없으면 기본값은 1이다
-		
-		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("search", search);
 		map.put("column", column);
@@ -50,41 +53,38 @@ public class FreeBoardController {
 		return mav;
 	}
 	
-	@GetMapping("/write")
-	public void write() {}
-	
-	@PostMapping("/write")
-	public String write(FreeBoardDTO dto) {
-		int row = freeBoardService.write(dto);
-		System.out.println(row + "행이 추가되었습니다.");
-		return "redirect:/freeBoard";
-	}
-	
 	
 	// ☆ <a href="">링크 클릭 ☆
 	// location.href = '주소', loacation.replace('주소')
 	// <form method="GET">
 	// response.sendRedirect("")
 	@GetMapping("/view/{idx}")
-	public ModelAndView view(@PathVariable("idx") int idx) {   // 메소드의 파라미터에 @PathVariable("idx")를 사용하여 idx 변수를 경로 변수에 매핑. 이렇게 하면 URL에서 추출된 실제 값이 해당 파라미터에 할당
+	public ModelAndView view(@PathVariable("idx") int idx, HttpServletResponse response, HttpServletRequest request) {   // 메소드의 파라미터에 @PathVariable("idx")를 사용하여 idx 변수를 경로 변수에 매핑. 이렇게 하면 URL에서 추출된 실제 값이 해당 파라미터에 할당
 		ModelAndView mav = new ModelAndView("/freeBoard/view"); // 눌렀을 때 자료를 불러와야하니 modelandview, 그리고 따로 입력값을 주지 않아도 되니 postmapping은 쓸 필요 없다.
 		// 게시글 조회
 		FreeBoardDTO dto = freeBoardService.selectOne(idx);
 		mav.addObject("dto", dto);
 		
+		freeBoardService.reduceViewCnt(idx, response,request);
+		
 		// 댓글 목록 조회
 		List<FreeBoardReplyDTO> replyList = freeBoardReplyService.getReply(idx);
 		mav.addObject("replyList", replyList);
 	
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth != null && auth.isAuthenticated()) {
+			String userid = auth.getName();
+			String nick = freeBoardService.getnick(userid);
+			mav.addObject("nickname",nick);
+		}
+		
 		
 		return mav;
 	}
 	
 	@PostMapping("/view/{idx}")
 	public String writeReply(@PathVariable("idx") int idx, FreeBoardReplyDTO reply) {
-
 		freeBoardReplyService.writeReply(reply);
-		
 		return "redirect:/freeBoard/view/" + idx;
 	}
 	
@@ -107,6 +107,26 @@ public class FreeBoardController {
 	public String modify(FreeBoardDTO dto) {
 		freeBoardService.update(dto);
 		return "redirect:/freeBoard/view/{idx}";
+	}
+	
+	@GetMapping("/write")
+	public ModelAndView getnickname() {
+		ModelAndView mav = new ModelAndView();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth != null && auth.isAuthenticated()) {
+			String userid = auth.getName();
+			String nick = freeBoardService.getnick(userid);
+			mav.addObject("nickname",nick);
+			return mav;
+		}
+		return null;
+	}
+	
+	@PostMapping("/write")
+	public String postboard(FreeBoardDTO dto) {
+		int row = freeBoardService.write(dto);
+		System.out.println(row != 0? "추가성공" : "추가실패");
+		return "redirect:/freeBoard";
 	}
 	
 

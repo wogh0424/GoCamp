@@ -3,18 +3,22 @@ package com.itbank.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.repository.LoginDao;
+import com.itbank.service.FreeBoardService;
 import com.itbank.service.LoginService;
 
 @RestController
@@ -23,6 +27,8 @@ public class AjaxController {
 	@Autowired private LoginService loginService;
 	
 	@Autowired private LoginDao dao;
+	
+	@Autowired private FreeBoardService freeBoardService;
 	
 //	@PostMapping("/Adminlogin")
 //	public HashMap<String, Object> checkAdmin(@RequestBody MemberDTO dto){

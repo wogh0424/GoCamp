@@ -6,7 +6,7 @@
 
 <div id="boardView">
 
-		<h3>${dto.idx } | ${dto.title } | <span id="writer">${dto.writer }</span></h3>
+		<h3>${dto.idx } | ${dto.title } | <span id="writer">${nickname }</span></h3>
 		<h4>조회수 : ${dto.view_cnt }</h4>
 		<h4>작성날짜 : <fmt:formatDate value="${dto.date }"/></h4>
 		<pre>${dto.content }</pre>
@@ -18,7 +18,7 @@
 	<hr>
 	<h3>댓글</h3>
 	<form method="POST" >
-		<p><input type="text" name="writer" value="${pageContext.request.userPrincipal.name}" readonly> </p> 
+		<p><input type="text" name="writer" value="${nickname }" readonly> </p> 
 		<p><textarea name="reply_content" placeholder="댓글작성" required></textarea> </p>
 		<p><input type="submit" value="댓글 작성"></p>
 	</form> 
@@ -92,5 +92,6 @@
 		}
 		}
 </script>
+
 </body>
 </html>

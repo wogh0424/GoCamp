@@ -2,6 +2,11 @@ package com.itbank.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +18,10 @@ import com.itbank.repository.FreeBoardDAO;
 
 @Service
 public class FreeBoardService {
-	
-	@Autowired private FreeBoardDAO dao;
-	
-	
+
+	@Autowired
+	private FreeBoardDAO dao;
+
 	public int selectCount(HashMap<String, String> map) {
 		return dao.selectCount(map);
 	}
@@ -30,15 +35,11 @@ public class FreeBoardService {
 	}
 
 	// 하나의 서비스 함수에서 2개 이상의 dao 함수를 호출할 때
-	@Transactional
 	public FreeBoardDTO selectOne(int idx) {
-		int row = dao.updateViewCount(idx);
-		System.out.println(row + "행이 수정되었습니다.");
+//		System.out.println(row + "행이 수정되었습니다.");
 		System.out.println(idx + "번 조회수 증가");
 		return dao.selectOne(idx);
 	}
-
-
 
 	public int delete(int idx) {
 		return dao.delete(idx);
@@ -48,4 +49,28 @@ public class FreeBoardService {
 		return dao.update(dto);
 	}
 
+	public String getnick(String userid) {
+		return dao.getnick(userid);
+	}
+
+	public void reduceViewCnt(int idx, HttpServletResponse response, HttpServletRequest request) {
+		Cookie[] cookies = request.getCookies();
+		boolean isVisited = true;
+
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if ("viewCount".equals(cookie.getName())) {
+					isVisited = false;
+					break;
+				}
+			}
+		}
+		if(isVisited) {
+			dao.updateViewCount(idx);
+			Cookie cookie = new Cookie("viewCount","true");
+			cookie.setMaxAge(10);
+			response.addCookie(cookie);
+		}
+		
+	}
 }

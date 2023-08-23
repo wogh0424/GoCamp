@@ -24,4 +24,5 @@ public interface LoginDao {
 	public int setAuth(String userid);
 
 	public List<MemberDTO> getUser();
+
 }

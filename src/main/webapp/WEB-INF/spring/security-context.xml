@@ -13,6 +13,7 @@
 	<!-- 평문과 평문의 값을 비교한다. 하지만 이 구조에서는 회원가입시 비밀번호를 솔트값으로 암호화를 진행하였기에 -->
 	<!-- 따로 s:authentication-provider의 기능을 가진 클래스를 만들 필요가 있었다. -->
 	<!-- 	그것을 아래처럼 <s:authentication-provider ref= 이렇게 지정함으로써 기능을 전가시킬수 있다 -->
+     
     <s:http auto-config="true" use-expressions="true">
         <s:intercept-url pattern="/login/loginForm" access="permitAll" />
         <s:intercept-url pattern="/home" access="permitAll" />
@@ -21,6 +22,7 @@
         <s:intercept-url pattern="/intro/**" access="hasRole('ROLE_USER')"/>
         <s:intercept-url pattern="/login/signup" access="permitAll "/>
         <s:intercept-url pattern="/resources/**" access="permitAll" />
+        <s:intercept-url pattern="/freeBoard/**" access="permitAll"/>
         
         
         <s:form-login login-page="/login/loginForm"
@@ -34,7 +36,11 @@
         <s:access-denied-handler error-page="/login/accessDenied" />
 <!--        	csrf는 토큰방식으로 보안에는 좋지만 복잡하기 때문에 이번에는 보류 -->
         <s:csrf disabled="true"/>
+     <s:session-management>
+     	<s:concurrency-control max-sessions="1" expired-url="/login?expired=true" error-if-maximum-exceeded="true"/>
+     </s:session-management>
     </s:http>
+    
     
 	<bean id="loginService" class="com.itbank.service.LoginService" />
 	<bean id="userLoginAuthenticationProvider" class="com.itbank.service.UserLoginAuthenticationProvider" />

@@ -14,7 +14,7 @@
 				fetch next #{perPage} rows only
 		</select>
 	
-		<insert id="insertBoard" parameterType="freeboard">
+		<insert id="insertBoard" parameterType="hashmap">
 			insert into free_board
 				(title, writer, content) 
 					values (#{title}, #{writer}, #{content})
@@ -32,6 +32,10 @@
 						idx = #{idx}
 		</update>
 		
+		<select id="ViewCount" parameterType="int">
+			select view_cnt from free_board where idx = #{idx}
+		</select>
+		
 		<delete id="delete" parameterType="int">
 				delete from free_board where idx=#{idx}
 		</delete>
@@ -44,6 +48,10 @@
 		
 		<select id="selectCount" parameterType="paging" resultType="int">
 				select count(*) from free_board where ${column} like '%${search}%'
+		</select>
+		
+		<select id="getnick" parameterType="string" resultType="string">
+			select nickname from member where userid = #{userid}
 		</select>
 		
 <!-- 		<select id="searchList" parameterType="board"> -->

@@ -2,6 +2,7 @@ package com.itbank.repository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +25,9 @@ public interface FreeBoardDAO {
 	int delete(int idx);
 
 	int update(FreeBoardDTO dto);
+
+	String getnick(String userid);
+
+	int ViewCount(int idx);
 
 }
