@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -62,16 +63,6 @@ public class LoginService implements UserDetailsService{
 		return userDetailsDto; //완전한 UserDetails 객체
 	}
 	
-	
-//	public MemberDTO checkAdmin(MemberDTO dto) {
-//		MemberDTO dto1 = dao.checkAdmin(dto);
-//		if(pwEncoding.matches(dto.getUserpw(), dto1.getUserpw())) {			
-//			return dto1;
-//		}
-//		return null;
-//	}
-	
-	
 	public int dupCheck(String userid) {
 		return dao.checkDup(userid);
 	}
@@ -101,5 +92,29 @@ public class LoginService implements UserDetailsService{
 
 	public List<MemberDTO> getUser() {
 		return dao.getUser();
+	}
+
+
+	public int changePw(MemberDTO dto, String userid) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String userpw = dto.getNewuserpw();
+		System.out.println(userpw + "LoginService유저PW");
+		String encodedpw = encoder.encode(userpw);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("userpw", encodedpw);
+		map.put("userid", userid);
+		return dao.changePw(map);
+	}
+
+
+	public String getPermission(String userid) {
+		return dao.getPermission(userid);
+	}
+
+	public int ChangeAuth(MemberDTO dto) {
+		if(dto.getEnabled() != null) {
+		int row = dao.banUser(dto);
+		}
+		return dao.changeAuth(dto);
 	}
 }

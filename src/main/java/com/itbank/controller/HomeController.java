@@ -1,7 +1,11 @@
 package com.itbank.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,26 +21,33 @@ import com.itbank.model.PageAndSearchDTO;
 import com.itbank.model.PagingDTO;
 import com.itbank.model.SearchDTO;
 import com.itbank.service.CampService;
-import com.itbank.service.TestService;
+import com.itbank.service.LoginService;
 
 @Controller
 public class HomeController {
 
-	@Autowired private TestService testService;
-	@Autowired private CampService campService;
-	
+	@Autowired
+	private CampService campService;
+	@Autowired
+	private LoginService loginService;
+
 	@RequestMapping("/")
-	public ModelAndView home(Locale locale, Model model) {
-		ModelAndView mav = new ModelAndView("home");
-		String version = testService.getVersion();
-		mav.addObject("version", version);
-		return mav;
+	public String home(Locale locale, Model model, HttpSession Session, HttpServletRequest request,
+			Principal principal) {
+		if (principal != null) {
+			String userid = principal.getName();
+			String Permission = loginService.getPermission(userid);
+			if (Session != null || request.isRequestedSessionIdValid()) {
+				Session = request.getSession();
+				Session.setAttribute("permission", Permission);
+			}
+		}
+		return "home";
 	}
-	
+
 	@GetMapping("/main")
-	public ModelAndView main(@RequestParam(value="page", defaultValue="1") int page, 
-							 @RequestParam(value="order", defaultValue="clickCnt") String order,
-							 SearchDTO search){
+	public ModelAndView main(@RequestParam(value = "page", defaultValue = "1") int page,
+			@RequestParam(value = "order", defaultValue = "clickCnt") String order, SearchDTO search) {
 		ModelAndView mav = new ModelAndView("main");
 		int campCnt = campService.selectCnt(search);
 		PagingDTO paging = new PagingDTO(page, campCnt, order);
@@ -46,9 +57,9 @@ public class HomeController {
 		mav.addObject("paging", paging);
 		return mav;
 	}
-	
+
 	@GetMapping("/view/{contentId}")
-	public ModelAndView view(@PathVariable("contentId") String contentId)	{
+	public ModelAndView view(@PathVariable("contentId") String contentId) {
 		ModelAndView mav = new ModelAndView("view");
 		String camp = campService.selectId(contentId);
 		mav.addObject("contentId", contentId);

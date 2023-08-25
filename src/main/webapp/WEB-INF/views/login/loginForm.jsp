@@ -29,7 +29,7 @@
         <label for="password">비밀번호</label>
         <input type="password" id="password" name="userpw"/>
     </p>
-    <%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
    <input type="submit" value="로그인"/>
 	<a href="${cpath }/login/signup"><input type="button" value="회원가입"/></a>
 </form:form>

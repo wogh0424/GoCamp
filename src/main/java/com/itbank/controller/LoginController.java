@@ -1,19 +1,16 @@
 package com.itbank.controller;
 
-import java.util.HashMap;
+import java.security.Principal;
 import java.util.List;
 import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.MemberDTO;
@@ -23,6 +20,7 @@ import com.itbank.service.LoginService;
 public class LoginController {
 	
 	@Autowired private LoginService loginService;
+	
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@GetMapping("/login/loginForm")
@@ -66,13 +64,13 @@ public class LoginController {
 		return mav;
 	}
 	
-//	@GetMapping("/login/loginForm")
-//	public void login() {}
-//	
-//	@PostMapping("/login/loginForm")
-//	public String login(MemberDTO dto, HttpSession session) {
-//		MemberDTO login = memberService.login(dto);
-//		session.setAttribute("login", login);
-//		return "redirect:/";
-//	}
+	@PostMapping("/changePw")
+	public String changePw(MemberDTO dto,
+							Principal principal) {
+		String userid = principal.getName();
+		int row = loginService.changePw(dto,userid);
+		
+			System.out.println(row != 0? "변경성공" : "변경실패");
+		return "redirect:/login/loginForm";
+	}
 }

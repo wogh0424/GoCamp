@@ -13,5 +13,6 @@ public interface CampDAO {
 	int selectCnt(SearchDTO search);
 
 	String selectId(String contentId);
+
 	
 }

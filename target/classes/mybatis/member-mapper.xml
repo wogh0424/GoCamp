@@ -33,19 +33,30 @@
 	<select id="getUser" resultType="member">
 		select mem.userid, au.authority from member mem join member_auth au on mem.userid = au.userid
 	</select>
+	
+	<select id="importMember" resultType="member" parameterType="string">
+		select * from member where userid = #{userid}
+	</select>
+	
+	<select id="checkPw" parameterType="string" resultType="string">
+		select userpw from member where userid = #{userid}
+	</select>
+	
+	<update id="changePw" parameterType="map">
+		update member set userpw = #{userpw} where userid = #{userid}
+	</update>
+	
+	<select id="getPermission" parameterType="string" resultType="string">
+		select authority from member_auth where userid = #{userid}
+	</select>
+	
+	<update id="changeAuth" parameterType="member">
+		update member_auth set authority = #{authority} where userid = #{userid}
+	</update>
+	
+	<update id="banUser" parameterType="member">
+		update member set enabled = #{enabled} where userid = #{userid}
+	</update>
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

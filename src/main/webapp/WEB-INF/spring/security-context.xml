@@ -19,11 +19,9 @@
         <s:intercept-url pattern="/home" access="permitAll" />
         <s:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" /> 
         <s:intercept-url pattern="/**" access="permitAll" />
-        <s:intercept-url pattern="/intro/**" access="hasRole('ROLE_USER')"/>
         <s:intercept-url pattern="/login/signup" access="permitAll "/>
         <s:intercept-url pattern="/resources/**" access="permitAll" />
         <s:intercept-url pattern="/freeBoard/**" access="permitAll"/>
-        
         
         <s:form-login login-page="/login/loginForm"
                     default-target-url="/"

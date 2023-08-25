@@ -129,7 +129,7 @@
 	<select id="selectId" resultType="String" parameterType="String">
 		select facltNm from gocamp where contentId = #{contentId}
 	</select>
- </mapper>
+	 </mapper>
 
 
 

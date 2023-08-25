@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="../header.jsp" %>
+<%@include file="../header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,16 +18,18 @@
 
 	<form id="signForm" method="POST" action="${cpath }/login/signup">
 		<p>
-			<input type="text" name="userid" placeholder="아이디입력" />
-			 <input type="button" id="dupCheckBtn" value="중복확인" /> 
-			 <span id="dubMessage"></span>
+			<input type="text" name="userid" placeholder="아이디입력" /> <input
+				type="button" id="dupCheckBtn" value="중복확인" /> <span
+				id="dubMessage"></span>
 		</p>
 
 		<p>
-			<input type="password" name="userpw" id="userpw" placeholder="비밀번호 입력" required />
+			<input type="password" name="userpw" id="userpw"
+				placeholder="비밀번호 입력" required />
 		</p>
 		<p>
-			<input type="password" name="confirmpw" id="confirmpw" placeholder="비밀번호 재확인"  required />
+			<input type="password" name="confirmpw" id="confirmpw"
+				placeholder="비밀번호 재확인" required />
 		</p>
 		<p>
 			<input type="text" name="username" placeholder="이름입력" required />
@@ -39,19 +41,19 @@
 			<input type="date" name="birth" placeholder="생일입력" />
 		</p>
 		<p>
-			<input type="text" name="pnum" placeholder="전화번호 입력"/>
-		</p>
+			<input type="text" name="pnum" placeholder="전화번호 입력" />
+		<p id="errorMessage" style="color: red;"></p>
+
+
 
 		<p>
-			<input type="email" name="email" placeholder="이메일 입력" required /> 
-			<input type="button" id="sendAuthNumber" value="인증번호 발송" />
+			<input type="email" name="email" placeholder="이메일 입력" required /> <input
+				type="button" id="sendAuthNumber" value="인증번호 발송" />
 		</p>
 		<p class="hidden">
-			<input type="number" name="authNumber" placeholder="인증번호 6자리" required /> 
-			<input id="checkAuthNumber" type="button" value="인증번호 확인" /> <br> <span id="authMessage"></span>
-		</p>
-		<p>
-			<input type="text" />
+			<input type="number" name="authNumber" placeholder="인증번호 6자리"
+				required /> <input id="checkAuthNumber" type="button"
+				value="인증번호 확인" /> <br> <span id="authMessage"></span>
 		</p>
 		<p>
 			<button type="submit">회원가입</button>
@@ -59,7 +61,7 @@
 
 	</form>
 
-		<script>
+	<script>
 		const dupCheckBtn = document.getElementById('dupCheckBtn')
 		const sendAuthNumber = document.getElementById('sendAuthNumber')
 		// 계정 중복확인
@@ -116,7 +118,7 @@
 			const row = await fetch(url).then(resp => resp.text())
 			const authMessage = document.getElementById('authMessage')
 			if(row != 0){
-				document.querySelector('input[type="submit"]').removeAttribute('disabled')
+				document.querySelector('button[type="submit"]').removeAttribute('disabled')
 				authMessage.innerText = '인증 성공'
 				authMessage.style.color = 'blue'
 			}
@@ -127,7 +129,7 @@
 	}
 		checkAuthNumber.onclick = checkAuthNumberHandler		
 	</script>
-	
+
 	<script>		
 			const userpw = document.getElementById('userpw')
 			const confirmpw = document.getElementById('confirmpw')

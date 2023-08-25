@@ -1,5 +1,6 @@
 package com.itbank.model;
 
+
 public class MemberDTO {
 
 	private String userid;
@@ -12,10 +13,30 @@ public class MemberDTO {
 	private String authority;
 	private String ROLE_USER;
 	private String ROLE_ADMIN;
-	private String ROLE_ENABLED;
+	private String currentuserpw;
+	private String newuserpw;
+	private String enabled;
 	
-
 	
+	
+	public String getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
+	}
+	public String getCurrentuserpw() {
+		return currentuserpw;
+	}
+	public void setCurrentuserpw(String currentuserpw) {
+		this.currentuserpw = currentuserpw;
+	}
+	public String getNewuserpw() {
+		return newuserpw;
+	}
+	public void setNewuserpw(String newuserpw) {
+		this.newuserpw = newuserpw;
+	}
 	public String getROLE_USER() {
 		return ROLE_USER;
 	}
@@ -27,12 +48,6 @@ public class MemberDTO {
 	}
 	public void setROLE_ADMIN(String rOLE_ADMIN) {
 		ROLE_ADMIN = rOLE_ADMIN;
-	}
-	public String getROLE_ENABLED() {
-		return ROLE_ENABLED;
-	}
-	public void setROLE_ENABLED(String rOLE_ENABLED) {
-		ROLE_ENABLED = rOLE_ENABLED;
 	}
 	public String getNickname() {
 		return nickname;

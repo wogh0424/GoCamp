@@ -250,8 +250,11 @@ a {
 			<c:if test="${pageContext.request.userPrincipal == null}">
 				<li><a href="${cpath }/login/signup">SIGNUP</a></li>
 			</c:if>
-			<c:if test="${pageContext.request.userPrincipal.name == 'admin'}">
+			<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
 				 <h3><a href="<c:url value="/admin/adminHome" />">관리자 홈</a></h3> 
+			</c:if>
+			<c:if test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }">
+				<h3><a href="${cpath }/mypage/main">마이페이지</a></h3>
 			</c:if>
 			</ul>
 		</div>

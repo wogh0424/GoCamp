@@ -26,5 +26,6 @@ public class CampService {
 	public String selectId(String contentId) {	
 		return campDAO.selectId(contentId);
 	}
+
 	
 }

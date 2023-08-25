@@ -23,11 +23,17 @@
 <div class="frame">
 <c:forEach var="dto" items="${list }">
 	<div class="main">
-	userid = ${dto.userid } | <form action="${cpath }/admin/modifyAuth"><select name="authority">
-		<option value="${dto.userid }/ROLE_USER">어드민</option>
-		<option value="${dto.userid }/ROLE_ADMIN">일반유저</option>
-		<option value="${dto.userid }/enabled">로그인 차단/허용</option>
+	 ${dto.userid } | 
+	 <form action="${cpath }/admin/modifyAuth" method="POST">
+	 <select name="authority">
+		<option value="ROLE_USER">일반유저</option>
+		<option value="ROLE_ADMIN">어드민</option>
 	</select>
+	<select name="enabled">
+		<option value="1">로그인 허가</option>
+		<option value="0">로그인 금지</option>
+	</select>
+	<input type="hidden" name="userid" value="${dto.userid }"/>
 	<button type="submit">권한변경</button></form>
 	</div>
 </c:forEach>

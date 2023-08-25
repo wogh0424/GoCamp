@@ -1,6 +1,7 @@
 package com.itbank.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,28 +21,16 @@ import com.itbank.model.MemberDTO;
 import com.itbank.repository.LoginDao;
 import com.itbank.service.FreeBoardService;
 import com.itbank.service.LoginService;
+import com.itbank.service.MypageService;
 
 @RestController
 public class AjaxController {
 
 	@Autowired private LoginService loginService;
-	
+	@Autowired private MypageService mypageService;
 	@Autowired private LoginDao dao;
 	
 	@Autowired private FreeBoardService freeBoardService;
-	
-//	@PostMapping("/Adminlogin")
-//	public HashMap<String, Object> checkAdmin(@RequestBody MemberDTO dto){
-//		System.out.println(dto.getAdminid());
-//		System.out.println(dto.getAdminpw());
-//		MemberDTO dto1 = loginService.checkAdmin(dto);
-//
-//		
-//		HashMap<String, Object> result = new HashMap<>();
-//		result.put("admin", dto1.getUserid());
-//		result.put("status", dto1.getUserid() != null);
-//		return null;
-//	}
 	
 	@GetMapping("/dupCheck/{userid}")
 	public int dupCheck(@PathVariable("userid") String userid) {
@@ -60,6 +49,25 @@ public class AjaxController {
 		HashMap<String, Object> result = new HashMap<>();
 		result.put("success", row > 0 ? 1 : 0);
 		result.put("message", row > 0 ? "메일이 발송되었습니다" : "메인 정송에 실패했습니다");
+		return result;
+	}
+	
+	@GetMapping("/checkAuthNumber/{authNumber}")
+	public int checkAuthNumber(@PathVariable("authNumber") int authNumber, HttpSession session) {
+		int sessionNumber = (int)session.getAttribute("authNumber");
+		session.setMaxInactiveInterval(1800);
+		System.out.println(authNumber + " : controller authNumber");
+		System.out.println(sessionNumber + " : controller sessionNumber");
+		return authNumber == sessionNumber ? 1 : 0;
+	}
+	
+	
+	@GetMapping("/checkPw/{currentuserpw}")
+	public int checkPw(@PathVariable("currentuserpw") String currentuserpw,
+			Principal principal) {
+		String userid = principal.getName();
+		int result = mypageService.checkPw(currentuserpw, userid);
+		System.out.println(result);
 		return result;
 	}
 }

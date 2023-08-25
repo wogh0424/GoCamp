@@ -331,7 +331,7 @@
 		<div class="item flex">
 			<div class="firstImage">
 				<a href="${cpath }/view/${item.contentId}"><img
-					src="${item.firstImageUrl }" width="300px" height="200px"></a>
+					src="${item.firstImageUrl }" id="lazy-img" width="300px" height="200px"></a>
 			</div>
 			<div class="description">
 				<div class="cnts flex">
@@ -491,8 +491,8 @@
             a.href += pageUrlParameterWriter()
          })
       })
-   
 </script>
+
 
 </body>
 </html>
