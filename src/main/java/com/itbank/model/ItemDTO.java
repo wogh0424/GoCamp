@@ -1,5 +1,7 @@
 package com.itbank.model;
 
+import java.sql.Date;
+
 public class ItemDTO {
 	private String contentId;
 	private String facltNm;
@@ -18,6 +20,21 @@ public class ItemDTO {
 	private String caravAcmpnyAt = "";
 	private String animalCmgCl = "";
 	private String firstImageUrl="";
+	private String induty="";
+	private String mapX;
+	private String mapY;
+	
+	private String eqpmnLendCl = "";
+	private String brazierCl = "";
+	private String sbrsEtc = "";
+	private String operPdCl = "";
+	private String operDeCl = "";
+	private String homepage = "";
+	private String posblFcltyCl = "";
+	private String posblFcltyEtc = "";
+	private Date modifiedtime;
+	private String resveCl = "";
+	
 	private int clickCnt;
 	private int recmCnt;
 	
@@ -123,6 +140,12 @@ public class ItemDTO {
 	public void setFirstImageUrl(String firstImageUrl) {
 		this.firstImageUrl = firstImageUrl;
 	}
+	public String getInduty() {
+		return induty;
+	}
+	public void setInduty(String induty) {
+		this.induty = induty;
+	}
 	public int getClickCnt() {
 		return clickCnt;
 	}
@@ -134,6 +157,79 @@ public class ItemDTO {
 	}
 	public void setRecmCnt(int recmCnt) {
 		this.recmCnt = recmCnt;
+	}
+	public String getMapX() {
+		return mapX;
+	}
+	public void setMapX(String mapX) {
+		this.mapX = mapX;
+	}
+	public String getMapY() {
+		return mapY;
+	}
+	public void setMapY(String mapY) {
+		this.mapY = mapY;
+	}
+	public String getEqpmnLendCl() {
+		return eqpmnLendCl;
+	}
+	public void setEqpmnLendCl(String eqpmnLendCl) {
+		this.eqpmnLendCl = eqpmnLendCl;
+	}
+	public String getBrazierCl() {
+		return brazierCl;
+	}
+	public void setBrazierCl(String brazierCl) {
+		this.brazierCl = brazierCl;
+	}
+	public String getSbrsEtc() {
+		return sbrsEtc;
+	}
+	public void setSbrsEtc(String sbrsEtc) {
+		this.sbrsEtc = sbrsEtc;
+	}
+	public String getOperPdCl() {
+		return operPdCl;
+	}
+	public void setOperPdCl(String operPdCl) {
+		this.operPdCl = operPdCl;
+	}
+	public String getOperDeCl() {
+		return operDeCl;
+	}
+	public void setOperDeCl(String operDeCl) {
+		this.operDeCl = operDeCl;
+	}
+	public String getHomepage() {
+		return homepage;
+	}
+	public void setHomepage(String homepage) {
+		this.homepage = homepage;
+	}
+	public String getPosblFcltyCl() {
+		return posblFcltyCl;
+	}
+	public void setPosblFcltyCl(String posblFcltyCl) {
+		this.posblFcltyCl = posblFcltyCl;
+	}
+	
+	public String getPosblFcltyEtc() {
+		return posblFcltyEtc;
+	}
+	public void setPosblFcltyEtc(String posblFcltyEtc) {
+		this.posblFcltyEtc = posblFcltyEtc;
+	}
+	public Date getModifiedtime() {
+		return modifiedtime;
+	}
+	public void setModifiedtime(Date modifiedtime) {
+		this.modifiedtime = modifiedtime;
+	}
+	public String getResveCl() {
+		return resveCl;
+	}
+	public void setResveCl(String resveCl) {
+		this.resveCl = resveCl;
 	}
 	
 	

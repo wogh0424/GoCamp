@@ -20,6 +20,7 @@ public class SearchDTO {
 	private String caravAcmpnyAt;
 	private String animalCmgCl;
 	
+	
 	public List<String> getThemaEnvrnCl() {
 		return themaEnvrnCl;
 	}

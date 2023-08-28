@@ -14,5 +14,6 @@ public interface CampDAO {
 
 	String selectId(String contentId);
 
+	ItemDTO selectOne(String contentId);
 	
 }

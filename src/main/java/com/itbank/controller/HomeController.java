@@ -44,26 +44,4 @@ public class HomeController {
 		}
 		return "home";
 	}
-
-	@GetMapping("/main")
-	public ModelAndView main(@RequestParam(value = "page", defaultValue = "1") int page,
-			@RequestParam(value = "order", defaultValue = "clickCnt") String order, SearchDTO search) {
-		ModelAndView mav = new ModelAndView("main");
-		int campCnt = campService.selectCnt(search);
-		PagingDTO paging = new PagingDTO(page, campCnt, order);
-		PageAndSearchDTO searchPage = new PageAndSearchDTO(paging, search);
-		List<ItemDTO> list = campService.selectAll(searchPage);
-		mav.addObject("list", list);
-		mav.addObject("paging", paging);
-		return mav;
-	}
-
-	@GetMapping("/view/{contentId}")
-	public ModelAndView view(@PathVariable("contentId") String contentId) {
-		ModelAndView mav = new ModelAndView("view");
-		String camp = campService.selectId(contentId);
-		mav.addObject("contentId", contentId);
-		mav.addObject("camp", camp);
-		return mav;
-	}
 }

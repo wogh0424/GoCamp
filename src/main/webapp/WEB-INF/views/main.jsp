@@ -1,30 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
-
+<%@ page import="java.util.Arrays" %>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x9jrgpo39q"></script>
 <script src="${cpath }/resources/js/addr.js"></script>
+<script src="${cpath }/resources/js/mainpage.js"></script>
+<link rel="stylesheet" href="./resources/css/main/main.css" type="text/css">
 <!-- 공공데이터 api -->
-<%-- <script src="${cpath }/resources/js/main.js/"></script> --%>
 <!-- main.js  -->
 
-<div class="modal">
+
+<div id="modal">
 	<div class="overlay"></div>
 	<div class="modal_body">
 		<div class="detailed_search_head">
 			<h2>상세검색 메뉴</h2>
-			<!--          <button class="search_close_btn">X</button> -->
 		</div>
+		
 		<div class="detailed_search_choice">
-			<form>
-				<ul>
+			<form id="dtl_search">
+				<input type="hidden" name="listTy" value="${listTy }">
+				<input type="hidden" name="order" value="${paging.order }">
+				<ul class="dtl_searchParams">
 					<li>
 						<div class="category_wrap">
 							<div class="category_name">지역별</div>
 							<div class="category_box">
-								<ul class="flex">
-									<li><input type="checkbox" name="dtl_sido" class="check01"
-										id="sido01" value="서울시"> <label for="sido01">서울시</label>
-									</li>
+								<ul>
+									<li><input type="checkbox" name="dtl_sido" class="check01" id="sido01" value="서울시"> <label for="sido01">서울시</label></li>
 									<li><input type="checkbox" name="dtl_sido" class="check01"
 										id="sido02" value="부산시"> <label for="sido02">부산시</label>
 									</li>
@@ -81,7 +84,7 @@
 						<div class="category_wrap">
 							<div class="category_name">운영형태</div>
 							<div class="category_box">
-								<ul class="flex">
+								<ul>
 									<li><input type="checkbox" name="facltDivNm"
 										class="check02" id="divNm01" value="지자체"> <label
 										for="divNm01">지자체</label></li>
@@ -105,7 +108,7 @@
 						<div class="category_wrap">
 							<div class="category_name">입지구분</div>
 							<div class="category_box">
-								<ul class="flex">
+								<ul>
 									<li><input type="checkbox" name="dtl_lctcl"
 										class="check03" id="lctcl01" value="해변"> <label
 										for="lctcl01">해변</label></li>
@@ -138,7 +141,7 @@
 						<div class="category_wrap">
 							<div class="category_name">주요시설</div>
 							<div class="category_box">
-								<ul class="flex">
+								<ul>
 									<li><input type="checkbox" name="induty" class="check04"
 										id="induty01" value="일반야영장"> <label for="induty01">일반야영장</label>
 									</li>
@@ -159,7 +162,7 @@
 						<div class="category_wrap">
 							<div class="category_name">테마별</div>
 							<div class="category_box">
-								<ul class="flex">
+								<ul>
 									<li><input type="checkbox" name="themaEnvrnCl"
 										class="check05" id="themaEnvrnCl01" value="일출명소"> <label
 										for="themaEnvrnCl01">일출명소</label></li>
@@ -204,7 +207,7 @@
 						<div class="category_wrap">
 							<div class="category_name">부대시설</div>
 							<div class="category_box">
-								<ul class="flex">
+								<ul>
 									<li><input type="checkbox" name="sbrsCl" class="check06"
 										id="sbrsCl01" value="전기"> <label for="sbrsCl01">전기</label>
 									</li>
@@ -227,7 +230,7 @@
 										id="sbrsCl07" value="놀이터"> <label for="sbrsCl07">놀이터</label>
 									</li>
 									<li><input type="checkbox" name="sbrsCl" class="check06"
-										id="sbrsCl08" value="산책터"> <label for="sbrsCl08">산책터</label>
+										id="sbrsCl08" value="산책로"> <label for="sbrsCl08">산책로</label>
 									</li>
 									<li><input type="checkbox" name="sbrsCl" class="check06"
 										id="sbrsCl09" value="운동장"> <label for="sbrsCl09">운동장</label>
@@ -246,7 +249,7 @@
 						<div class="category_wrap">
 							<div class="category_name">기타정보</div>
 							<div class="category_box">
-								<ul class="flex">
+								<ul>
 									<li><input type="checkbox" name="trlerAcmpnyAt"
 										class="check06" id="acmpnyAt01" value="Y"> <label
 										for="acmpnyAt01">개인 트레일러 입장 가능</label></li>
@@ -257,8 +260,8 @@
 										class="check06" id="acmpnyAt03" value="Y"> <label
 										for="acmpnyAt03">반려동물 동반가능</label></li>
 								</ul>
-								<span>(※ 실제 결과는 현장사정 및 계절에 따라 달라질 수 있으니 캠핑장 사업주에 직접 확인 후
-									이용바랍니다.)</span>
+								<div class="notion">(※ 실제 결과는 현장사정 및 계절에 따라 달라질 수 있으니 캠핑장 사업주에 직접 확인 후
+									이용바랍니다.)</div>
 							</div>
 						</div>
 					</li>
@@ -268,231 +271,217 @@
 						value="초기화">
 				</div>
 			</form>
+		</div>  <!-- dtl search end -->
+	</div> <!-- modal_body end -->
+</div> <!-- modal end -->
+
+
+<div id="searchBg" style="background-image: url('./resources/image/main/searchBg.jpg');">
+	<div id="searchHeader">
+		<div id="calender">
+			
 		</div>
+		<div id="search">
+			<h3>간편검색</h3>
+			<form class="searchOpt">
+				<input type="hidden" name="listTy" value="${listTy }">
+				<div style="display:flex; flex-flow:wrap;">
+				<select name="sido">
+					<option value="">=== 시 / 도 ===</option>
+					<option value="서울시" ${param.sido == '서울시' ? 'selected' : ''}>서울시</option>
+					<option value="부산시" ${param.sido == '부산시' ? 'selected' : ''}>부산시</option>
+					<option value="대구시" ${param.sido == '대구시' ? 'selected' : ''}>대구시</option>
+					<option value="인천시" ${param.sido == '인천시' ? 'selected' : ''}>인천시</option>
+					<option value="광주시" ${param.sido == '광주시' ? 'selected' : ''}>광주시</option>
+					<option value="대전시" ${param.sido == '대전시' ? 'selected' : ''}>대전시</option>
+					<option value="울산시" ${param.sido == '울산시' ? 'selected' : ''}>울산시</option>
+					<option value="세종시" ${param.sido == '세종시' ? 'selected' : ''}>세종시</option>
+					<option value="경기도" ${param.sido == '경기도' ? 'selected' : ''}>경기도</option>
+					<option value="강원도" ${param.sido == '강원도' ? 'selected' : ''}>강원도</option>
+					<option value="충청북도" ${param.sido == '충청북도' ? 'selected' : ''}>충청북도</option>
+					<option value="충청남도" ${param.sido == '충청남도' ? 'selected' : ''}>충청남도</option>
+					<option value="전라북도" ${param.sido == '전라북도' ? 'selected' : ''}>전라북도</option>
+					<option value="전라남도" ${param.sido == '전라남도' ? 'selected' : ''}>전라남도</option>
+					<option value="경상북도" ${param.sido == '경상북도' ? 'selected' : ''}>경상북도</option>
+					<option value="경상남도" ${param.sido == '경상남도' ? 'selected' : ''}>경상남도</option>
+					<option value="제주도" ${param.sido == '제주도' ? 'selected' : ''}>제주도</option>
+				</select> 
+				<select name="gungu">
+					<option value="">=== 군 / 구 ===</option>
+				</select>
+				<select name="lctcl">
+					<option value="">=== 테마 ===</option>
+					<option value="해변" ${param.lctcl == '해변' ? 'selected' : ''}>해변</option>
+					<option value="섬" ${param.lctcl == '섬' ? 'selected' : ''}>섬</option>
+					<option value="산" ${param.lctcl == '산' ? 'selected' : ''}>산</option>
+					<option value="숲" ${param.lctcl == '숲' ? 'selected' : ''}>숲</option>
+					<option value="계곡" ${param.lctcl == '계곡' ? 'selected' : ''}>계곡</option>
+					<option value="강" ${param.lctcl == '강' ? 'selected' : ''}>강</option>
+					<option value="호수" ${param.lctcl == '호수' ? 'selected' : ''}>호수</option>
+					<option value="도심" ${param.lctcl == '도심' ? 'selected' : ''}>도심</option>
+				</select>		
+				</div>
+				<div>
+					<input type="search" name="keyword" placeholder="검색어를 입력하세요" value="${param.keyword }"> 
+					<input type="submit" value="검색">
+					<button id="openModal">상세조건검색 +</button>
+				</div>
+			
+			</form>
+		</div> <!-- end of search -->
+	</div> <!--  end of searchHeader -->
+</div> <!-- end of searchBg -->
 
-	</div>
-</div>
-<button id="openModal">상세검색</button>
-
-
-<div id="search">
-	<form>
-		<p>
-			<select name="sido">
-				<option value="">== 전체 ==</option>
-				<option value="서울시" ${param.sido == '서울시' ? 'selected' : ''}>서울시</option>
-				<option value="부산시" ${param.sido == '부산시' ? 'selected' : ''}>부산시</option>
-				<option value="대구시" ${param.sido == '대구시' ? 'selected' : ''}>대구시</option>
-				<option value="인천시" ${param.sido == '인천시' ? 'selected' : ''}>인천시</option>
-				<option value="광주시" ${param.sido == '광주시' ? 'selected' : ''}>광주시</option>
-				<option value="대전시" ${param.sido == '대전시' ? 'selected' : ''}>대전시</option>
-				<option value="울산시" ${param.sido == '울산시' ? 'selected' : ''}>울산시</option>
-				<option value="세종시" ${param.sido == '세종시' ? 'selected' : ''}>세종시</option>
-				<option value="경기도" ${param.sido == '경기도' ? 'selected' : ''}>경기도</option>
-				<option value="강원도" ${param.sido == '강원도' ? 'selected' : ''}>강원도</option>
-				<option value="충청북도" ${param.sido == '충청북도' ? 'selected' : ''}>충청북도</option>
-				<option value="충청남도" ${param.sido == '충청남도' ? 'selected' : ''}>충청남도</option>
-				<option value="전라북도" ${param.sido == '전라북도' ? 'selected' : ''}>전라북도</option>
-				<option value="전라남도" ${param.sido == '전라남도' ? 'selected' : ''}>전라남도</option>
-				<option value="경상북도" ${param.sido == '경상북도' ? 'selected' : ''}>경상북도</option>
-				<option value="경상남도" ${param.sido == '경상남도' ? 'selected' : ''}>경상남도</option>
-				<option value="제주도" ${param.sido == '제주도' ? 'selected' : ''}>제주도</option>
-			</select> <select name="gungu">
-				<option value="">== 전체 ==</option>
-			</select> <select name="lctcl">
-				<option value="">== 전체테마 ==</option>
-				<option value="해변" ${param.lctcl == '해변' ? 'selected' : ''}>해변</option>
-				<option value="섬" ${param.lctcl == '섬' ? 'selected' : ''}>섬</option>
-				<option value="산" ${param.lctcl == '산' ? 'selected' : ''}>산</option>
-				<option value="숲" ${param.lctcl == '숲' ? 'selected' : ''}>숲</option>
-				<option value="계곡" ${param.lctcl == '계곡' ? 'selected' : ''}>계곡</option>
-				<option value="강" ${param.lctcl == '강' ? 'selected' : ''}>강</option>
-				<option value="호수" ${param.lctcl == '호수' ? 'selected' : ''}>호수</option>
-				<option value="도심" ${param.lctcl == '도심' ? 'selected' : ''}>도심</option>
-			</select>
-		</p>
-		<input type="search" name="keyword" placeholder="캠핑장 이름으로 검색해주세요"
-			value="${param.keyword }"> <input type="submit" value="검색">
-	</form>
-</div>
-
-<select id="orderSelect" name="order">
-	<option value="clickCnt" ${param.order == 'clickCnt' ? 'selected' : ''}>조회순</option>
-	<option value="recmCnt" ${param.order == 'recmCnt' ? 'selected' : ''}>추천순</option>
-	<option value="facltNm" ${param.order == 'facltNm' ? 'selected' : ''}>이름순</option>
-</select>
 
 <div id="main">
-	<h3>총 ${paging.boardCount }개 캠핑장이 검색되었습니다.</h3>
-	<h3>게시판 : ${paging.page } / ${paging.pageCount }</h3>
-	<h3>${paging.begin }~${paging.end }</h3>
+	<div id="campCount">총 <span style="color: #91C148;">${paging.boardCount }</span>개 캠핑장이 조회되었습니다.</div>
+	<div id="mainHeader" >
+		<select id="orderSelect" name="order">
+			<option value="clickCnt" ${param.order == 'clickCnt' ? 'selected' : ''}>조회순</option>
+			<option value="recmCnt" ${param.order == 'recmCnt' ? 'selected' : ''}>추천순</option>
+			<option value="facltNm" ${param.order == 'facltNm' ? 'selected' : ''}>이름순</option>
+		</select>
+		
+		<a href="${cpath }/main?order=${paging.order }&listTy="><button id="listTypeChangeBtn" value="${listTy }">${listTy == 'LIST' ? '지도로 보기' : '리스트로 보기'}</button></a>
+	</div>
 
-	<c:forEach items="${list }" var="item">
-		<div class="item flex">
-			<div class="firstImage">
-				<a href="${cpath }/view/${item.contentId}"><img
-					src="${item.firstImageUrl }" id="lazy-img" width="300px" height="200px"></a>
+	<div id="gocampMain" style="max-width: 100%; margin: 0px auto; ">
+	<c:if test="${listTy == 'LIST'}">
+		<div id="mainList">
+			<c:forEach items="${list }" var="item">
+				<div class="mainlistItem">
+					<div class="firstImage">
+						<a href="${cpath }/view/${item.contentId}"><img	src="${item.firstImageUrl }" width="300px" height="200px" style="margin-right: 30px;"></a>
+					</div>
+					<div class="description">
+						<div class="cnts">
+							<div class="clickCnt">조회수 ${item.clickCnt }</div>
+							<div class="recmCnt">추천수 ${item.recmCnt }</div>
+						</div>
+						<div class="where">
+							<div class="facltNm">
+								<a href="${cpath }/view/${item.contentId}">[${item.doNm } ${item.sigunguNm }] ${item.facltNm }</a>
+							</div>
+						</div>
+						<c:if test="${item.lineIntro != '' }">
+						<div class="lineIntro">
+							<b>${item.lineIntro }</b>
+						</div>
+						</c:if>
+						<c:if test="${item.intro != '' }">
+						<div class="intro">${item.intro }</div>
+						</c:if>
+						<div class="address">
+							<img src="./resources/image/main/location.png" width=22px height=22px; style="margin-right: 10px;"> ${item.addr1 } 
+							<img src="./resources/image/main/phone.png" width=22px height=22px; style="margin: 0 10px 0 20px;"> ${item.tel != '' ? item.tel : '홈페이지 방문 바람' }
+						</div>
+						<c:if test="${item.sbrsCl != ''}">
+						<div class="sbrsCl">
+							<c:set var="splitSbrs" value="${fn:split(item.sbrsCl, ',') }" />
+							<c:forEach var="sbrs" items="${splitSbrs}">
+									<div class="sbrsItem">
+										<img src="${cpath }/resources/image/main/${sbrs}.png" width="30px" height="30px"><br>
+										<span>${ sbrs}</span>
+									</div>
+							</c:forEach>
+						</div>
+						</c:if>
+					</div> <!-- end of description -->
+				</div> <!-- end of item -->
+			</c:forEach>
+			<div class="main_paging">
+				<ul class="paging">
+				<c:if test="${paging.prev }">
+					<li class="np"><a href="${cpath }/main?listTy=${listTy}&order=${paging.order}"><button class="page" value="1" ><b>〈〈</b></button></a><li>
+					<li class="np"><a href="${cpath }/main?listTy=${listTy}&order=${paging.order}"><button class="page" value="${paging.begin - paging.perPage}" ><b>〈</b></button></a><li>
+				</c:if>
+
+				<c:forEach var="i" begin="${paging.begin }" end="${paging.end }">
+					<li><a href="${cpath }/main?listTy=${listTy}&order=${paging.order}"><button class="page" value="${i}">${i }</button></a></li>
+				</c:forEach>
+				
+				<c:if test="${paging.next }">
+					<li class="np"><a href="${cpath }/main?listTy=${listTy}&order=${paging.order}"><button class="page" value="${paging.end + 1}" ><b>〉</b></button></a><li>
+					<li class="np"><a href="${cpath }/main?listTy=${listTy}&order=${paging.order}"><button class="page" value="${paging.pageCount}" ><b>〉〉</b></button></a><li>
+				</c:if>
+				</ul>
 			</div>
-			<div class="description">
-				<div class="cnts flex">
-					<div class="clickCnt">조회수 ${item.clickCnt }</div>
-					<div class="recmCnt">추천수 ${item.recmCnt }</div>
+		</div> <!-- end of mainList -->
+	</c:if>
+	
+	<c:if test="${listTy == 'MAP' }">
+		<div id="navermap" style="width: 100%;">
+			<div class="showMap" style="width: 100%">
+				<div id="map">
+					
 				</div>
-				<div class="where flex">
-					<div class="facltNm">
-						<a href="${cpath }/view/${item.contentId}">[${item.doNm }
-							${item.sigunguNm }] ${item.facltNm }</a>
+				<div class="campList_map">
+					<ul id="mapList">
+						<c:forEach items="${list }" var="item" varStatus="st">
+							<li class="mapItem" x="${item.mapX }" y="${item.mapY }" cid="${item.contentId }" st="${st.index }" facltNm="${item.facltNm }" tel="${item.tel }">
+								<a href="${cpath }/view/${item.contentId}">[${item.doNm } ${item.sigunguNm }] ${item.facltNm }</a><br>
+								<b>${item.addr1 }</b><br>
+								<b>${item.tel }</b>
+							</li>
+						</c:forEach>
+					</ul>
+					<div class="map_paging">
+						<a href="${cpath }/main?listTy=${listTy}&order=${paging.order}"><button class="page" value="${param.page <= 1 ? 1 : paging.page - 1}">PREV</button></a>
+						<div class="currentMapPage"><b style="color: #1C84C6;">${paging.page}</b>/${paging.pageCount }</div>
+						<a href="${cpath }/main?listTy=${listTy}&order=${paging.order}"><button class="page" value="${param.page > paging.pageCount ? paging.pageCount : paging.page + 1}">NEXT</button></a>
 					</div>
 				</div>
-				<div class="lineIntro">
-					<b>${item.lineIntro }</b>
-				</div>
-				<div class="intro">${item.intro }</div>
-				<div class="address flex">${item.addr1 }</div>
-				<div class="sbrsCl">
-					<c:set var="splitSbrs" value="${fn:split(item.sbrsCl, ',') }" />
-					<c:forEach var="sbrs" items="${splitSbrs}">
-						<span>${sbrs }</span>
-					</c:forEach>
-				</div>
-			</div>
-		</div>
-	</c:forEach>
-	<div class="paging frame">
-		<c:if test="${paging.prev }">
-			<a class="page"
-				href="${cpath }/main?page=${paging.begin - paging.perPage}"><button>[이전]</button></a>
-		</c:if>
-
-		<c:forEach var="i" begin="${paging.begin }" end="${paging.end }">
-			<a class="page" href="${cpath }/main?page=${i}"><button>${i }</button></a>
-		</c:forEach>
-
-		<c:if test="${paging.next }">
-			<a class="page" href="${cpath }/main?page=${paging.end + 1}"><button>[다음]</button></a>
-		</c:if>
-	</div>
-</div>
-
+			</div> <!-- end of showMap -->
+		</div> <!-- end of naverMap -->
+	</c:if>
+	</div> <!-- end of gocampMain -->
+</div><!-- end of main -->
+<a style="display:scroll;position:fixed;bottom:50px;right:50px;" rel="nofollow" href="#" title="Back to Top" style="font-size:2em"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMnxaUftutrJ-gMYQrt2loxz_W88m6_z9jFt5PwITMqtwMeZXRxZjCuC3C6LqUSUfsxbY&usqp=CAU" style="width: 80px; height: 80px;"></a>
 <script>
-   function orderByHandler(event) {
-      location.href = '${cpath}/main?order=' + event.target.value   + orderUrlParameterWriter()
-   }
-   
-   // 시도에 따른 군구 옵션을 채워주는 함수
-   function sigunguHandler() {
-      // 시도의 값을 받아옴
-      var sido = document.querySelector('select[name="sido"]').value
-      if (sido == '') {
-         return
-      }
-      var sigungu = addr[sido].split(',')
-      
-      // gungu 내부의 값을 초기화
-      const gungu = document.querySelector('select[name="gungu"]')
-      gungu.innerHTML = ''
-      const defaultOpt = document.createElement('option')
-      defaultOpt.innerText = '== 전체 =='
-      defaultOpt.value = ''
-      gungu.append(defaultOpt)
-      
-      sigungu.forEach(ob => {
-         const option = document.createElement('option')
-         option.innerText = ob
-         option.value = ob
-         gungu.append(option)
-      })
-   } 
-   
-   // 페이지가 새로고침 되었을 때도 군구 파라미터가 남아있도록 하기 위해서 만든 함수
-   function gunguParamSetter() {
-      // 군구 파라미터 값을 받아와 옵션의 value와 비교해서 값이 같으면 'selected' 옵션 추가
-      sigunguHandler()
-      const gungu = document.querySelector('select[name="gungu"]')
-      const gunguParam = '${param.gungu}'
-      if (gunguParam == '') {
-         return
-      }
-      var gunguOpts = gungu.options
-      Object.values(gunguOpts).forEach(ob => {
-         if(ob.value == gunguParam) {
-            ob.selected = 'selected'
-         }
-      })
-   }
-   
-   // 많은 양의 url 파라미터를 자동으로 부여
-   function pageUrlParameterWriter() {
-      const url = location.href
-      // 파라미터가 없을 때(?가 없음)는 빈값을 return
-      if (url.indexOf('?') == -1) {
-         return ''
-      }
-      
-      // 파라미터가 있을 때는 파라미터 부분만 잘라냄
-      let params = url.substring(url.indexOf('?') + 1, url.length)
-      if (params.length <= 1) {
-         return ''
-      }
-      
-      // page는 유동적으로 변동되기 때문에 제외해야한다.
-      const page = '${param.page}' 
-      
-      if (page != '') {
-         let pageParam = 'page=' + page
-         params = url.substring(url.indexOf(pageParam) + pageParam.length, url.length)
-      }
-      else {
-         params = '&' + params
-      }
-      return params
-   }
-   
-   function orderUrlParameterWriter() {
-      const url = location.href
-      const page = '${param.page}' 
-      if (url.indexOf('?') == -1) {
-         return ''
-      }
-      let params = url.substring(url.indexOf('?') + 1, url.length)
-      if (params.length <= 1) {
-         return ''
-      }
-      const order = '${param.order}'
-      
-      if (order != '') {
-         let orderParam = 'order=' + order
-         params = url.substring(url.indexOf(orderParam) + orderParam.length, url.length)
-      }
-      else if (page != '')  { 
-    	 {
-    	   let pageParam = 'page=' + page
-    	      params = url.substring(url.indexOf(pageParam) + pageParam.length, url.length)
-    	  }
-      }
-      else {
-         params = '&' + params
-      }
-      return params
-   }
-   
-   
-   document.getElementById('openModal').addEventListener("click", () => {
-      document.querySelector('div[class="modal"]').style.display='flex'
+	// 정렬 변경용 함수
+   document.getElementById('openModal').addEventListener("click", (event) => {
+	  event.preventDefault()
+      document.getElementById('modal').style.display = 'flex'
    })
    document.querySelector('div[class="overlay"]').addEventListener("click", () => {
-      document.querySelector('div[class="modal"]').style.display='none'
+      document.getElementById('modal').style.display = 'none'
    })
    document.getElementById('orderSelect').onchange = orderByHandler
    document.querySelector('select[name="sido"]').onchange = sigunguHandler
-   window.onload = gunguParamSetter
+   window.onload = sigunguHandler
+   window.addEventListener("load", parameterHandler)
    window.addEventListener("load", () => {
-      document.querySelectorAll('a[class="page"]').forEach(a => {
-            a.href += pageUrlParameterWriter()
+      document.querySelectorAll('button[class="page"]').forEach(btn => {
+            btn.parentNode.href += pageUrlParameterWriter(btn)
          })
       })
+   document.getElementById('listTypeChangeBtn').onclick = listTypeHandler
 </script>
 
+
+<script>
+	const mapItemList = document.querySelectorAll('li[class="mapItem"]')
+	const mapList = document.getElementById('')
+	
+	var markers = new Array()
+	var infoWindows = new Array()
+	
+	var map
+	
+	if ('${listTy}' == 'MAP') {
+		map =  new naver.maps.Map('map', {
+		    zoom: 11,
+			zoomControl: true,
+			zoomControlOptions : { // 줌 컨트롤 옵션
+				position : naver.maps.Position.TOP_RIGHT // 오른쪽 위로 위치 설정
+			},
+			mapTypeControl : true
+		});
+		window.onload = markerHandler
+	}
+	
+	mapItemList.forEach(li => li.onclick = mapHandler)
+</script>
 
 </body>
 </html>

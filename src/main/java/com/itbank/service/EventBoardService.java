@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.model.EventBoardDTO;
-import com.itbank.model.NoticeBoardDTO;
 import com.itbank.model.PagingDTO;
 import com.itbank.repository.EventBoardDAO;
 
