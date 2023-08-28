@@ -271,9 +271,7 @@ a {
 		</div>
 	</section>
 	<!-- section end -->
-	<div class="footer_wrap">
-		<p>하단메뉴</p>
-	</div>
+
 	<footer>
 		<!-- footer start -->
 

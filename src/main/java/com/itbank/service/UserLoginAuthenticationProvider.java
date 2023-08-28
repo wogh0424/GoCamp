@@ -29,8 +29,6 @@ public class UserLoginAuthenticationProvider implements AuthenticationProvider {
 		String userId = authentication.getName();
 		String userPw = (String) authentication.getCredentials();
 		UserDetailsDto userDetails = (UserDetailsDto) userDetailsService.loadUserByUsername(userId);
-		System.out.println("provider : " + userPw);
-		System.out.println("dto : " + userDetails.getPassword());
 		if (userDetails == null || !userId.equals(userDetails.getUsername())
 				|| !pwEncoding.matches(userPw, userDetails.getPassword())) {
 			
@@ -60,7 +58,6 @@ public class UserLoginAuthenticationProvider implements AuthenticationProvider {
 		/* 최종 리턴 시킬 새로만든 Authentication 객체 */
 		Authentication newAuth = new UsernamePasswordAuthenticationToken(userDetails, null,
 				userDetails.getAuthorities());
-		System.out.println("auth : " + newAuth);
 		return newAuth;
 	}
 
