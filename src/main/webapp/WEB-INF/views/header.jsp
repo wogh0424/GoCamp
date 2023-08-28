@@ -141,7 +141,7 @@
 <body>
 	<header>
 		<div class="title_logo">
-			<a href="${cpath }"><img
+			<a href="${cpath }/"><img
 				src="${cpath }/resources/image/camping_logo.png"></a>
 		</div>
 		<div class="header_login">
