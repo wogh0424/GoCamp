@@ -26,6 +26,20 @@ public class FreeBoardReplyService {
 	}
 
 
+	// 댓글 수정 삭제
+
+	public int updateReply(FreeBoardReplyDTO dto) {
+		return dao.updateReply(dto);
+		
+	}
+
+
+
+	public int deleteReply(int idx) {
+		return dao.deleteReply(idx);
+	}
+
+
 
 
 }

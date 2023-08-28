@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+		"-//mybatis.org//DTD Mapper 3.0//EN"
+		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="com.itbank.repository.GocampReviewDAO">
+
+<insert id="insertUpload" parameterType="gocampreview">
+		insert into gocampReview 
+				(writer,title,review_content, gocamp_board) 
+				values (#{writer},#{title},#{review_content},#{gocamp_board})
+	</insert>
+	
+<!-- 	가장 큰값, 마지막에 넣은값 -->
+	<select id="selectMaxIdxFromUpload" resultType="int">   
+		select max(idx) from gocampReview
+	</select>
+		<!-- c:forEach var="item" items="${list }" -->	
+	<insert id="insertFile" parameterType="hashmap">
+		insert into gocampReview_file (gocampReview, filePath) 
+		
+			<foreach item="item" collection="list" separator="  UNION ALL  " >
+				select #{upload}, #{item} from dual
+		</foreach>
+	</insert>
+	
+	<select id="selectAllReview" resultType="gocampreview">
+		 SELECT 
+	        gocampReview.idx,
+	        gocampReview.title,
+	        gocampReview.writer,
+	        gocampReview.review_content,
+	        (SELECT GROUP_CONCAT(filePath SEPARATOR ',')
+	         FROM gocampReview_file
+	         WHERE gocampReview_file.gocampReview = gocampReview.idx) AS filePath 
+ 		  FROM gocampReview
+   		  ORDER BY idx
+	</select>
+	
+	<select id="selectFileList" parameterType="int" resultType="string">
+		select 
+ 			  filePath
+    			    from gocampReview_file
+   		 where
+        		gocampReview = #{idx}
+	</select>
+	
+	<delete id="deleteFile" parameterType="int">
+			delete from gocampReview_file where gocampReview = #{idx }
+	</delete>
+	
+	<delete id="deleteReview" parameterType="int">
+			delete from gocampReview where idx = #{idx}
+	</delete>
+
+	
+<!-- 		<select id="selectAll" resultType="gocampreview" parameterType="paging"> -->
+<!-- 			select * from gocampReview	 -->
+<!-- 				order by  -->
+<!-- 					idx desc  -->
+<!-- 				offset #{offset} rows -->
+<!-- 				fetch next #{perPage} rows only -->
+<!-- 		</select> -->
+		
+<!-- 		<insert id="writeReview" parameterType="gocampreview"> -->
+<!-- 			insert into gocampReview  -->
+<!-- 				(writer,review_content, gocamp_board) -->
+<!-- 					values (#{writer},#{review_content},#{gocamp_board}) -->
+<!-- 		</insert> -->
+		
+<!-- 		<select id="getReview" parameterType="String" resultType="gocampreview"> -->
+<!-- 			select gr.* from gocampReview gr join gocamp gc  -->
+<!-- 				on gc.contentId = gr.gocamp_board where gc.contentId = #{contentId} -->
+<!-- 		</select> -->
+		
+		
+</mapper>
+		

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.itbank.model.EventBoardDTO;
+import com.itbank.model.NoticeBoardDTO;
 import com.itbank.model.PagingDTO;
 
 @Repository
@@ -18,5 +19,11 @@ public interface EventBoardDAO {
 	EventBoardDTO selectOne(int idx);
 
 	int updateViewCount(int idx);
+	
+	int insertBoard(EventBoardDTO dto);
+
+	int delete(int idx);
+
+	int update(EventBoardDTO dto);
 
 }

@@ -15,6 +15,11 @@ public interface FreeBoardReplyDAO {
 
 	int insertReply(FreeBoardReplyDTO reply);
 
+	int updateReply(FreeBoardReplyDTO dto);
+
+	int deleteReply(int idx);
+
+
 
 
 }

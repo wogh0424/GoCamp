@@ -2,7 +2,6 @@ package com.itbank.repository;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -20,14 +19,25 @@ public interface FreeBoardDAO {
 
 	int insertBoard(FreeBoardDTO dto);
 
+	// 게시글 조회 view/${idx}
 	FreeBoardDTO selectOne(int idx);
 
-	int delete(int idx);
+	int deleteFreeBoard(int idx);
 
 	int update(FreeBoardDTO dto);
 
 	String getnick(String userid);
 
 	int ViewCount(int idx);
+
+	List<FreeBoardDTO> selectFile();
+
+	int insertFile(HashMap<String, Object> param);
+
+	int selectMaxIdxFromUpload();
+
+	int deleteFile(int idx);
+
+	List<String> selectFileList(int idx);
 
 }

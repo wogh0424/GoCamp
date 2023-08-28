@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.model.EventBoardDTO;
+import com.itbank.model.NoticeBoardDTO;
 import com.itbank.model.PagingDTO;
 import com.itbank.repository.EventBoardDAO;
 
@@ -29,6 +30,21 @@ public class EventBoardService {
 	public EventBoardDTO selectOne(int idx) {
 		dao.updateViewCount(idx);
 		return dao.selectOne(idx);
+	}
+	
+	// 게시글 작성
+	public int write(EventBoardDTO dto) {
+		return dao.insertBoard(dto);
+	}
+	
+	// 게시글 삭제
+	public int delete(int idx) {
+		return dao.delete(idx);
+	}
+		
+	// 게시글 수정
+	public int update(EventBoardDTO dto) {
+		return dao.update(dto);
 	}
 
 }

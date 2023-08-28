@@ -21,6 +21,8 @@
 		<typeAlias type="com.itbank.model.FreeBoardReplyDTO" alias="freeboardreply"/>
 		<typeAlias type="com.itbank.model.NoticeBoardDTO" alias="noticeboard"/>
 		<typeAlias type="com.itbank.model.EventBoardDTO" alias="eventboard"/>
+		<typeAlias type="com.itbank.model.GocampReviewDTO" alias="gocampreview"/>
+		
 	</typeAliases>
 	
 </configuration>

@@ -10,6 +10,9 @@
 		<pre>
 			<ol>
 					<li><a href="${cpath }/freeBoard">자유게시판 + 댓글</a></li>
+					<li><a href="${cpath }/noticeBoard">공지게시판</a></li>
+					<li><a href="${cpath }/eventBoard">이벤트게시판</a></li>
+					<li><a href="${cpath }/review">main review + fileupload</a></li>
 				
 			</ol>
 		</pre>

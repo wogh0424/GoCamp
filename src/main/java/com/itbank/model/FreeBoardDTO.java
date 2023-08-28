@@ -1,15 +1,32 @@
 package com.itbank.model;
 
 import java.sql.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class FreeBoardDTO {
 	
+//	  	idx 		int auto_increment primary key,
+//	    title 		varchar(1000) not null,
+//	    writer 		varchar(100) ,
+//	    content 	varchar(2000),
+//	    filePath 	varchar(255),
+//	    view_cnt    int default 0,
+//	    date 		datetime default now(),
+//	 
+//		CONSTRAINT free_user_fk FOREIGN KEY (writer) REFERENCES member(nickname)
+	
 	private int idx;
-	private String writer;
-	private Date date;
 	private String title;
+	private String writer;
 	private String content;
+	
+	private String filePath;
+	private List<MultipartFile> upload;
+	
 	private int view_cnt;
+	private Date date;
 	
 	public int getIdx() {
 		return idx;
@@ -46,6 +63,18 @@ public class FreeBoardDTO {
 	}
 	public void setView_cnt(int view_cnt) {
 		this.view_cnt = view_cnt;
+	}
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	public List<MultipartFile> getUpload() {
+		return upload;
+	}
+	public void setUpload(List<MultipartFile> upload) {
+		this.upload = upload;
 	}
 	
 	

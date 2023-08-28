@@ -9,7 +9,7 @@
 			
 			where ${column} like '%${search}%'
 				order by 
-					idx 
+					idx desc
 				offset #{offset} rows
 				fetch next #{perPage} rows only
 		</select>
@@ -30,6 +30,22 @@
 		<select id="selectCount" parameterType="paging" resultType="int">
 				select count(*) from event_board where ${column} like '%${search}%'
 		</select>
+		
+		<insert id="insertBoard" parameterType="eventboard">
+			insert into event_board
+				(title, content) 
+					values (#{title}, #{content})
+		</insert>
+		
+		<delete id="delete" parameterType="int">
+				delete from event_board where idx=#{idx}
+		</delete>
+		
+		<update id="update"  parameterType="eventboard" >
+				update event_board
+					set title=#{title}, content=#{content} 
+						where idx=#{idx}
+		</update>
 		
 		
 </mapper>

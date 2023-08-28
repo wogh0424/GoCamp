@@ -41,7 +41,9 @@
 		
 	</div>
 	<div>
+	<c:if test="${pageContext.request.userPrincipal != null}">
 		<a href="${cpath }/freeBoard/write"><button>새 글 작성</button></a>
+	</c:if>
 	</div>
 </div>
 

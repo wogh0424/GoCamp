@@ -30,6 +30,11 @@
 	</c:forEach>
 </div>
 
+<c:if test="${pageContext.request.userPrincipal.name == 'admin'}">
+		<h3><a href="${cpath }/noticeBoard/write">새글작성</a></h3> 
+</c:if>
+
+
 <div class="paging">
 	<c:if test="${paging.prev }">
 		<a href="${cpath }/noticeBoard?page=${paging.begin - paging.perPage}&search=${paging.search}&column=${paging.column}">[이전]</a>

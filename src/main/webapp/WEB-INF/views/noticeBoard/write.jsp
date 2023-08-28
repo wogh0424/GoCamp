@@ -4,12 +4,9 @@
 
 <h3>작성</h3>
 <!-- enctype="multipart/form-data" -->
-<form method="POST" enctype="multipart/form-data" >
+<form method="POST" >
 	<p><input type="text" name="title" placeholder="제목" required autofocus> </p>
-	<p><input type="text" name="writer" value="${nickname}" readonly> </p>
 	<p><textarea name="content" placeholder="내용" required></textarea> </p>
-	<p><input name="upload" type="file" multiple ></p>
-	
 	<p><input type="submit"></p>
 </form>
 

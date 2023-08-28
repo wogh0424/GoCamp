@@ -27,10 +27,23 @@ public class NoticeBoardService {
 
 	@Transactional
 	public NoticeBoardDTO selectOne(int idx) {
-		int row = dao.updateViewCount(idx);
-		System.out.println(row + "행이 수정되었습니다.");
-		System.out.println(idx + "번 조회수 증가");
+		dao.updateViewCount(idx);
 		return dao.selectOne(idx);
+	}
+
+	// 게시글 작성
+	public int write(NoticeBoardDTO dto) {
+		return dao.insertBoard(dto);
+	}
+	
+	// 게시글 삭제
+	public int delete(int idx) {
+		return dao.delete(idx);
+	}
+		
+	// 게시글 수정
+	public int update(NoticeBoardDTO dto) {
+		return dao.update(dto);
 	}
 
 }

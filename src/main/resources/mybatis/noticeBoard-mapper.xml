@@ -9,7 +9,7 @@
 			
 			where ${column} like '%${search}%'
 				order by 
-					idx 
+					idx desc
 				offset #{offset} rows
 				fetch next #{perPage} rows only
 		</select>
@@ -30,6 +30,23 @@
 		<select id="selectCount" parameterType="paging" resultType="int">
 				select count(*) from notice_board where ${column} like '%${search}%'
 		</select>
+		
+		
+		<insert id="insertBoard" parameterType="noticeboard">
+			insert into notice_board
+				(title, content) 
+					values (#{title}, #{content})
+		</insert>
+		
+		<delete id="delete" parameterType="int">
+				delete from notice_board where idx=#{idx}
+		</delete>
+		
+		<update id="update"  parameterType="noticeboard" >
+				update notice_board
+					set title=#{title}, content=#{content} 
+						where idx=#{idx}
+		</update>
 		
 		
 </mapper>

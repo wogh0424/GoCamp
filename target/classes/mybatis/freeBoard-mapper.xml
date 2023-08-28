@@ -14,15 +14,59 @@
 				fetch next #{perPage} rows only
 		</select>
 	
-		<insert id="insertBoard" parameterType="hashmap">
+		<insert id="insertBoard" parameterType="freeboard">
 			insert into free_board
 				(title, writer, content) 
 					values (#{title}, #{writer}, #{content})
 		</insert>
 		
+		<insert id="insertFile" parameterType="hashmap">
+			insert into free_board_file (free_board, filePath) 
+			
+				<foreach item="item" collection="list" separator="  UNION ALL  " >
+					select #{upload}, #{item} from dual
+			</foreach>
+		</insert>
+		
+		<select id="selectMaxIdxFromUpload" resultType="int">   
+		select max(idx) from free_board
+	</select>
+
+		
 		<select id="selectOne" parameterType="int" resultType="freeboard">
-				select * from free_board where idx=#{idx}
+		
+			 SELECT 
+		        free_board.idx,
+		        free_board.title,
+		        free_board.writer,
+		        free_board.content,
+		        (SELECT GROUP_CONCAT(filePath SEPARATOR ',')
+		         FROM free_board_file
+		         WHERE free_board_file.free_board = free_board.idx) AS filePath 
+	 		  FROM free_board where idx = #{idx}
+	   		  ORDER BY idx
+		
+<!-- 		SELECT *, -->
+<!--       	 (SELECT GROUP_CONCAT(filePath, ',') -->
+<!--         FROM free_board_file -->
+<!--         WHERE free_board_file.free_board = free_board.idx) as filePath -->
+<!-- 		FROM free_board -->
+<!-- 		WHERE idx = #{idx} -->
+		
+<!-- 				select * -->
+<!-- 				(select -->
+<!-- 				select  -->
+<!-- 				listagg(filePath, ',') -->
+<!-- 					from free_board_file -->
+<!-- 				where -->
+<!-- 				 free_board_file.free_board = free_board.idx) as filePath -->
+<!-- 				  from free_board where idx=#{idx} -->
 		</select>
+		
+		<select id="selectFileList" parameterType="int" resultType="string">
+				select filePath from free_board_file where free_board = #{idx}
+	</select>
+		
 		
 		<update id="updateViewCount" parameterType="int">
 				update free_board
@@ -36,7 +80,11 @@
 			select view_cnt from free_board where idx = #{idx}
 		</select>
 		
-		<delete id="delete" parameterType="int">
+		<delete id="deleteFile" parameterType="int">
+				delete from free_board_file where free_board = #{idx }
+		</delete>
+		
+		<delete id="deleteFreeBoard" parameterType="int">
 				delete from free_board where idx=#{idx}
 		</delete>
 		
@@ -53,10 +101,6 @@
 		<select id="getnick" parameterType="string" resultType="string">
 			select nickname from member where userid = #{userid}
 		</select>
-		
-<!-- 		<select id="searchList" parameterType="board"> -->
-<!-- 				select * from board2 where title like '%${search}%' -->
-<!-- 		</select> -->
-		
+
 </mapper>
 		

@@ -19,4 +19,10 @@ public interface NoticeBoardDAO {
 
 	int updateViewCount(int idx);
 
+	int insertBoard(NoticeBoardDTO dto);
+
+	int delete(int idx);
+
+	int update(NoticeBoardDTO dto);
+
 }
