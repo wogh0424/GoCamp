@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.itbank.repository.ProductDAO">
+	<select id="selectAll" resultType="product" parameterType="paging">
+		select * from product orders limit #{offset}, #{perPage}
+	</select>
+	
+	<select id="selectOne" resultType="product" parameterType="String">
+		select * from product where pCategory = #{pCategory}
+	</select>
+	
+	<select id="selectCount" resultType="int">
+		select count(*) from product	
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from product where idx = #{idx}
+	</delete>
+	
+</mapper>
