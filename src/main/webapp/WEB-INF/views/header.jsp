@@ -392,5 +392,9 @@ footer{
 		<footer>
 			<!-- footer start -->
 
-</footer>
+
+	</footer>
+
+		
+
 		<!-- section end -->
