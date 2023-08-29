@@ -11,7 +11,6 @@ import java.util.List;
 
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,19 +24,14 @@ import com.itbank.model.PagingDTO;
 import com.itbank.repository.FreeBoardDAO;
 
 @Service
-public class FreeBoardService extends HttpServlet{
+public class FreeBoardService{
 
 	@Autowired
 	private FreeBoardDAO dao;
 	
-<<<<<<< HEAD
-	private File dir = new File(getServletContext().getRealPath("/upload"));
-
-	
-=======
 	private File dir = new File("/usr/local/tomcat/webapps/upload");
 
->>>>>>> e45f09466df09b38a8bae761edb65baedaf19258
+
 	// directory 없으면 만들기(성공)
 	public FreeBoardService() {
 			if(dir.exists() == false) {

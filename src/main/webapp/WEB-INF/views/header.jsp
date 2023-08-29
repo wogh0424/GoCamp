@@ -387,17 +387,10 @@ footer{
 		</div>
 	<div class="header_bottom"></div>
 		</section>
-<<<<<<< HEAD
 		<!-- section end -->
 
 		<footer>
 			<!-- footer start -->
 
-	</footer>
-	
-
-
-		</footer>
-=======
+</footer>
 		<!-- section end -->
->>>>>>> e45f09466df09b38a8bae761edb65baedaf19258
