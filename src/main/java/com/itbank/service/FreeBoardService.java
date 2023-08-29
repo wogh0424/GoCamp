@@ -30,14 +30,8 @@ public class FreeBoardService extends HttpServlet{
 	@Autowired
 	private FreeBoardDAO dao;
 	
-<<<<<<< HEAD
 	private File dir = new File(getServletContext().getRealPath("/upload"));
 
-	
-=======
-	private File dir = new File("/usr/local/tomcat/webapps/upload");
-
->>>>>>> e45f09466df09b38a8bae761edb65baedaf19258
 	// directory 없으면 만들기(성공)
 	public FreeBoardService() {
 			if(dir.exists() == false) {
