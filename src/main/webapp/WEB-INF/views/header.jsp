@@ -135,6 +135,13 @@
 	margin: 20px auto;
 	justify-content: space-between;
 }
+a{
+	text-decoration: none;
+	color: white;
+}
+#login_btn {
+	font-weight: bold;
+}
 </style>
 
 </head>
@@ -151,9 +158,9 @@
 					<!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
 				</c:if>
 				<sec:authorize access="isAnonymous()">
-					<p>
-						<a href="<c:url value="/login/loginForm" />">로그인</a>
-					</p>
+					<li id="login_btn">
+						<a href="<c:url value="/login/loginForm" />">일반/사업자 로그인</a>
+					</li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<%-- 			<form:form action="${pageContext.request.contextPath}/logout" method="POST"> --%>
