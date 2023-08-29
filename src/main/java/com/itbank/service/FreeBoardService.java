@@ -9,7 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 
 
+
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,16 +25,13 @@ import com.itbank.model.PagingDTO;
 import com.itbank.repository.FreeBoardDAO;
 
 @Service
-public class FreeBoardService {
+public class FreeBoardService extends HttpServlet{
 
 	@Autowired
 	private FreeBoardDAO dao;
 	
-<<<<<<< HEAD
-	private File dir = new File("/usr/local/tomcat/webapps/ROOT/resources/upload/");
-=======
-	private File dir = new File("/usr/local/tomcat/webapps/ROOT/resources/upload");
->>>>>>> c1a6b9226a1d0470f005ac86715243bff39e61a3
+	private File dir = new File(getServletContext().getRealPath("/upload"));
+
 	
 	// directory 없으면 만들기(성공)
 	public FreeBoardService() {

@@ -82,7 +82,6 @@
 }
 
 /* 게시판  */
-<<<<<<< HEAD
 	#boardTitle{
 		display: flex;
 		gap: 10px;
@@ -147,11 +146,9 @@
  			justify-content: space-between; 
 		}
 		
-=======
 .flex {
 	display: flex;
 }
->>>>>>> 30606d07040cecfff94be40bba552458c0d836c8
 
 .description {
 	width: 600px;
@@ -202,7 +199,6 @@
 	margin: 20px auto;
 	justify-content: space-between;
 }
-<<<<<<< HEAD
 a{
 	text-decoration: none;
 	color: white;
@@ -210,7 +206,6 @@ a{
 #login_btn {
 	font-weight: bold;
 }
-=======
 /*2023-08-29 쇼핑몰 페이지 추가 - 재우 */
 /*list 카테고리 리스트 시작 */
 .pCategory_list {
@@ -310,7 +305,6 @@ footer{
 	color: white;
 }
 /*2023-08-29 쇼핑몰 페이지 추가 - 재우 */
->>>>>>> f04cd842901c2fb06e026fc28fb5bef2b1967185
 </style>
 
 </head>
@@ -369,11 +363,8 @@ footer{
 		<footer>
 			<!-- footer start -->
 
-<<<<<<< HEAD
 	</footer>
 	
 
-=======
 
 		</footer>
->>>>>>> 30606d07040cecfff94be40bba552458c0d836c8
