@@ -141,7 +141,7 @@
 					<input type="email" name="email" placeholder="이메일 입력" required />
 					<input type="button" id="sendAuthNumber" value="인증번호 발송" />
 				</p>
-				<div class="authNumber_wrap" id="hidden">
+				<div class="hidden" id="authNumber_wrap">
 					<input type="number" name="authNumber" placeholder="인증번호 6자리" required />
 					<input id="checkAuthNumber" type="button" value="인증번호 확인" /> <br> 
 				</div>
@@ -196,7 +196,7 @@
 			alert(json.message)
 			
 			if(json.success == 1){
-				document.querySelector('p.hidden').classList.remove('hidden')
+				document.querySelector('div.hidden').classList.remove('hidden')
 				document.querySelector('button[type="submit"]').disabled = 'disabled'
 			}
 		}
