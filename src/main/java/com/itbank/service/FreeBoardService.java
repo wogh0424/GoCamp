@@ -28,7 +28,7 @@ public class FreeBoardService {
 	@Autowired
 	private FreeBoardDAO dao;
 	
-	private File dir = new File("/usr/local/webapps/ROOT/resources/upload/");
+	private File dir = new File("/usr/local/tomcat/webapps/ROOT/resources/upload");
 	
 	// directory 없으면 만들기(성공)
 	public FreeBoardService() {
