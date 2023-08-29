@@ -207,7 +207,7 @@
 }
 a{
 	text-decoration: none;
-	color: white;
+	color: black;
 }
 #login_btn {
 	font-weight: bold;
@@ -343,11 +343,7 @@ footer{
 					<li>현재 접속 아이디 ${pageContext.request.userPrincipal.name}</li>
 					<!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
 				</c:if>
-				<sec:authorize access="isAnonymous()">
-					<p>
-					<li><a href="<c:url value="/login/loginForm" />">로그인</a></li>
-					</p>
-
+				<sec:authorize access="isAnonymous()">			
 					<li id="login_btn">
 						<a href="<c:url value="/login/loginForm" />">일반/사업자 로그인</a>
 					</li>
