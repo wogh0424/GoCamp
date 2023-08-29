@@ -24,7 +24,7 @@
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	background-color: rgba(0, 116, 60);
+	background-color: white;
 	width: 100%;
 	height: 80px;
 }
@@ -35,32 +35,33 @@
 }
 
 .header_top>ul>li {
+	list-style: none;
 	font-weight: bold;
 	color: white;
 	transition-duration: 0.5s;
 }
 
 .header_top>ul>li>a:hover {
-	background-color: white;
-	color: rgba(0, 116, 60);
+	background-color: #F1BC31;
+	color: white;
 	text-decoration: initial;
 	transition-duration: 0.5s;
 }
 
 .header_top>ul>li>a {
 	text-decoration: none;
-	color: white;
+	color: grey;
 	padding: 28px;
 }
 /* 타이틀 로고 부터 navbar까지 끝*/
 /* 로그인 헤더 시작*/
 .header_login {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: space-between;
 	align-items: center;
 	width: 100%;
-	height: 40px;
-	background-color: rgba(0, 116, 60);
+	height: 35px;
+	background-color: black;
 	border-bottom: 1px solid white;
 }
 
@@ -79,6 +80,11 @@
 	text-decoration: none;
 	color: white;
 	font-weight: bold;
+}
+.header_bottom {
+	width: 100%;
+	height: 5px;
+	background-color: black;
 }
 
 /* 게시판  */
@@ -271,8 +277,8 @@ a{
 /*footer 시작 */
 footer{
 	width: 100%;
-	height: 200px;
-	background-color: #112a4a;
+	height: 150px;
+	background-color: black;;
 }
 .footer_menu > ul	{
 	display: flex;
@@ -304,6 +310,17 @@ footer{
 	font-weight: bold;
 	color: white;
 }
+.footer_botton > ul	{
+	display: flex;
+	justify-content: center;
+	color: orange;
+	list-style: none;
+	font-size: 12px;
+	font-weight: bold;
+}
+.footer_botton > ul > li {
+	padding: 10px;
+}
 /*2023-08-29 쇼핑몰 페이지 추가 - 재우 */
 </style>
 
@@ -316,11 +333,21 @@ footer{
 		</div>
 		<div class="header_login">
 			<ul>
+				<li><a href=""><img src="${cpath }/resources/image/header_ico/facebook32.png"></a></li>
+				<li><a href=""><img src="${cpath }/resources/image/header_ico/instagram32.png"></a></li>
+				<li><a href=""><img src="${cpath }/resources/image/header_ico/twitter32.png"></a></li>
+				<li><a href=""><img src="${cpath }/resources/image/header_ico/youtube32.png"></a></li>
+			</ul>
+			<ul>
 				<c:if test="${pageContext.request.userPrincipal != null}">
 					<li>현재 접속 아이디 ${pageContext.request.userPrincipal.name}</li>
 					<!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
 				</c:if>
 				<sec:authorize access="isAnonymous()">
+					<p>
+					<li><a href="<c:url value="/login/loginForm" />">로그인</a></li>
+					</p>
+
 					<li id="login_btn">
 						<a href="<c:url value="/login/loginForm" />">일반/사업자 로그인</a>
 					</li>
@@ -331,7 +358,7 @@ footer{
 					<%-- 			</form:form> --%>
 				</sec:authorize>
 				<c:if test="${pageContext.request.userPrincipal == null}">
-					<li><a href="${cpath }/login/signup">SIGNUP</a></li>
+					<li><a href="${cpath }/login/signup">회원가입</a></li>
 				</c:if>
 				<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
 					<h3>
@@ -355,9 +382,12 @@ footer{
 				<li><a href="">MENU</a></li>
 				<li><a href="">MENU</a></li>
 				<li><a href="">MENU</a></li>
+				<li><a href="">MENU</a></li>
 			</ul>
 		</div>
+	<div class="header_bottom"></div>
 		</section>
+<<<<<<< HEAD
 		<!-- section end -->
 
 		<footer>
@@ -368,3 +398,6 @@ footer{
 
 
 		</footer>
+=======
+		<!-- section end -->
+>>>>>>> e45f09466df09b38a8bae761edb65baedaf19258
