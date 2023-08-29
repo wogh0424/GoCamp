@@ -50,12 +50,15 @@ public class ProductController {
 		return "redirect:/";
 	}
 	
-	// 상세목록
-	@GetMapping("/product")
-	public ModelAndView product() {
-		ModelAndView mav = new ModelAndView("product/view");
-		return mav;
-	}
+	   // 상품 상세페이지
+	   @GetMapping("/view/{idx}")
+	   public ModelAndView view(@PathVariable("idx") int idx) {
+	      ModelAndView mav = new ModelAndView("product/view");
+	      ProductDTO dto = productService.selectDetails(idx);
+	      mav.addObject("dto", dto);
+	      return mav;
+	   }
+
 	
 	// 장바구니
 	@GetMapping("/basket")

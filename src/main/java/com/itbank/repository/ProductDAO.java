@@ -18,4 +18,6 @@ public interface ProductDAO {
 
 	ProductDTO selectOne(String pCategory);
 
+	ProductDTO selectDetails(int idx);
+
 }

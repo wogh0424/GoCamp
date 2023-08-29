@@ -31,4 +31,8 @@ public class ProductService {
 		return dao.selectOne(pCategory);
 	}
 
+	public ProductDTO selectDetails(int idx) {
+		return dao.selectDetails(idx);
+	}
+
 }

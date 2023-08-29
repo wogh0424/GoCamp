@@ -20,4 +20,9 @@
 		delete from product where idx = #{idx}
 	</delete>
 	
+	<select id="selectDetails" parameterType="int" resultType="product">
+         select * from product where idx=#{idx}
+    </select>
+   
+	
 </mapper>

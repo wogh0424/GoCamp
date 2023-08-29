@@ -17,7 +17,7 @@
    <c:forEach var="dao" items="${list }">
    <div class="product_items">
   		<ul>
-  			<li><a href=""><img src="${cpath }/resources/image/${dao.image}"></a></li>
+  			<li><a href="${cpath }/product/view/${dao.idx}"><img src="${cpath }/resources/image/${dao.image}"></a></li>
   			<li>${dao.pName }</li>
   			<li>${dao.pContent }</li>
   			<li>가격 : ${dao.price }</li>
