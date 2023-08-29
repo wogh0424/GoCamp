@@ -10,6 +10,10 @@
 		<h4>조회수 : ${dto.view_cnt }</h4>
 		<h4>작성날짜 : <fmt:formatDate value="${dto.postdate }"/></h4>
 		<pre>${dto.content }</pre>
+		<c:forTokens var="filePath" items="${dto.filePath}" delims=",">
+		<h3>${filePath}</h3>
+			<img src="${cpath }/upload/${filePath}" height="200">
+		</c:forTokens>
 </div>
 <div id="noticeBoardAdmin">
 		<c:if test="${pageContext.request.userPrincipal.name == 'admin'}">

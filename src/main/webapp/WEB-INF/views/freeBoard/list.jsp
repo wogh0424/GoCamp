@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../header.jsp"%>
+<div id=boardTitle>
+<div id=board>BOARD > </div><div id=freeBoard>FreeBoard</div>
+</div>
+
 
 <form method="GET" >
+<div id="column">
 	<select name="column">
 		<option value="title" ${paging.column == 'title' ? 'selected' : '' }>타이틀</option>
 		<option value="content" ${paging.column == 'content' ? 'selected' : '' }>내용</option>
@@ -10,10 +15,12 @@
 	</select>
 		<p><input type="search" name="search" value="${param.search }" placeholder="검색"></p>
 		<p><input type="submit"></p>
+</div>
 </form>
 
-<h3>게시판 : ${paging.page } / ${paging.pageCount }</h3>
-<h3>${paging.begin }~ ${paging.end }</h3>
+
+<%-- <h3>게시판 : ${paging.page } / ${paging.pageCount }</h3> --%>
+<%-- <h3>${paging.begin }~ ${paging.end }</h3> --%>
 
 <div id="boardList">
 	<div class="item columns">
@@ -30,7 +37,7 @@
 				<a href="${cpath}/freeBoard/view/${dto.idx}">${dto.title }</a>
 			</div>
 			<div class="writer">${dto.writer }</div>
-			<div class="writeDate">${dto.date }</div>
+			<div class="date">${dto.date }</div>
 			<div class="viewCount">${dto.view_cnt }</div>
 		</div>
 	</c:forEach>

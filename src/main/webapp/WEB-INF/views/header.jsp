@@ -178,54 +178,70 @@ a {
 }
 
 /* 게시판  */
-
-.flex {
+	#boardTitle{
 		display: flex;
+		gap: 10px;
+/* 		justify-content: center;  */
+/* 		align-items: center; */
+		padding-left: 250px;
+		padding-top: 50px;
+		
 	}
-	.description {
-		width: 600px;
+	
+	#board{
+		font-size: 25pt;
+		font-weight: bold;
+		line-height: 1
+		
 	}
-	.lineIntro {
-		display: -webkit-box;
-		max-width: 60%;
-	    -webkit-line-clamp: 1;
-	    -webkit-box-orient: vertical;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
+	#freeBoard{
+		font-size: 20pt;
+		font-weight: bold;
+		line-height: 1
 	}
-	.intro {
- 	    display: -webkit-box;
-		max-width: 60%;
-	    -webkit-line-clamp: 3;
-	    -webkit-box-orient: vertical;
-	    overflow: hidden;
-	    text-overflow: ellipsis;
-	}
+	
+	#column {
+ 		display: flex;
+ 		gap: 10px;
+    }
+   
+	
 	#boardList {
 			width: 900px;
+			margin: 0 auto;
 		}
 		.item {
 			display: flex;
 			padding: 5px 10px;
 		}
+		.column {
+			display: flex;
+			
+		}
 		.columns {
-			background-color: #dadada;
+			background-color:#FFFFFF;
+			border-bottom: 3px solid #00743D; 
+			border-top: 3px solid #00743D; 
 		}
 		.item > .idx,
 		.item > .writer,
-		.item > .writeDate,
+		.item > .date,
 		.item > .viewCount {
 			flex: 1;
 		}		
 		.item > .title {
 			flex: 5;
 		}
+		.item > .idx{
+			color:  #00743D;
+		}
 		.menubar {
 			display: flex;
 			width: 900px;
 			margin: 20px auto;
-			justify-content: space-between;
+ 			justify-content: space-between; 
 		}
+		
 
 </style>
 </head>
@@ -275,6 +291,6 @@ a {
 	<footer>
 		<!-- footer start -->
 
-
 	</footer>
+	
 

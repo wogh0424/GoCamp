@@ -25,4 +25,12 @@ public interface NoticeBoardDAO {
 
 	int update(NoticeBoardDTO dto);
 
+	int insertFile(HashMap<String, Object> param);
+
+	int selectMaxIdxFromUpload();
+
+	List<String> selectFileList(int idx);
+
+	int deleteFile(int idx);
+
 }

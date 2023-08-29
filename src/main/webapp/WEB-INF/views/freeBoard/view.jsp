@@ -10,7 +10,7 @@
 		<h4>작성날짜 : <fmt:formatDate value="${dto.date }"/></h4>
 		<pre>${dto.content }</pre>
 		<c:forTokens var="filePath" items="${dto.filePath}" delims=",">
-		<h3>${filePath}</h3>
+<%-- 		<h3>${filePath}</h3> --%>
 			<img src="${cpath }/upload/${filePath}" height="200">
 		</c:forTokens>
 </div>

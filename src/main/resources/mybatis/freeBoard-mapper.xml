@@ -36,31 +36,13 @@
 		<select id="selectOne" parameterType="int" resultType="freeboard">
 		
 			 SELECT 
-		        free_board.idx,
-		        free_board.title,
-		        free_board.writer,
-		        free_board.content,
+		        free_board.*,
 		        (SELECT GROUP_CONCAT(filePath SEPARATOR ',')
 		         FROM free_board_file
 		         WHERE free_board_file.free_board = free_board.idx) AS filePath 
 	 		  FROM free_board where idx = #{idx}
 	   		  ORDER BY idx
 		
-<!-- 		SELECT *, -->
-<!--       	 (SELECT GROUP_CONCAT(filePath, ',') -->
-<!--         FROM free_board_file -->
-<!--         WHERE free_board_file.free_board = free_board.idx) as filePath -->
-<!-- 		FROM free_board -->
-<!-- 		WHERE idx = #{idx} -->
-		
-<!-- 				select * -->
-<!-- 				(select -->
-<!-- 				select  -->
-<!-- 				listagg(filePath, ',') -->
-<!-- 					from free_board_file -->
-<!-- 				where -->
-<!-- 				 free_board_file.free_board = free_board.idx) as filePath -->
-<!-- 				  from free_board where idx=#{idx} -->
 		</select>
 		
 		<select id="selectFileList" parameterType="int" resultType="string">

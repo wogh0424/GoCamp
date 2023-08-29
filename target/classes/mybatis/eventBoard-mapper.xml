@@ -24,7 +24,15 @@
 
 		
 		<select id="selectOne" parameterType="int" resultType="eventboard">
-				select * from event_board where idx=#{idx}
+				 SELECT 
+		        event_board.idx,
+		        event_board.title,
+		        event_board.content,
+		        (SELECT GROUP_CONCAT(filePath SEPARATOR ',')
+		         FROM event_board_file
+		         WHERE event_board_file.event_board = event_board.idx) AS filePath 
+	 		  FROM event_board where idx = #{idx}
+	   		  ORDER BY idx
 		</select>
 		
 		<select id="selectCount" parameterType="paging" resultType="int">
@@ -37,8 +45,24 @@
 					values (#{title}, #{content})
 		</insert>
 		
+		<insert id="insertFile" parameterType="hashmap">
+			insert into event_board_file (event_board, filePath) 
+			
+				<foreach item="item" collection="list" separator="  UNION ALL  " >
+					select #{upload}, #{item} from dual
+			</foreach>
+		</insert>
+		
+		<select id="selectMaxIdxFromUpload" resultType="int">   
+		select max(idx) from event_board
+	</select>
+		
 		<delete id="delete" parameterType="int">
 				delete from event_board where idx=#{idx}
+		</delete>
+		
+		<delete id="deleteFile" parameterType="int">
+				delete from event_board_file where event_board = #{idx}
 		</delete>
 		
 		<update id="update"  parameterType="eventboard" >
