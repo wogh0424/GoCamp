@@ -208,6 +208,15 @@
 	margin: 20px auto;
 	justify-content: space-between;
 }
+<<<<<<< HEAD
+a{
+	text-decoration: none;
+	color: white;
+}
+#login_btn {
+	font-weight: bold;
+}
+=======
 /*2023-08-29 쇼핑몰 페이지 추가 - 재우 */
 /*list 카테고리 리스트 시작 */
 .pCategory_list {
@@ -318,6 +327,7 @@ footer{
 	padding: 10px;
 }
 /*2023-08-29 쇼핑몰 페이지 추가 - 재우 */
+>>>>>>> f04cd842901c2fb06e026fc28fb5bef2b1967185
 </style>
 
 </head>
@@ -340,9 +350,15 @@ footer{
 					<!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
 				</c:if>
 				<sec:authorize access="isAnonymous()">
+<<<<<<< HEAD
 					<p>
 					<li><a href="<c:url value="/login/loginForm" />">로그인</a></li>
 					</p>
+=======
+					<li id="login_btn">
+						<a href="<c:url value="/login/loginForm" />">일반/사업자 로그인</a>
+					</li>
+>>>>>>> 8cc24dec5fd96cb19b7a275d9cde6a48b24aad31
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<%-- 			<form:form action="${pageContext.request.contextPath}/logout" method="POST"> --%>
