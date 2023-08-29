@@ -25,12 +25,12 @@ import com.itbank.model.PagingDTO;
 import com.itbank.repository.FreeBoardDAO;
 
 @Service
-public class FreeBoardService extends HttpServlet{
+public class FreeBoardService{
 
 	@Autowired
 	private FreeBoardDAO dao;
 	
-	private File dir = new File(getServletContext().getRealPath("/upload"));
+	private File dir = new File("/usr/local/apache-tomcat-8.5.91/webapps/upload");
 
 	// directory 없으면 만들기(성공)
 	public FreeBoardService() {
