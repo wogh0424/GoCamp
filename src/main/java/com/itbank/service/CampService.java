@@ -1,7 +1,6 @@
 package com.itbank.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +22,11 @@ public class CampService {
 		return campDAO.selectAll(searchPage);
 	}
 
-	public String selectId(String contentId) {	
+	public String selectId(String contentId) {
 		return campDAO.selectId(contentId);
 	}
 
-	
+	public ItemDTO selectOne(String contentId) {
+		return campDAO.selectOne(contentId);
+	}
 }

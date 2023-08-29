@@ -126,10 +126,10 @@
 			</if>
 	</select>
 	
-	<select id="selectId" resultType="String" parameterType="String">
-		select facltNm from gocamp where contentId = #{contentId}
+	<select id="selectOne" resultType="item" parameterType="string">
+		select * from gocamp where contentId = #{contentId}
 	</select>
-	 </mapper>
+ </mapper>
 
 
 
