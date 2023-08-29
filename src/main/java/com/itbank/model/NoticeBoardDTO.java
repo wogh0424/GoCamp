@@ -1,6 +1,9 @@
 package com.itbank.model;
 
 import java.sql.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class NoticeBoardDTO {
 	
@@ -16,6 +19,21 @@ public class NoticeBoardDTO {
 	private Date postdate;
 	private int view_cnt;
 	
+	private String filePath;
+	private List<MultipartFile> upload;
+	
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	public List<MultipartFile> getUpload() {
+		return upload;
+	}
+	public void setUpload(List<MultipartFile> upload) {
+		this.upload = upload;
+	}
 	public int getIdx() {
 		return idx;
 	}

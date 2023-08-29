@@ -24,7 +24,15 @@
 
 		
 		<select id="selectOne" parameterType="int" resultType="noticeboard">
-				select * from notice_board where idx=#{idx}
+			SELECT 
+		        notice_board.idx,
+		        notice_board.title,
+		        notice_board.content,
+		        (SELECT GROUP_CONCAT(filePath SEPARATOR ',')
+		         FROM notice_board_file
+		         WHERE notice_board_file.notice_board = notice_board.idx) AS filePath 
+	 		  FROM notice_board where idx = #{idx}
+	   		  ORDER BY idx
 		</select>
 		
 		<select id="selectCount" parameterType="paging" resultType="int">
@@ -38,8 +46,24 @@
 					values (#{title}, #{content})
 		</insert>
 		
+		<insert id="insertFile" parameterType="hashmap">
+			insert into notice_board_file (notice_board, filePath) 
+			
+				<foreach item="item" collection="list" separator="  UNION ALL  " >
+					select #{upload}, #{item} from dual
+			</foreach>
+		</insert>
+		
+		<select id="selectMaxIdxFromUpload" resultType="int">   
+				select max(idx) from notice_board
+		</select>
+		
 		<delete id="delete" parameterType="int">
 				delete from notice_board where idx=#{idx}
+		</delete>
+		
+		<delete id="deleteFile" parameterType="int">
+				delete from notice_board_file where notice_board = #{idx}
 		</delete>
 		
 		<update id="update"  parameterType="noticeboard" >

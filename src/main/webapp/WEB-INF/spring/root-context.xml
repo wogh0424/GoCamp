@@ -32,6 +32,7 @@
 			<list>
 				<value>classpath:mybatis/camp-mapper.xml</value>
 				<value>classpath:mybatis/member-mapper.xml</value>
+				<value>classpath:mybatis/product-mapper.xml</value>
 				<value>classpath:mybatis/freeBoard-mapper.xml</value>
 				<value>classpath:mybatis/freeBoardReply-mapper.xml</value>
 				<value>classpath:mybatis/noticeBoard-mapper.xml</value>

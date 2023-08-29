@@ -82,9 +82,76 @@
 }
 
 /* 게시판  */
+<<<<<<< HEAD
+	#boardTitle{
+		display: flex;
+		gap: 10px;
+/* 		justify-content: center;  */
+/* 		align-items: center; */
+		padding-left: 250px;
+		padding-top: 50px;
+		
+	}
+	
+	#board{
+		font-size: 25pt;
+		font-weight: bold;
+		line-height: 1
+		
+	}
+	#freeBoard{
+		font-size: 20pt;
+		font-weight: bold;
+		line-height: 1
+	}
+	
+	#column {
+ 		display: flex;
+ 		gap: 10px;
+    }
+   
+	
+	#boardList {
+			width: 900px;
+			margin: 0 auto;
+		}
+		.item {
+			display: flex;
+			padding: 5px 10px;
+		}
+		.column {
+			display: flex;
+			
+		}
+		.columns {
+			background-color:#FFFFFF;
+			border-bottom: 3px solid #00743D; 
+			border-top: 3px solid #00743D; 
+		}
+		.item > .idx,
+		.item > .writer,
+		.item > .date,
+		.item > .viewCount {
+			flex: 1;
+		}		
+		.item > .title {
+			flex: 5;
+		}
+		.item > .idx{
+			color:  #00743D;
+		}
+		.menubar {
+			display: flex;
+			width: 900px;
+			margin: 20px auto;
+ 			justify-content: space-between; 
+		}
+		
+=======
 .flex {
 	display: flex;
 }
+>>>>>>> 30606d07040cecfff94be40bba552458c0d836c8
 
 .description {
 	width: 600px;
@@ -135,6 +202,7 @@
 	margin: 20px auto;
 	justify-content: space-between;
 }
+<<<<<<< HEAD
 a{
 	text-decoration: none;
 	color: white;
@@ -142,6 +210,107 @@ a{
 #login_btn {
 	font-weight: bold;
 }
+=======
+/*2023-08-29 쇼핑몰 페이지 추가 - 재우 */
+/*list 카테고리 리스트 시작 */
+.pCategory_list {
+	width: 100%;
+	height: 420px;
+	border-top: 1px solid white;
+	background-color: #112a4a;
+}
+.pCategory_items {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 0;	
+}
+.pCategory_items > ul {
+	width: 180	px;
+	height: 180px;
+	border: 1px solid black;
+	border-radius: 10px;
+	padding: 0;
+	margin: 10px;
+	background-color: white;
+	box-shadow: 2px 2px 2px black;
+}
+.pCategory_items > ul > li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	color: black;
+	font-weight: bold;
+}
+/* 상품 리스트 시작 */
+.product_wrap {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	border: 1px solid black;
+}
+.pImage {
+	box-sizing: border-box;
+}
+.product_items {
+	width: 300px;
+	height: 350px;
+	border: 1px solid black;
+	margin: 20px;
+	box-shadow: 1px 1px 1px black;
+	
+}
+.product_items > ul {
+	padding: 15px;
+	margin: 0;
+}
+.product_items > ul > li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 250px;
+	margin: auto;
+}
+/*list 카테고리 리스트 끝 */
+/*footer 시작 */
+footer{
+	width: 100%;
+	height: 200px;
+	background-color: #112a4a;
+}
+.footer_menu > ul	{
+	display: flex;
+	justify-content: space-around;
+}
+/*footer 끝 */
+/*product_modify, delete btn 시작*/
+.product_modify_btn > a > button,
+.product_delete_btn > a > button{
+	width: 150px;
+	height: 20px;
+}
+.paging {
+	display: flex;
+	justify-content: center;
+	padding: 10px;
+	margin: 10px;
+	text-align: center;
+}
+.paging_count {
+	width: 20px;
+	height: 20px;
+	border: 1px solid black;
+	background-color: black;
+	margin: 2px;
+	
+}
+.paging_count > a {
+	font-weight: bold;
+	color: white;
+}
+/*2023-08-29 쇼핑몰 페이지 추가 - 재우 */
+>>>>>>> f04cd842901c2fb06e026fc28fb5bef2b1967185
 </style>
 
 </head>
@@ -188,7 +357,7 @@ a{
 		<div class="header_top">
 			<ul>
 				<li><a href="${cpath }/main">MENU</a></li>
-				<li><a href="">MENU</a></li>
+				<li><a href="${cpath }/product/list">MENU</a></li>
 				<li><a href="">MENU</a></li>
 				<li><a href="">MENU</a></li>
 				<li><a href="">MENU</a></li>
@@ -200,5 +369,11 @@ a{
 		<footer>
 			<!-- footer start -->
 
+<<<<<<< HEAD
+	</footer>
+	
+
+=======
 
 		</footer>
+>>>>>>> 30606d07040cecfff94be40bba552458c0d836c8

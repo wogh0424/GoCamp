@@ -26,4 +26,12 @@ public interface EventBoardDAO {
 
 	int update(EventBoardDTO dto);
 
+	int selectMaxIdxFromUpload();
+
+	int insertFile(HashMap<String, Object> param);
+
+	List<String> selectFileList(int idx);
+
+	int deleteFile(int idx);
+
 }
