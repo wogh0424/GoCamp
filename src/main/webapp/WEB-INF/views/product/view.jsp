@@ -4,7 +4,7 @@
 
 <div class="detail_item">
 <%--    <div class="pImage"><img src="${cpath }/resource/image/${dto.image}"></div> --%>
-   <div>임시 이미지 자리입니다</div>
+   <div><img src="${cpath }/resources/image/noimage.png"></div>
    <div>
       <ul>
          <li>상품명 : ${dto.pName }</li>
@@ -24,7 +24,7 @@
       <div class="">리뷰 내용</div>
       <div class="">리뷰 이미지</div>
    </div>
-   <div><img src="${cpath }/resource/image/${dto.image}">상품 설명 사진 위치</div>
+   <div><img src="${cpath }/resources/image/${dto.image}">상품 설명 사진 위치</div>
 </div>
 </body>
 </html>
