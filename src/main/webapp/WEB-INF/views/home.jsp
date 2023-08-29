@@ -18,6 +18,16 @@
 		</pre>
 	</fieldset>
 </details>
-
+<footer><!-- footer start -->
+<div class="footer_botton">
+	<ul>
+		<li>개발자소개</li>
+		<li>개인정보처리방침</li>
+		<li>전자우편무단수집거부</li>
+		<li>캠핑장 등록안내</li>
+		<li>미등록야영장불법영업신고</li>
+	</ul>
+</div>
+</footer><!-- footer end -->
 </body>
 </html>
