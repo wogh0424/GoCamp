@@ -220,39 +220,106 @@
                 </div>
                 
                 <div class="intro4">
-                    <div class="viewReviewTT">
-                        	 ▶️ 최근 n건
-                    </div>
-                    <div id="campReview">
-                        <!--forEach로 구현-->
-                        <div class="campReviewItems">
-                            <ul class="campReviewRow">
-                                <li class="reviewRow">1</li>
-                                <li class="reviewTT">리뷰 제목</li>
-                                <li class="reviewDate">리뷰 작성 날짜</li>
-                            </ul>
-                        </div>
-                        <div class="campReviewItems">
-                            <ul class="campReviewRow">
-                                <li class="reviewRow">2</li>
-                                <li class="reviewTT">리뷰 제목</li>
-                                <li class="reviewDate">리뷰 작성 날짜</li>
-                            </ul>
-                        </div>
-                        <div class="campReviewItems">
-                            <ul class="campReviewRow">
-                                <li class="reviewRow">3</li>
-                                <li class="reviewTT">리뷰 제목</li>
-                                <li class="reviewDate">리뷰 작성 날짜</li>
-                            </ul>
-                        </div>
+<!--                     <div class="viewReviewTT"> -->
+<!--                         	 ▶️ 최근 n건 -->
+<!--                     </div> -->
+<!--                     <div id="campReview"> -->
+<!--                         forEach로 구현 -->
+<!--                         <div class="campReviewItems"> -->
+<!--                             <ul class="campReviewRow"> -->
+<!--                                 <li class="reviewRow">1</li> -->
+<!--                                 <li class="reviewTT">리뷰 제목</li> -->
+<!--                                 <li class="reviewDate">리뷰 작성 날짜</li> -->
+<!--                             </ul> -->
+<!--                         </div> -->
+<!--                         <div class="campReviewItems"> -->
+<!--                             <ul class="campReviewRow"> -->
+<!--                                 <li class="reviewRow">2</li> -->
+<!--                                 <li class="reviewTT">리뷰 제목</li> -->
+<!--                                 <li class="reviewDate">리뷰 작성 날짜</li> -->
+<!--                             </ul> -->
+<!--                         </div> -->
+<!--                         <div class="campReviewItems"> -->
+<!--                             <ul class="campReviewRow"> -->
+<!--                                 <li class="reviewRow">3</li> -->
+<!--                                 <li class="reviewTT">리뷰 제목</li> -->
+<!--                                 <li class="reviewDate">리뷰 작성 날짜</li> -->
+<!--                             </ul> -->
+<!--                         </div> -->
                         
-                    </div>
-                </div>
+<!--                     </div> -->
+
+				<div id="reviewContainer">
+				<h3>리뷰작성</h3>
+				<c:if test="${pageContext.request.userPrincipal != null}">
+				<form method="POST" enctype="multipart/form-data" id="reviewForm">
+					<div class="inputReview">
+						<p><input type="text" name="title" placeholder="제목" value="[${view.facltNm}]" required autofocus> </p>
+						<p><input type="text" name="writer" value="${nickname}" readonly> </p>
+					</div>
+						<p><textarea name="review_content" placeholder="리뷰작성" required></textarea> </p>
+					<input type="hidden" name="gocamp"  value="${view.contentId }"/>		
+					<p><input type="file" name="upload" multiple></p>
+					<p><input type="submit"></p>
+				</form>
+				</c:if>
+				
+				<c:if test="${pageContext.request.userPrincipal == null}">
+				<fieldset id="login-message">
+				        <p >로그인해야 리뷰를 작성할 수 있습니다😄<a href="${cpath }/login/loginForm">  로그인go</a></p>
+				</fieldset>
+				</c:if>
+				</div>
+				
+				<fieldset>
+				  <c:choose>
+						<c:when test="${empty list && pageContext.request.userPrincipal != null}">
+							 <p>아직 등록된 리뷰가 없습니다.</p>
+					</c:when>
+					<c:otherwise>
+					<c:forEach var="review" items="${list }">
+					
+					
+					<fieldset class="gocampReview">
+					  <div class="reviewHeader">
+					    <h2 class="reviewIdx">${review.idx}</h2>
+					    <h2 class="reviewTitle">${review.title}</h2>
+					  </div>
+					  <p class="reviewContent">${review.review_content}</p>
+					  <div class="reviewDetails">
+					    <span class="reviewWriter">${review.writer}</span>
+					    <span class="reviewDate"><fmt:formatDate value="${review.reviewdate}" pattern="yyyy-MM-dd"/></span>
+					    <c:if test="${review.writer == nickname}">
+					      <a class="deleteReviewLink" href="${cpath}/main/deleteReview/${review.idx}">
+					        <button class="deleteReviewBtn">삭제</button>
+					      </a>
+					    </c:if>
+					  </div>
+					  <div class="reviewImages">
+					    <c:forTokens var="filePath" items="${review.filePath}" delims=",">
+					      <img class="reviewImage" src="${cpath}/upload/${filePath}" alt="Review Image">
+					    </c:forTokens>
+					  </div>
+					</fieldset>
+						
+						
+						
+						</c:forEach>
+					</c:otherwise>
+				  </c:choose>
+				</fieldset>
+              </div>
+			<!--  리뷰 끝  -->
+
             </div>
         </div>
-    </div> <!--end of view-->
+     <!--end of view-->
+  
+    
     <a style="display:scroll;position:fixed;bottom:50px;right:50px;" rel="nofollow" href="#" title="Back to Top"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
+    
+   
+    
     <script>
     	const lctCl = '${view.lctCl}'
         // 헤더의 배경이미지 설정용 자바스크립트
@@ -305,5 +372,9 @@
         const viewShowMap = document.getElementById('viewShowMap')
         viewShowMap.addEventListener('click', viewMapHandler)
     </script>
+    
+       
+
+    
 </body>
 </html>

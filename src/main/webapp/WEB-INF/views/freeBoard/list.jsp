@@ -2,25 +2,25 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../header.jsp"%>
 <div id=boardTitle>
-<div id=board>BOARD > </div><div id=freeBoard>FreeBoard</div>
+<div id=board>BOARD > </div><div id=freeBoard><a href="${cpath}/freeBoard">FreeBoard</a></div>
 </div>
 
 
-<form method="GET" >
-<div id="column">
-	<select name="column">
-		<option value="title" ${paging.column == 'title' ? 'selected' : '' }>타이틀</option>
-		<option value="content" ${paging.column == 'content' ? 'selected' : '' }>내용</option>
-		<option value="writer" ${paging.column == 'writer' ? 'selected' : '' }>작성자</option>
-	</select>
-		<p><input type="search" name="search" value="${param.search }" placeholder="검색"></p>
-		<p><input type="submit"></p>
-</div>
+<form method="GET" class="search-form">
+  <div id="column" class="search-column">
+    <select name="column" class="search-select">
+      <option value="title" ${paging.column == 'title' ? 'selected' : ''}>타이틀</option>
+      <option value="content" ${paging.column == 'content' ? 'selected' : ''}>내용</option>
+    </select>
+    <div class="search-input-container">
+      <input type="search" name="search" value="${param.search}" class="search-input" placeholder="검색">
+      <button type="submit" class="search-submit">
+        🔍
+      </button>
+    </div>
+  </div>
 </form>
 
-
-<%-- <h3>게시판 : ${paging.page } / ${paging.pageCount }</h3> --%>
-<%-- <h3>${paging.begin }~ ${paging.end }</h3> --%>
 
 <div id="boardList">
 	<div class="item columns">

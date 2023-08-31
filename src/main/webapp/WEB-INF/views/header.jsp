@@ -15,7 +15,7 @@
 
 <style>
 /* body 전체에 폰트 설정 */
-<<<<<<< HEAD
+
 * {
 	
 }
@@ -107,6 +107,196 @@ a {
 
 
 /* 게시판  */
+
+/*리뷰게시판 */
+
+ pre{
+	background-color: white;
+ }
+
+  #reviewContainer {
+  	width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #reviewContainer > h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  
+  #reviewForm {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.inputReview {
+  display: flex;
+  gap: 10px;
+}
+
+
+.inputReview input[name="title"] {
+	width: 400px;
+	height: 50px;
+}
+
+
+#reviewContainer textarea[name="review_content"] {
+  width: 720px;
+  height: 200px;
+  padding: 10px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+
+}
+
+#reviewContainer input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+#reviewContainer input[type="submit"] {
+  background-color: #F4C752;
+  color: #3C5944;
+  font-weight: 
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+  
+
+ .gocampReview {
+  position: relative; /* 컨테이너를 기준으로 삭제 버튼을 배치 */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.reviewHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.reviewIdx {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.reviewTitle {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.reviewContent {
+  margin: 0;
+}
+
+.reviewDetails {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 10px;
+}
+
+.reviewWriter, .reviewDate {
+  margin: 0;
+}
+
+.reviewImages {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.reviewImage {
+  max-height: 150px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.deleteReviewLink {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.deleteReviewBtn {
+  background-color: #F4C752;
+  color: #3C5944;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* 리뷰게시판 끝 */
+  
+  
+/*자유게시판*/
+
+/* 검색창 */
+
+.search-form {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.search-column,
+.search-input,
+.search-select {
+  margin-right: 5px;
+}
+
+.search-input-container {
+  display: flex;
+  align-items: center;
+  background-color: #f9f9f9;
+  border: 1px solid #3C5944;
+  border-radius: 3px;
+}
+
+.search-input {
+  padding: 8px;
+  border: none;
+  border-radius: 3px;
+}
+
+.search-submit {
+  background-color: #f9f9f9;
+  border: none;
+  border-radius: 3px;
+  padding: 8px;
+  }
+
 	#boardTitle{
 		display: flex;
 		gap: 10px;
@@ -123,7 +313,10 @@ a {
 		line-height: 1
 		
 	}
-	#freeBoard{
+	#freeBoard,
+	#reviewBoard,
+	#eventBoard,
+	#noticeBoard {
 		font-size: 20pt;
 		font-weight: bold;
 		line-height: 1
@@ -148,7 +341,7 @@ a {
 			
 		}
 		.columns {
-			background-color:#FFFFFF;
+			
 			border-bottom: 3px solid #00743D; 
 			border-top: 3px solid #00743D; 
 		}
@@ -171,27 +364,6 @@ a {
  			justify-content: space-between; 
 		}
 		
-		
-/*         form#insertForm { */
-/*             position: relative; */
-/*         } */
-/*         #preview { */
-/*             width: 300px; */
-/*             height: 300px; */
-/*             background-size: auto 100%; */
-/*             background-position: center; */
-/*             background-repeat: no-repeat; */
-
-/*             position: absolute; */
-/*             bottom: 0; */
-/*             border: 1px solid blue; */
-/*         } */
-/*         input[name="upload"] { */
-/*             border: 1px solid red; */
-/*             width: 300px; */
-/*             height: 350px; */
-/*         } */
-    
 		
 
 .flex {
@@ -228,7 +400,7 @@ a {
 }
 
 .columns {
-	background-color: #dadada;
+	background-color: white;
 }
 
 .item>.idx, .item>.writer, .item>.writeDate, .item>.viewCount {
@@ -245,7 +417,7 @@ a {
 	margin: 20px auto;
 	justify-content: space-between;
 }
->>>>>>> e1476b1f3af0f36fb07c8b1df8acebd748811f7c
+
 a{
 	text-decoration: none;
 	color: black;
@@ -550,7 +722,45 @@ aside {
 </head>
 <body>
 
+<!-- 	텍스트에디터 api - summernote -->
 
+	<!-- include libraries(jQuery, bootstrap) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" >
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+
+<script>
+
+$(document).ready(function() {
+    $('#content').summernote({
+        toolbar: [
+        	// [groupName, [list of button]]
+    	    ['fontname', ['fontname']],
+    	    ['fontsize', ['fontsize']],
+    	    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+    	    ['color', ['forecolor','color']],
+    	    ['table', ['table']],
+    	    ['para', ['ul', 'ol', 'paragraph']],
+    	    ['height', ['height']],
+    	    ['view', ['fullscreen', 'help']]
+        ],
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+        
+        placeholder: '내용을 입력하세요',
+        tabsize: 2,
+        width: 800,
+        height: 200
+    });
+});
+</script>
+
+<!-- 텍스트 에디터 끝 -->
 
 
 	<header>
@@ -606,8 +816,8 @@ aside {
 						<ul>
 							<li><a href="${cpath }/noticeBoard">공지게시판</a></li>
 							<li><a href="${cpath }/eventBoard">이벤트게시판</a></li>
-							<li><a href="${cpath }/freeBoard">자유게시판 + 댓글</a></li>
-							<li><a href="${cpath }/review">main review + fileupload</a></li>
+							<li><a href="${cpath }/freeBoard">자유게시판(+ 댓글)</a></li>
+							<li><a href="${cpath }/reviewBoard">전체리뷰게시판</a></li>
 						</ul>
 					</li>
 					<li><a href="#">쇼핑몰</a>

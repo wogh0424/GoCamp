@@ -1,124 +1,86 @@
-//
-////package com.itbank.controller;
-//=======
-//import java.util.List;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Controller;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.servlet.ModelAndView;
-////
-//import com.itbank.model.GocampReviewDTO;
-//import com.itbank.service.GocampReviewService;
-//
-//@Controller
-//public class GocampReviewController {
-//	
-//	@Autowired private GocampReviewService gocampReviewService;
-//	
-//	
-//	@GetMapping("/review")
-//	public ModelAndView review() {
-//		ModelAndView mav = new ModelAndView();
-//
-//		List<GocampReviewDTO> list = gocampReviewService.selectAllReview();
-//		
-//		for(GocampReviewDTO dto : list) {
-//			System.out.println(dto.getTitle());					// 제목은 하나
-//			System.out.println(dto.getReview_content());			
-//			
-//			String[] arr = dto.getFilePath().split(",");
-//			for(String s : arr) {
-//				System.out.println(s);									// 파일은 여러개
-//			}
-//			System.out.println();
-//		}
-//		
-//		mav.addObject("list", list);
-//		return mav;
-//	}
-//	
-//	@PostMapping("/upload")
-//	public String upload(GocampReviewDTO dto) {   
-//		
-//		int row = gocampReviewService.insert(dto);
-//		System.out.println(row + "행이 추가되었습니다.");
-//		
-//		return "redirect:/review"; 
-//	}
-//	
-//	@GetMapping("/deleteReview/{idx}")
-//	public String deleteReview(@PathVariable("idx") int idx) {
-//		int row = gocampReviewService.deleteReview(idx);
-//		System.out.println(row + "행이 삭제되었습니다.");
-//		return "redirect:/review";
-//	}
-////	@GetMapping("")
-////	public ModelAndView list(@RequestParam(value = "page", defaultValue = "1") int page) {
-////	    int boardCount = gocampReviewService.selectCount();  // 총 게시물의 개수를 불러옴
-////	    PagingDTO paging = new PagingDTO(page, boardCount);
-//>>>>>>> e1476b1f3af0f36fb07c8b1df8acebd748811f7c
-////
-////import java.util.List;
-////
-////import org.springframework.beans.factory.annotation.Autowired;
-////import org.springframework.stereotype.Controller;
-////import org.springframework.web.bind.annotation.GetMapping;
-////import org.springframework.web.bind.annotation.PathVariable;
-////import org.springframework.web.bind.annotation.PostMapping;
-////import org.springframework.web.bind.annotation.RequestMapping;
-////import org.springframework.web.servlet.ModelAndView;
-////
-////import com.itbank.model.GocampReviewDTO;
-////import com.itbank.service.GocampReviewService;
-////
-////@Controller
-////public class GocampReviewController {
-////	
-////	@Autowired private GocampReviewService gocampReviewService;
-////	
-////	
-////	@GetMapping("/review")
-////	public ModelAndView review() {
-////		ModelAndView mav = new ModelAndView();
-////
-////		// 리뷰 목록 가져오기 		
-////		List<GocampReviewDTO> list = gocampReviewService.selectAllReview();
-////		
-////	
-////		
-////		for(GocampReviewDTO dto : list) {
-////			System.out.println(dto.getTitle());					// 제목은 하나
-////			System.out.println(dto.getReview_content());			
-////			
-////			String[] arr = dto.getFilePath().split(",");
-////			for(String s : arr) {
-////				System.out.println(s);									// 파일은 여러개
-////			}
-////			System.out.println();
-////		}
-////		
-////		mav.addObject("list", list);
-////		return mav;
-////	}
-////	
-////	@PostMapping("/upload")
-////	public String upload(GocampReviewDTO dto) {   
-////		
-////		int row = gocampReviewService.insert(dto);
-////		System.out.println(row + "행이 추가되었습니다.");
-////		
-////		return "redirect:/review"; 
-////	}
-////	
-////	@GetMapping("/deleteReview/{idx}")
-////	public String deleteReview(@PathVariable("idx") int idx) {
-////		int row = gocampReviewService.deleteReview(idx);
-////		System.out.println(row + "행이 삭제되었습니다.");
-////		return "redirect:/review";
-////	}
-////
-////}
-////
+
+package com.itbank.controller;
+
+import java.util.HashMap;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+
+import com.itbank.model.GocampReviewDTO;
+import com.itbank.model.ItemDTO;
+import com.itbank.model.PagingDTO;
+import com.itbank.service.CampService;
+import com.itbank.service.GocampReviewService;
+
+@Controller
+@RequestMapping("/reviewBoard")
+public class GocampReviewController {
+	
+	@Autowired private GocampReviewService gocampReviewService;
+
+	
+	// 검색, 페이징 
+	@GetMapping("") // 주소는 /freeBoard, jsp는 /freeBoard/list.jsp
+	public ModelAndView list(@RequestParam(value="column", defaultValue = "title") String column, @RequestParam(value="search", defaultValue = "") String search, @RequestParam(value="page", defaultValue = "1") int page) {  // page를 받을건데 없으면 기본값은 1이다
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("search", search);
+		map.put("column", column);
+		
+	
+		int boardCount = gocampReviewService.selectCountGoCampAllReview(map);    // 총게시물의 개수를 불러오자
+		PagingDTO paging = new PagingDTO(page, boardCount, search, column);
+		      
+		
+		
+		ModelAndView mav = new ModelAndView("/reviewBoard/list");
+		List<GocampReviewDTO> list = gocampReviewService.GoCampAllReview(paging);  // page로 서비스함수를 호출
+		
+	
+
+		mav.addObject("list", list);
+		mav.addObject("paging", paging);
+		return mav;
+	}
+	
+	// 리뷰조회
+		@GetMapping("/view/{idx}")
+		public ModelAndView view(@PathVariable("idx") int idx) {  
+			ModelAndView mav = new ModelAndView("reviewBoard/view"); 
+		
+
+			
+			GocampReviewDTO dto = gocampReviewService.selectOneReview(idx);
+			mav.addObject("dto", dto);
+
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			if(auth != null && auth.isAuthenticated()) {
+				String userid = auth.getName();
+				String nick = gocampReviewService.getnick(userid);
+				mav.addObject("nickname",nick);
+			}
+			
+			
+			return mav;
+		}
+		
+	
+	
+
+
+
+
+}
+

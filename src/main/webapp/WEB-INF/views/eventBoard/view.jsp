@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../header.jsp" %>
 
-<h3>게시글 읽기</h3>
+<h3>이벤트게시글판읽기</h3>
 
 <div id="boardView">
 
@@ -11,7 +11,6 @@
 		<h4>작성날짜 : <fmt:formatDate value="${dto.postdate }"/></h4>
 		<pre>${dto.content }</pre>
 		<c:forTokens var="filePath" items="${dto.filePath}" delims=",">
-		<h3>${filePath}</h3>
 			<img src="${cpath }/upload/${filePath}" height="200">
 		</c:forTokens>
 </div>

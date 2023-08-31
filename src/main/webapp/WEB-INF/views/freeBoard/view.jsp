@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@include file="../header.jsp" %>
 
-<h3>게시글 읽기</h3>
+<div id=boardTitle>
+<div id=board>BOARD > </div><div id=freeBoard><a href="${cpath}/freeBoard">FreeBoard</a></div>
+</div>
 
 <div id="boardView">
 		<h3>${dto.idx } | ${dto.title } | <span id="writer">${dto.writer }</span></h3>
@@ -55,7 +57,7 @@
 		</div>
 </div>
 
-<!-- LOGIN 연결되면 구현-->
+
 <script>
 
 

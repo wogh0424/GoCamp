@@ -165,7 +165,10 @@
 	<select id="searchByKeyWord" parameterType="string" resultType="item">
 		select * from gocamp where facltNm like '%${srchKywrd}%' limit 10
 	</select>
- </mapper>
+	
+	
+	
+	 </mapper>
 
 
 

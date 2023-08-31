@@ -1,14 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../header.jsp"%>
+<div id=boardTitle>
+	<div id=board>BOARD > </div><div id=eventBoard><a href="${cpath}/eventBoard">eventBoard</a></div>
+</div>
 
-<form method="GET" >
-	<select name="column">
-		<option value="title" ${paging.column == 'title' ? 'selected' : '' }>타이틀</option>
-		<option value="content" ${paging.column == 'content' ? 'selected' : '' }>내용</option>
-	</select>
-		<p><input type="search" name="search" value="${param.search }" placeholder="검색"></p>
-		<p><input type="submit"></p>
+<form method="GET" class="search-form">
+  <div id="column" class="search-column">
+    <select name="column" class="search-select">
+      <option value="title" ${paging.column == 'title' ? 'selected' : ''}>타이틀</option>
+      <option value="content" ${paging.column == 'content' ? 'selected' : ''}>내용</option>
+    </select>
+    <div class="search-input-container">
+      <input type="search" name="search" value="${param.search}" class="search-input" placeholder="검색">
+      <button type="submit" class="search-submit">
+        🔍
+      </button>
+    </div>
+  </div>
 </form>
 
 <div id="boardList">
@@ -30,10 +39,11 @@
 	</c:forEach>
 </div>
 
-
+<div class="menubar">
 <c:if test="${pageContext.request.userPrincipal.name == 'admin'}">
-		<h3><a href="${cpath }/eventBoard/write">새글작성</a></h3> 
+		<a href="${cpath }/eventBoard/write"><button>event글 작성</button></a> 
 </c:if>
+</div>
 
 <div class="paging">
 	<c:if test="${paging.prev }">

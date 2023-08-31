@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.itbank.model.GocampReviewDTO;
+import com.itbank.model.PagingDTO;
 
 @Repository
 public interface GocampReviewDAO {
@@ -24,12 +25,24 @@ public interface GocampReviewDAO {
 
 	int deleteReview(int idx);
 
-	List<GocampReviewDTO> selectAllReview();
+	List<GocampReviewDTO> selectAllReview(String contentId);
+
+	String getnick(String userid);
+
+	String getContentId(int idx);
+	
+	// review 게시판
+
+	int selectCountGoCampAllReview(HashMap<String, String> map);
+
+	List<GocampReviewDTO> GoCampAllReview(PagingDTO paging);
+
+	GocampReviewDTO selectOneReview(int idx);
 
 	List<GocampReviewDTO> searchByKeyword(String srchKywrd);
 
-//	List<GocampReviewDTO> getReview(String contentId);
-//
-//	String writeReview(GocampReviewDTO review);
+	
 
+
+	
 }

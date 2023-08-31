@@ -24,5 +24,6 @@ public interface CampDAO {
 	int plusTagChooseCnt(List<String> tags);
 
 	List<ItemDTO> searchByKeyWord(String srchKywrd);
+
 	
 }

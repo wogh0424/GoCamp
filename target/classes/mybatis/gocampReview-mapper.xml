@@ -7,8 +7,8 @@
 
 <insert id="insertUpload" parameterType="gocampreview">
 		insert into gocampReview 
-				(writer,title,review_content, gocamp_board) 
-				values (#{writer},#{title},#{review_content},#{gocamp_board})
+				(writer,title,review_content, gocamp) 
+				values (#{writer},#{title},#{review_content},#{gocamp})
 	</insert>
 	
 <!-- 	가장 큰값, 마지막에 넣은값 -->
@@ -25,17 +25,16 @@
 	</insert>
 	
 	<select id="selectAllReview" resultType="gocampreview">
+
 		 SELECT 
-	        gocampReview.idx,
-	        gocampReview.title,
-	        gocampReview.writer,
-	        gocampReview.review_content,
+	        gr.*,
 	        (SELECT GROUP_CONCAT(filePath SEPARATOR ',')
 	         FROM gocampReview_file
-	         WHERE gocampReview_file.gocampReview = gocampReview.idx) AS filePath 
- 		  FROM gocampReview
-   		  ORDER BY idx
-	</select>
+	         WHERE gocampReview_file.gocampReview = gr.idx) AS filePath 
+ 		  FROM gocampReview gr join gocamp g on gr.gocamp = g.contentId
+ 		  where g.contentId = #{contentId}
+   		  ORDER BY gr.idx desc
+	</select>	
 	
 	<select id="selectFileList" parameterType="int" resultType="string">
 		select 
@@ -52,30 +51,47 @@
 	<delete id="deleteReview" parameterType="int">
 			delete from gocampReview where idx = #{idx}
 	</delete>
+	
+	<select id="getContentId" resultType="string">
+			select gc.contentId 
+			  from gocampReview gr join gocamp gc on gr.gocamp = gc.contentId where gr.idx=#{idx} 
 
-	<!-- 통합검색용 쿼리 -->
-	<select id="searchByKeyword" parameterType="string">
-		select * from gocampReview where title like '%${srchKywrd}%' or review_content like '%${srchKywrd}%'
+	</select>
+		
+	<select id="getnick" parameterType="string" resultType="string">
+			select nickname from member where userid = #{userid}
 	</select>
 	
-<!-- 		<select id="selectAll" resultType="gocampreview" parameterType="paging"> -->
-<!-- 			select * from gocampReview	 -->
-<!-- 				order by  -->
-<!-- 					idx desc  -->
-<!-- 				offset #{offset} rows -->
-<!-- 				fetch next #{perPage} rows only -->
-<!-- 		</select> -->
+	
+<!-- 	 review 게시판 -->
+	
+	<select id="GoCampAllReview" resultType="gocampreview" parameterType="paging">
+		select * from gocampReview
 		
-<!-- 		<insert id="writeReview" parameterType="gocampreview"> -->
-<!-- 			insert into gocampReview  -->
-<!-- 				(writer,review_content, gocamp_board) -->
-<!-- 					values (#{writer},#{review_content},#{gocamp_board}) -->
-<!-- 		</insert> -->
+		where ${column} like '%${search}%'
+			order by 
+				idx desc 
+			offset #{offset} rows
+			fetch next #{perPage} rows only
+	</select>
+	
+	<select id="selectCountGoCampAllReview" parameterType="paging" resultType="int">
+			select count(*) from gocampReview where ${column} like '%${search}%'
+	</select>
+	
+			
+		<select id="selectOneReview" parameterType="int" resultType="gocampreview">
 		
-<!-- 		<select id="getReview" parameterType="String" resultType="gocampreview"> -->
-<!-- 			select gr.* from gocampReview gr join gocamp gc  -->
-<!-- 				on gc.contentId = gr.gocamp_board where gc.contentId = #{contentId} -->
-<!-- 		</select> -->
+			 SELECT 
+		        gocampReview.*,
+		        (SELECT GROUP_CONCAT(filePath SEPARATOR ',')
+		         FROM gocampReview_file
+		         WHERE gocampReview_file.gocampReview = gocampReview.idx) AS filePath 
+	 		  FROM gocampReview where idx = #{idx}
+	   		  ORDER BY idx 
+		
+		</select>
+		
 		
 		
 </mapper>

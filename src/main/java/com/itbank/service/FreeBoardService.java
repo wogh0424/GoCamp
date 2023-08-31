@@ -29,7 +29,8 @@ public class FreeBoardService{
 	@Autowired
 	private FreeBoardDAO dao;
 	
-	private File dir = new File("/usr/local/tomcat/webapps/upload");
+	private File dir = new File("C:\\Users/yeonji/git/GoCamp/src/main/webapp/resources/image");
+
 
 
 	// directory 없으면 만들기(성공)
@@ -88,34 +89,6 @@ public class FreeBoardService{
 			
 		return row;
 	}
-	
-	// 파일첨부 게시글 작성 
-//	public int write(FreeBoardDTO dto) {
-		
-//		List<MultipartFile> uploadList =  dto.getUpload();		
-//		ArrayList<String> fileNameList = new ArrayList<>(); 
-//		
-//		for(MultipartFile f : uploadList) {			
-//			File dest = new File(dir, f.getOriginalFilename()); 		
-//			fileNameList.add(dest.getName());				
-//			try {
-//				f.transferTo(dest);  // 
-//			} catch (Exception e) {}
-//		}
-//		
-//		int row = 0;
-//		
-//		row += dao.insertBoard(dto);
-//		int fk = dao.selectMaxIdxFromUpload();
-//		
-//		HashMap<String, Object> param = new HashMap<>();
-//		param.put("upload", fk); 
-//		param.put("list", fileNameList);
-//		
-//		row += dao.insertBoard(dto);
-//
-//		return row;
-//	}
 
 	
 

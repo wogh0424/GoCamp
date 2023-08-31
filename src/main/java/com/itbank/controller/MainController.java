@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +35,8 @@ public class MainController {
 	@Autowired private NoticeBoardService noticeService;
 	@Autowired private EventBoardService eventService;
 	@Autowired private GocampReviewService reviewService;
+	@Autowired private GocampReviewService gocampReviewService;	
+
 	
 	@GetMapping("/camp")
 	public ModelAndView main(@RequestParam(value="page", defaultValue="1") int page, 
@@ -51,6 +56,7 @@ public class MainController {
 		return mav;
 	}
 	
+	// 캠핑장 당 리뷰 
 	@GetMapping("/view/{contentId}")
 	public ModelAndView view(@PathVariable("contentId") String contentId) throws IOException	{
 		ModelAndView mav = new ModelAndView("/main/view");
@@ -58,8 +64,39 @@ public class MainController {
 		System.out.println(row);
 		ItemDTO view = campService.selectOne(contentId);
 		mav.addObject("view", view);
+		
+		// 리뷰 목록가져오기 (+연지리뷰추가)
+		List<GocampReviewDTO> list = gocampReviewService.selectAllReview(contentId);
+		mav.addObject("list", list);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if(auth != null && auth.isAuthenticated()) {
+			String userid = auth.getName();
+			String nick = gocampReviewService.getnick(userid);
+			mav.addObject("nickname",nick);
+		}
 		return mav;
 	}
+	
+	@PostMapping("/view/{contentId}")
+	public String upload(GocampReviewDTO dto) {   
+
+		int row = gocampReviewService.insert(dto);
+		System.out.println(row + "행이 추가되었습니다.");
+		
+		return "redirect:/main/view/{contentId}"; 
+	}
+	
+	@GetMapping("deleteReview/{idx}")
+	public String deleteReview(@PathVariable("idx") int idx, String contentId) {
+		
+		contentId = gocampReviewService.getContentId(idx);
+		int row = gocampReviewService.deleteReview(idx);
+		System.out.println(row + "행이 삭제되었습니다.");
+		return "redirect:/main/view/" + contentId;
+	}
+	
+	// 리뷰 끝 
 	
 	@GetMapping("/search")
 	public ModelAndView search(String srchKywrd) {
