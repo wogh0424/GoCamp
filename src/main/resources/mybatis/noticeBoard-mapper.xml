@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+		"-//mybatis.org//DTD Mapper 3.0//EN"
+		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="com.itbank.repository.NoticeBoardDAO">
+		<select id="selectAll" resultType="noticeboard" parameterType="paging">
+			select * from notice_board 
+			
+			where ${column} like '%${search}%'
+				order by 
+					idx desc
+				offset #{offset} rows
+				fetch next #{perPage} rows only
+		</select>
+		
+		<update id="updateViewCount" parameterType="int">
+				update notice_board 
+					set
+						view_cnt = view_cnt + 1
+					where
+						idx = #{idx}
+		</update>
+
+		
+		<select id="selectOne" parameterType="int" resultType="noticeboard">
+			SELECT 
+		        notice_board.idx,
+		        notice_board.title,
+		        notice_board.content,
+		        (SELECT GROUP_CONCAT(filePath SEPARATOR ',')
+		         FROM notice_board_file
+		         WHERE notice_board_file.notice_board = notice_board.idx) AS filePath 
+	 		  FROM notice_board where idx = #{idx}
+	   		  ORDER BY idx
+		</select>
+		
+		<select id="selectCount" parameterType="paging" resultType="int">
+				select count(*) from notice_board where ${column} like '%${search}%'
+		</select>
+		
+		
+		<insert id="insertBoard" parameterType="noticeboard">
+			insert into notice_board
+				(title, content) 
+					values (#{title}, #{content})
+		</insert>
+		
+		<insert id="insertFile" parameterType="hashmap">
+			insert into notice_board_file (notice_board, filePath) 
+			
+				<foreach item="item" collection="list" separator="  UNION ALL  " >
+					select #{upload}, #{item} from dual
+			</foreach>
+		</insert>
+		
+		<select id="selectMaxIdxFromUpload" resultType="int">   
+				select max(idx) from notice_board
+		</select>
+		
+		<delete id="delete" parameterType="int">
+				delete from notice_board where idx=#{idx}
+		</delete>
+		
+		<delete id="deleteFile" parameterType="int">
+				delete from notice_board_file where notice_board = #{idx}
+		</delete>
+		
+		<update id="update"  parameterType="noticeboard" >
+				update notice_board
+					set title=#{title}, content=#{content} 
+						where idx=#{idx}
+		</update>
+		
+		
+</mapper>
+		

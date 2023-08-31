@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.itbank.repository.ProductDAO">
+	<select id="selectAll" resultType="product" parameterType="paging"> <!-- 쇼핑몰 페이징 10개씩 -->
+		select * from product orders limit #{offset}, #{perPage}
+	</select>
+	
+	<select id="selectpName" resultType="product" parameterType="String">
+		select * from product where pName = #{pName}
+	</select>
+	
+	<select id="priceSelectAll" resultType="product"> <!-- 가격정렬 기능(오름차순/내림차순 둘다 가능)  -->
+		select * from product order by price desc
+	</select>
+	
+	<select id="viewsSelectAll" resultType="product">
+		select * from product order by views desc
+	</select>
+	
+	<select id="sDateSelectAll" resultType="product">
+		select * from product order by sDate desc
+	</select>
+	
+	<select id="pStarSelectAll" resultType="product">
+		select * from product order by pStar desc
+	</select>
+	
+	<select id="selectCount" resultType="int">
+		select count(*) from product	
+	</select>
+	
+	<delete id="delete" parameterType="int"> <!-- 상품 삭제 기능 -->
+		delete from product where idx = #{idx}
+	</delete>
+	
+	<select id="selectDetails" parameterType="int" resultType="product">
+         select * from product where idx=#{idx}
+    </select>
+</mapper>
