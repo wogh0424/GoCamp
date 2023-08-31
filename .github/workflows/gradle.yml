@@ -48,11 +48,3 @@ jobs:
         port: ${{ secrets.SERVER_PORT }}
         source: webapps/ROOT.war
         target: /usr/local/tomcat
-<<<<<<< HEAD
-
-        
-        
-        
-        
-=======
->>>>>>> 112020bd7eb5bec402945365e7126220f9272165
