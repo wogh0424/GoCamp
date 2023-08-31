@@ -33,4 +33,6 @@ public interface EventBoardDAO {
 
 	int deleteFile(int idx);
 
+	List<EventBoardDTO> searchByKeyWord(String srchKywrd);
+
 }

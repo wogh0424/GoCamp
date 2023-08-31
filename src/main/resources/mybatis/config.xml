@@ -12,11 +12,7 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.itbank.model.ItemDTO" alias="item"/>
-		<typeAlias type="com.itbank.model.PagingDTO" alias="paging"/>
 		<typeAlias type="com.itbank.model.ShopPagingDTO" alias="shopPaging"/>
-		<typeAlias type="com.itbank.model.SearchDTO" alias="search"/>
-		<typeAlias type="com.itbank.model.PageAndSearchDTO" alias="searchPage"/>
 		<typeAlias type="com.itbank.model.MemberDTO" alias="member"/>
 		<typeAlias type="com.itbank.model.ProductDTO" alias="product"/>
 		<typeAlias type="com.itbank.model.FreeBoardDTO" alias="freeboard"/>
@@ -24,6 +20,14 @@
 		<typeAlias type="com.itbank.model.NoticeBoardDTO" alias="noticeboard"/>
 		<typeAlias type="com.itbank.model.EventBoardDTO" alias="eventboard"/>
 		<typeAlias type="com.itbank.model.GocampReviewDTO" alias="gocampreview"/>
+		
+		
+		<!-- 정민 -->
+		<typeAlias type="com.itbank.model.ItemDTO" alias="item"/>
+		<typeAlias type="com.itbank.model.MainPagingDTO" alias="paging"/>
+		<typeAlias type="com.itbank.model.SearchDTO" alias="search"/>
+		<typeAlias type="com.itbank.model.PageAndSearchDTO" alias="searchPage"/>
+		<typeAlias type="com.itbank.model.TagDTO" alias="tag"/>
 	</typeAliases>
 	
 </configuration>

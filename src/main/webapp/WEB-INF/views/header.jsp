@@ -19,9 +19,7 @@
 * {
 	
 }
-=======
 
->>>>>>> 8b10ede39137b255ac4fd528b84c6fb569ac4ed7
 /*전체 적용*/
 body {
 	margin: 0;
@@ -173,7 +171,6 @@ a {
  			justify-content: space-between; 
 		}
 		
-<<<<<<< HEAD
 		
 /*         form#insertForm { */
 /*             position: relative; */
@@ -600,7 +597,7 @@ aside {
 				<ul>
 					<li><a href="#">검색</a>
 						<ul>
-							<li><a href="${cpath }/main">캠핑장</a></li>
+							<li><a href="${cpath }/main/camp">캠핑장</a></li>
 							<li><a href="">SUB_MENU</a></li>
 							<li><a href="">SUB_MENU</a></li>
 						</ul>
@@ -638,4 +635,9 @@ aside {
 			</div>
 		</div>
 	</nav>
-
+	<div class="header_bottom" style="display: flex; justify-content: right; height: 40px; align-items:center;">
+		<form action="${cpath }/main/search">
+			<input type="search" name="srchKywrd" placeholder="검색어를 입력하세요">
+			<input type="submit" value="검색">
+		</form>
+	</div>

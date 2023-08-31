@@ -61,6 +61,13 @@
 			<if test='(search.animalCmgCl) != null'>
 				and animalCmgCl like '가능%'
 			</if>
+			<if test='(search.tags) != null'>
+				and (
+				<foreach collection="search.tags" item="item7" separator=" or ">
+					tags like '%${item7}%'
+				</foreach>
+				)
+			</if>
 			order by
 				${page.order} <if test="page.order != 'facltNm'">desc</if>     
 			offset #{page.offset} rows
@@ -124,10 +131,39 @@
 			<if test='(animalCmgCl) != null'>
 				and animalCmgCl like '가능%'
 			</if>
+			<if test='(tags) != null'>
+				and (
+				<foreach collection="tags" item="item7" separator=" or ">
+					tags like '%${item7}%'
+				</foreach>
+				)
+			</if>
 	</select>
 	
 	<select id="selectOne" resultType="item" parameterType="string">
 		select * from gocamp where contentId = #{contentId}
+	</select>
+	
+	<select id="selectTags" resultType="tag">
+		select * from tagLibrary order by chooseCnt desc, tagNum 
+	</select>
+	
+	<update id="plusViewCount" parameterType="string">
+		update gocamp set clickCnt = clickCnt + 1 where contentId = #{contentId}
+	</update>
+	
+	<update id="plusTagChooseCnt" parameterType="list">
+		update tagLibrary 
+			set
+			chooseCnt = chooseCnt + 1
+			where tagNum in 
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+				${item}
+			</foreach>			
+	</update>
+	
+	<select id="searchByKeyWord" parameterType="string" resultType="item">
+		select * from gocamp where facltNm like '%${srchKywrd}%' limit 10
 	</select>
  </mapper>
 

@@ -72,6 +72,8 @@
 						where idx=#{idx}
 		</update>
 		
-		
+		<select id="searchByKeyWord" parameterType="string" resultType="noticeboard">
+			select * from notice_board where title like '%${srchKywrd}%' or content like '%${srchKywrd}%'
+		</select>
 </mapper>
 		

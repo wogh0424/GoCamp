@@ -53,6 +53,10 @@
 			delete from gocampReview where idx = #{idx}
 	</delete>
 
+	<!-- 통합검색용 쿼리 -->
+	<select id="searchByKeyword" parameterType="string">
+		select * from gocampReview where title like '%${srchKywrd}%' or review_content like '%${srchKywrd}%'
+	</select>
 	
 <!-- 		<select id="selectAll" resultType="gocampreview" parameterType="paging"> -->
 <!-- 			select * from gocampReview	 -->

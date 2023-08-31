@@ -42,12 +42,15 @@ public class CampService {
 		return campDAO.selectOne(contentId);
 	}
 
-
 	public List<TagDTO> selectTags() {
 		return campDAO.selectTags();
 	}
 
 	public int plusViewCount(String contentId) {
 		return campDAO.plusViewCount(contentId);
+	}
+
+	public List<ItemDTO> searchByKeyWord(String srchKywrd) {
+		return campDAO.searchByKeyWord(srchKywrd);
 	}
 }

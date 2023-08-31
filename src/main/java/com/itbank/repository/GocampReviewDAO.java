@@ -24,11 +24,12 @@ public interface GocampReviewDAO {
 
 	int deleteReview(int idx);
 
-	List<GocampReviewDTO> selectAllReview(String contentId);
+	List<GocampReviewDTO> selectAllReview();
 
-	String getnick(String userid);
+	List<GocampReviewDTO> searchByKeyword(String srchKywrd);
 
-	String getContentIdByReviewIdx(int idx);
+//	List<GocampReviewDTO> getReview(String contentId);
+//
+//	String writeReview(GocampReviewDTO review);
 
-	
 }

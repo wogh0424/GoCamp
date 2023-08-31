@@ -33,4 +33,6 @@ public interface NoticeBoardDAO {
 
 	int deleteFile(int idx);
 
+	List<NoticeBoardDTO> searchByKeyWord(String srchKywrd);
+
 }
