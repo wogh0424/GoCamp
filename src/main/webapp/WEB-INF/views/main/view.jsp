@@ -115,7 +115,7 @@
                 <li class="selected">캠핑장 소개</li>
                 <li id="viewShowImage">주변풍경</li>
                 <li id="viewShowMap">위치/주변정보</li>
-                <li>캠핑&여행후기</li>
+                <li>캠핑&#38;여행후기</li>
             </ul>
             <div id="viewIntro">
                 <div class="intro1 selected">
@@ -197,7 +197,7 @@
                     <div class="viewNotion">
                     	    ※ 고캠핑에 등록된 정보는 현장상황과 다소 다를 수 있으니 <span style="color:red;">반려동물 동반 여부, 부가 시설물, 추가차량</span> 등 원활한 캠핑을 위해 꼭 필요한 사항은 해당 캠핑장에서 미리 확인하시기 바랍니다.
                     </div>
-                </div>
+                </div> <!-- end of intro1 -->
                 <div class="intro2">
                     <div class="viewImageTT">
                         	 ▶️ 주변 사진
@@ -220,35 +220,6 @@
                 </div>
                 
                 <div class="intro4">
-<!--                     <div class="viewReviewTT"> -->
-<!--                         	 ▶️ 최근 n건 -->
-<!--                     </div> -->
-<!--                     <div id="campReview"> -->
-<!--                         forEach로 구현 -->
-<!--                         <div class="campReviewItems"> -->
-<!--                             <ul class="campReviewRow"> -->
-<!--                                 <li class="reviewRow">1</li> -->
-<!--                                 <li class="reviewTT">리뷰 제목</li> -->
-<!--                                 <li class="reviewDate">리뷰 작성 날짜</li> -->
-<!--                             </ul> -->
-<!--                         </div> -->
-<!--                         <div class="campReviewItems"> -->
-<!--                             <ul class="campReviewRow"> -->
-<!--                                 <li class="reviewRow">2</li> -->
-<!--                                 <li class="reviewTT">리뷰 제목</li> -->
-<!--                                 <li class="reviewDate">리뷰 작성 날짜</li> -->
-<!--                             </ul> -->
-<!--                         </div> -->
-<!--                         <div class="campReviewItems"> -->
-<!--                             <ul class="campReviewRow"> -->
-<!--                                 <li class="reviewRow">3</li> -->
-<!--                                 <li class="reviewTT">리뷰 제목</li> -->
-<!--                                 <li class="reviewDate">리뷰 작성 날짜</li> -->
-<!--                             </ul> -->
-<!--                         </div> -->
-                        
-<!--                     </div> -->
-
 				<div id="reviewContainer">
 				<h3>리뷰작성</h3>
 				<c:if test="${pageContext.request.userPrincipal != null}">
@@ -281,6 +252,7 @@
 					
 					
 					<fieldset class="gocampReview">
+					 <div class="recommedation"><button>추천하기</button></div>
 					  <div class="reviewHeader">
 					    <h2 class="reviewIdx">${review.idx}</h2>
 					    <h2 class="reviewTitle">${review.title}</h2>
@@ -312,11 +284,12 @@
 			<!--  리뷰 끝  -->
 
             </div>
-        </div>
      <!--end of view-->
-  
+        </div> <!-- end of campIntro -->
+  </div>  
+  <!-- end of view -->
     
-    <a style="display:scroll;position:fixed;bottom:50px;right:50px;" rel="nofollow" href="#" title="Back to Top"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
+    <a style="display:scroll;position:fixed;bottom:50px;right:50px;text-decoration: none;" rel="nofollow" href="#" title="Back to Top"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
     
    
     

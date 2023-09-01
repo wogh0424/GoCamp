@@ -34,13 +34,12 @@ public class FreeBoardController {
 	
 	// 검색, 페이징 
 	@GetMapping("") // 주소는 /freeBoard, jsp는 /freeBoard/list.jsp
-	public ModelAndView list(@RequestParam(value="column", defaultValue = "title") String column, @RequestParam(value="search", defaultValue = "") String search, @RequestParam(value="page", defaultValue = "1") int page) {  // page를 받을건데 없으면 기본값은 1이다
+	public ModelAndView list(@RequestParam(value="order", defaultValue = "") String order, @RequestParam(value="page", defaultValue = "1") int page) {  // page를 받을건데 없으면 기본값은 1이다
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("search", search);
-		map.put("column", column);
+		map.put("order", order);
 		
 		int boardCount = freeBoardService.selectCount(map);    // 총게시물의 개수를 불러오자
-		PagingDTO paging = new PagingDTO(page, boardCount, search, column);
+		PagingDTO paging = new PagingDTO(page, boardCount, order);
 		                           
 		ModelAndView mav = new ModelAndView("/freeBoard/list");
 		List<FreeBoardDTO> list = freeBoardService.selectAll(paging);  // page로 서비스함수를 호출

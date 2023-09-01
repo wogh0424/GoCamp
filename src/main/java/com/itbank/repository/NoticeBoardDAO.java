@@ -35,4 +35,6 @@ public interface NoticeBoardDAO {
 
 	List<NoticeBoardDTO> searchByKeyWord(String srchKywrd);
 
+	int countByKeyword(String srchKywrd);
+
 }

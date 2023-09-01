@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.GocampReviewDTO;
 import com.itbank.model.PagingDTO;
 import com.itbank.repository.GocampReviewDAO;
@@ -23,7 +22,7 @@ public class GocampReviewService {
 
 	@Autowired private GocampReviewDAO dao;
 
-	private File dir = new File("/usr/local/tomcat/webapps/upload");
+	private File dir = new File("C:\\Users/yeonji/git/GoCamp/src/main/webapp/resources/image");
 
 	
 	// directory 없으면 만들어라
@@ -133,10 +132,9 @@ public class GocampReviewService {
 		return dao.selectOneReview(idx);
 	}
 
-
-	
-	
-
+	public int countByKeyword(String srchKywrd) {
+		return dao.countByKeyword(srchKywrd);
+	}
 
 }
 

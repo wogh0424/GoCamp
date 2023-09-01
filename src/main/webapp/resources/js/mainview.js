@@ -1,6 +1,6 @@
 function viewBannerHandler() {
  	  const mainViewBg = document.getElementById('viewBg');
-      let image = '';
+      let image = 'url(' + cpath + '/resources/image/mainView/';
       let tmp = '';
       if (lctCl == '') {
     	 tmp = '';
@@ -12,31 +12,31 @@ function viewBannerHandler() {
       }
         switch(tmp) {
         case '해변':
-        	image = 'url(' + cpath + 'resources/image/mainView/해변.jpg)';
+        	image += '해변.jpg)';
         	break;
         case '섬':
-        	image = 'url(' + cpath + '/resources/image/mainView/섬.jpg)';
+        	image += '섬.jpg)';
         	break;
         case '산':
-        	image = 'url(' + cpath + '/resources/image/mainView/산.jpg)';
+        	image += '산.jpg)';
         	break;
    	   	case '숲':
-   	   		image = 'url(' + cpath + '/resources/image/mainView/숲.jpg)';
+   	   		image += '숲.jpg)';
    	   		break;
    	   	case '계곡':
-   	   		image = 'url(' + cpath + '/resources/image/mainView/계곡.jpg)';
+   	   		image += '계곡.jpg)';
    	   		break;
        	case '강':
-       		image = 'url(' + cpath + '/resources/image/mainView/강.jpg)';
+       		image += '강.jpg)';
        		break;
        	case '호수':
-       		image = 'url(' + cpath + '/resources/image/mainView/호수.jpg)';
+       		image += '호수.jpg)';
        		break;
        	case '도심':
-       		image = 'url(' + cpath + '/resources/image/mainView/도심.jpg)';
+       		image += '도심.jpg)';
        		break;
        	default:
-       		image = 'url(' + cpath + '/resources/image/mainView/기본.jpg)';
+       		image += '기본.jpg)';
        	}
  	       viewBg.style.backgroundImage = image;
    	}
@@ -64,6 +64,7 @@ function viewBannerHandler() {
 		else {
 			arr = [];
 		};
+		// 이미지가 없는 경우에는 noimag
 		const viewImage = document.getElementById('viewImage');
 		const noimg = '<div class="noImageNotion"><img src="'+ cpath +'/resources/image/mainView/noimg.gif"></div>'
 		if (arr.length == 0) {
@@ -123,6 +124,7 @@ function viewBannerHandler() {
    	}
    	
     function viewMapHandler() {
+    	// view에서 지도를 띄우는 부분
     	const map = new naver.maps.Map('viewMap', {
     		zoom: 11,
     		zoomControl:true,
@@ -132,6 +134,7 @@ function viewBannerHandler() {
     		mapTypeControl: true
     	})
     	const coords = new naver.maps.LatLng(y, x)
+    	// 마커 생성
     	const marker = new naver.maps.Marker({
 			position: coords,
 			map: map
@@ -139,6 +142,7 @@ function viewBannerHandler() {
     	if (tel == '') {
 			tel = '(홈페이지 방문 바람)'
 		}
+    	// 정보창 생성
 		const infoWindow = new naver.maps.InfoWindow({
 			content: '<div class="marker"><b>' 
 					    + facltNm + '</b><br>연락처 : ' + tel + 
@@ -169,7 +173,7 @@ function viewBannerHandler() {
     	}
 	
     	imagePrevBtn.addEventListener('click', () => {
-    		imageItem.style.width = '900px'
+    		imageItem.style.width = '900px'  // 이미지 크기가 스크롤로 줄어들었다면 다시 맞춰준다.
     		currentIndex--;
     		updateImage();
     	});
@@ -183,12 +187,12 @@ function viewBannerHandler() {
     	updateImage();
 	    	
     	imageModal.style.display = 'block';
-    	document.body.style.overflow = 'hidden'
+    	document.body.style.overflow = 'hidden'  // body의 스크롤 제거
     }
     
-function modalCloseHandler() {
+function modalCloseHandler() {  // 모달을 닫고 body의 스크롤을 복구한다.
 	document.getElementById('imageModal').style.display = 'none'
-    document.body.style.overflow = 'auto';	
+    document.body.style.overflow = 'auto';	 
 }
 
 function imageScrollHandler(event) {

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.itbank.model.EventBoardDTO;
+import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.GocampReviewDTO;
 import com.itbank.model.ItemDTO;
 import com.itbank.model.PageAndSearchDTO;
@@ -24,6 +25,7 @@ import com.itbank.model.SearchDTO;
 import com.itbank.model.TagDTO;
 import com.itbank.service.CampService;
 import com.itbank.service.EventBoardService;
+import com.itbank.service.FreeBoardService;
 import com.itbank.service.GocampReviewService;
 import com.itbank.service.NoticeBoardService;
 
@@ -36,7 +38,7 @@ public class MainController {
 	@Autowired private EventBoardService eventService;
 	@Autowired private GocampReviewService reviewService;
 	@Autowired private GocampReviewService gocampReviewService;	
-
+	@Autowired private FreeBoardService freeService;
 	
 	@GetMapping("/camp")
 	public ModelAndView main(@RequestParam(value="page", defaultValue="1") int page, 
@@ -102,15 +104,28 @@ public class MainController {
 	public ModelAndView search(String srchKywrd) {
 		ModelAndView mav = new ModelAndView("/main/search");
 		List<ItemDTO> camplist = campService.searchByKeyWord(srchKywrd);
+		int campCnt = campService.countByKeword(srchKywrd);
 		List<NoticeBoardDTO> noticelist = noticeService.searchByKeyWord(srchKywrd);
+		int noticeCnt = noticeService.countByKeyword(srchKywrd);
 		List<EventBoardDTO> eventlist = eventService.searchByKeyWord(srchKywrd);
+		int eventCnt = eventService.countByKeyword(srchKywrd);
 		List<GocampReviewDTO> reviewlist = reviewService.searchByKeyWord(srchKywrd);
-	
+		int reviewCnt = reviewService.countByKeyword(srchKywrd);
+		List<FreeBoardDTO> freelist = freeService.searchByKeyWord(srchKywrd);
+		int freeCnt = freeService.countByKeyword(srchKywrd);
+		
 		mav.addObject("keyword", srchKywrd);
-		mav.addObject("campList", camplist); 
+		mav.addObject("campList", camplist);
+		mav.addObject("campCnt", campCnt);
 		mav.addObject("noticelist", noticelist);
+		mav.addObject("noticeCnt", noticeCnt);
 		mav.addObject("eventlist", eventlist);
+		mav.addObject("eventCnt", eventCnt);
 		mav.addObject("reviewlist", reviewlist);
+		mav.addObject("reviewCnt", reviewCnt);
+		mav.addObject("freelist", freelist);
+		mav.addObject("freeCnt", freeCnt);
 		return mav;
 	}
+	
 }

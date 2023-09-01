@@ -23,7 +23,7 @@ public class NoticeBoardService {
 	@Autowired private NoticeBoardDAO dao;
 	
 
-	private File dir = new File("/usr/local/tomcat/webapps/upload");
+	private File dir = new File("C:\\Users/yeonji/git/GoCamp/src/main/webapp/resources/image");
 
 	
 	// directory 없으면 만들기(성공)
@@ -110,6 +110,10 @@ public class NoticeBoardService {
 	// 통합검색용 쿼리
 	public List<NoticeBoardDTO> searchByKeyWord(String srchKywrd) {
 		return dao.searchByKeyWord(srchKywrd);
+	}
+
+	public int countByKeyword(String srchKywrd) {
+		return dao.countByKeyword(srchKywrd);
 	}
 
 }
