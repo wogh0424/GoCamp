@@ -5,9 +5,8 @@
 		
 <mapper namespace="com.itbank.repository.EventBoardDAO">
 		<select id="selectAll" resultType="eventboard" parameterType="paging">
-			select * from event_board 
-			
-			where ${column} like '%${search}%'
+			select * from event_board 		
+				where title like '%${order}%' or content like '%${order}%'
 				order by 
 					idx desc
 				offset #{offset} rows
@@ -36,7 +35,7 @@
 		</select>
 		
 		<select id="selectCount" parameterType="paging" resultType="int">
-				select count(*) from event_board where ${column} like '%${search}%'
+				select count(*) from event_board where title like '%${order}%' or content like '%${order}%'
 		</select>
 		
 		<insert id="insertBoard" parameterType="eventboard">
@@ -73,6 +72,10 @@
 		
 		<select id="searchByKeyWord" parameterType="string" resultType="eventboard">
 			select * from event_board where title like '%${srchKywrd}%' or content like '%${srchKywrd}%'
+		</select>
+		
+		<select id="countByKeyword" parameterType="string" resultType="int">
+			select count(*) from event_board where title like '%${srchKywrd}%' or content like '%${srchKywrd}%'
 		</select>
 </mapper>
 		

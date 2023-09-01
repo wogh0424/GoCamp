@@ -35,4 +35,6 @@ public interface EventBoardDAO {
 
 	List<EventBoardDTO> searchByKeyWord(String srchKywrd);
 
+	int countByKeyword(String srchKywrd);
+
 }

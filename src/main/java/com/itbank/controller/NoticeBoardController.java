@@ -23,13 +23,12 @@ public class NoticeBoardController {
 	@Autowired private NoticeBoardService noticeBoardService;
 	
 	@GetMapping("")
-	public ModelAndView list(@RequestParam(value="column", defaultValue="title")String column, @RequestParam(value="search", defaultValue = "")String search, @RequestParam(value="page", defaultValue = "1")int page) {
+	public ModelAndView list(@RequestParam(value="order", defaultValue = "")String order, @RequestParam(value="page", defaultValue = "1")int page) {
 		HashMap<String,String> map = new HashMap<String, String>();
-		map.put("search", search);
-		map.put("column", column);
+		map.put("order", order);
 		
 		int boardCount = noticeBoardService.selectCount(map);
-		PagingDTO paging = new PagingDTO(page, boardCount, search, column);
+		PagingDTO paging = new PagingDTO(page, boardCount, order);
 		
 		ModelAndView mav = new ModelAndView("/noticeBoard/list");
 		List<NoticeBoardDTO> list = noticeBoardService.selectAll(paging); 

@@ -6,8 +6,7 @@
 <mapper namespace="com.itbank.repository.NoticeBoardDAO">
 		<select id="selectAll" resultType="noticeboard" parameterType="paging">
 			select * from notice_board 
-			
-			where ${column} like '%${search}%'
+				where title like '%${order}%' or content like '%${order}%'
 				order by 
 					idx desc
 				offset #{offset} rows
@@ -36,7 +35,7 @@
 		</select>
 		
 		<select id="selectCount" parameterType="paging" resultType="int">
-				select count(*) from notice_board where ${column} like '%${search}%'
+				select count(*) from notice_board where title like '%${order}%' or content like '%${order}%'
 		</select>
 		
 		
@@ -74,6 +73,10 @@
 		
 		<select id="searchByKeyWord" parameterType="string" resultType="noticeboard">
 			select * from notice_board where title like '%${srchKywrd}%' or content like '%${srchKywrd}%'
+		</select>
+		
+		<select id="countByKeyword" parameterType="string" resultType="int">
+			select count(*) from notice_board where title like '%${srchKywrd}%' or content like '%${srchKywrd}%'
 		</select>
 </mapper>
 		

@@ -21,7 +21,7 @@ public class EventBoardService {
 	@Autowired private EventBoardDAO dao;
 	
 	
-	private File dir = new File("/usr/local/tomcat/webapps/upload");
+	private File dir = new File("C:\\Users/yeonji/git/GoCamp/src/main/webapp/resources/image");
 	
 	// directory 없으면 만들기(성공)
 	public EventBoardService() {
@@ -109,6 +109,11 @@ public class EventBoardService {
 	// 통합검색용 쿼리
 		public List<EventBoardDTO> searchByKeyWord(String srchKywrd) {
 			return dao.searchByKeyWord(srchKywrd);
+		}
+
+
+		public int countByKeyword(String srchKywrd) {
+			return dao.countByKeyword(srchKywrd);
 		}
 
 }

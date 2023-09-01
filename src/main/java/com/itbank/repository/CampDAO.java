@@ -25,5 +25,6 @@ public interface CampDAO {
 
 	List<ItemDTO> searchByKeyWord(String srchKywrd);
 
-	
+	int countByKeyword(String srchKywrd);
+
 }

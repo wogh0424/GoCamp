@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.FreeBoardDTO;
@@ -35,20 +34,19 @@ public class FreeBoardController {
 	
 	// 검색, 페이징 
 	@GetMapping("") // 주소는 /freeBoard, jsp는 /freeBoard/list.jsp
-	public ModelAndView list(@RequestParam(value="column", defaultValue = "title") String column, @RequestParam(value="search", defaultValue = "") String search, @RequestParam(value="page", defaultValue = "1") int page) {  // page를 받을건데 없으면 기본값은 1이다
+	public ModelAndView list(@RequestParam(value="order", defaultValue = "") String order, @RequestParam(value="page", defaultValue = "1") int page) {  // page를 받을건데 없으면 기본값은 1이다
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("search", search);
-		map.put("column", column);
+		map.put("order", order);
 		
 		int boardCount = freeBoardService.selectCount(map);    // 총게시물의 개수를 불러오자
-		PagingDTO paging = new PagingDTO(page, boardCount, search, column);
+		PagingDTO paging = new PagingDTO(page, boardCount, order);
 		                           
 		ModelAndView mav = new ModelAndView("/freeBoard/list");
 		List<FreeBoardDTO> list = freeBoardService.selectAll(paging);  // page로 서비스함수를 호출
 		
 //		for (FreeBoardDTO dto : list) {
-//	        List<MultipartFile> upload = freeBoardService.selectUpload(dto.getIdx());  // 해당 게시글의 파일 경로 조회
-//	        dto.setUpload(upload);  // 파일 경로 정보를 FreeBoardDTO에 설정
+//	        List<String> filePaths = freeBoardService.selectFilePaths(dto.getIdx());  // 해당 게시글의 파일 경로 조회
+//	        dto.setFilePaths(filePaths);  // 파일 경로 정보를 FreeBoardDTO에 설정
 //	    }
 		
 		for (FreeBoardDTO dto : list) {
@@ -79,13 +77,6 @@ public class FreeBoardController {
 		// 댓글 목록 조회
 		List<FreeBoardReplyDTO> replyList = freeBoardReplyService.getReply(idx);
 		mav.addObject("replyList", replyList);
-		
-		// 댓글 개수 띄우기
-		int replyCount = freeBoardService.replyCount(idx);
-		dto.setReplyCount(replyCount);
-		mav.addObject("replyCount", replyCount);
-		
-		
 		
 	
 		freeBoardService.reduceViewCnt(idx, response,request);

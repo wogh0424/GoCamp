@@ -6,18 +6,10 @@
 </div>
 
 <form method="GET" class="search-form">
-  <div id="column" class="search-column">
-    <select name="column" class="search-select">
-      <option value="title" ${paging.column == 'title' ? 'selected' : ''}>타이틀</option>
-      <option value="content" ${paging.column == 'content' ? 'selected' : ''}>내용</option>
-    </select>
     <div class="search-input-container">
-      <input type="search" name="search" value="${param.search}" class="search-input" placeholder="검색">
-      <button type="submit" class="search-submit">
-        🔍
-      </button>
+      <input type="search" name="order" value="${param.order}" class="search-input" placeholder="검색">
+      <button type="submit" class="search-submit">🔍</button>
     </div>
-  </div>
 </form>
 
 <div id="boardList">
@@ -47,13 +39,13 @@
 
 <div class="paging">
 	<c:if test="${paging.prev }">
-		<a href="${cpath }/eventBoard?page=${paging.begin - paging.perPage}&search=${paging.search}&column=${paging.column}">[이전]</a>
+		<a href="${cpath }/eventBoard?page=${paging.begin - paging.perPage}&search=${paging.order}">[이전]</a>
 	</c:if>
 	<c:forEach var="i" begin="${paging.begin }" end="${paging.end }">
-		<a href="${cpath }/eventBoard?page=${i }&search=${paging.search}&column=${paging.column}">[${i }]</a>
+		<a href="${cpath }/eventBoard?page=${i }&search=${paging.order}">[${i }]</a>
 	</c:forEach>
 	<c:if test="${paging.next }">
-		<a href="${cpath }/eventBoard?page=${paging.end + 1}&search=${paging.search}&column=${paging.column}">[다음]</a>
+		<a href="${cpath }/eventBoard?page=${paging.end + 1}&search=${paging.order}">[다음]</a>
 	</c:if>
 </div>
 
