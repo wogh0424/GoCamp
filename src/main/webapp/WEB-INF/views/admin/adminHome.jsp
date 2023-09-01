@@ -8,6 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>관리자 홈</title>
 <style>
+a{
+	text-decoration: none;
+	color: black;
+}
 header {
 	height: 50px;
 	border: 2px solid black;
@@ -54,6 +58,10 @@ header {
 
 #section>article.selected {
 	display: none;
+}
+.back_btn {
+	display: flex;
+	justify-content: center;
 }
 </style>
 </head>
@@ -129,6 +137,7 @@ header {
 					</tr>
                		</c:forEach>
 				</table>
+				<div class="back_btn"><button><a href="${cpath }">돌아가기</a></button></div>
         </article>
 
         <article class="control_board">
