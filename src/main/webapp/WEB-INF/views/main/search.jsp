@@ -155,7 +155,7 @@
 				</ul>
 			</div>
 			<div style="width: 100%; display:flex; justify-content: center;">
-				<a href="${cpath }/main/camp?listTy=List&keyword=${param.srchKywrd }"><button class="searchMoreBtn">더보기</button></a>		
+				<a href="${cpath }/main/camp?listTy=LIST&keyword=${param.srchKywrd }"><button class="searchMoreBtn">더보기</button></a>		
 			</div>
 		</div>
 		
