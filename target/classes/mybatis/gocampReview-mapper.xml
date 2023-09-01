@@ -54,7 +54,8 @@
 	
 	<select id="getContentId" resultType="string">
 			select gc.contentId 
-			  from gocampReview gr join gocamp gc on gr.gocamp = gc.contentId where gr.idx=#{idx} 
+			  from gocampReview gr join gocamp gc 
+			  	on gr.gocamp = gc.contentId where gr.idx=#{idx} 
 
 	</select>
 		

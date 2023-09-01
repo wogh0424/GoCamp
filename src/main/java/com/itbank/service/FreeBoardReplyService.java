@@ -41,5 +41,14 @@ public class FreeBoardReplyService {
 
 
 
+	public int getFreeBoardIdx(int idx) {
+		return dao.getFreeBoardIdx(idx);
+	}
+
+
+
+
+
+
 
 }

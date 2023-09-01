@@ -26,6 +26,12 @@
 		</select>
 		
 		
+		<select id="getFreeBoardIdx" resultType="Integer">
+			select b.idx
+				from reply_free_board r join free_board b
+					on r.board = b.idx where r.idx = #{idx} 
+		</select>
+		
 		
 		<update id="updateReply"  parameterType="freeboardreply" >
 				update reply_free_board
@@ -36,5 +42,6 @@
 		<delete id="deleteReply" parameterType="int">
 				delete from reply_free_board where idx=#{idx}
 		</delete>
+		
 </mapper>
 		
