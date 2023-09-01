@@ -93,6 +93,13 @@
 		<select id="replyCount" resultType="int">
 			select count(replyCount) from free_board f join reply_free_board r on f.idx = r.board where f.idx = #{idx}
 		</select>
-
+		
+		<select id="searchByKeyWord" parameterType="string" resultType="freeboard">
+			select * from free_board where title like '%${srchkywrd}%' or content like '%${srchkywrd}%'
+		</select>
+	
+		<select id="countByKeyword" parameterType="string" resultType="int">
+			select count(*) from free_board where title like '%${srchkywrd}%' or content like '%${srchkywrd}%'
+		</select>
 </mapper>
 		

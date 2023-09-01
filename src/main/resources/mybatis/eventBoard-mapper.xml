@@ -74,5 +74,9 @@
 		<select id="searchByKeyWord" parameterType="string" resultType="eventboard">
 			select * from event_board where title like '%${srchKywrd}%' or content like '%${srchKywrd}%'
 		</select>
+		
+		<select id="countByKeyword" parameterType="string" resultType="int">
+			select count(*) from event_board where title like '%${srchKywrd}%' or content like '%${srchKywrd}%'
+		</select>
 </mapper>
 		

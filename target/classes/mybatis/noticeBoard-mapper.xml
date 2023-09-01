@@ -75,5 +75,9 @@
 		<select id="searchByKeyWord" parameterType="string" resultType="noticeboard">
 			select * from notice_board where title like '%${srchKywrd}%' or content like '%${srchKywrd}%'
 		</select>
+		
+		<select id="countByKeyword" parameterType="string" resultType="int">
+			select count(*) from notice_board where title like '%${srchKywrd}%' or content like '%${srchKywrd}%'
+		</select>
 </mapper>
 		

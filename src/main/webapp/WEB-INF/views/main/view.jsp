@@ -115,7 +115,7 @@
                 <li class="selected">캠핑장 소개</li>
                 <li id="viewShowImage">주변풍경</li>
                 <li id="viewShowMap">위치/주변정보</li>
-                <li>캠핑&여행후기</li>
+                <li>캠핑&#38;여행후기</li>
             </ul>
             <div id="viewIntro">
                 <div class="intro1 selected">

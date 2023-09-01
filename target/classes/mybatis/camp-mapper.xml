@@ -166,7 +166,9 @@
 		SELECT * FROM gocamp where facltNm like '%${srchKywrd}%' order by clickCnt limit 10
 	</select>
 
-	
+	<select id="countByKeyword" parameterType="string" resultType="int">
+		select count(*) from gocamp where facltNm like '%${srchKywrd}%'
+	</select>
 </mapper>
 
 

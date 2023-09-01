@@ -132,5 +132,9 @@ public class GocampReviewService {
 		return dao.selectOneReview(idx);
 	}
 
+	public int countByKeyword(String srchKywrd) {
+		return dao.countByKeyword(srchKywrd);
+	}
+
 }
 

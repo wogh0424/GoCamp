@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.PagingDTO;
@@ -42,6 +41,10 @@ public interface FreeBoardDAO {
 	List<String> selectFileList(int idx);
 
 	int replyCount(int idx);
+
+	List<FreeBoardDTO> searchByKeyWord(String srchKywrd);
+
+	int countByKeyword(String srchKywrd);
 
 //	List<MultipartFile> selectUpload(int idx);
 

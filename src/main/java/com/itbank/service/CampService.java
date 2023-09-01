@@ -19,17 +19,21 @@ public class CampService {
 	
 	public int selectCnt(SearchDTO search) {
 		if (search.getSearchTags() != null) {
-			List<String> tmp = Arrays.asList(search.getSearchTags().split(","));
-			search.setTags(tmp);
+			if (search.getSearchTags() != "") {
+				List<String> tmp = Arrays.asList(search.getSearchTags().split(","));
+				search.setTags(tmp);
+			}
 		}
 		return campDAO.selectCnt(search);
 	}
 	
 	public List<ItemDTO> selectAll(PageAndSearchDTO searchPage) {
 		if (searchPage.getSearch().getSearchTags() != null) {
-			List<String> tmp = Arrays.asList(searchPage.getSearch().getSearchTags().split(","));
-			searchPage.getSearch().setTags(tmp);
-			campDAO.plusTagChooseCnt(tmp);
+			if (searchPage.getSearch().getSearchTags() != "") {
+				List<String> tmp = Arrays.asList(searchPage.getSearch().getSearchTags().split(","));
+				searchPage.getSearch().setTags(tmp);
+				campDAO.plusTagChooseCnt(tmp);				
+			}
 		}
 		return campDAO.selectAll(searchPage);
 	}
@@ -52,5 +56,9 @@ public class CampService {
 
 	public List<ItemDTO> searchByKeyWord(String srchKywrd) {
 		return campDAO.searchByKeyWord(srchKywrd);
+	}
+
+	public int countByKeword(String srchKywrd) {
+		return campDAO.countByKeyword(srchKywrd);
 	}
 }

@@ -4,10 +4,8 @@ package com.itbank.service;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -154,6 +152,15 @@ public class FreeBoardService{
 //	public List<MultipartFile> selectUpload(int idx) {
 //		return dao.selectUpload(idx);
 //	}
+	
+	// 통합검색용
+	public List<FreeBoardDTO> searchByKeyWord(String srchKywrd) {
+		return dao.searchByKeyWord(srchKywrd);
+	}
+
+	public int countByKeyword(String srchKywrd) {
+		return dao.countByKeyword(srchKywrd);
+	}
 
 	
 }

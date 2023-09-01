@@ -111,4 +111,9 @@ public class EventBoardService {
 			return dao.searchByKeyWord(srchKywrd);
 		}
 
+
+		public int countByKeyword(String srchKywrd) {
+			return dao.countByKeyword(srchKywrd);
+		}
+
 }

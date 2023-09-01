@@ -116,7 +116,7 @@
 		<!-- 캠핑장 -->
 		<div class="searchListBody">
 			<div class="searchListTT">
-				⛺ 캠핑장 [총 <span class="blueT">${campList.size() }</span>건]
+				⛺ 캠핑장 [총 <span class="blueT">${campCnt }</span>건]
 			</div>
 			
 			<div class="searchListItems">
@@ -155,14 +155,14 @@
 				</ul>
 			</div>
 			<div style="width: 100%; display:flex; justify-content: center;">
-				<a href="${cpath }/main/camp?listTy=LIST&keyword=${param.srchKywrd }"><button class="searchMoreBtn">더보기</button></a>		
+				<a href="${cpath }/main/camp?listTy=LIST&keyword=${param.srchKywrd != null ? param.srchKywrd : '' }"><button class="searchMoreBtn">더보기</button></a>		
 			</div>
 		</div>
 		
 		<!-- 공지사항 -->
 		<div class="searchListBody">
 			<div class="searchListTT">
-				ℹ️ 공지사항 게시물 검색결과 [총  <span class="blueT">${noticelist.size() }</span>건]
+				ℹ️ 공지사항 게시물 검색결과 [총  <span class="blueT">${noticeCnt }</span>건]
 			</div>
 			<div class="searchListItem">
 				<ul>
@@ -170,7 +170,7 @@
 						<li>검색된 결과가 없습니다.</li>
 					</c:if>
 					<c:forEach items="${noticelist }" var="notice" begin="0" end="9">
-						<li><a href="" class="searchKey">${notice.title }</a></li>
+						<li><a href="${cpath }/noticeBoard/view/${notice.idx}" class="searchKey">${notice.title }</a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -182,7 +182,7 @@
 		<!-- 이벤트 -->
 		<div class="searchListBody">
 			<div class="searchListTT">
-				🎉 이벤트 게시물 검색결과 [총  <span class="blueT">${eventlist.size() }</span>건]
+				🎉 이벤트 게시물 검색결과 [총  <span class="blueT">${eventCnt }</span>건]
 			</div>
 			<div class="searchListItem">
 				<ul>
@@ -190,7 +190,7 @@
 						<li>검색된 결과가 없습니다.</li>
 					</c:if>
 					<c:forEach items="${eventlist }" var="event" begin="0" end="9">
-						<li><a href="" class="searchKey">${event.title }</a></li>
+						<li><a href="${cpath }/eventBoard/view/${event.idx}" class="searchKey">${event.title }</a></li>
 					</c:forEach>
 				</ul>
 			</div>
@@ -202,7 +202,7 @@
 		<!-- 캠핑&여행후기 게시물 검색결과 -->
 		<div class="searchListBody">
 			<div class="searchListTT">
-				💭 캠핑&여행후기 게시물 검색결과 [총   <span class="blueT">${reviewlist.size() }</span>건]
+				💭 캠핑&#38;여행후기 게시물 검색결과 [총   <span class="blueT">${reviewCnt }</span>건]
 			</div>
 			<div class="searchListItem">
 				<ul>
@@ -210,7 +210,7 @@
 						<li>검색된 결과가 없습니다.</li>
 					</c:if>
 					<c:forEach items="${reviewlist }" var="review" begin="0" end="9">
-						<li><a href="" class="searchKey">${review.title }</a></li>
+						<li><a href="${cpath }/reviewBoard/view/${review.idx}" class="searchKey">${review.title }</a></li>
 					</c:forEach>				
 				</ul>
 			</div>
@@ -218,6 +218,27 @@
 				<a href=""><button class="searchMoreBtn">더보기</button></a>		
 			</div>
 		</div>
+		
+		<!-- 자유게시판 -->
+		<div class="searchListBody">
+			<div class="searchListTT">
+				😆 자유게시판 게시물 검색결과 [총   <span class="blueT">${freeCnt }</span>건]
+			</div>
+			<div class="searchListItem">
+				<ul>
+					<c:if test="${freelist.size() == 0 }">
+						<li>검색된 결과가 없습니다.</li>
+					</c:if>
+					<c:forEach items="${freelist }" var="free" begin="0" end="9">
+						<li><a href="${cpath }/freeBoard/view/${free.idx}" class="searchKey">${free.title }</a></li>
+					</c:forEach>				
+				</ul>
+			</div>
+			<div style="width: 100%; display:flex; justify-content: center;">
+				<a href=""><button class="searchMoreBtn">더보기</button></a>		
+			</div>
+		</div>
+		
 		
 		<!-- 쇼핑몰 -->
 		<div class="searchListBody">
@@ -250,7 +271,6 @@
 			}
 		})
 	}
-	
 </script>
 
 </body>
