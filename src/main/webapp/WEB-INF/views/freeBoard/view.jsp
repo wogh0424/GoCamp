@@ -35,16 +35,15 @@
 	
 		<c:forEach var="reply" items="${replyList }">
 		<div id="freeBoardReplyview">  
-			<h3>${reply.writer} | <fmt:formatDate value="${reply.replydate }"/></h3>                                              
+			<h3><span class="replywriter">${reply.writer }</span> | <fmt:formatDate value="${reply.replydate }"/></h3>                                              
 			<h3>${reply.reply_content }</h3>
-		<a href="${cpath }/freeBoard/modifyReply/${reply.idx}"><button>수정</button></a>
-		<a href="${cpath }/freeBoard/deleteReply/${reply.idx}"><button>삭제</button></a>
+		<c:if test="${reply.writer == nickname }">	
+<%-- 			<a href="${cpath }/freeBoard/modifyReply/${reply.idx}"><button class="modifyReplyBtn">수정</button></a> --%>
+			<a href="${cpath }/freeBoard/deleteReply/${reply.idx}"><button class="deleteReplyBtn">삭제</button></a>
+		</c:if>
 		</div>
 		</c:forEach>
 	
-
-
-
 
 
 <div class="menubar">
@@ -58,36 +57,37 @@
 </div>
 
 
-<script>
 
+
+<!-- 게시글 팝업창 -->
+<script>
 
 		const modifyBtn = document.getElementById('modifyBtn')
 		const deleteBtn = document.getElementById('deleteBtn')
-		const writer = document.getElementById('writer')
+		
+		
+		const writer = document.getElementById('writer')		
 		const login = '${nickname}'
 		
+		
+		// 공통함수
 		function loginCheck() {
 			const flag = 	writer.innerText == login
 			return flag
 		}
-		// 공통되는 코드를 하나의 함수로 묶어놨다.
 		
+		// 수정클릭
 		modifyBtn.onclick = function(event) {	
-			event.preventDefault()                                       // 1) 일단 이벤트의 기본작동을 막는다(버튼 눌려서 링크 이동)
-			if(loginCheck() == false) {									   // 2) 로그인 체크여부에 따라
-				alert('본인 글만 수정할 수 있습니다.')			   //			경고 메시지를 출력하고 
-				return															   // 	        함수를 종료한다.
+			event.preventDefault()                                     
+			if(loginCheck() == false) {								
+				alert('본인 글만 수정할 수 있습니다.')			
+				return														
 			}
-			location.href = event.target.parentNode.href						// 3) 원래 이동하려던 주소로 이동시킨다.
+			location.href = event.target.parentNode.href					
 			
-			// event : clickEvent
-			// event.target : <button>
-			// .parentNode : <a href="">
-			// .href = "${cpath}/board/modify/{dto.idx}"  - 자바코드가 제일 먼저 실행 되므로 주석안에서 틀려도 js보다 먼저 실행돼서 오류가 발생
-			// 주소창의 내용이 바꼈으니 getMapping	
 		}
 		
-		
+		// 삭제 클릭 
 		deleteBtn.onclick = function(event){
 			event.preventDefault()
 			const check = loginCheck()
@@ -99,6 +99,10 @@
 			location.href = event.target.parentNode.href
 		}
 		}
+		
+		
+		
+	
 </script>
 </body>
 </html>

@@ -24,6 +24,7 @@ public class NoticeBoardService {
 	
 
 	private File dir = new File("/usr/local/tomcat/webapps/upload");
+
 	
 	// directory 없으면 만들기(성공)
 	public NoticeBoardService() {

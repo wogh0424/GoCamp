@@ -34,7 +34,7 @@
 		<div class="item">
 			<div class="idx">${dto.idx }</div>
 			<div class="title">
-				<a href="${cpath}/freeBoard/view/${dto.idx}">${dto.title }</a>
+				<a href="${cpath}/freeBoard/view/${dto.idx}">${dto.title }<c:if test="${not empty dto.filePath}">(사진있음)</c:if></a>
 			</div>
 			<div class="writer">${dto.writer }</div>
 			<div class="date">${dto.date }</div>
