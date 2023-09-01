@@ -21,6 +21,8 @@ public interface FreeBoardReplyDAO {
 
 	int getFreeBoardIdx(int idx);
 
+	int updateReplyCount(FreeBoardReplyDTO reply);
+
 
 
 

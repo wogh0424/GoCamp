@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.FreeBoardDTO;
@@ -47,8 +46,8 @@ public class FreeBoardController {
 		List<FreeBoardDTO> list = freeBoardService.selectAll(paging);  // page로 서비스함수를 호출
 		
 //		for (FreeBoardDTO dto : list) {
-//	        List<MultipartFile> upload = freeBoardService.selectUpload(dto.getIdx());  // 해당 게시글의 파일 경로 조회
-//	        dto.setUpload(upload);  // 파일 경로 정보를 FreeBoardDTO에 설정
+//	        List<String> filePaths = freeBoardService.selectFilePaths(dto.getIdx());  // 해당 게시글의 파일 경로 조회
+//	        dto.setFilePaths(filePaths);  // 파일 경로 정보를 FreeBoardDTO에 설정
 //	    }
 		
 		for (FreeBoardDTO dto : list) {
@@ -79,13 +78,6 @@ public class FreeBoardController {
 		// 댓글 목록 조회
 		List<FreeBoardReplyDTO> replyList = freeBoardReplyService.getReply(idx);
 		mav.addObject("replyList", replyList);
-		
-		// 댓글 개수 띄우기
-		int replyCount = freeBoardService.replyCount(idx);
-		dto.setReplyCount(replyCount);
-		mav.addObject("replyCount", replyCount);
-		
-		
 		
 	
 		freeBoardService.reduceViewCnt(idx, response,request);

@@ -20,6 +20,12 @@
 					values (#{writer}, #{reply_content}, #{board})
 		</insert>
 		
+		<update id="updateReplyCount">
+		update free_board
+    		set replyCount = replyCount + 1
+   				 where idx = #{idx};
+		</update>
+		
 		<select id="getReply" parameterType="int" resultType="freeboardreply">
 			select r.* from reply_free_board r join free_board f 
 					on f.idx = r.board where f.idx = #{idx}; 
@@ -42,6 +48,8 @@
 		<delete id="deleteReply" parameterType="int">
 				delete from reply_free_board where idx=#{idx}
 		</delete>
+		
+		
 		
 </mapper>
 		
