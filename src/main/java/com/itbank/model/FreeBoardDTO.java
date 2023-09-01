@@ -27,6 +27,7 @@ public class FreeBoardDTO {
 	
 	private int view_cnt;
 	private Date date;
+	private int replyCount;
 	
 	public int getIdx() {
 		return idx;
@@ -75,6 +76,12 @@ public class FreeBoardDTO {
 	}
 	public void setUpload(List<MultipartFile> upload) {
 		this.upload = upload;
+	}
+	public int getReplyCount() {
+		return replyCount;
+	}
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
 	}
 	
 	

@@ -5,6 +5,12 @@
 		
 <mapper namespace="com.itbank.repository.FreeBoardDAO">
 		<select id="selectAll" resultType="freeboard" parameterType="paging">
+		
+<!-- 					SELECT b.*, f.filePath FROM free_board b join free_board_file f on b.idx = f.free_board   -->
+<!-- 						WHERE ${column} LIKE '%${search}%' -->
+<!-- 							ORDER BY idx DESC -->
+<!-- 							LIMIT #{offset}, #{perPage} -->
+		
 			select * from free_board
 			
 			where ${column} like '%${search}%'
@@ -82,6 +88,10 @@
 		
 		<select id="getnick" parameterType="string" resultType="string">
 			select nickname from member where userid = #{userid}
+		</select>
+		
+		<select id="replyCount" resultType="int">
+			select count(replyCount) from free_board f join reply_free_board r on f.idx = r.board where f.idx = #{idx}
 		</select>
 
 </mapper>

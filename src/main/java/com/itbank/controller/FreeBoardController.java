@@ -2,6 +2,7 @@ package com.itbank.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -43,6 +44,18 @@ public class FreeBoardController {
 		                           
 		ModelAndView mav = new ModelAndView("/freeBoard/list");
 		List<FreeBoardDTO> list = freeBoardService.selectAll(paging);  // page로 서비스함수를 호출
+		
+//		for (FreeBoardDTO dto : list) {
+//	        List<String> filePaths = freeBoardService.selectFilePaths(dto.getIdx());  // 해당 게시글의 파일 경로 조회
+//	        dto.setFilePaths(filePaths);  // 파일 경로 정보를 FreeBoardDTO에 설정
+//	    }
+		
+		for (FreeBoardDTO dto : list) {
+		    System.out.println("idx: " + dto.getIdx() + ", filePath: " + dto.getFilePath());
+		}
+
+		
+		
 		mav.addObject("list", list);
 		mav.addObject("paging", paging);
 		return mav;
@@ -59,11 +72,13 @@ public class FreeBoardController {
 		FreeBoardDTO dto = freeBoardService.selectOne(idx);
 		mav.addObject("dto", dto);
 		
+		System.out.println("filePath: " + dto.getFilePath());
+		
 		
 		// 댓글 목록 조회
 		List<FreeBoardReplyDTO> replyList = freeBoardReplyService.getReply(idx);
 		mav.addObject("replyList", replyList);
-	
+		
 	
 		freeBoardService.reduceViewCnt(idx, response,request);
 		
@@ -155,11 +170,18 @@ public class FreeBoardController {
 	}
 	
 	@GetMapping("/deleteReply/{idx}")
-	public String deleteReply(@PathVariable("idx") int idx) {
+	public String deleteReply(@PathVariable("idx") int idx, Integer freeBoardIdx) {
+		
+		freeBoardIdx = freeBoardReplyService.getFreeBoardIdx(idx);
+		
 		int row = freeBoardReplyService.deleteReply(idx);
 		System.out.println(row + "행이 삭제되었습니다.");
-		return "redirect:/freeBoard";
+		System.out.println("freeBoardIdx" + freeBoardIdx );
+		return "redirect:/freeBoard/view/" + freeBoardIdx;
 	}
+	
+	
+
 	
 
 	

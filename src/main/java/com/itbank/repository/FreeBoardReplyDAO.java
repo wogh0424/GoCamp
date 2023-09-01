@@ -19,6 +19,12 @@ public interface FreeBoardReplyDAO {
 
 	int deleteReply(int idx);
 
+	int getFreeBoardIdx(int idx);
+
+	int updateReplyCount(FreeBoardReplyDTO reply);
+
+
+
 
 
 

@@ -2,7 +2,8 @@ package com.itbank.model;
 
 
 public class MemberDTO {
-
+	
+	private int idx;
 	private String userid;
 	private String userpw;
 	private String email;
@@ -17,49 +18,11 @@ public class MemberDTO {
 	private String newuserpw;
 	private String enabled;
 	
-	
-	
-	public String getEnabled() {
-		return enabled;
+	public int getIdx() {
+		return idx;
 	}
-	public void setEnabled(String enabled) {
-		this.enabled = enabled;
-	}
-	public String getCurrentuserpw() {
-		return currentuserpw;
-	}
-	public void setCurrentuserpw(String currentuserpw) {
-		this.currentuserpw = currentuserpw;
-	}
-	public String getNewuserpw() {
-		return newuserpw;
-	}
-	public void setNewuserpw(String newuserpw) {
-		this.newuserpw = newuserpw;
-	}
-	public String getROLE_USER() {
-		return ROLE_USER;
-	}
-	public void setROLE_USER(String rOLE_USER) {
-		ROLE_USER = rOLE_USER;
-	}
-	public String getROLE_ADMIN() {
-		return ROLE_ADMIN;
-	}
-	public void setROLE_ADMIN(String rOLE_ADMIN) {
-		ROLE_ADMIN = rOLE_ADMIN;
-	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
-	public String getAuthority() {
-		return authority;
-	}
-	public void setAuthority(String authority) {
-		this.authority = authority;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	public String getUserid() {
 		return userid;
@@ -85,6 +48,12 @@ public class MemberDTO {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	public String getPnum() {
 		return pnum;
 	}
@@ -97,6 +66,40 @@ public class MemberDTO {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	
-	
+	public String getAuthority() {
+		return authority;
+	}
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+	public String getROLE_USER() {
+		return ROLE_USER;
+	}
+	public void setROLE_USER(String rOLE_USER) {
+		ROLE_USER = rOLE_USER;
+	}
+	public String getROLE_ADMIN() {
+		return ROLE_ADMIN;
+	}
+	public void setROLE_ADMIN(String rOLE_ADMIN) {
+		ROLE_ADMIN = rOLE_ADMIN;
+	}
+	public String getCurrentuserpw() {
+		return currentuserpw;
+	}
+	public void setCurrentuserpw(String currentuserpw) {
+		this.currentuserpw = currentuserpw;
+	}
+	public String getNewuserpw() {
+		return newuserpw;
+	}
+	public void setNewuserpw(String newuserpw) {
+		this.newuserpw = newuserpw;
+	}
+	public String getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
+	}		
 }

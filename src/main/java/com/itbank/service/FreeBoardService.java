@@ -4,11 +4,11 @@ package com.itbank.service;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-
-
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -29,7 +29,8 @@ public class FreeBoardService{
 	@Autowired
 	private FreeBoardDAO dao;
 	
-	private File dir = new File("C:\\Users/yeonji/git/GoCamp/src/main/webapp/resources/image");
+	private File dir = new File("/usr/local/tomcat/webapps/upload");
+
 
 
 
@@ -60,15 +61,16 @@ public class FreeBoardService{
 		System.err.println("uploadsize : " + dto.getUpload().get(0).getOriginalFilename());
 
 		List<MultipartFile> uploadList =  dto.getUpload();		// 첨부파일의 목록  (2)
+		
 		for(MultipartFile file : uploadList) {				// 2회 반복
 			String ymd = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
-			String fileName = file.getOriginalFilename();   // a.jpg
+			String fileName = file.getOriginalFilename();
 			if (fileName.equals("")) {
 				continue;
 			}
 			else {
 				ArrayList<String> fileNameList = new ArrayList<>();  // (파일 이름 추가할 수 있는) 비어있는 문자열 리스트  (0)
-				fileName = fileName.substring(0, fileName.lastIndexOf("."));   // a (마지막 index는 포함되지 않으니 a만 남는다,)
+				fileName = file.getOriginalFilename().substring(0, fileName.lastIndexOf("."));   // a (마지막 index는 포함되지 않으니 a만 남는다,)
 				
 				String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);   // image/jpeg 이면 jpeg만 남으므로  a_20230704140453.jpeg  이렇게 표현
 				File dest = new File(dir, fileName + "_" + ymd + "." + ext);
@@ -144,6 +146,14 @@ public class FreeBoardService{
 		}
 		
 	}
+
+	public int replyCount(int idx) {
+		return dao.replyCount(idx);
+	}
+//
+//	public List<MultipartFile> selectUpload(int idx) {
+//		return dao.selectUpload(idx);
+//	}
 
 	
 }

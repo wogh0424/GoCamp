@@ -22,6 +22,8 @@ public class FreeBoardReplyService {
 
 
 	public int writeReply(FreeBoardReplyDTO reply) {
+		int row = dao.updateReplyCount(reply);
+		System.out.println(reply + "개의 댓글이 추가");
 		return dao.insertReply(reply);
 	}
 
@@ -38,6 +40,15 @@ public class FreeBoardReplyService {
 	public int deleteReply(int idx) {
 		return dao.deleteReply(idx);
 	}
+
+
+
+	public int getFreeBoardIdx(int idx) {
+		return dao.getFreeBoardIdx(idx);
+	}
+
+
+
 
 
 
