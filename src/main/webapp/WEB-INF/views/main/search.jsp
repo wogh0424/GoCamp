@@ -175,7 +175,7 @@
 				</ul>
 			</div>
 			<div style="width: 100%; display:flex; justify-content: center;">
-				<a href=""><button class="searchMoreBtn">더보기</button></a>		
+				<a href="${cpath }/noticeBoard?order=${param.srchKywrd}"><button class="searchMoreBtn">더보기</button></a>		
 			</div>
 		</div>
 		
@@ -195,7 +195,7 @@
 				</ul>
 			</div>
 			<div style="width: 100%; display:flex; justify-content: center;">
-				<a href=""><button class="searchMoreBtn">더보기</button></a>		
+				<a href="${cpath }/eventBoard?order=${param.srchKywrd}"><button class="searchMoreBtn">더보기</button></a>		
 			</div>
 		</div>
 		
@@ -215,7 +215,7 @@
 				</ul>
 			</div>
 			<div style="width: 100%; display:flex; justify-content: center;">
-				<a href=""><button class="searchMoreBtn">더보기</button></a>		
+				<a href="${cpath }/reviewBoard?order=${param.srchKywrd}"><button class="searchMoreBtn">더보기</button></a>		
 			</div>
 		</div>
 		
@@ -235,7 +235,7 @@
 				</ul>
 			</div>
 			<div style="width: 100%; display:flex; justify-content: center;">
-				<a href=""><button class="searchMoreBtn">더보기</button></a>		
+				<a href="${cpath }/freeBoard?order=${param.srchKywrd}"><button class="searchMoreBtn">더보기</button></a>		
 			</div>
 		</div>
 		
