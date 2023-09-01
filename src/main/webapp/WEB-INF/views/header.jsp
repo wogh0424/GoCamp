@@ -433,7 +433,7 @@ a{
 	border: 1px solid black;
 }
 .product_items {
-	display: flex;
+	display: flex-start;
 	justify-content: center;
 	border-top: 1px solid grey;
 	
@@ -710,12 +710,136 @@ footer{
 		color: white;
 		font-weight: bold;
 }
+/*메뉴 드랍 다운 끝*/
+
 aside {
 	height: 100%;
 	border-left: 0.25px solid black;
 	float: right;
 }
-/*메뉴 드랍 다운 끝*/
+
+/*장바구니 페이지 시작*/
+.basket_status > ul{
+	display: flex;
+	justify-content: flex-end;
+}
+.basket_checklist > ul{
+	display: flex;
+	justify-content: space-between;
+}
+.basket_items {
+	width: 1000px;
+	height: 1000px;
+	margin: auto;
+}
+.basket_list {
+	border-top: 2px solid black;
+	border-bottom: 1px solid grey;
+}
+.basket_list > ul {
+	display: flex;
+	justify-content: center;
+}
+.basket_list > ul > li {
+	padding: 5px;
+	text-align: center;
+}
+.basket_pay > ul {
+	display: flex;
+	justify-content: center;
+}
+.basket_pay > ul > li {
+	padding: 5px;
+}
+#payBtn{
+	border: 2px solid green;
+	border-radius: 5px;
+	background-color: white;
+	color: black;
+}
+#payAllBtn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+	width: 250px;
+	height: 50px;
+	background-color: #3C5944;
+	box-shadow: 1px 1px 1px black;
+	font-weight: bold;
+}
+#payAllBtn > a {
+	text-decoration: none;
+	color: white;
+}
+/*장바구니 페이지 끝*/
+/*주무녈제 페이지 시작*/
+.orderpay_items {
+	width: 1000px;
+	height: 1000px;
+	margin: auto;
+}
+.orderpay_items > p {
+	text-align: center;
+}
+.orderpay_status {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid black;
+}
+.orderpay_status > ul {
+	display: flex;
+}
+.orderpay_list_title > ul {
+	display: flex;
+	justify-content: space-around;
+}
+.orderpay_list {
+	border-bottom: 1px dashed black;
+}
+.orderpay_list > ul {
+	display : flex;
+	justify-content: space-around;
+}
+#orderpay_title,
+#deliveryInfo_title {
+	font-weight: bold;
+	font-size: 15px;
+}
+.orderpay_delivery_address {
+	border-bottom: 1px solid black;
+}
+.orderpay_details {
+	border-bottom: 1px dashed black;
+}
+#orderpayBtn {
+	width: 250px;
+	height: 50px;
+	border-radius: 5px;
+	background-color: #3C5944;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+}
+#lastorderBtn {
+	width: 250px;
+	height: 50px;
+	border-radius: 5px;
+	background-color: #3C5944;
+	color: white;
+	font-weight: bold;
+}
+.lastorder_items {
+	width: 1000px;
+	height: 1000px;
+	margin: auto;
+	text-align: center;
+}
+.lastorder_status > ul{
+	display: flex;
+	justify-content: flex-end;
+}
+/*주무녈제 페이지 끝*/
 </style>
 <script>
 	const cpath = '${cpath}'
@@ -782,6 +906,7 @@ $(document).ready(function() {
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<%-- 			<form:form action="${pageContext.request.contextPath}/logout" method="POST"> --%>
+					<li><a href="${cpath }/product/basket">장바구니</a></li>
 					<li><a href="${cpath }/logout">로그아웃</a></li>
 					<%-- 			</form:form> --%>
 				</sec:authorize>
@@ -824,7 +949,7 @@ $(document).ready(function() {
 					<li><a href="#">쇼핑몰</a>
 						<ul>
 							<li><a href="${cpath }/product/list">MENU</a></li>
-							<li><a href="">SUB_MENU</a></li>
+							<li><a href="${cpath }/product/basket">SUB_MENU</a></li>
 							<li><a href="">SUB_MENU</a></li>
 						</ul>
 					</li>

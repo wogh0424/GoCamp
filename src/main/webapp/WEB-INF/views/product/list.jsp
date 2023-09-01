@@ -38,6 +38,14 @@
 				<li>리뷰 많은순</li>
 				<li><a href="${cpath }/product/list?sort=sDate_desc">등록일순</a></li>
 				<li><a href="${cpath }/product/list?sort=pStar_desc">별점순</a></li>
+				<li>
+					<select>
+						<option>20개씩</option>
+						<option>40개씩</option>
+						<option>60개씩</option>
+						<option>80개씩</option>
+					</select>
+				</li>
 				<li><input type="search" name="pSearch">
 					<button>검색</button></li>
 			</ul>
