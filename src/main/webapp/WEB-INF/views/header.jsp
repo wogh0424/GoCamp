@@ -698,6 +698,7 @@ footer{
 
 #menu > ul > li:hover > ul {
 		display:block;
+		z-index: 1;
 }
 
 #menu > ul > li > ul > li:hover {
