@@ -25,5 +25,4 @@ public interface CampDAO {
 
 	List<ItemDTO> searchByKeyWord(String srchKywrd);
 
-	
 }

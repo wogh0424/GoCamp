@@ -4,8 +4,6 @@ package com.itbank.controller;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,9 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 import com.itbank.model.GocampReviewDTO;
-import com.itbank.model.ItemDTO;
 import com.itbank.model.PagingDTO;
-import com.itbank.service.CampService;
 import com.itbank.service.GocampReviewService;
 
 @Controller

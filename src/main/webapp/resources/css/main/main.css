@@ -229,7 +229,34 @@ button#tag_resetBtn {
 	background-color: #00A6ED;
 	border: 1px solid #00A6ED;
 }
-
+/*자동완성*/
+#mainSearchBtn{
+	position:relative;
+}
+.autocomplete {
+	position: absolute;
+	width: 300px;
+	background-color: #efefef;
+	top: 52px;
+	left: 0;
+	border-radius: 5px;
+}
+#searchBar:focus {
+	outline: 2px solid lightgrey; 
+}
+.highlight {
+	color: #c22187;
+	font-weight: bold;
+}
+.line {
+	height: 25px;
+	padding-left: 10px;
+	font-size: 14px;
+	line-height: 25px;
+}
+.lineChoice {
+	background-color: #dddddd;
+}
 /* 지도영역  =============================================*/
 #navermap {
 	padding: 30px 20px;

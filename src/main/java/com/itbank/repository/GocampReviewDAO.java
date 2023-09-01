@@ -40,9 +40,5 @@ public interface GocampReviewDAO {
 	GocampReviewDTO selectOneReview(int idx);
 
 	List<GocampReviewDTO> searchByKeyword(String srchKywrd);
-
-	
-
-
 	
 }

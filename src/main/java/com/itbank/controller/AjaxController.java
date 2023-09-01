@@ -5,6 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itbank.model.ImageDTO;
+import com.itbank.model.ItemDTO;
+import com.itbank.service.CampService;
 import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
 
@@ -24,6 +27,7 @@ public class AjaxController {
 
 	@Autowired private LoginService loginService;
 	@Autowired private MypageService mypageService;
+	@Autowired private CampService campService;
 	
 	@GetMapping("/dupCheck/{userid}")
 	public int dupCheck(@PathVariable("userid") String userid) {
@@ -81,5 +85,12 @@ public class AjaxController {
             return false;
         }
     }
+	
+	@GetMapping("/autocompletion")
+	public List<ItemDTO> autocompletion() {
+		String any = "";
+		List<ItemDTO> list = campService.searchByKeyWord(any);
+		return list;
+	}
 	///////////////////////////////////   정민's ajaxController end/
 }

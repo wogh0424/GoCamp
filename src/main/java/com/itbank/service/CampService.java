@@ -53,5 +53,4 @@ public class CampService {
 	public List<ItemDTO> searchByKeyWord(String srchKywrd) {
 		return campDAO.searchByKeyWord(srchKywrd);
 	}
-
 }

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.GocampReviewDTO;
 import com.itbank.model.PagingDTO;
 import com.itbank.repository.GocampReviewDAO;
@@ -132,11 +131,6 @@ public class GocampReviewService {
 	public GocampReviewDTO selectOneReview(int idx) {
 		return dao.selectOneReview(idx);
 	}
-
-
-	
-	
-
 
 }
 

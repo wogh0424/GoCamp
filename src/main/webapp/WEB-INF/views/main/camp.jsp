@@ -347,7 +347,10 @@
 					</select>		
 					</div>
 					<div id="mainSearchBtn">
-						<input type="search" name="keyword" placeholder="검색어를 입력하세요" value="${param.keyword }"> 
+						<input list="searchBar" type="search" name="keyword" placeholder="검색어를 입력하세요" value="${param.keyword }" autocomplete="off">
+						<datalist id="searchBar">
+							
+						</datalist> 
 						<button id="mainSearch">검색</button>
 						<button id="openModal">상세조건 +</button>
 					</div>
@@ -385,12 +388,17 @@
 			<option value="facltNm" ${param.order == 'facltNm' ? 'selected' : ''}>이름순</option>
 		</select>
 		
-		<a href="${cpath }/main?order=${paging.order }&listTy="><button id="listTypeChangeBtn" value="${listTy }">${listTy == 'LIST' ? '지도로 보기' : '리스트로 보기'}</button></a>
+		<a href="${cpath }/main/camp?order=${paging.order }&listTy="><button id="listTypeChangeBtn" value="${listTy }">${listTy == 'LIST' ? '지도로 보기' : '리스트로 보기'}</button></a>
 	</div>
 
 	<div id="gocampMain" style="max-width: 100%; margin: 0px auto; ">
 	<c:if test="${listTy == 'LIST'}">
 		<div id="mainList">
+			<c:if test="${list.size() == 0 }"> 
+				<div class="noItem" style="width: 100%; height: 100px;text-align: center; font-weight: bold; font-size: 30px; line-height: 100px; margin: 20px; padding: 30px;">
+					🥲 검색된 캠핑장이 없습니다. 
+				</div>
+			</c:if>
 			<c:forEach items="${list }" var="item">
 				<div class="mainlistItem">
 					<div class="firstImage">
@@ -479,7 +487,7 @@
 	</c:if>
 	</div> <!-- end of gocampMain -->
 </div><!-- end of main -->
-    <a style="display:scroll;position:fixed;bottom:50px;right:50px;" rel="nofollow" href="#" title="Back to Top"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
+    <a style="display:scroll;position:fixed;bottom:50px;right:50px;text-decoration: none;" rel="nofollow" href="#" title="Back to Top"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
 <script>
 	// 정렬 변경용 함수
    document.getElementById('openModal').addEventListener("click", (event) => {
@@ -541,7 +549,6 @@
     });
 	
     const tagOptList = document.querySelectorAll('a.tag_s');
-    
     const tag_reset = document.getElementById('tag_resetBtn')
     const tag_search = document.getElementById('tag_searchBtn')
     
@@ -552,9 +559,15 @@
 	mapItemList.forEach(li => li.onclick = mapHandler)
 </script>
 
+<script>
+   // 검색어 자동완성 기능
+	const searchBar = document.getElementById('searchBar')
+
+	
+</script>
 
 <script>
-		 window.addEventListener('load', function () {
+		window.addEventListener('load', function () {
 			    buildCalendar();
 			});    // 웹 페이지가 로드되면 buildCalendar 실행
 

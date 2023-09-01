@@ -163,12 +163,11 @@
 	</update>
 	
 	<select id="searchByKeyWord" parameterType="string" resultType="item">
-		select * from gocamp where facltNm like '%${srchKywrd}%' limit 10
+		SELECT * FROM gocamp where facltNm like '%${srchKywrd}%' order by clickCnt limit 10
 	</select>
+
 	
-	
-	
-	 </mapper>
+</mapper>
 
 
 
