@@ -35,12 +35,9 @@ header {
 	font-size: 17px;
 	border-collapse: collapse;
 }
-
-.user_auth {
-	width: 700px;
-	height: 800px;
-	border: 2px solid blue;
-	margin: 50px auto;
+.user_auth > table {
+	text-align: center;
+	margin: auto;
 }
 
 .user_wrap {
@@ -76,29 +73,62 @@ header {
     </div>
     <section id="section">
         <article class="user_auth">
-            <c:forEach var="dto" items="${list }">
-            <div class="user_wrap">
-            <div class="user_content">
-                <div class="userid">${dto.userid }</div> 
-                 <form action="${cpath }/admin/modifyAuth" method="POST">
-                <select name="authority">
-                    <option value="ROLE_USER">일반유저</option>
-                    <option value="ROLE_BUSINESS">사업자 등록</option>
-                </select>   
-                <select name="enabled">
-                    <option value="1">로그인 허가</option>
-                    <option value="0">로그인 금지</option>
-                </select>
-                <input type="hidden" name="userid" value="${dto.userid }"/>
-				<button type="submit">권한변경</button>
-                </form>
-                <form action="${cpath }/admin/ControluserBoard/${userid}">
-                <input type="hidden" value="${dto.userid }" />
-               <button type="submit" id="userBoardList">유저 게시글 조회</button>
-               </form>
-                </div>
-            </div>
-                </c:forEach>  
+				<table border="1" cellpadding="10" cellspacing="0">
+					<tr>
+						<th colspan="13">회원관리</th>
+					</tr>
+					<tr>
+						<th>idx</th>
+						<th>userid</th>
+						<th>username</th>
+						<th>nickname</th>
+						<th>email</th>
+						<th>pnum</th>
+						<th>birth</th>
+						<th>enabled</th>
+						<th>authority</th>
+						<th>enabled</th>
+						<th>changeBtn</th>
+						<th>UserBoardSearch</th>
+					</tr>
+					<form action="${cpath }/admin/modifyAuth" method="POST">
+					<c:forEach var="dto" items="${list }">
+					<tr>
+						<td>${dto.idx }</td>
+						<td>${dto.userid }</td>
+						<td>${dto.username }</td>
+						<td>${dto.nickname }</td>
+						<td>${dto.email }</td>
+						<td>${dto.pnum }</td>
+						<td>${dto.birth }</td>
+						<td>${dto.enabled }</td>
+						<td>
+							<select name="authority">
+			                    <option value="ROLE_USER">일반유저</option>
+			                    <option value="ROLE_BUSINESS">사업자 등록</option>
+							</select>
+						</td>
+						<td>
+						    <select name="enabled">
+			                    <option value="1">로그인 허가</option>
+			                    <option value="0">로그인 금지</option>
+                			</select>
+						</td>
+						<td>
+							<input type="hidden" name="userid" value="${dto.userid }"/>
+							<button type="submit">권한변경</button>
+						</td>
+					
+					</form>
+						<td>
+							<form action="${cpath }/admin/ControluserBoard/${userid}">
+                			<input type="hidden" value="${dto.userid }" />
+               				<button type="submit" id="userBoardList">유저 게시글 조회</button>
+						</td>
+               		</form>
+					</tr>
+               		</c:forEach>
+				</table>
         </article>
 
         <article class="control_board">
