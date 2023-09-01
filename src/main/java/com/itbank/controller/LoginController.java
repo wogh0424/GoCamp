@@ -56,13 +56,6 @@ public class LoginController {
 			return "redirect:/";	
 	}
 	
-	@GetMapping("/admin/grantAuth")
-	public ModelAndView getUser() {
-		ModelAndView mav = new ModelAndView("/admin/grantAuth");
-		List<MemberDTO> list = loginService.getUser();
-		mav.addObject("list",list);
-		return mav;
-	}
 	
 	@PostMapping("/changePw")
 	public String changePw(MemberDTO dto,

@@ -24,6 +24,7 @@ a {
 	height: 500px;
 	border: 2px solid rgb(162, 154, 154);
 	border-radius: 70px;
+	padding: 20px;
 }
 
 .loginForm_content {
@@ -118,12 +119,7 @@ input {
 </head>
 
 <body>
-   <div id="nav_wrap">
-	<ul id="login_type">
-		<li id="nomal_login">일반 로그인</li>
-		<li id="businessLogin">사업자 로그인</li>
-	</ul>
-	</div>
+
 	<section id="section">
 		<article class="loginForm_frame">
 			<div class="loginForm_content">
@@ -160,57 +156,7 @@ input {
 			</p>
 		</div>
 		</article>
-
-		<article class="loginForm_frame">
-			<div class="loginForm_content">
-				<div id="input_account">
-					<h3>아이디와 비밀번호를 입력해주세요.</h3>
-				</div>
-				<c:url value="/login" var="loginUrl" />
-			</div>
-			<form:form name="f" action="${loginUrl}" method="POST">
-				<div class="form-wrap">
-					<c:if test="${param.error != null}">
-						<p>아이디와 비밀번호가 잘못되었습니다.</p>
-					</c:if>
-					<div id="input_wrap">
-						<p>
-							<input type="text" class="businessID" name="businessID"
-								placeholder="사업자 번호 입력" />
-						</p>
-						<p>
-							<input type="text" class="id" name="userid" placeholder="ID입력" />
-						</p>
-						<p>
-							<input type="password" class="password" name="userpw"
-								placeholder="비밀번호 입력" />
-						</p>
-					</div>
-				</div>
-				<input type="hidden" name="${_csrf.parameterName}"
-					value="${_csrf.token}" />
-				<input type="submit" class="login_btn_input" value="사업자 로그인" />
-			</form:form>
-		</article>
 	</section>
-
-	<script>
-	 const btnList = document.querySelectorAll('#login_type > li')
-     const articleList = document.querySelectorAll('#section > article')
-
-     
-     btnList.forEach((element, index) => {
-         articleList.forEach(e => e.classList.add('selected'))
-          articleList[0].classList.remove('selected');
-         element.onclick = function(event) {
-             btnList.forEach(e => e.classList.remove('selected'))
-             element.classList.add('selected')
-
-             articleList.forEach(e => e.classList.add('selected'))
-             articleList[index].classList.remove('selected')
-         }
-     })
-</script>
 
 </body>
 </html>

@@ -776,7 +776,7 @@ $(document).ready(function() {
 				</c:if>
 				<sec:authorize access="isAnonymous()">			
 					<li id="login_btn">
-						<a href="<c:url value="/login/loginForm" />">일반/사업자 로그인</a>
+						<a href="<c:url value="/login/loginForm" />">로그인</a>
 					</li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">

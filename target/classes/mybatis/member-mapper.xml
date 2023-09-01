@@ -31,7 +31,8 @@
 	</insert>
 	
 	<select id="getUser" resultType="member">
-		select mem.userid, au.authority from member mem join member_auth au on mem.userid = au.userid
+		select * from member mem join member_auth au on mem.userid = au.userid
+
 	</select>
 	
 	<select id="importMember" resultType="member" parameterType="string">
