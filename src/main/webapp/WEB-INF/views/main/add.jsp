@@ -4,80 +4,8 @@
 <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x9jrgpo39q&submodules=geocoder"></script>
 <script src="${cpath }/resources/js/addr.js"></script>
 <script src="${cpath }/resources/js/mainadd.js"></script>
+<link rel="stylesheet" href="${cpath }/resources/css/main/mainCRUD.css" type="text/css">
 
-<style>
-	#addcamp ul {
-		display: flex;
-		flex-flow: wrap;
-	}
-	#addcamp ul li {
-		margin: 2px 5px;;
-	}
-	#addcamp textarea {
-		width: 100%;
-		height: 60px;
-		resize: none;
-		overflow-y: scroll;
-	}
-	#addForm {
-		width: 100%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-	#addcamp {
-		border-top: 1px solid black;
-		border-bottom: 1px solid black;
-		display: flex;	
-		padding: 20px 5px;
-	}
-	#addcamp > div {
-		margin: 10px;
-		width: 30%;
-	}
-	#addcamp input[type="text"] {
-		width: 100%;
-		max-width: 300px;
-	}
-	
-	
-	#addcamp input[type="file"] {
-        display: none;
-    }
-
-    label.image {
-        display: inline-block;
-        background-color: #007bff;
-        color: #fff;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    .image-preview {
-            width: 100%;
-            height: auto;
-            border:2px dashed grey;
-            margin-top: 10px;
-            text-align: center;
-        }
-	.checked {
-		color: blue;
-	}        
-    .notChecked {
-    	color: red;
-    }
-    .blue {
-    	color: #2729b4;
-    }
-    .green {
-    	color: #1c9444;
-    }
-    .checkBtn {
-    	background-color: #FC6546;
-    	color: white;
-    }
-</style>
 <!-- 파일(multiple X) -->
 <!-- firstImageUrl -->
 
@@ -448,23 +376,28 @@
 </div>
 
 <script>
+		// 이미지 미리보기
         const imageInput = document.getElementById('firstimage');
         const imagePreview = document.getElementById('imagePreview');
-
+		
         imageInput.onchange = imageViewHandler
         
+        // 콘텐츠 아이디 중복 방지
         const cid = document.getElementById('cid')
         const cidCheck = document.getElementById('cidDupCheck')
         const cidCheckResult = document.getElementById('cidCheckResult')
         cidCheck.onclick = (event) => cidCheckHandler(event)
         
+        // 도이름과 시군구 
         document.querySelector('select[name="doNm"]').onchange = sigunguHandler
         
          const inputAddr = document.querySelector('input[name="addr1"]')
          const findCoordinateBtn = document.getElementById('findCoordinates')
          
+         // x, y좌표 찾기
          findCoordinateBtn.onclick = findCoordinateHandler
-
+		
+         // addForm의 컨트롤 제어
          document.getElementById("addForm").addEventListener("submit", function(event) {
         		event.preventDefault();
         	    if (validateForm()) {

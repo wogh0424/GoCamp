@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 a {
 	text-decoration: none;
 	color: black;
@@ -24,9 +25,11 @@ a {
 	font-weight: bold;
 	margin: auto 0;
 }
+
 #dtl_search li {
 	margin: 5px;
 }
+
 .category_box {
 	width: 80%;
 	min-height: 30px;
@@ -111,6 +114,7 @@ a {
 	background-position: center;
 	background-size: cover;
 }
+
 #searchHeader {
 	margin: 0 auto;
 	max-width: 1200px;
@@ -119,6 +123,7 @@ a {
 	display: flex;
 	justify-content: space-between;
 }
+
 #calender {
 	width: 320px;
 	height: 350px;
@@ -134,6 +139,7 @@ a {
 	box-sizing: border-box;
 	position: relative;
 }
+
 #search select {
 	flex: 1;
 }
@@ -160,12 +166,12 @@ a {
 	cursor: pointer;
 	border-radius: 2px;
 }
+
 button#mainSearch {
 	margin-left: 98px;
 	background-color: white;
 	color: black;
 }
-
 
 ul.searchNav {
 	margin: 0;
@@ -173,13 +179,13 @@ ul.searchNav {
 	display: flex;
 }
 
-ul.searchNav li{
+ul.searchNav li {
 	flex: 1;
 	cursor: pointer;
 	height: 50px;
 	line-height: 50px;
 	font-size: 20px;
-	text-align: center; 
+	text-align: center;
 	background-color: #ED5565;
 	color: white;
 }
@@ -201,42 +207,50 @@ div#search>div.selected {
 #tag_search {
 	width: 100%;
 }
+
 .tag_search_choice {
 	display: flex;
 	flex-flow: wrap;
 }
+
 .tag_search_choice li {
 	height: 34px;
 	margin: 3px;
 	font-size: 14px;
 }
+
 .tag_search_choice a {
 	border: 1px solid grey;
 	border-radius: 8px;
 	padding: 5px;
 	box-sizing: border-box;
 }
+
 .tag_search_choice a.ov {
 	background-color: #00A6ED;
 	border: 1px solid #00A6ED;
 	color: white;
 }
+
 .tagBtns {
-	position:absolute;
+	position: absolute;
 	bottom: 20px;
 	right: 40px;
 }
-.tagBtns > button{
+
+.tagBtns>button {
 	margin-left: 20px;
 }
+
 button#tag_resetBtn {
 	background-color: #00A6ED;
 	border: 1px solid #00A6ED;
 }
 /*자동완성*/
-#mainSearchBtn{
-	position:relative;
+#mainSearchBtn {
+	position: relative;
 }
+
 .autocomplete {
 	position: absolute;
 	width: 300px;
@@ -245,19 +259,23 @@ button#tag_resetBtn {
 	left: 0;
 	border-radius: 5px;
 }
+
 #searchBar:focus {
-	outline: 2px solid lightgrey; 
+	outline: 2px solid lightgrey;
 }
+
 .highlight {
 	color: #c22187;
 	font-weight: bold;
 }
+
 .line {
 	height: 25px;
 	padding-left: 10px;
 	font-size: 14px;
 	line-height: 25px;
 }
+
 .lineChoice {
 	background-color: #dddddd;
 }
@@ -550,6 +568,7 @@ button#tag_resetBtn {
 	font-size: 17px;
 	font-weight: bold;
 }
+
 #viewName {
 	font-weight: bolder;
 	font-size: 60px;
@@ -560,6 +579,7 @@ button#tag_resetBtn {
 	font-size: 25px;
 	width: 100%;
 }
+
 .viewTagsTT {
 	width: 80px;
 	height: 50px;
@@ -570,18 +590,18 @@ button#tag_resetBtn {
 	padding: 10px;
 	margin-right: 20px;
 }
+
 .viewTagsitem {
 	display: flex;
 	flex-flow: wrap;
 	max-width: 70%;
 }
+
 .tagItems {
 	margin-right: 10px;
 }
 
 /*intro1 ======================*/
-
-
 #view {
 	max-width: 1200px;
 	margin: 20px auto;
@@ -627,12 +647,15 @@ button#tag_resetBtn {
 #viewDescriptionTable tr:first-child td:first-child {
 	border-top: 2px solid red;
 }
+
 #viewDescriptionTable tr:first-child td:nth-child(2) {
 	border-top: 2px solid black;
 }
+
 #viewDescriptionTable tr {
 	border-bottom: 1px solid lightgrey;
 }
+
 #viewDescriptionTable tr td {
 	padding: 15px 10px;
 }
@@ -793,9 +816,11 @@ div#viewIntro>div.selected {
 	width: 100%;
 	font-size: 17px;
 }
+
 .viewImageTT {
 	font-size: 25px;
 }
+
 #viewImage {
 	width: 100%;
 	min-height: 250px;
@@ -807,38 +832,42 @@ div#viewIntro>div.selected {
 	display: flex;
 	flex-flow: wrap;
 }
+
 .campSurroundingItems {
 	border: none;
 	box-sizing: border-box;
 	width: 233px;
 	height: 170px;
 	margin: 2px;
-	position:relative;
+	position: relative;
 	padding: 0;
 }
+
 .campImageOverlay {
 	border: none;
 	box-sizing: border-box;
 	background-color: rgba(0, 0, 0, 0.4);
-    width: 100%;
-    height: calc(100% - 4px);
-    left: 0px;
-    top: 0px;
-    position: absolute;
-    margin: 0;
-    opacity: 0;
-    z-index:2;
-    text-align: center;
-    line-height: 8.5;
-    font-size: 20px;
-    color: #bbbbbb;
-    font-weight: bold;
+	width: 100%;
+	height: calc(100% - 4px);
+	left: 0px;
+	top: 0px;
+	position: absolute;
+	margin: 0;
+	opacity: 0;
+	z-index: 2;
+	text-align: center;
+	line-height: 8.5;
+	font-size: 20px;
+	color: #bbbbbb;
+	font-weight: bold;
 }
+
 .campImageOverlay:hover {
 	transition-duration: 0.3s;
 	cursor: pointer;
 	opacity: 1;
 }
+
 .campSurroundingImages {
 	z-index: 2;
 	border: none;
@@ -852,12 +881,13 @@ div#viewIntro>div.selected {
 	width: 100%;
 	height: 100%;
 	position: fixed;
-	top:0;
+	top: 0;
 	left: 0;
 	display: none;
 	transition-duration: 0.5s;
 	z-index: 3;
 }
+
 #imageModalOverlay {
 	position: absolute;
 	top: 0;
@@ -867,18 +897,19 @@ div#viewIntro>div.selected {
 	background-color: black;
 	color: white;
 }
+
 #imageModalTT {
 	position: absolute;
 	top: 0;
 	left: 0;
-	display:flex;
+	display: flex;
 	justify-content: space-between;
 	width: 100%;
 	height: 50px;
 	text-align: center;
 }
 
-#imageModalTT div{
+#imageModalTT div {
 	margin: 0 30px;
 	padding: 20px;
 	pointer-events: none;
@@ -889,9 +920,11 @@ div#imageViewClose {
 	cursor: pointer;
 	pointer-events: auto;
 }
+
 div#imageViewClose:hover {
-	color:#999999;
+	color: #999999;
 }
+
 #imageItem {
 	width: 900px;
 	height: auto;
@@ -901,22 +934,26 @@ div#imageViewClose:hover {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
+
 #imagePrevBtn, #imageNextBtn {
 	font-size: 40px;
 	width: 50px;
 	height: 50px;
 	cursor: pointer;
 }
+
 #imagePrevBtn:hover, #imageNextBtn:hover {
 	color: #999999;
 }
+
 #imagePrevBtn {
-	position:absolute;
+	position: absolute;
 	top: 50%;
 	left: 30px;
 }
+
 #imageNextBtn {
-	position:absolute;
+	position: absolute;
 	top: 50%;
 	right: 30px;
 }
@@ -937,6 +974,7 @@ div#imageViewClose:hover {
 .viewReviewTT {
 	font-size: 25px;
 }
+
 .intro4 {
 	width: 100%;
 	margin: 20px 0;
@@ -973,91 +1011,182 @@ div#imageViewClose:hover {
 	text-align: center;
 }
 
+/* 통합검색 ============================= */
+#totalSearchList {
+	max-width: 1200px;
+	margin: 20px auto;
+	border-top: 2px solid black;
+	padding: 30px 0;
+}
+
+#searchAll {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	font-size: 20px;
+}
+
+#searchAll>div {
+	margin: 10px;
+	height: 50px;
+	line-height: 50px;
+}
+
+.searchListBody {
+	width: 100%;
+	margin: 30px 0;
+	padding: 30px 0;
+	border-top: 1px solid lightgrey;
+}
+
+.searchListTT {
+	font-size: 18px;
+}
+
+.searchListItems, .searchListItem {
+	font-size: 15px;
+	width: 100%;
+	min-height: 150px;
+	background-color: #F6F8F9;
+	margin: 30px 0 20px;;
+	padding: 20px 4%;
+	box-sizing: border-box;
+}
+
+.searchListItem ul {
+	list-style: square;
+	padding-left: 10px;
+}
+
+.searchMoreBtn {
+	width: 320px;
+	height: 50px;
+	box-sizing: border-box;
+	font-size: 15px;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	padding: 10px 20px;
+	text-align: center;
+	background: #616670;
+	color: #fff;
+}
+
+.blueT {
+	color: #00A6ED;
+}
+
+.highlight {
+	color: #c22187;
+	font-weight: bold;
+}
+
+.campSearchItem {
+	width: 100%;
+	display: flex;
+	padding: 20px 0;
+	color: grey;
+	border-top: 1px solid lightgrey;
+}
+
+.campSearchItem a {
+	color: grey;
+}
+
+.searchListBody a:hover {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
 /* 달력  */
-        @import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+@import
+	url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
 
-        .Calender > div {
-            background-color : white;
-            height: auto;
-            width: 350px;
-            margin: 0px;
-            padding: 15px;
-            margin: 0 auto;
-            border-radius:5px;
-            box-shadow:0px 40px 30px -20px rgba(0,0,0,0.3);
-            z-index: 2;
-        }
+.Calender>div {
+	background-color: white;
+	height: auto;
+	width: 350px;
+	margin: 0px;
+	padding: 15px;
+	margin: 0 auto;
+	border-radius: 5px;
+	box-shadow: 0px 40px 30px -20px rgba(0, 0, 0, 0.3);
+	z-index: 2;
+}
 
-        .Calender td {
-            width: 10px;
-            height: 10px;
-        }
+.Calender td {
+	width: 10px;
+	height: 10px;
+}
 
-        .Calendar {
-            text-align: center;
-            background-color: #e8ecee;  
-            width:350px;   
-        }
-		
-		.Calendar>thead>tr:first-child {
-			background-color: #4476D5;
-			border: none;
-			color: white;
-		}
-		.red {
-			color: red;
-		}
-		.blue {
-			color: blue;
-		}
-        .Calendar>thead>tr:first-child>td {
-            font-family: 'Questrial', sans-serif;
-            font-size: 1em;
-            font-weight: bold;
-        }
+.Calendar {
+	text-align: center;
+	background-color: #e8ecee;
+	width: 350px;
+}
 
-        .Calendar>thead>tr:last-child>td {
-            font-family: 'Questrial', sans-serif;
-            font-weight: 500;     
-        }
+.Calendar>thead>tr:first-child {
+	background-color: #4476D5;
+	border: none;
+	color: white;
+}
 
-        .Calendar>tbody>tr>td>p {
-            font-family: 'Montserrat', sans-serif;
-            height: 30px;
-            width: 30px;
-            border-radius: 15px;
-            transition-duration: .2s;
-            line-height: 33px;
-            margin-left: 11px;
-            display: block;
-            text-align: center;
-        }        
+.red {
+	color: red;
+}
 
-        .pastDay {
-            color: lightgray;
-            font-size: 15px;
-        }
+.blue {
+	color: blue;
+}
 
-        .today {
-            background-color: #F5D042;            
-            color: #fff;
-            font-weight: 600;
-            cursor: pointer;
-        }
+.Calendar>thead>tr:first-child>td {
+	font-family: 'Questrial', sans-serif;
+	font-size: 1em;
+	font-weight: bold;
+}
 
-        .futureDay {
-            background-color: #FFFFFF;
-            cursor: pointer;
-            font-size: 15px;
-        }
-        .futureDay:hover{
-            background:#eee;
-        }
+.Calendar>thead>tr:last-child>td {
+	font-family: 'Questrial', sans-serif;
+	font-weight: 500;
+}
 
-        .futureDay.choiceDay,
-        .today.choiceDay {
-            background: #0A174E;
-            color: #fff;
-            font-weight: 600;
-            cursor: pointer;
-        }
+.Calendar>tbody>tr>td>p {
+	font-family: 'Montserrat', sans-serif;
+	height: 30px;
+	width: 30px;
+	border-radius: 15px;
+	transition-duration: .2s;
+	line-height: 33px;
+	margin-left: 11px;
+	display: block;
+	text-align: center;
+}
+
+.pastDay {
+	color: lightgray;
+	font-size: 15px;
+}
+
+.today {
+	background-color: #F5D042;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.futureDay {
+	background-color: #FFFFFF;
+	cursor: pointer;
+	font-size: 15px;
+}
+
+.futureDay:hover {
+	background: #eee;
+}
+
+.futureDay.choiceDay, .today.choiceDay {
+	background: #0A174E;
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+}
