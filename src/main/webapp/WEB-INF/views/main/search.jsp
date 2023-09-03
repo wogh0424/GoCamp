@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
+
+<script src="${cpath }/resources/js/mainsearch.js"></script>
+
 <style>
 	#totalSearchList {
 		max-width: 1200px;
@@ -261,16 +264,6 @@
 <script>
 	window.onload = keywordMarkHandler
 	const key = '${keyword}'
-	
-	function keywordMarkHandler() {
-		const links = document.querySelectorAll('a.searchKey')
-		links.forEach(a => {
-			if (a.innerText.includes(key)) {
-				let text = a.innerText.replace(key, '<span class="highlight">' + key + '</span>')
-				a.innerHTML = text				
-			}
-		})
-	}
 </script>
 
 </body>

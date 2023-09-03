@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.itbank.model.CampDTO;
 import com.itbank.model.EventBoardDTO;
 import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.GocampReviewDTO;
@@ -100,6 +101,7 @@ public class MainController {
 	
 	// 리뷰 끝 
 	
+	// 통합검색
 	@GetMapping("/search")
 	public ModelAndView search(String srchKywrd) {
 		ModelAndView mav = new ModelAndView("/main/search");
@@ -127,5 +129,28 @@ public class MainController {
 		mav.addObject("freeCnt", freeCnt);
 		return mav;
 	}
+	@GetMapping("/add") 
+	public ModelAndView addcamp() {
+		ModelAndView mav = new ModelAndView("/main/add");
+		List<TagDTO> tags = campService.selectTags();
+		mav.addObject("tags", tags);
+		return mav;
+	}
 	
-}
+	// 캠핑장 추가	
+	@PostMapping("/add")
+	public String addcamp(CampDTO dto) {
+		int row = campService.addcamp(dto);
+		System.out.println("추가 : " + row);
+		return "redirect:/main/camp";
+	}
+	
+	@GetMapping("/modify/{contentId}")
+	public ModelAndView modifycamp(@PathVariable("contentId") String contentId) {
+		ModelAndView mav = new ModelAndView("/main/modify/{contentId}");
+		ItemDTO item = campService.selectOne(contentId);
+		mav.addObject("item", item);
+		return mav;
+	}
+	
+} 
