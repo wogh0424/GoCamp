@@ -93,4 +93,11 @@ public class AjaxController {
 		return list;
 	}
 	///////////////////////////////////   정민's ajaxController end/
+	
+	
+	
+	// 연지's ajaxController
+	
+//	@PostMapping("selectOne")
+//	public String select
 }

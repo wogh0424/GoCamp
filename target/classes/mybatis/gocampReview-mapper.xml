@@ -62,7 +62,7 @@
 	<select id="getnick" parameterType="string" resultType="string">
 			select nickname from member where userid = #{userid}
 	</select>
-	
+
 	
 <!-- 	 review 게시판 -->
 	

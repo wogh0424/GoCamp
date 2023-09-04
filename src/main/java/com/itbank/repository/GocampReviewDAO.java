@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.itbank.model.GocampReviewDTO;
+import com.itbank.model.LikesDTO;
 import com.itbank.model.PagingDTO;
 
 @Repository
@@ -42,5 +43,8 @@ public interface GocampReviewDAO {
 	List<GocampReviewDTO> searchByKeyword(String srchKywrd);
 
 	int countByKeyword(String srchKywrd);
+
+
+	
 	
 }

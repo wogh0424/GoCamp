@@ -18,6 +18,7 @@ public class NoticeBoardDTO {
 	private String content;
 	private Date postdate;
 	private int view_cnt;
+	private int pin;
 	
 	private String filePath;
 	private List<MultipartFile> upload;
@@ -64,6 +65,13 @@ public class NoticeBoardDTO {
 	public void setView_cnt(int view_cnt) {
 		this.view_cnt = view_cnt;
 	}
+	public int getPin() {
+		return pin;
+	}
+	public void setPin(int pin) {
+		this.pin = pin;
+	}
+	
 	
 	
 

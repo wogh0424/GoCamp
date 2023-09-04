@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.model.ItemDTO;
+import com.itbank.model.LikesDTO;
 import com.itbank.model.PageAndSearchDTO;
 import com.itbank.model.SearchDTO;
 import com.itbank.model.TagDTO;
@@ -61,4 +62,7 @@ public class CampService {
 	public int countByKeword(String srchKywrd) {
 		return campDAO.countByKeyword(srchKywrd);
 	}
+
+	
+	
 }

@@ -3,6 +3,7 @@ package com.itbank.repository;
 import java.util.List;
 
 import com.itbank.model.ItemDTO;
+import com.itbank.model.LikesDTO;
 import com.itbank.model.PageAndSearchDTO;
 import com.itbank.model.SearchDTO;
 import com.itbank.model.TagDTO;
@@ -26,5 +27,9 @@ public interface CampDAO {
 	List<ItemDTO> searchByKeyWord(String srchKywrd);
 
 	int countByKeyword(String srchKywrd);
+
+	void insertLike(LikesDTO like);
+
+	void deleteLike(int member, int review);
 
 }
