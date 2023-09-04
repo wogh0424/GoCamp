@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.itbank.model.CampDTO;
 import com.itbank.model.EventBoardDTO;
 import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.GocampReviewDTO;
@@ -130,6 +131,7 @@ public class MainController {
 
 	// 리뷰 끝 
 	
+
 	// 찜 추가
 	@PostMapping("/like")
 	public ModelAndView addLike(Principal principal, @RequestParam("gocamp") String gocamp) {
@@ -178,6 +180,9 @@ public class MainController {
 	
 
 	
+
+	// 통합검색
+
 	@GetMapping("/search")
 	public ModelAndView search(String srchKywrd) {
 		ModelAndView mav = new ModelAndView("/main/search");
@@ -205,7 +210,15 @@ public class MainController {
 		mav.addObject("freeCnt", freeCnt);
 		return mav;
 	}
+	@GetMapping("/addcamp") 
+	public ModelAndView addcamp() {
+		ModelAndView mav = new ModelAndView("/main/addcamp");
+		List<TagDTO> tags = campService.selectTags();
+		mav.addObject("tags", tags);
+		return mav;
+	}
 	
+
 
 	
 	
@@ -213,4 +226,37 @@ public class MainController {
 	
 	
 	
-}
+
+
+	// 캠핑장 추가	
+	@PostMapping("/addcamp")
+	public String addcamp(CampDTO dto) {
+		int row = campService.addcamp(dto);
+		System.out.println("추가 : " + row);
+		return "redirect:/main/camp";
+	}
+	
+	@GetMapping("/modifycamp/{contentId}")
+	public ModelAndView modifycamp(@PathVariable("contentId") String contentId) {
+		ModelAndView mav = new ModelAndView("/main/modifycamp");
+		ItemDTO item = campService.selectOne(contentId);
+		List<TagDTO> tags = campService.selectTags();
+		mav.addObject("tags", tags);
+		mav.addObject("item", item);
+		return mav;
+	}
+	
+	@PostMapping("/modifycamp/{contentId}")
+	public String modifycamp(CampDTO dto) {
+		int row = campService.updatecamp(dto);
+		System.out.println("수정 : " + row);
+		return "redirect:/main/view/{contentId}";
+	}
+	
+	@GetMapping("/deletecamp/{contentId}")
+	public String deletecamp(@PathVariable("contentId") String contentId) {
+		int row = campService.deletecamp(contentId);
+		System.out.println(row);
+		return "redirect:/main/camp";
+	}
+} 

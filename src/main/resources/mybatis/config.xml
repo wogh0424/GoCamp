@@ -23,7 +23,11 @@
 		<typeAlias type="com.itbank.model.NoticeBoardDTO" alias="noticeboard"/>
 		<typeAlias type="com.itbank.model.EventBoardDTO" alias="eventboard"/>
 		<typeAlias type="com.itbank.model.GocampReviewDTO" alias="gocampreview"/>
+
 		<typeAlias type="com.itbank.model.LikesDTO" alias="like"/>
+
+		<typeAlias type="com.itbank.model.AdminDTO" alias="admin"/>
+
 		
 		
 		<!-- 정민 -->
@@ -32,6 +36,8 @@
 		<typeAlias type="com.itbank.model.SearchDTO" alias="search"/>
 		<typeAlias type="com.itbank.model.PageAndSearchDTO" alias="searchPage"/>
 		<typeAlias type="com.itbank.model.TagDTO" alias="tag"/>
+		<typeAlias type="com.itbank.model.CampDTO" alias="camp"/>
+		<typeAlias type="com.itbank.model.ImageDTO" alias="image"/>
 	</typeAliases>
 	
 </configuration>

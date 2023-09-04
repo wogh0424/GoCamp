@@ -86,4 +86,18 @@ public class ProductController {
 		ModelAndView mav = new ModelAndView("product/basket");
 		return mav;
 	}
+	
+	// 주문결제
+	@GetMapping("/orderpay")
+	public ModelAndView orderpay() {
+		ModelAndView mav = new ModelAndView("product/orderpay");
+		return mav;
+	}
+	
+	// 주문완료
+	@GetMapping("/lastorder")
+	public ModelAndView lastoder() {
+		ModelAndView mav = new ModelAndView("product/lastorder");
+		return mav;
+	}
 }

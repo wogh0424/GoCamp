@@ -1,103 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
-<style>
-	#totalSearchList {
-		max-width: 1200px;
-		margin: 20px auto;
-		border-top: 2px solid black;
-		padding: 30px 0;
-	}
-	#searchAll {
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		font-size: 20px;
-	}
-	#searchAll > div {
-		margin: 10px;
-		height: 50px; 
-		line-height: 50px;
-	}
-	
-	.searchListBody {
-		width: 100%;
-		margin: 30px 0;
-		padding: 30px 0;
-		border-top: 1px solid lightgrey;
-	}
-	
-	.searchListTT {
-		font-size: 18px;
-	}
-	
-	.searchListItems, .searchListItem {
-		font-size: 15px;
-		width: 100%;
-		min-height : 150px;
-		background-color: #F6F8F9;
-		margin: 30px 0 20px;;
-		padding: 20px 4%;
-		box-sizing: border-box;
-	}
-	
-	.searchListItem ul {
-		list-style: square;
-		padding-left: 10px;
-	}
-	
-	.searchMoreBtn {
-		width: 320px;
-		height: 50px;
-	    box-sizing: border-box;
-	    font-size: 15px;
-		border-radius: 5px;
-		border: none;
-		cursor: pointer;
-	    padding: 10px 20px;
-	    text-align: center;
-	    background: #616670;
-	    color: #fff;
-	}
-	.blueT {
-		color: #00A6ED;
-	}
-	.highlight {
-		color: #c22187;
-		font-weight: bold;
-	}
-	.campSearchItem {
-		width: 100%;
-		display: flex;
-		padding: 20px 0;
-		color: grey;
-		border-top: 1px solid lightgrey;
-	}
-	.campSearchItem a {
-		color: grey;
-	}
-	.searchListBody a:hover {
-		cursor: pointer;
-		text-decoration: underline;
-	}
-	.sbrsCl {
-		width: 790px;
-		margin-top: 20px;
-		display: flex;
-		padding: 15px;
-		flex-flow: wrap;
-		justify-content: left;
-		text-align: center;
-		background-color: white;
-		border-radius: 10px;
-		border: 1px solid lightgrey;
-	}
-	
-	.sbrsItem {
-		font-size: 12px;
-		margin: 13px;
-	}
-</style>
+<link rel="stylesheet" href="${cpath }/resources/css/main/main.css" type="text/css">
+<script src="${cpath }/resources/js/mainsearch.js"></script>
 
 <div id="totalSearchList">
 
@@ -175,7 +80,7 @@
 				</ul>
 			</div>
 			<div style="width: 100%; display:flex; justify-content: center;">
-				<a href=""><button class="searchMoreBtn">더보기</button></a>		
+				<a href="${cpath }/noticeBoard?order=${param.srchKywrd}"><button class="searchMoreBtn">더보기</button></a>		
 			</div>
 		</div>
 		
@@ -195,7 +100,7 @@
 				</ul>
 			</div>
 			<div style="width: 100%; display:flex; justify-content: center;">
-				<a href=""><button class="searchMoreBtn">더보기</button></a>		
+				<a href="${cpath }/eventBoard?order=${param.srchKywrd}"><button class="searchMoreBtn">더보기</button></a>		
 			</div>
 		</div>
 		
@@ -215,7 +120,7 @@
 				</ul>
 			</div>
 			<div style="width: 100%; display:flex; justify-content: center;">
-				<a href=""><button class="searchMoreBtn">더보기</button></a>		
+				<a href="${cpath }/reviewBoard?order=${param.srchKywrd}"><button class="searchMoreBtn">더보기</button></a>		
 			</div>
 		</div>
 		
@@ -235,7 +140,7 @@
 				</ul>
 			</div>
 			<div style="width: 100%; display:flex; justify-content: center;">
-				<a href=""><button class="searchMoreBtn">더보기</button></a>		
+				<a href="${cpath }/freeBoard?order=${param.srchKywrd}"><button class="searchMoreBtn">더보기</button></a>		
 			</div>
 		</div>
 		
@@ -261,16 +166,6 @@
 <script>
 	window.onload = keywordMarkHandler
 	const key = '${keyword}'
-	
-	function keywordMarkHandler() {
-		const links = document.querySelectorAll('a.searchKey')
-		links.forEach(a => {
-			if (a.innerText.includes(key)) {
-				let text = a.innerText.replace(key, '<span class="highlight">' + key + '</span>')
-				a.innerHTML = text				
-			}
-		})
-	}
 </script>
 
 </body>

@@ -402,12 +402,23 @@
 			<c:forEach items="${list }" var="item">
 				<div class="mainlistItem">
 					<div class="firstImage">
-						<a href="${cpath }/main/view/${item.contentId}"><img	src="${item.firstImageUrl }" width="300px" height="200px" style="margin-right: 30px;"></a>
+						<a href="${cpath }/main/view/${item.contentId}">
+						<c:if test="${fn:contains(item.firstImageUrl, 'gocamping') }">
+							<img src="${item.firstImageUrl }" width="300px" height="200px" style="margin-right: 30px;">
+						</c:if>
+						<c:if test="${!fn:contains(item.firstImageUrl, 'gocamping') }">
+							<img src="${cpath }/resources/upload/camp/${item.firstImageUrl }" width="300px" height="200px" style="margin-right: 30px;">
+						</c:if>
+						</a>
 					</div>
 					<div class="description">
 						<div class="cnts">
 							<div class="clickCnt">조회수 ${item.clickCnt }</div>
 							<div class="recmCnt">추천수 ${item.recmCnt }</div>
+							<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
+								<a href="${cpath }/main/modifycamp/${item.contentId}"><button class="modifyCampBtn">정보 수정</button></a>
+								<a href="${cpath }/main/deletecamp/${item.contentId}" onclick="return confirm('정말로 삭제하시겠습니까? 삭제 후 복구는 불가능합니다.')"><button class="delectCampBtn">캠핑장 삭제</button></a>
+							</c:if>
 						</div>
 						<div class="where">
 							<div class="facltNm">
@@ -489,25 +500,31 @@
 </div><!-- end of main -->
     <a style="display:scroll;position:fixed;bottom:50px;right:50px;text-decoration: none;" rel="nofollow" href="#" title="Back to Top"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
 <script>
-	// 정렬 변경용 함수
+	// 상세검색 모달
    document.getElementById('openModal').addEventListener("click", (event) => {
 	  event.preventDefault()
       document.getElementById('modal').style.display = 'flex'
       document.body.style.overflow = 'none'
    })
+   // 상세검색 오버레이
    document.querySelector('div[class="overlay"]').addEventListener("click", () => {
       document.getElementById('modal').style.display = 'none'
       document.body.style.overflow = 'auto';	
    })
+   // 정렬
    document.getElementById('orderSelect').onchange = orderByHandler
+   // 시도에 따라 군구부여
    document.querySelector('select[name="sido"]').onchange = sigunguHandler
+   // 파라미터를 유지하기 위해 만든 함수
    window.onload = sigunguHandler
    window.addEventListener("load", parameterHandler)
+   // 페이지 변경시 page 버튼들의 파라미터를 설정해준다.
    window.addEventListener("load", () => {
       document.querySelectorAll('button[class="page"]').forEach(btn => {
             btn.parentNode.href += pageUrlParameterWriter(btn)
          })
       })
+   // 리스트 보여주는 방식 변경
    document.getElementById('listTypeChangeBtn').onclick = listTypeHandler
 </script>
 
@@ -521,6 +538,7 @@
 	
 	var map
 	
+	// listTy가 map일 때 map을 로드
 	if (listTy == 'MAP') {
 		map =  new naver.maps.Map('map', {
 		    zoom: 11,
@@ -532,10 +550,13 @@
 		});
 		window.onload = markerHandler
 	}
+	// 지도의 아이템들을 관리
+	mapItemList.forEach(li => li.onclick = mapHandler)
 	
 	const searchNavList = document.querySelectorAll('ul.searchNav > li');
     const searchDivList =  document.querySelectorAll('div#search > div');
     
+    // 선택된 창에만 selected를 부여
     searchNavList.forEach((element, index) => {
         element.onclick = function() {
             // 모든 탭의 selected 클래스를 제거한다
@@ -552,11 +573,11 @@
     const tag_reset = document.getElementById('tag_resetBtn')
     const tag_search = document.getElementById('tag_searchBtn')
     
+    // 태그들의 설정을 관리
     tag_reset.onclick = tagResetHandler
     tag_search.onclick = tagSearchHandler
     
     tagOptList.forEach(a => a.onclick = tagHandler)
-	mapItemList.forEach(li => li.onclick = mapHandler)
 </script>
 
 <script>

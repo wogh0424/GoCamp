@@ -46,6 +46,8 @@ public interface FreeBoardDAO {
 
 	int countByKeyword(String srchKywrd);
 
+	List<FreeBoardDTO> userboard(String nickname);
+
 //	List<MultipartFile> selectUpload(int idx);
 
 }

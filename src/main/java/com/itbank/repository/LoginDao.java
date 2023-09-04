@@ -40,4 +40,6 @@ public interface LoginDao{
 
 	public int getMemberIdx(String userid);
 
+	public List<MemberDTO> checkEnabled(String userid);
+
 }

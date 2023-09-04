@@ -1,6 +1,7 @@
 package com.itbank.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.model.AdminDTO;
 import com.itbank.model.MemberDTO;
+import com.itbank.service.AdminService;
+import com.itbank.service.FreeBoardService;
 import com.itbank.service.MypageService;
 
 @Controller
@@ -18,10 +22,16 @@ public class MypageController {
 	@Autowired
 	private MypageService mypageService;
 
+	@Autowired FreeBoardService freeBoardService;
+	
+	@Autowired AdminService adminService;
+	
 	@GetMapping("/main")
 	public ModelAndView importMember(Principal principal) {
 		ModelAndView mav = new ModelAndView("/mypage/main");
 		String userid = principal.getName();
+		String nick = freeBoardService.getnick(userid);
+		List<AdminDTO> deletedBoard = adminService.deletedBoard(nick);
 		MemberDTO dto = mypageService.importMember(userid);
 		int startidx = 9;
 		int endidx = 12;
@@ -42,6 +52,7 @@ public class MypageController {
 			dto.setPnum(modifypnum);
 		}
 		mav.addObject("dto", dto);
+		mav.addObject("deleted",deletedBoard);
 		return mav;
 	}
 

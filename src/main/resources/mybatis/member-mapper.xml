@@ -32,7 +32,6 @@
 	
 	<select id="getUser" resultType="member">
 		select * from member mem join member_auth au on mem.userid = au.userid
-
 	</select>
 	
 	<select id="importMember" resultType="member" parameterType="string">
@@ -79,6 +78,11 @@
 	<select id="getUserpw" resultType="string" parameterType="string">
 		select userpw from member where userid = #{userid}
 	</select>
+
+	<select id="checkEnabled" parameterType="string" resultType="member">
+		select enabled from member where userid = #{userid}
+	</select>
+		
 </mapper>
 
 

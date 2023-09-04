@@ -38,7 +38,10 @@
 				<value>classpath:mybatis/noticeBoard-mapper.xml</value>
 				<value>classpath:mybatis/eventBoard-mapper.xml</value>
 				<value>classpath:mybatis/gocampReview-mapper.xml</value>
+
 				<value>classpath:mybatis/like-mapper.xml</value>
+
+				<value>classpath:mybatis/admin-mapper.xml</value>
 			</list>		
 		</property>
 	</bean>

@@ -2,173 +2,306 @@
 <!DOCTYPE mapper PUBLIC 
 	"-//mybatis.org//DTD Mapper 3.0//EN" 
 	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.itbank.repository.CampDAO">
-	<select id="selectAll" resultType="item" parameterType="searchPage">
+	<select id="selectAll" resultType="item"
+		parameterType="searchPage">
 		select * from gocamp
-			where doNm like '%${search.sido}%'
-			and sigunguNm like '%${search.gungu}%'
-			and facltNm like '%${search.keyword}%'
-			and lctcl like '%${search.lctcl}%'
-			<if test='(search.dtl_sido) != null'>
-				and (
-				<foreach collection="search.dtl_sido" item="item1" separator=" or ">
-					doNm = '${item1}'
-				</foreach>
-				)
-			</if>
-			<if test='(search.facltDivNm) != null'>
-				and (
-				<foreach collection="search.facltDivNm" item="item2" separator=" or ">
-					facltDivNm = '${item2}'
-				</foreach>
-				)
-			</if>
-			<if test='(search.dtl_lctcl) != null'>
-				and (
-				<foreach collection="search.dtl_lctcl" item="item3" separator=" or ">
-					lctcl like '%${item3}%'
-				</foreach>
-				)
-			</if>
-			<if test='(search.induty) != null'>
-				and (
-				<foreach collection="search.induty" item="item4" separator=" or ">
-					induty like '%${item4}%'
-				</foreach>
-				)
-			</if>
-			<if test='(search.sbrsCl) != null'>
-				and (
-				<foreach collection="search.sbrsCl" item="item5" separator=" or ">
-					sbrsCl like '%${item5}%'
-				</foreach>
-				)
-			</if>
-			<if test='(search.themaEnvrnCl) != null'>
-				and (
-				<foreach collection="search.themaEnvrnCl" item="item6" separator=" or ">
-					themaEnvrnCl like '%${item6}%'
-				</foreach>
-				)
-			</if>
-			<if test='(search.trlerAcmpnyAt) != null'>
-				and trlerAcmpnyAt = 'Y'
-			</if>
-			<if test='(search.caravAcmpnyAt) != null'>
-				and caravAcmpnyAt = 'Y'
-			</if>
-			<if test='(search.animalCmgCl) != null'>
-				and animalCmgCl like '가능%'
-			</if>
-			<if test='(search.tags) != null'>
-				and (
-				<foreach collection="search.tags" item="item7" separator=" or ">
-					tags like '%${item7}%'
-				</foreach>
-				)
-			</if>
-			order by
-				${page.order} <if test="page.order != 'facltNm'">desc</if>     
-			offset #{page.offset} rows
-			fetch next #{page.perPage} rows only;
-	</select>
-	
-	<select id="selectCnt" resultType="int" parameterType="search">
-		select count(*) from gocamp 
-		    where doNm like '%${sido}%'
-		    and sigunguNm like '%${gungu}%'
-		    and facltNm like '%${keyword}%'
-		    and lctcl like '%${lctcl}%'
-		    <if test='(dtl_sido) != null'>
-				and (
-				<foreach collection="dtl_sido" item="item" separator=" or ">
-					doNm = '${item}'
-				</foreach>
-				)
-			</if>
-			<if test='(facltDivNm) != null'>
-				and (
-				<foreach collection="facltDivNm" item="item2" separator=" or ">
-					facltDivNm = '${item2}'
-				</foreach>
-				)
-			</if>
-			<if test='(dtl_lctcl) != null'>
-				and (
-				<foreach collection="dtl_lctcl" item="item3" separator=" or ">
-					lctcl like '%${item3}%'
-				</foreach>
-				)
-			</if>
-			<if test='(induty) != null'>
-				and (
-				<foreach collection="induty" item="item4" separator=" or ">
-					induty like '%${item4}%'
-				</foreach>
-				)
-			</if>
-			<if test='(sbrsCl) != null'>
-				and (
-				<foreach collection="sbrsCl" item="item5" separator=" or ">
-					sbrsCl like '%${item5}%'
-				</foreach>
-				)
-			</if>
-			<if test='(themaEnvrnCl) != null'>
-				and (
-				<foreach collection="themaEnvrnCl" item="item6" separator=" or ">
-					themaEnvrnCl like '%${item6}%'
-				</foreach>
-				)
-			</if>
-			<if test='(trlerAcmpnyAt) != null'>
-				and trlerAcmpnyAt = 'Y'
-			</if>
-			<if test='(caravAcmpnyAt) != null'>
-				and caravAcmpnyAt = 'Y'
-			</if>
-			<if test='(animalCmgCl) != null'>
-				and animalCmgCl like '가능%'
-			</if>
-			<if test='(tags) != null'>
-				and (
-				<foreach collection="tags" item="item7" separator=" or ">
-					tags like '%${item7}%'
-				</foreach>
-				)
-			</if>
-	</select>
-	
-	<select id="selectOne" resultType="item" parameterType="string">
-		select * from gocamp where contentId = #{contentId}
-	</select>
-	
-	<select id="selectTags" resultType="tag">
-		select * from tagLibrary order by chooseCnt desc, tagNum 
-	</select>
-	
-	<update id="plusViewCount" parameterType="string">
-		update gocamp set clickCnt = clickCnt + 1 where contentId = #{contentId}
-	</update>
-	
-	<update id="plusTagChooseCnt" parameterType="list">
-		update tagLibrary 
-			set
-			chooseCnt = chooseCnt + 1
-			where tagNum in 
-			<foreach collection="list" item="item" open="(" separator="," close=")">
-				${item}
-			</foreach>			
-	</update>
-	
-	<select id="searchByKeyWord" parameterType="string" resultType="item">
-		SELECT * FROM gocamp where facltNm like '%${srchKywrd}%' order by clickCnt limit 10
+		where doNm like '%${search.sido}%'
+		and sigunguNm
+		like '%${search.gungu}%'
+		and facltNm like '%${search.keyword}%'
+		and
+		lctcl like '%${search.lctcl}%'
+		<if test='(search.dtl_sido) != null'>
+			and (
+			<foreach collection="search.dtl_sido" item="item1"
+				separator=" or ">
+				doNm = '${item1}'
+			</foreach>
+			)
+		</if>
+		<if test='(search.facltDivNm) != null'>
+			and (
+			<foreach collection="search.facltDivNm" item="item2"
+				separator=" or ">
+				facltDivNm = '${item2}'
+			</foreach>
+			)
+		</if>
+		<if test='(search.dtl_lctcl) != null'>
+			and (
+			<foreach collection="search.dtl_lctcl" item="item3"
+				separator=" or ">
+				lctcl like '%${item3}%'
+			</foreach>
+			)
+		</if>
+		<if test='(search.induty) != null'>
+			and (
+			<foreach collection="search.induty" item="item4"
+				separator=" or ">
+				induty like '%${item4}%'
+			</foreach>
+			)
+		</if>
+		<if test='(search.sbrsCl) != null'>
+			and (
+			<foreach collection="search.sbrsCl" item="item5"
+				separator=" or ">
+				sbrsCl like '%${item5}%'
+			</foreach>
+			)
+		</if>
+		<if test='(search.themaEnvrnCl) != null'>
+			and (
+			<foreach collection="search.themaEnvrnCl" item="item6"
+				separator=" or ">
+				themaEnvrnCl like '%${item6}%'
+			</foreach>
+			)
+		</if>
+		<if test='(search.trlerAcmpnyAt) != null'>
+			and trlerAcmpnyAt = 'Y'
+		</if>
+		<if test='(search.caravAcmpnyAt) != null'>
+			and caravAcmpnyAt = 'Y'
+		</if>
+		<if test='(search.animalCmgCl) != null'>
+			and animalCmgCl like '가능%'
+		</if>
+		<if test='(search.tags) != null'>
+			and (
+			<foreach collection="search.tags" item="item7"
+				separator=" or ">
+				tags like '%${item7}%'
+			</foreach>
+			)
+		</if>
+		order by
+		${page.order}
+		<if test="page.order != 'facltNm'">desc</if>
+		offset #{page.offset} rows
+		fetch next #{page.perPage} rows only;
 	</select>
 
-	<select id="countByKeyword" parameterType="string" resultType="int">
-		select count(*) from gocamp where facltNm like '%${srchKywrd}%'
+	<select id="selectCnt" resultType="int" parameterType="search">
+		select count(*) from gocamp
+		where doNm like '%${sido}%'
+		and sigunguNm
+		like '%${gungu}%'
+		and facltNm like '%${keyword}%'
+		and lctcl like
+		'%${lctcl}%'
+		<if test='(dtl_sido) != null'>
+			and (
+			<foreach collection="dtl_sido" item="item" separator=" or ">
+				doNm =
+				'${item}'
+			</foreach>
+			)
+		</if>
+		<if test='(facltDivNm) != null'>
+			and (
+			<foreach collection="facltDivNm" item="item2"
+				separator=" or ">
+				facltDivNm = '${item2}'
+			</foreach>
+			)
+		</if>
+		<if test='(dtl_lctcl) != null'>
+			and (
+			<foreach collection="dtl_lctcl" item="item3" separator=" or ">
+				lctcl
+				like '%${item3}%'
+			</foreach>
+			)
+		</if>
+		<if test='(induty) != null'>
+			and (
+			<foreach collection="induty" item="item4" separator=" or ">
+				induty
+				like '%${item4}%'
+			</foreach>
+			)
+		</if>
+		<if test='(sbrsCl) != null'>
+			and (
+			<foreach collection="sbrsCl" item="item5" separator=" or ">
+				sbrsCl
+				like '%${item5}%'
+			</foreach>
+			)
+		</if>
+		<if test='(themaEnvrnCl) != null'>
+			and (
+			<foreach collection="themaEnvrnCl" item="item6"
+				separator=" or ">
+				themaEnvrnCl like '%${item6}%'
+			</foreach>
+			)
+		</if>
+		<if test='(trlerAcmpnyAt) != null'>
+			and trlerAcmpnyAt = 'Y'
+		</if>
+		<if test='(caravAcmpnyAt) != null'>
+			and caravAcmpnyAt = 'Y'
+		</if>
+		<if test='(animalCmgCl) != null'>
+			and animalCmgCl like '가능%'
+		</if>
+		<if test='(tags) != null'>
+			and (
+			<foreach collection="tags" item="item7" separator=" or ">
+				tags like
+				'%${item7}%'
+			</foreach>
+			)
+		</if>
 	</select>
+
+	<select id="selectOne" resultType="item" parameterType="string">
+		select *
+		from gocamp where contentId = #{contentId}
+	</select>
+
+	<select id="selectTags" resultType="tag">
+		select * from tagLibrary
+		order by chooseCnt desc, tagNum
+	</select>
+
+	<update id="plusViewCount" parameterType="string">
+		update gocamp set
+		clickCnt = clickCnt + 1 where contentId = #{contentId}
+	</update>
+
+	<update id="plusTagChooseCnt" parameterType="list">
+		update tagLibrary
+		set
+		chooseCnt = chooseCnt + 1
+		where tagNum in
+		<foreach collection="list" item="item" open="(" separator=","
+			close=")">
+			${item}
+		</foreach>
+	</update>
+
+	<select id="searchByKeyWord" parameterType="string"
+		resultType="item">
+		SELECT * FROM gocamp where facltNm like '%${srchKywrd}%'
+		order by clickCnt limit 10
+	</select>
+
+	<select id="countByKeyword" parameterType="string"
+		resultType="int">
+		select count(*) from gocamp where facltNm like
+		'%${srchKywrd}%'
+	</select>
+
+	<insert id="addcamp" parameterType="camp">
+		insert into gocamp
+		(firstImageUrl, contentId, facltNm, lineIntro,
+		intro, featureNm, tel, homepage,
+		tooltip, direction, sitedStnc, doNm,
+		sigunguNm, addr1, mapX, mapY,
+		trlerAcmpnyAt, caravAcmpnyAt,
+		exprnProgrmAt, clturEventAt,
+		animalCmgCl, facltDivNm, sbrsEtc,
+		posblFcltyClEtc, brazierCl, lctcl, operPdcl,
+		operDecl, resveCl, induty, sbrsCl,
+		themaEnvrnCl, eqpmnLendCl,
+		posblFcltyCl, tags)
+		values
+		(#{firstImageUrl},
+		#{contentId},
+		#{facltNm},#{lineIntro},#{intro},#{featureNm},#{tel},#{homepage},#{tooltip},#{direction},#{sitedStnc},#{doNm},#{sigunguNm},#{addr1},#{mapX},#{mapY},#{trlerAcmpnyAt},
+		#{caravAcmpnyAt}, #{exprnProgrmAt}, #{clturEventAt}, #{animalCmgCl},#{facltDivNm}, #{sbrsEtc}, #{posblFcltyEtc}, #{brazierCl},
+		<trim prefix="" suffix="" prefixOverrides=" ">'<if test='lctcl != null'><foreach collection="lctcl" item="item01" separator=",">${item01}</foreach></if>'</trim>,
+		<trim prefix="" suffix="" prefixOverrides=" ">'<if test='operPdcl != null'><foreach collection="operPdcl" item="item02" separator=",">${item02}</foreach></if>'</trim>,
+		<trim prefix="" suffix="" prefixOverrides=" ">'<if test="operDecl != null"><foreach collection="operDecl" item="item03" separator=",">${item03}</foreach></if>'</trim>,
+		<trim prefix="" suffix="" prefixOverrides=" ">'<if test="resveCl != null"><foreach collection="resveCl" item="item04" separator="+">${item04}</foreach></if>'</trim>,
+		<trim prefix="" suffix="" prefixOverrides=" ">'<if test="induty != null"><foreach collection="induty" item="item05" separator=",">${item05}</foreach></if>'</trim>,
+		<trim prefix="" suffix="" prefixOverrides=" ">'<if test="sbrsCl != null"><foreach collection="sbrsCl" item="item06" separator=",">${item06}</foreach></if>'</trim>,
+		<trim prefix="" suffix="" prefixOverrides=" ">'<if test="themaEnvrnCl != null"><foreach collection="themaEnvrnCl" item="item07" separator=",">${item07}</foreach></if>'</trim>,
+		<trim prefix="" suffix="" prefixOverrides=" ">'<if test="eqpmnLendCl != null"><foreach collection="eqpmnLendCl" item="item08" separator=",">${item08}</foreach></if>'</trim>,
+		<trim prefix="" suffix="" prefixOverrides=" ">'<if test="posblFcltyCl != null"><foreach collection="posblFcltyCl" item="item09" separator=",">${item09}</foreach></if>'</trim>,
+		<trim prefix="" suffix="" prefixOverrides=" ">'<if test="tag != null"><foreach collection="tag" item="item10" separator=",">${item10}</foreach></if>'</trim>)
+		
+		<!-- 공백문자가 들어가서 잘라준다. -->
+	</insert>
+
+	<!-- 콘텐트아이디가 겹치는지 확인 -->
+	<select id="cidDupCheck" parameterType="string"
+		resultType="boolean">
+		select count(*) from gocamp where contentId = #{contentId}
+	</select>
+	
+	<select id="getImageList" parameterType="string" resultType="string">
+		select imageSrc from campImageUrl where contentId = #{contentId}
+	</select>
+	
+	<delete id="deleteImageItem" parameterType="image">
+		delete from campImageUrl where contentId = #{contentId} and imageSrc like '%${imageSrc}'
+	</delete>
+	
+	<select id="selectFirstImage" parameterType="string" resultType="string">
+		select firstImageUrl from gocamp where contentId = #{contentId}
+	</select>
+	
+	<insert id="insertImages" parameterType="HashMap">
+		insert into campImageUrl (contentId, imageSrc)
+			<foreach collection="list" item="item" separator=" UNION ALL ">
+				select #{contentId}, #{item} from dual
+			</foreach>
+	</insert>
+	
+	<update id="updatecamp" parameterType="camp">
+		update gocamp set
+			firstImageUrl = #{firstImageUrl},
+			contentId = #{contentId},
+			facltNm = #{facltNm},
+			lineIntro = #{lineIntro},
+			intro = #{intro},
+			featureNm = #{featureNm},
+			tel = #{tel},
+			homepage = #{homepage},
+			tooltip = #{tooltip},
+			direction = #{direction},
+			sitedStnc = #{sitedStnc},
+			doNm = #{doNm},
+			sigunguNm = #{sigunguNm},
+			addr1 = #{addr1},
+			mapX = #{mapX},
+			mapY = #{mapY},
+			trlerAcmpnyAt = #{trlerAcmpnyAt},
+			caravAcmpnyAt = #{caravAcmpnyAt},
+			exprnProgrmAt = #{exprnProgrmAt},
+			clturEventAt = #{exprnProgrmAt},
+			animalCmgCl = #{animalCmgCl},
+			facltDivNm = #{facltDivNm},
+			sbrsEtc = #{sbrsEtc},
+			posblFcltyClEtc = #{posblFcltyEtc},
+			brazierCl = #{brazierCl},
+			lctcl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test='lctcl != null'><foreach collection="lctcl" item="item01" separator=",">${item01}</foreach></if>'</trim>,
+			operPdcl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test='operPdcl != null'><foreach collection="operPdcl" item="item02" separator=",">${item02}</foreach></if>'</trim>,
+			operDecl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="operDecl != null"><foreach collection="operDecl" item="item03" separator=",">${item03}</foreach></if>'</trim>,
+			resveCl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="resveCl != null"><foreach collection="resveCl" item="item04" separator="+">${item04}</foreach></if>'</trim>,
+			induty = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="induty != null"><foreach collection="induty" item="item05" separator=",">${item05}</foreach></if>'</trim>,
+			sbrsCl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="sbrsCl != null"><foreach collection="sbrsCl" item="item06" separator=",">${item06}</foreach></if>'</trim>,
+			themaEnvrnCl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="themaEnvrnCl != null"><foreach collection="themaEnvrnCl" item="item07" separator=",">${item07}</foreach></if>'</trim>,
+			eqpmnLendCl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="eqpmnLendCl != null"><foreach collection="eqpmnLendCl" item="item08" separator=",">${item08}</foreach></if>'</trim>,
+			posblFcltyCl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="posblFcltyCl != null"><foreach collection="posblFcltyCl" item="item09" separator=",">${item09}</foreach></if>'</trim>,
+			tags = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="tag != null"><foreach collection="tag" item="item10" separator=",">${item10}</foreach></if>'</trim>
+			where contentId = #{contentId}
+	</update>
+	
+	<delete id="deleteFile" parameterType="string">
+		delete from campImageUrl where contentId = #{contentId}
+	</delete>
+	
+	<delete id="deletecamp" parameterType="string">
+		delete from gocamp where contentId = #{contentId}
+	</delete>
 </mapper>
 
 
