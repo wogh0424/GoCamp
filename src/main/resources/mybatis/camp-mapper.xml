@@ -198,6 +198,10 @@
 		'%${srchKywrd}%'
 	</select>
 
+
+
+
+
 	<insert id="addcamp" parameterType="camp">
 		insert into gocamp
 		(firstImageUrl, contentId, facltNm, lineIntro,

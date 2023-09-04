@@ -23,7 +23,6 @@
 		<typeAlias type="com.itbank.model.NoticeBoardDTO" alias="noticeboard"/>
 		<typeAlias type="com.itbank.model.EventBoardDTO" alias="eventboard"/>
 		<typeAlias type="com.itbank.model.GocampReviewDTO" alias="gocampreview"/>
-
 		<typeAlias type="com.itbank.model.LikesDTO" alias="like"/>
 
 		<typeAlias type="com.itbank.model.AdminDTO" alias="admin"/>

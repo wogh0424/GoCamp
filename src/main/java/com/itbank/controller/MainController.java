@@ -90,6 +90,7 @@ public class MainController {
 		
 		
 		// 찜 상태 확인하기( 연지)
+		if(principal!= null) {
 		 String username = principal.getName();
 		 MemberDTO dto = mypageService.importMember(username);
 		 int member = dto.getIdx();
@@ -97,7 +98,7 @@ public class MainController {
 		 boolean isLiked = likeService.isLiked(contentId, member);
 		 
 		 mav.addObject("isLiked", isLiked);
-		
+		}
 		
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -131,7 +132,6 @@ public class MainController {
 
 	// 리뷰 끝 
 	
-
 	// 찜 추가
 	@PostMapping("/like")
 	public ModelAndView addLike(Principal principal, @RequestParam("gocamp") String gocamp) {
@@ -180,9 +180,6 @@ public class MainController {
 	
 
 	
-
-	// 통합검색
-
 	@GetMapping("/search")
 	public ModelAndView search(String srchKywrd) {
 		ModelAndView mav = new ModelAndView("/main/search");
@@ -210,24 +207,7 @@ public class MainController {
 		mav.addObject("freeCnt", freeCnt);
 		return mav;
 	}
-	@GetMapping("/addcamp") 
-	public ModelAndView addcamp() {
-		ModelAndView mav = new ModelAndView("/main/addcamp");
-		List<TagDTO> tags = campService.selectTags();
-		mav.addObject("tags", tags);
-		return mav;
-	}
 	
-
-
-	
-	
-	
-	
-	
-	
-
-
 	// 캠핑장 추가	
 	@PostMapping("/addcamp")
 	public String addcamp(CampDTO dto) {
@@ -259,4 +239,11 @@ public class MainController {
 		System.out.println(row);
 		return "redirect:/main/camp";
 	}
-} 
+
+	
+	
+	
+	
+	
+	
+}
