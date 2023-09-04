@@ -134,6 +134,7 @@ input {
 						<p>아이디와 비밀번호가 잘못되었습니다.</p>
 					</c:if>
 					<div class="input_wrap">
+					
 						<p>
 							<input type="text" class="id" name="userid"
 								placeholder="Enter ID" />

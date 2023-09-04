@@ -17,8 +17,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.itbank.model.AdminDTO;
 import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.PagingDTO;
+import com.itbank.repository.AdminDAO;
 import com.itbank.repository.FreeBoardDAO;
 
 @Service
@@ -26,6 +28,8 @@ public class FreeBoardService{
 
 	@Autowired
 	private FreeBoardDAO dao;
+	
+	@Autowired AdminDAO adminDao;
 	
 	private File dir = new File("C:\\Users/yeonji/git/GoCamp/src/main/webapp/resources/image");
 
@@ -106,7 +110,6 @@ public class FreeBoardService{
 				file.delete();					
 			}
 		}
-		
 		int row = 0;
 		row += dao.deleteFile(idx);
 		row += dao.deleteFreeBoard(idx);
@@ -139,7 +142,7 @@ public class FreeBoardService{
 		if(isVisited) {
 			dao.updateViewCount(idx);
 			Cookie cookie = new Cookie("viewCount","true");
-			cookie.setMaxAge(10);
+			cookie.setMaxAge(20);
 			response.addCookie(cookie);
 		}
 		
@@ -162,5 +165,11 @@ public class FreeBoardService{
 		return dao.countByKeyword(srchKywrd);
 	}
 
-	
+	public List<FreeBoardDTO> userboard(String nickname) {
+		return dao.userboard(nickname);
+	}
+
+	public int reasonDeletion(AdminDTO dto) {
+		return adminDao.setDeletedReason(dto);
+	}	
 }

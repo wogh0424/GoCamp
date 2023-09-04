@@ -21,6 +21,7 @@ public class FreeBoardDTO {
 	private String title;
 	private String writer;
 	private String content;
+
 	
 	private String filePath;
 	private List<MultipartFile> upload = null;

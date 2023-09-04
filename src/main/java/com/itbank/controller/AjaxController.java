@@ -7,17 +7,22 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.ImageDTO;
 import com.itbank.model.ItemDTO;
+import com.itbank.model.MemberDTO;
 import com.itbank.service.CampService;
 import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
@@ -92,5 +97,10 @@ public class AjaxController {
 		List<ItemDTO> list = campService.searchByKeyWord(any);
 		return list;
 	}
-	///////////////////////////////////   정민's ajaxController end/
+	
+	@GetMapping("/login/checkBan")
+	public List<MemberDTO> checkEnabled(@RequestParam("userid") String userid){
+		List<MemberDTO> list = loginService.checkEnabled(userid);
+		return list;
+	}
 }

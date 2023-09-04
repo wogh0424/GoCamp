@@ -29,6 +29,12 @@ public class LoginController {
 		return "login/loginForm";
 	}
 	
+	@PostMapping("/login/loginForm")
+	public String checkparam(MemberDTO dto) {
+		System.out.println(dto.getUserid() + ": 로그인 컨트롤러의 아이디");
+		
+		return null;
+	}
 	
 	@GetMapping("/login/accessDenied")
 	public String accessDenied(Locale locale, Model model) {
@@ -49,12 +55,29 @@ public class LoginController {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String pw = encoder.encode(dto.getUserpw());
 			dto.setUserpw(pw);
+			int startidx = 9;
+			int endidx = 12;
+			String pnum = dto.getPnum();
+			// 전화번호에 - 이 있으면 그대로 replaceChar 함수 실행
+			if(pnum.length() == 13) {
+			return pnum;
+			// 전화번호에 - 이 없으면 - 을 붙혀주고 replaceChar 함수 실행
+			}else if(pnum.length() == 11) {
+				StringBuilder stringBuilder = new StringBuilder(pnum);
+				stringBuilder.insert(3, "-");
+				stringBuilder.insert(8, "-");
+				
+				String modifiedPnum = stringBuilder.toString();
+				dto.setPnum(modifiedPnum);
+			}
+			
 			row = loginService.signup(dto);
 			System.out.println("homeController값 : "+row);
 			System.out.println(dto.getUserpw());
 			System.out.println(row != 0 ? "가입성공" : "가입실패");
 			return "redirect:/";	
 	}
+	
 	
 	
 	@PostMapping("/changePw")
