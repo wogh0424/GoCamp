@@ -102,5 +102,9 @@
 		<select id="countByKeyword" parameterType="string" resultType="int">
 			select count(*) from free_board where title like '%${srchkywrd}%' or content like '%${srchkywrd}%'
 		</select>
+		
+		<select id="userboard" parameterType="string" resultType="freeboard">
+			select * from free_board where writer = #{nickname}
+		</select>
 </mapper>
 		

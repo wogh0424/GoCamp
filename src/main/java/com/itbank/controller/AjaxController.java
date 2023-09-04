@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itbank.model.ImageDTO;
+import com.itbank.model.MemberDTO;
 import com.itbank.service.CampService;
 import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
@@ -106,5 +108,10 @@ public class AjaxController {
 		boolean check = campService.cidDupCheck(contentId);
 		return check;
 	}
-	///////////////////////////////////   정민's ajaxController end/
+	
+	@GetMapping("/login/checkBan")
+	public List<MemberDTO> checkEnabled(@RequestParam("userid") String userid){
+		List<MemberDTO> list = loginService.checkEnabled(userid);
+		return list;
+	}
 }

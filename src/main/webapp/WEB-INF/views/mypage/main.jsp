@@ -8,6 +8,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+#top_frame {
+	width: 700px;
+	padding: 30px;
+}
+.banned_content {
+	display: flex;
+}
+
+</style>
+
 </head>
 <body>
 
@@ -33,7 +44,18 @@
 				</div>
 			</div>
 		</div>
-		<div class="top_frame"></div>
+		<div class="top_frame">
+			<h3>운영자에 의해 삭제된 글</h3>
+			<div class="deleted_board">
+				<c:forEach var="board" items="${deleted }">
+					<div class="banned_content">
+					<div id="title">${board.title }</div>
+					<div id="reason">${board.reason }</div>
+					<div id="date">${board.deleted_date }</div>
+					</div> 
+				</c:forEach>
+			</div>
+		</div>
 	</div>
 
 	<script>

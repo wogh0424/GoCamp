@@ -47,8 +47,8 @@ public class LoginService implements UserDetailsService{
 		UserDetailsDto userDetailsDto = dao.selectUser(userid);
 		// 3. security-context에서 날라온 값은 dao로 간다
 		// 4. 반환된 DB값을 Dto로 보낸다.
-		authList = dao.getAuthList(userid);
 		
+		authList = dao.getAuthList(userid);
 		// 반환값을 dto로 넘기고 DB값과 auth.class에서 입력값과 암호화값을 비교
 		if (userDetailsDto == null) { //User을 찾지 못했을 경우
 			throw new UsernameNotFoundException(userid);
@@ -114,5 +114,9 @@ public class LoginService implements UserDetailsService{
 		System.out.println(row);
 		}
 		return dao.changeAuth(dto);
+	}
+
+	public List<MemberDTO> checkEnabled(String userid) {
+		return dao.checkEnabled(userid);
 	}
 }

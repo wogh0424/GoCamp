@@ -17,7 +17,15 @@ public class MemberDTO {
 	private String currentuserpw;
 	private String newuserpw;
 	private String enabled;
+	private String reason;
 	
+	
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
 	public int getIdx() {
 		return idx;
 	}
