@@ -46,8 +46,13 @@
     <div id="view">
         <div id="viewMain">
             <div id="firstImage">
-                <img src="${view.firstImageUrl }">
-            </div>
+			<c:if test="${fn:contains(view.firstImageUrl, 'gocamping') }">
+				<img src="${view.firstImageUrl }" width="300px" height="200px" style="margin-right: 30px;">
+			</c:if>
+			<c:if test="${!fn:contains(view.firstImageUrl, 'gocamping') }">
+				<img src="${cpath }/resources/upload/camp/${view.firstImageUrl }" width="300px" height="200px" style="margin-right: 30px;">
+			</c:if>
+		</div>
             <div id="viewDescription">
                 <table id="viewDescriptionTable">
                 	<c:if test="${view.addr1 != '' }">
@@ -195,7 +200,7 @@
                         </table>
                     </div> <!-- end of otherFeatures -->
                     <div class="viewNotion">
-                    	    ※ 고캠핑에 등록된 정보는 현장상황과 다소 다를 수 있으니 <span style="color:red;">반려동물 동반 여부, 부가 시설물, 추가차량</span> 등 원활한 캠핑을 위해 꼭 필요한 사항은 해당 캠핑장에서 미리 확인하시기 바랍니다.
+                    	    ※ 더캠핑에 등록된 정보는 현장상황과 다소 다를 수 있으니 <span style="color:red;">반려동물 동반 여부, 부가 시설물, 추가차량</span> 등 원활한 캠핑을 위해 꼭 필요한 사항은 해당 캠핑장에서 미리 확인하시기 바랍니다.
                     </div>
                 </div> <!-- end of intro1 -->
                 <div class="intro2">
@@ -206,7 +211,7 @@
                     
                     </div>
                     <div class="notion">
-                    	※ 모든 컨텐츠의 저작권은 고캠핑에 있습니다. 무단 사용 및 불법 재배포는 법적 조치를 받을 수 있습니다.
+                    	※ 모든 컨텐츠의 저작권은 더캠핑에 있습니다. 무단 사용 및 불법 재배포는 법적 조치를 받을 수 있습니다.
                     </div>
                 </div>
                 <div class="intro3">
@@ -331,7 +336,7 @@
 		// 사진의 크기를 스크롤로 조정
 		const imageItem = document.getElementById('imageItem');
 		 // 초기 이미지 폭
-		let currentWidth = 800;
+		let currentWidth = 900;
 		 
 		imageItem.addEventListener('wheel', (event) => {
 			imageScrollHandler(event)

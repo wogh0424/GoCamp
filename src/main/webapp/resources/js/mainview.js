@@ -8,7 +8,6 @@ function viewBannerHandler() {
       }  // lctcl이 없을 경우 기본이미지를 부여한다.
       else {
     	  let type = lctCl.split(',');
-    	  console.log(type)
     	  tmp = type[0]; 	// 여러개의 입지 구분 중 처음 것만 가져온다.
       }
         switch(tmp) {
@@ -73,29 +72,10 @@ function viewBannerHandler() {
     }
  // 사진========================================   
 	async function imageRequestHandler(id) {   		
-		let url = 'https://apis.data.go.kr/B551011/GoCamping/imageList?';
-		const params = {
-				serviceKey: 'NXleNIUe%2Fm77zJ9SgvX9%2BmbB2KiHMu900jEu%2F1GCGQ%2F3eOQD65jRFFN5l5Qrvw5tumPP0dCi%2BjK75haSrtR9IA%3D%3D',
-				pageNo: 1,
-				numOfRows: 50,
-				MobileOS: 'ETC',
-				MobileApp: 'AppTest',
-				_type: 'json',
-				contentId: viewId,
-		};
-		for (let key in params) {
-			url += key + '=' + params[key] + '&';
-		};
+		let url = cpath + '/getImageList/' + id
 		let arr = await fetch(url)
 		.then(resp => resp.json())
-		.then(json => json.response.body.items);
-		if (arr != '') {
-			arr = arr.item;
-		}
-		else { 
-			arr = [];  // items가 없는 경우에는 비어있는 배열로 만든다.
-		};
-		// 이미지가 없는 경우에는 noimag
+		// 이미지가 없는 경우에는 noimage
 		const viewImage = document.getElementById('viewImage');
 		const noimg = '<div class="noImageNotion"><img src="'+ cpath +'/resources/image/mainView/noimg.gif"></div>'
 		if (arr.length == 0) {
@@ -103,50 +83,66 @@ function viewBannerHandler() {
 		}
 		else {
 			viewImage.innerHTML = ''
-				const thumb = 'thumb/thumb_1000_';
+			const thumb = 'thumb/thumb_1000_';
 			const camp = '/upload/camp/' + id + '/'
 			for(let i = 0; i < arr.length; i++) {
-				const src = arr[i].imageUrl
-				const newUrl = src.replace(camp, camp + thumb); // 이미지를 썸네일용으로 바꿔서 넣어준다.
-				// https://gocamping.or.kr/upload/camp/7783/7236jMdhsUL2GEb5qRtxSIKX.jpg   =>   https://gocamping.or.kr/upload/camp/7783/thumb/thumb_1000_7236jMdhsUL2GEb5qRtxSIKX.jpg
-				
-				const requestStatus = cpath + '/imageStatus'
-				const requestUrl = {
-						imageUrl: newUrl
+				// api에서 받아온 사진과 db에 내가 넣은 데이터를 구분해주어야 한다.
+				let newimgUrl = ''
+				if (arr[i].includes('gocamping.or.kr')) {
+					const src = arr[i]
+					const newUrl = src.replace(camp, camp + thumb); // 이미지를 썸네일용으로 바꿔서 넣어준다.
+					// https://gocamping.or.kr/upload/camp/7783/7236jMdhsUL2GEb5qRtxSIKX.jpg   =>   https://gocamping.or.kr/upload/camp/7783/thumb/thumb_1000_7236jMdhsUL2GEb5qRtxSIKX.jpg
+					
+					const requestStatus = cpath + '/imageStatus'
+					const requestUrl = {
+							imageUrl: newUrl
+					}
+					// imageStatus에 요청을 보내서 url에 이미지가 있는지 확인한다.
+					await fetch(requestStatus, {
+						method: 'POST',
+						headers: {
+							'Content-Type' : 'application/json'
+						},
+						body: JSON.stringify(requestUrl)
+					}).then(resp => resp.json())
+					.then(json => {
+						console.log(json)
+						if (json) {
+							newimgUrl = newUrl
+						}
+						else {
+							newimgUrl = ''
+						}
+					})
 				}
-				// imageStatus에 요청을 보내서 url에 이미지가 있는지 확인한다.
-				await fetch(requestStatus, {
-					method: 'POST',
-					headers: {
-						'Content-Type' : 'application/json'
-					},
-					body: JSON.stringify(requestUrl)
-				}).then(resp => resp.json())
-				.then(json => {
-					if (json) {
-						let div1 = document.createElement('div');
-						div1.classList.add('campSurroundingItems');
-						
-						let div2 = document.createElement('div');
-						div2.classList.add('campImageOverlay');
-						div2.innerText = '클릭해서 확대';
-						
-						let img = document.createElement('img');
-						img.src = newUrl;
-						img.classList.add('campSurroundingImages');
-						div1.appendChild(div2);
-						div1.appendChild(img);
-						viewImage.appendChild(div1);
-					}
-					else {
-						console.log('이미지가 없습니다...')
-					}
-				})
+				else {
+					newimgUrl = cpath + '/resources/upload/camp/' + arr[i];
+				}
 				
-			};
+				// 이미지 url에 값이 들어왔을 때만 요소를 생성
+				if (newimgUrl != '') {
+					let div1 = document.createElement('div');
+					div1.classList.add('campSurroundingItems');
+					
+					let div2 = document.createElement('div');
+					div2.classList.add('campImageOverlay');
+					div2.innerText = '클릭해서 확대';
+					
+					let img = document.createElement('img');
+					img.src = newimgUrl;
+					img.classList.add('campSurroundingImages');
+					div1.appendChild(div2);
+					div1.appendChild(img);
+					viewImage.appendChild(div1);					
+				}
+				else {
+					continue;
+				}
+			}; // end of for
 		};
 		const imageOverlays = document.querySelectorAll('div.campImageOverlay')
 		if (imageOverlays.length == 0) {
+			// 걸러낸 이후에서 이미지가 없다면 noimg로 바꿔준다.
 			viewImage.innerHTML = noimg
 		}
 		else {

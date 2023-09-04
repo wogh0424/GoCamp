@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.ImageDTO;
-import com.itbank.model.ItemDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.service.CampService;
 import com.itbank.service.LoginService;
@@ -73,12 +72,14 @@ public class AjaxController {
 		return result;
 	}
 	
-	// 정민's ajaxController
+	// 정민's ajaxController ///////////////////////////////////////
+	// 이미지가 존재하는지 판단한다.
 	@PostMapping("/imageStatus")
 	public boolean imageStatus(@RequestBody ImageDTO imageUrl) {
 		return checkImageExists(imageUrl.getImageUrl());
 	}
 	
+	// (view)이미지가 존재하는지 판단한다.
 	private boolean checkImageExists(String imageUrl) {
         try {
             URL url = new URL(imageUrl);
@@ -91,11 +92,18 @@ public class AjaxController {
         }
     }
 	
-	@GetMapping("/autocompletion")
-	public List<ItemDTO> autocompletion() {
-		String any = "";
-		List<ItemDTO> list = campService.searchByKeyWord(any);
-		return list;
+	// (view)DB에서 이미지 url들을 가져온다.
+	@GetMapping("/getImageList/{contentId}")
+	private List<String> getImageList(@PathVariable("contentId") String contentId) {
+		List<String> imageList = campService.getImageList(contentId);
+		return imageList;
+	}
+	
+	// 콘텐츠 아이디 중복을 체크한다.
+	@GetMapping("/cidDupCheck/{contentId}")
+	public boolean cidDupCheck(@PathVariable("contentId") String contentId) {
+		boolean check = campService.cidDupCheck(contentId);
+		return check;
 	}
 	
 	@GetMapping("/login/checkBan")

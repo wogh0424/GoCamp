@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+#addcamp ul {
+		display: flex;
+		flex-flow: wrap;
+	}
+	#addcamp ul li {
+		margin: 2px 5px;;
+	}
+	#addcamp textarea {
+		width: 100%;
+		height: 60px;
+		resize: none;
+		overflow-y: scroll;
+	}
+	#addForm {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	#addcamp {
+		border-top: 1px solid black;
+		border-bottom: 1px solid black;
+		display: flex;	
+		padding: 20px 5px;
+	}
+	#addcamp > div {
+		margin: 10px;
+		width: 30%;
+	}
+	#addcamp input[type="text"] {
+		width: 100%;
+		max-width: 300px;
+	}
+	
+	
+	#addcamp input[type="file"] {
+        display: none;
+    }
+
+    label.image {
+        display: inline-block;
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .image-preview {
+            width: 100%;
+            height: auto;
+            border:2px dashed grey;
+            margin-top: 10px;
+            text-align: center;
+        }
+	.checked {
+		color: blue;
+	}        
+    .notChecked {
+    	color: red;
+    }
+    .blue {
+    	color: #2729b4;
+    }
+    .green {
+    	color: #1c9444;
+    }
+    .checkBtn {
+    	background-color: #FC6546;
+    	color: white;
+    }

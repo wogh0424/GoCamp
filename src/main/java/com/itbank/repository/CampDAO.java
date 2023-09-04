@@ -2,6 +2,7 @@ package com.itbank.repository;
 
 import java.util.List;
 
+import com.itbank.model.CampDTO;
 import com.itbank.model.ItemDTO;
 import com.itbank.model.PageAndSearchDTO;
 import com.itbank.model.SearchDTO;
@@ -26,5 +27,12 @@ public interface CampDAO {
 	List<ItemDTO> searchByKeyWord(String srchKywrd);
 
 	int countByKeyword(String srchKywrd);
+
+	int addcamp(CampDTO dto);
+
+	boolean cidDupCheck(String contentId);
+
+	List<String> getImageList(String contentId);
+
 
 }
