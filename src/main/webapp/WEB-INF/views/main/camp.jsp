@@ -415,8 +415,10 @@
 						<div class="cnts">
 							<div class="clickCnt">조회수 ${item.clickCnt }</div>
 							<div class="recmCnt">추천수 ${item.recmCnt }</div>
-							<a href="${cpath }/main/modifycamp/${item.contentId}"><button class="modifyCampBtn">수정</button></a>
-							<a href="${cpath }/main/deletecamp/${item.contentId}" onclick="return confirm('정말로 삭제하시겠습니까? 삭제 후 복구는 불가능합니다.')"><button class="delectCampBtn">삭제</button></a>
+							<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
+								<a href="${cpath }/main/modifycamp/${item.contentId}"><button class="modifyCampBtn">정보 수정</button></a>
+								<a href="${cpath }/main/deletecamp/${item.contentId}" onclick="return confirm('정말로 삭제하시겠습니까? 삭제 후 복구는 불가능합니다.')"><button class="delectCampBtn">캠핑장 삭제</button></a>
+							</c:if>
 						</div>
 						<div class="where">
 							<div class="facltNm">

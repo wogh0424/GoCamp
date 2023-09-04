@@ -118,7 +118,7 @@ header {
                 </c:if>
                 <c:if test="${dto.enabled == 0}">
                     접근금지
-                </c:if>
+                </c:if> 
             </td>
             <td>
                 <select name="authority">
@@ -156,7 +156,9 @@ header {
 			
 		</article>
 
-		<article class="control_board"></article>
+		<article class="control_board">
+			<a href="${cpath }/main/addcamp"><button>캠핑장 추가</button></a>
+		</article>
 
 		<article class="sales_chart"></article>
 		<article class="board_chart"></article>
