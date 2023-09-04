@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itbank.model.ImageDTO;
 import com.itbank.model.MemberDTO;
+import com.itbank.model.SearchDTO;
 import com.itbank.service.CampService;
 import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
@@ -102,6 +103,13 @@ public class AjaxController {
 		return campService.deleteImageItem(imageInfo);
 	}
 	
+	// (camp) 자동완성을 위한 데이터를 불러온다.
+	@PostMapping("/autocompletion")
+	private List<String> autocompletion(@RequestBody SearchDTO dto) {
+		return campService.autocompletion(dto);
+	}
+	
+	/////////////////////////////////////////////////////////////////////////
 	// 콘텐츠 아이디 중복을 체크한다.
 	@GetMapping("/cidDupCheck/{contentId}")
 	public boolean cidDupCheck(@PathVariable("contentId") String contentId) {

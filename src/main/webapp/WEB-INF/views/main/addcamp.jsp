@@ -377,6 +377,8 @@
 
 </div>
 
+<%@include file="../footer.jsp" %>
+
 <script>
 		// 이미지 미리보기
         const imageInput = document.getElementById('firstimage');

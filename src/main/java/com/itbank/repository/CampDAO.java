@@ -48,5 +48,7 @@ public interface CampDAO {
 
 	int deletecamp(String contentId);
 
+	List<String> autocompletion(SearchDTO dto);
+
 
 }

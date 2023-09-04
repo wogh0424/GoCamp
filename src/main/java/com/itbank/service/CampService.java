@@ -178,4 +178,9 @@ public class CampService {
 		row += campDAO.deletecamp(contentId);
 		return row;
 	}
+	
+	// 검색어 자동완성
+	public List<String> autocompletion(SearchDTO dto) {
+		return campDAO.autocompletion(dto);
+	}
 }

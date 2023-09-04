@@ -293,7 +293,7 @@
         </div> <!-- end of campIntro -->
   </div>  
   <!-- end of view -->
-    
+  <%@include file="../footer.jsp" %>  
     <a style="display:scroll;position:fixed;bottom:50px;right:50px;text-decoration: none;" rel="nofollow" href="#" title="Back to Top"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
     
    
