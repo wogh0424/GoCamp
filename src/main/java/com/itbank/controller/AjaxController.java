@@ -122,4 +122,8 @@ public class AjaxController {
 		List<MemberDTO> list = loginService.checkEnabled(userid);
 		return list;
 	}
+
+	
+	
+
 }

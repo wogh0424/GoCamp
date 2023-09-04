@@ -257,10 +257,33 @@ a {
   cursor: pointer;
 }
 
+/* 리뷰 헤더에 대한 스타일 */
+.reviewHeader {
+  cursor: pointer; /* 포인터 커서로 클릭 가능하도록 설정 */
+  border: 1px solid #ddd; /* 테두리 추가 (선택 사항) */
+  padding: 10px; /* 여백 추가 (선택 사항) */
+}
+
+/* 숨겨진 리뷰 내용에 대한 스타일 */
+.hiddenReview {
+  display: none; /* 숨겨진 상태로 시작 */
+  padding: 10px; /* 여백 추가 (선택 사항) */
+}
+
+/* 리뷰 제목에 대한 스타일 */
+.reviewTitle {
+  font-weight: bold; /* 제목을 두껍게 표시 */
+  font-size: 16px; /* 원하는 글꼴 크기로 조정 */
+  margin-bottom: 5px; /* 아래 여백 추가 (선택 사항) */
+}
+
+
 /* 리뷰게시판 끝 */
   
   
 /*자유게시판*/
+
+/*/
 
 /* 검색창 */
 
@@ -717,6 +740,14 @@ aside {
 	border-left: 0.25px solid black;
 	float: right;
 }
+<<<<<<< HEAD
+/*메뉴 드랍 다운 끝*/
+
+.highlight {
+		color: #c22187;
+		font-weight: bold;
+	}
+=======
 
 /*장바구니 페이지 시작*/
 .basket_status > ul{
@@ -840,9 +871,9 @@ aside {
 	justify-content: flex-end;
 }
 /*주무녈제 페이지 끝*/
+>>>>>>> 70a4e8b736d9a071731c70d30a4ec10db707779a
 </style>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" >
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
 <script>
 	const cpath = '${cpath}'
 </script>
@@ -850,14 +881,19 @@ aside {
 </head>
 <body>
 
-<!-- 	텍스트에디터 api - summernote -->
+<!-- jquery 사용 위한 라이브러리 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- 	텍스트에디터 api - summernote -->
 	<!-- include libraries(jQuery, bootstrap) -->
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" >
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 
 
 <script>
@@ -945,6 +981,7 @@ $(document).ready(function() {
 							<li><a href="${cpath }/eventBoard">이벤트게시판</a></li>
 							<li><a href="${cpath }/freeBoard">자유게시판(+ 댓글)</a></li>
 							<li><a href="${cpath }/reviewBoard">전체리뷰게시판</a></li>
+							<li><a href="${cpath }/main/like">좋아요</a></li>
 						</ul>
 					</li>
 					<li><a href="#">쇼핑몰</a>
@@ -978,3 +1015,6 @@ $(document).ready(function() {
 			<input type="submit" value="검색">
 		</form>
 	</div>
+	
+	
+

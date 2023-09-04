@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.itbank.model.CampDTO;
 import com.itbank.model.ImageDTO;
 import com.itbank.model.ItemDTO;
+import com.itbank.model.LikesDTO;
 import com.itbank.model.PageAndSearchDTO;
 import com.itbank.model.SearchDTO;
 import com.itbank.model.TagDTO;
@@ -73,6 +74,7 @@ public class CampService {
 	public int countByKeword(String srchKywrd) {
 		return campDAO.countByKeyword(srchKywrd);
 	}
+
 
 	public int addcamp(CampDTO dto) {
 		String ymd = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
@@ -178,9 +180,13 @@ public class CampService {
 		row += campDAO.deletecamp(contentId);
 		return row;
 	}
+<<<<<<< HEAD
 	
 	// 검색어 자동완성
 	public List<String> autocompletion(SearchDTO dto) {
 		return campDAO.autocompletion(dto);
 	}
+=======
+
+>>>>>>> b8dce030271e0338fa804420a36c6d8a8d560c79
 }

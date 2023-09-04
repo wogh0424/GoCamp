@@ -38,6 +38,11 @@
 		select * from member where userid = #{userid}
 	</select>
 	
+<!-- 	찜 기능을 위한 member idx 불러오기 -->
+	<select id="getMemberIdx" resultType="int" parameterType="string">
+		select idx from member where userid = #{userid}
+	</select>
+	
 	<select id="checkPw" parameterType="string" resultType="string">
 		select userpw from member where userid = #{userid}
 	</select>
