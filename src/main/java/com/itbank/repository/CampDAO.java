@@ -1,8 +1,10 @@
 package com.itbank.repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.itbank.model.CampDTO;
+import com.itbank.model.ImageDTO;
 import com.itbank.model.ItemDTO;
 import com.itbank.model.PageAndSearchDTO;
 import com.itbank.model.SearchDTO;
@@ -33,6 +35,18 @@ public interface CampDAO {
 	boolean cidDupCheck(String contentId);
 
 	List<String> getImageList(String contentId);
+
+	boolean deleteImageItem(ImageDTO imageInfo);
+
+	String selectFirstImage(String contentId);
+
+	int insertImages(HashMap<String, Object> param);
+
+	int updatecamp(CampDTO dto);
+
+	int deleteFile(String contentId);
+
+	int deletecamp(String contentId);
 
 
 }

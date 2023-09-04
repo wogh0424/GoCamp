@@ -70,8 +70,8 @@ public class AjaxController {
 	// 정민's ajaxController ///////////////////////////////////////
 	// 이미지가 존재하는지 판단한다.
 	@PostMapping("/imageStatus")
-	public boolean imageStatus(@RequestBody ImageDTO imageUrl) {
-		return checkImageExists(imageUrl.getImageUrl());
+	public boolean imageStatus(@RequestBody ImageDTO imageSrc) {
+		return checkImageExists(imageSrc.getImageSrc());
 	}
 	
 	// (view)이미지가 존재하는지 판단한다.
@@ -87,11 +87,17 @@ public class AjaxController {
         }
     }
 	
-	// (view)DB에서 이미지 url들을 가져온다.
+	// (view, modify)DB에서 이미지 url들을 가져온다.
 	@GetMapping("/getImageList/{contentId}")
 	private List<String> getImageList(@PathVariable("contentId") String contentId) {
 		List<String> imageList = campService.getImageList(contentId);
 		return imageList;
+	}
+	
+	// (modify) 이미지를 하나 삭제한다.
+	@PostMapping("/deleteImageItem")
+	private boolean deleteImageItem(@RequestBody ImageDTO imageInfo) {
+		return campService.deleteImageItem(imageInfo);
 	}
 	
 	// 콘텐츠 아이디 중복을 체크한다.

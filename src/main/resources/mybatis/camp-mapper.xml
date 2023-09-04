@@ -239,6 +239,69 @@
 	<select id="getImageList" parameterType="string" resultType="string">
 		select imageSrc from campImageUrl where contentId = #{contentId}
 	</select>
+	
+	<delete id="deleteImageItem" parameterType="image">
+		delete from campImageUrl where contentId = #{contentId} and imageSrc like '%${imageSrc}'
+	</delete>
+	
+	<select id="selectFirstImage" parameterType="string" resultType="string">
+		select firstImageUrl from gocamp where contentId = #{contentId}
+	</select>
+	
+	<insert id="insertImages" parameterType="HashMap">
+		insert into campImageUrl (contentId, imageSrc)
+			<foreach collection="list" item="item" separator=" UNION ALL ">
+				select #{contentId}, #{item} from dual
+			</foreach>
+	</insert>
+	
+	<update id="updatecamp" parameterType="camp">
+		update gocamp set
+			firstImageUrl = #{firstImageUrl},
+			contentId = #{contentId},
+			facltNm = #{facltNm},
+			lineIntro = #{lineIntro},
+			intro = #{intro},
+			featureNm = #{featureNm},
+			tel = #{tel},
+			homepage = #{homepage},
+			tooltip = #{tooltip},
+			direction = #{direction},
+			sitedStnc = #{sitedStnc},
+			doNm = #{doNm},
+			sigunguNm = #{sigunguNm},
+			addr1 = #{addr1},
+			mapX = #{mapX},
+			mapY = #{mapY},
+			trlerAcmpnyAt = #{trlerAcmpnyAt},
+			caravAcmpnyAt = #{caravAcmpnyAt},
+			exprnProgrmAt = #{exprnProgrmAt},
+			clturEventAt = #{exprnProgrmAt},
+			animalCmgCl = #{animalCmgCl},
+			facltDivNm = #{facltDivNm},
+			sbrsEtc = #{sbrsEtc},
+			posblFcltyClEtc = #{posblFcltyEtc},
+			brazierCl = #{brazierCl},
+			lctcl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test='lctcl != null'><foreach collection="lctcl" item="item01" separator=",">${item01}</foreach></if>'</trim>,
+			operPdcl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test='operPdcl != null'><foreach collection="operPdcl" item="item02" separator=",">${item02}</foreach></if>'</trim>,
+			operDecl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="operDecl != null"><foreach collection="operDecl" item="item03" separator=",">${item03}</foreach></if>'</trim>,
+			resveCl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="resveCl != null"><foreach collection="resveCl" item="item04" separator="+">${item04}</foreach></if>'</trim>,
+			induty = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="induty != null"><foreach collection="induty" item="item05" separator=",">${item05}</foreach></if>'</trim>,
+			sbrsCl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="sbrsCl != null"><foreach collection="sbrsCl" item="item06" separator=",">${item06}</foreach></if>'</trim>,
+			themaEnvrnCl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="themaEnvrnCl != null"><foreach collection="themaEnvrnCl" item="item07" separator=",">${item07}</foreach></if>'</trim>,
+			eqpmnLendCl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="eqpmnLendCl != null"><foreach collection="eqpmnLendCl" item="item08" separator=",">${item08}</foreach></if>'</trim>,
+			posblFcltyCl = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="posblFcltyCl != null"><foreach collection="posblFcltyCl" item="item09" separator=",">${item09}</foreach></if>'</trim>,
+			tags = <trim prefix="" suffix="" prefixOverrides=" ">'<if test="tag != null"><foreach collection="tag" item="item10" separator=",">${item10}</foreach></if>'</trim>
+			where contentId = #{contentId}
+	</update>
+	
+	<delete id="deleteFile" parameterType="string">
+		delete from campImageUrl where contentId = #{contentId}
+	</delete>
+	
+	<delete id="deletecamp" parameterType="string">
+		delete from gocamp where contentId = #{contentId}
+	</delete>
 </mapper>
 
 

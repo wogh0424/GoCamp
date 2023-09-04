@@ -95,7 +95,7 @@ function viewBannerHandler() {
 					
 					const requestStatus = cpath + '/imageStatus'
 					const requestUrl = {
-							imageUrl: newUrl
+							imageSrc: newUrl
 					}
 					// imageStatus에 요청을 보내서 url에 이미지가 있는지 확인한다.
 					await fetch(requestStatus, {
@@ -106,7 +106,6 @@ function viewBannerHandler() {
 						body: JSON.stringify(requestUrl)
 					}).then(resp => resp.json())
 					.then(json => {
-						console.log(json)
 						if (json) {
 							newimgUrl = newUrl
 						}

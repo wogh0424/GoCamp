@@ -129,28 +129,43 @@ public class MainController {
 		mav.addObject("freeCnt", freeCnt);
 		return mav;
 	}
-	@GetMapping("/add") 
+	@GetMapping("/addcamp") 
 	public ModelAndView addcamp() {
-		ModelAndView mav = new ModelAndView("/main/add");
+		ModelAndView mav = new ModelAndView("/main/addcamp");
 		List<TagDTO> tags = campService.selectTags();
 		mav.addObject("tags", tags);
 		return mav;
 	}
 	
 	// 캠핑장 추가	
-	@PostMapping("/add")
+	@PostMapping("/addcamp")
 	public String addcamp(CampDTO dto) {
 		int row = campService.addcamp(dto);
 		System.out.println("추가 : " + row);
 		return "redirect:/main/camp";
 	}
 	
-	@GetMapping("/modify/{contentId}")
+	@GetMapping("/modifycamp/{contentId}")
 	public ModelAndView modifycamp(@PathVariable("contentId") String contentId) {
-		ModelAndView mav = new ModelAndView("/main/modify/{contentId}");
+		ModelAndView mav = new ModelAndView("/main/modifycamp");
 		ItemDTO item = campService.selectOne(contentId);
+		List<TagDTO> tags = campService.selectTags();
+		mav.addObject("tags", tags);
 		mav.addObject("item", item);
 		return mav;
 	}
 	
+	@PostMapping("/modifycamp/{contentId}")
+	public String modifycamp(CampDTO dto) {
+		int row = campService.updatecamp(dto);
+		System.out.println("수정 : " + row);
+		return "redirect:/main/view/{contentId}";
+	}
+	
+	@GetMapping("/deletecamp/{contentId}")
+	public String deletecamp(@PathVariable("contentId") String contentId) {
+		int row = campService.deletecamp(contentId);
+		System.out.println(row);
+		return "redirect:/main/camp";
+	}
 } 

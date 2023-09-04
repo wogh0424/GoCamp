@@ -370,6 +370,7 @@
 			</ul>
 			</div>	<!-- end of 세번째 단락 -->
 		</div>  <!-- end of addcamp -->
+		<div class="notion">※ 캠핑장 풍경사진 추가는 수정탭에서 가능함</div>
 		<input type="submit" value="추가" style="width: 250px; height: 50px; border-radius: 5px; background-color: #4476D5; color: white; font-size: 18px; margin: 20px auto;">
 	</form>
 
@@ -389,6 +390,7 @@
         cidCheck.onclick = (event) => cidCheckHandler(event)
         
         // 도이름과 시군구 
+        const sigunguNm = '${item.sigunguNm}'
         document.querySelector('select[name="doNm"]').onchange = sigunguHandler
         
          const inputAddr = document.querySelector('input[name="addr1"]')
@@ -401,7 +403,7 @@
          document.getElementById("addForm").addEventListener("submit", function(event) {
         		event.preventDefault();
         	    if (validateForm()) {
-        	    	document.getElementById("addForm").submit
+        	    	document.getElementById("addForm").submit()
         	    }
         	});
          
