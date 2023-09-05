@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itbank.model.ImageDTO;
 import com.itbank.model.MemberDTO;
+import com.itbank.model.ProductDTO;
 import com.itbank.model.SearchDTO;
 import com.itbank.service.CampService;
 import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
+import com.itbank.service.ProductService;
 
 @RestController
 public class AjaxController {
@@ -30,6 +32,7 @@ public class AjaxController {
 	@Autowired private LoginService loginService;
 	@Autowired private MypageService mypageService;
 	@Autowired private CampService campService;
+	@Autowired private ProductService productService;
 	
 	@GetMapping("/dupCheck/{userid}")
 	public int dupCheck(@PathVariable("userid") String userid) {
@@ -123,7 +126,11 @@ public class AjaxController {
 		return list;
 	}
 
-	
+	@PostMapping("/grocery")
+	public int grocery(@RequestBody ProductDTO dto) {
+		int row = productService.grocery(dto);
+		return row;
+	}
 	
 
 }

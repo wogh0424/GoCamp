@@ -13,7 +13,7 @@ public class ProductDTO {
 	   private Date sDate;
 	   private int pick;
 	   private String image;
-	   private int userid;
+	   private String userid;
 	   private int pStar;
 	   
 	public int getIdx() {
@@ -76,10 +76,10 @@ public class ProductDTO {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public int getUserid() {
+	public String getUserid() {
 		return userid;
 	}
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 	public int getpStar() {

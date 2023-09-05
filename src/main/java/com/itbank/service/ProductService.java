@@ -51,4 +51,15 @@ public class ProductService {
 		return dao.pStarSelectAll();
 	}
 
+	public int grocery(ProductDTO dto) {
+		int row = 0;
+		if (dao.validategrocery(dto) != 0) {
+			row = dao.updatecurrentgrocery(dto);
+		}
+		else {
+			row = dao.grocery(dto);			
+		}
+		return row;
+	}
+
 }

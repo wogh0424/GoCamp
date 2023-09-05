@@ -28,4 +28,10 @@ public interface ProductDAO {
 
 	List<ProductDTO> pStarSelectAll();
 
+	int grocery(ProductDTO dto);
+
+	int validategrocery(ProductDTO dto);
+
+	int updatecurrentgrocery(ProductDTO dto);
+
 }

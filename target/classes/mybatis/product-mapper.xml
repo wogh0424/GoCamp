@@ -39,4 +39,17 @@
 	<select id="selectDetails" parameterType="int" resultType="product">
          select * from product where idx=#{idx}
     </select>
+    
+    <insert id="grocery" parameterType="product">
+    	insert into basket (userid, pid, pName, price, amount) values 
+    		(#{userid}, #{idx}, #{pName}, #{price}, #{amount})
+    </insert>
+    
+    <select id="validategrocery" parameterType="product">
+    	select count(*) from basket where userid = #{userid} and pid = #{idx} and pName = #{pName}
+    </select>
+    
+    <update id="updatecurrentgrocery" parameterType="product">
+    	update basket set amount = amount + #{amount} where userid = #{userid} and pid = #{idx} and pName = #{pName}
+    </update>
 </mapper>

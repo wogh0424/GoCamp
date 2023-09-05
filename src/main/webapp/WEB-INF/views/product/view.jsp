@@ -28,7 +28,46 @@
 </div>
 
 <script>
+	const grocery = document.getElementById('grocery')
+	const pName = '${dto.pName}'
+	const pid = '${dto.idx}'
+	const price = '${dto.price}'
+	const userid = '${pageContext.request.userPrincipal.name}'
+	const amount = '1'    // amount만 수정
 
+	grocery.onclick = groceryAddHandler
+	
+	async function groceryAddHandler() {
+		if (userid == '') {
+			alert('로그인을 해야 장바구니 이용이 가능합니다')
+			return
+		}
+		else {
+			const url = cpath + "/grocery"
+			const params = {
+				userid : userid,
+				idx : pid,
+				pName : pName,
+				price : price,
+				amount : amount
+			}
+			await fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type' : 'application/json'
+				},
+				body: JSON.stringify(params)
+			}).then(resp => resp.json())
+			.then(json => {
+				if (json) {
+					alert('장바구니에 ' + pName + '이(가) ' + amount + '개 추가되었습니다.')
+				}
+				else {
+					alert('장바구니에 추가되지 못했습니다.')				
+				}
+			})
+		}
+	}
 </script>
 
 </body>
