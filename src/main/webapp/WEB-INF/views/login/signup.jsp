@@ -118,39 +118,39 @@
 			<div class="signup_content">
 				<h2>회원가입</h2>
 				<p>
-					<input type="text" name="userid" placeholder="아이디 입력" />
-					<input type="button" id="dupCheckBtn" value="중복확인" />
+					<input type="text" name="userid" placeholder="아이디 입력" required autofocus>
+					<input type="button" id="dupCheckBtn" value="중복확인">
 				</p>
 			  
 				<span id="dubMessage"></span>
 			        
 		
 				<p>
-					<input type="password" name="userpw" id="userpw" placeholder="비밀번호 입력" required />
+					<input type="password" name="userpw" id="userpw" placeholder="비밀번호 입력" required>
 				</p>
 				<p>
-					<input type="password" name="confirmpw" id="confirmpw" placeholder="비밀번호 재확인" required />
+					<input type="password" name="confirmpw" id="confirmpw" placeholder="비밀번호 재확인" required>
 				</p>
 				<p>
-					<input type="text" name="username" placeholder="이름 입력" required />
+					<input type="text" name="username" placeholder="이름 입력" required>
 				</p>
 				<p>
-					<input type="text" name="nickname" placeholder="닉네임 입력" />
+					<input type="text" name="nickname" placeholder="닉네임 입력" required>
 				</p>
 				<p>
-					<input type="date" name="birth" placeholder="생일 입력" />
+					<input type="date" name="birth" placeholder="생일 입력" required>
 				</p>
 				<p>
-					<input type="text" name="pnum" placeholder="전화번호 입력" />
+					<input type="text" name="pnum" placeholder="전화번호 입력" required>
 				</p>
 		
 				<p>
-					<input type="email" name="email" placeholder="이메일 입력" required />
-					<input type="button" id="sendAuthNumber" value="인증번호 발송" />
+					<input type="email" name="email" placeholder="이메일 입력" required>
+					<input type="button" id="sendAuthNumber" value="인증번호 발송" required>
 				</p>
 				<div class="hidden" id="authNumber_wrap">
-					<input type="number" name="authNumber" placeholder="인증번호 6자리" required />
-					<input id="checkAuthNumber" type="button" value="인증번호 확인" /> <br> 
+					<input type="number" name="authNumber" placeholder="인증번호 6자리" required>
+					<input id="checkAuthNumber" type="button" value="인증번호 확인" required> <br> 
 				</div>
 				<p>
 					<span id="authMessage">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>

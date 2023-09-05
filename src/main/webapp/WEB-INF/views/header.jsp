@@ -448,7 +448,7 @@ a{
 #login_btn {
 	font-weight: bold;
 }
-/*2023-08-29 쇼핑몰 페이지 추가 - 재우 */
+/*쇼핑몰 목록 시작*/
 .product_wrap {
 	flex-wrap: wrap;
 	width: 100%;
@@ -502,6 +502,7 @@ a{
 	background-color: lightgreen;
 	color: black;
 }
+/*쇼핑몰 목록 끝*/
 /*list 카테고리 리스트 시작 */
 .pCategory_items {
 	width: 900px;
@@ -757,8 +758,6 @@ aside {
 }
 
 /*메뉴 드랍 다운 끝*/
-
-
 /*장바구니 페이지 시작*/
 .basket_status > ul{
 	display: flex;
@@ -814,7 +813,7 @@ aside {
 	color: white;
 }
 /*장바구니 페이지 끝*/
-/*주무녈제 페이지 시작*/
+/*주문결제 페이지 시작*/
 .orderpay_items {
 	width: 1000px;
 	height: 1000px;
@@ -1046,13 +1045,34 @@ aside {
 	height: 30px;
 	border-bottom: 1px solid lightgrey;
 }
-/*주무녈제 페이지 끝*/
+/*관리자페이지 끝 */
+/*주문결제 페이지 끝*/
 
 .camping_right_list:hover {
 	background-color: #F4C752;
 	color: #1146D5;
 	transition: ease 0.3s;
 }
+
+/* 마이페이지  시작 */
+.mypage_items {
+	display: flex;
+	justify-content: center;
+	width: 500px;
+	border: 1px solid black;
+	border-radius: 10px;
+	margin: auto;
+}
+.deleted_board {
+	display: flex;
+	justify-content: center;
+	width: 500px;
+	height: 300px;
+	border: 1px solid black;
+	border-radius: 10px;
+	margin: auto;
+}
+/* 마이페이지  끝 */
 </style>
 
 <script>
@@ -1114,7 +1134,7 @@ $(document).ready(function() {
 		<div class="header_login" >
 			<ul  style="margin-right: 10%;">
 				<c:if test="${pageContext.request.userPrincipal != null}">
-					<li>현재 접속 아이디 ${pageContext.request.userPrincipal.name}</li>
+					<li>${pageContext.request.userPrincipal.name}님 환영합니다.</li>
 					<!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
 				</c:if>
 				<sec:authorize access="isAnonymous()">			
@@ -1132,15 +1152,11 @@ $(document).ready(function() {
 					<li><a href="${cpath }/login/signup">회원가입</a></li>
 				</c:if>
 				<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
-					<h3>
-						<a href="<c:url value="/admin/adminpage" />">관리자 홈</a>
-					</h3>
+						<li><a href="<c:url value="/admin/adminpage" />">관리자 홈</a></li>
 				</c:if>
 				<c:if
 					test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }">
-					<h3>
-						<a href="${cpath }/mypage/main">마이페이지</a>
-					</h3>
+						<li><a href="${cpath }/mypage/main">마이페이지</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -1157,41 +1173,34 @@ $(document).ready(function() {
 		<div class="header_top">
 			<div id="menu">
 				<ul>
-					<li><a href="">검색</a>
+					<li><a href="">캠핑장</a>
 						<ul>
-							<li><a href="${cpath }/main/camp">캠핑장</a></li>
-							<li><a href="">SUB_MENU</a></li>
-							<li><a href="">SUB_MENU</a></li>
+							<li><a href="${cpath }/main/camp">캠핑장검색</a></li>
+						</ul>
+					</li>
+					<li><a href="">소식</a>
+						<ul>
+							<li><a href="${cpath }/noticeBoard">공지게시판</a></li>
+							<li><a href="${cpath }/eventBoard">이벤트게시판</a></li>
+
+						</ul>
+					</li>
+					<li><a href="">캠핑도구</a>
+						<ul>
+							<li><a href="${cpath }/product/list">쇼핑몰</a></li>
 						</ul>
 					</li>
 					<li><a href="">게시판</a>
 						<ul>
-							<li><a href="${cpath }/noticeBoard">공지게시판</a></li>
-							<li><a href="${cpath }/eventBoard">이벤트게시판</a></li>
 							<li><a href="${cpath }/freeBoard">자유게시판(+ 댓글)</a></li>
 							<li><a href="${cpath }/reviewBoard">전체리뷰게시판</a></li>
 							<li><a href="${cpath }/main/like">좋아요</a></li>
 						</ul>
 					</li>
-					<li><a href="">쇼핑몰</a>
+					<li><a href="">고객센터</a>
 						<ul>
-							<li><a href="${cpath }/product/list">MENU</a></li>
-							<li><a href="${cpath }/product/basket">SUB_MENU</a></li>
-							<li><a href="">SUB_MENU</a></li>
-						</ul>
-					</li>
-					<li><a href="">MENU</a>
-						<ul>
-							<li><a href="">SUB_MENU</a></li>
-							<li><a href="">SUB_MENU2</a></li>
-							<li><a href="">SUB_MENU3</a></li>
-						</ul>
-					</li>
-					<li><a href="">MENU</a>
-						<ul>
-							<li><a href="">SUB_MENU</a></li>
-							<li><a href="">SUB_MENU2</a></li>
-							<li><a href="">SUB_MENU3</a></li>
+							<li><a href="">캠핑장정보 수정요청</a></li>
+							<li><a href="">등록 야영장 확인문의</a></li>
 						</ul>
 					</li>
 				</ul>

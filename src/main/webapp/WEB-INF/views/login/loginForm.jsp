@@ -129,11 +129,11 @@ input {
 					
 						<p>
 							<input type="text" class="id" name="userid"
-								placeholder="Enter ID" />
+								placeholder="Enter ID" required autofocus>
 						</p>
 						<p>
 							<input type="password" class="password" name="userpw"
-								placeholder="Enter PW" />
+								placeholder="Enter PW" required>
 						</p>
 					</div>
 				</div>
