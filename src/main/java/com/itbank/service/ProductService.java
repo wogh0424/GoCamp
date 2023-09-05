@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.itbank.model.BasketDTO;
 import com.itbank.model.ProductDTO;
 import com.itbank.model.ShopPagingDTO;
 import com.itbank.repository.ProductDAO;
@@ -60,6 +61,10 @@ public class ProductService {
 		
 	public List<ProductDTO> selectOne(String name) {
 		return dao.selectOne(name);
+	}
+
+	public List<BasketDTO> basketSelectAll() {
+		return dao.basketSelectAll();
 	}
 
 }

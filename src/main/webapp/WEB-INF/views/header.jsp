@@ -864,6 +864,30 @@ aside {
 .lastorder_status > ul{
 	display: flex;
 	justify-content: flex-end;
+}.orderlist_items {
+	width: 1000px;
+	height: 1000px;
+	margin: auto;
+}
+.orderlist_list {
+	border-top: 2px solid black;
+	border-bottom: 1px solid grey;
+}
+.orderlist_list > ul {
+	display: flex;
+	justify-content: center;
+}
+.orderlist_list > ul > li {
+	padding: 5px;
+	text-align: center;
+}
+.orderlist_pay > ul {
+	display: flex;
+	justify-content: center;
+	margin: 5px;
+}
+.orderlist_pay > ul > li {
+	padding: 5px;
 }
 
 .admimpage_wrap {

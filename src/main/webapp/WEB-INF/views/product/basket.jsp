@@ -24,25 +24,29 @@
 			<input type="checkbox">TheCamping Masket
 		</div>
 		<div class="basket_list">
+		<c:forEach var="dto" items="${basketlist }">
 			<ul>
 				<li><input type="checkbox"></li>
 				<li>이미지</li>
+				<li>${dto.pName }</li>
 				<li><button>X</button></li>
 				<li>상품설명</li>
-				<li>상품수량
+				<li><input type="number" value="${dto.amount }">
 					<p><button>주문수정</button></p>
 				</li>
 				<li>상품금액
-					<p>10000원</p>
+					<p>${dto.price }</p>
 					<p><button id="payBtn">주문하기</button></p>
 				</li>
 				<li>배송비
 					<p>10000원</p>
 				</li>
 			</ul>
+			</c:forEach>
 		</div>
 		<div class="basket_pay">
 			<ul>
+				<li>주문 예정 날짜 :[ ]</li>
 				<li>선택상품금액
 					<p>10000원</p>
 				</li>

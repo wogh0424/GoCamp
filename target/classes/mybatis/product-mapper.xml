@@ -24,6 +24,10 @@
 		select * from product order by pStar desc
 	</select>
 	
+	<select id="basketSelectAll" resultType="basket">
+		select * from basket order by idx;
+	</select>
+	
 	<select id="selectCount" resultType="int">
 		select count(*) from product	
 	</select>

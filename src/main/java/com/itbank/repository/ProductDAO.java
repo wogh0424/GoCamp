@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.itbank.model.BasketDTO;
 import com.itbank.model.ProductDTO;
 import com.itbank.model.ShopPagingDTO;
 
@@ -33,5 +34,7 @@ public interface ProductDAO {
 	int updatecurrentgrocery(ProductDTO dto);
 
 	List<ProductDTO> selectOne(String name);
+
+	List<BasketDTO> basketSelectAll();
 
 }
