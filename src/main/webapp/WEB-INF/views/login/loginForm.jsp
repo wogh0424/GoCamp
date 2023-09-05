@@ -2,12 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
 
-<html lang="ko">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>로그인 페이지</title>
 <style>
 a {
 	text-decoration: none;
@@ -15,16 +10,17 @@ a {
 }
 
 #section {
-	width: 400px;
-	margin: 5% auto;
+	display: flex;
+	margin: 20px 29.5% 50px;
 }
 
 .loginForm_frame {
-	position: relative;
-	height: 500px;
-	border: 2px solid rgb(162, 154, 154);
-	border-radius: 70px;
+	width: 440px;	
+	height: 340px;
+	background-color: #3C5944;
+	box-sizing: border-box;
 	padding: 20px;
+	border-radius: 10px 0 0 10px;
 }
 
 .loginForm_content {
@@ -38,14 +34,10 @@ a {
 }
 
 .id, .password, .businessID {
-	width: 250px;
+	width: 80%;
 	height: 50px;
-	border-radius: 50px;
-	border: 1px solid rgb(184, 167, 167);
-}
-
-.btn_wrap {
-	position: relative;
+	border-radius: 5px;
+	border: 1px solid grey;
 }
 
 .login_btn_input {
@@ -66,13 +58,13 @@ a {
 .login_btn_input {
 	display: block;
 	margin: 30px 50%;
-	width: 70%;
+	width: 80%;
 	padding: 13px 0;
-	border-radius: 10px;
+	border-radius: 5px;
 	background-color: rgb(90, 209, 110);
 	font-size: large;
 	font-weight: bolder;
-	border: 1px solid rgb(60, 116, 69);
+	border: 1px solid grey;
 	color: white;
 }
 
@@ -116,16 +108,16 @@ input {
 	width:100%;
 }
 </style>
-</head>
-
-<body>
-
-	<section id="section">
+	
+	<div style="margin: 50px 0 30px; text-align: center; font-weight: bolder;">
+		<h1>로그인</h1>
+		<p style="color: grey;">더캠핑의 다양한 서비스와 혜택을 누리세요</p>
+	</div>
+	
+	<div id="section">
 		<article class="loginForm_frame">
+			<div style="width: 400px; height: 300px; background-color: white; padding: 20px; border-radius: 10px;">
 			<div class="loginForm_content">
-				<div class="input_account">
-					<h3>아이디와 비밀번호를 입력해주세요.</h3>
-				</div>
 				<c:url value="/login" var="loginUrl" />
 			</div>
 			<form:form name="f" action="${loginUrl}" method="POST">
@@ -154,10 +146,14 @@ input {
 				<a href="${cpath}/login/signup">회원가입</a> | <a
 					href="${cpath}/login/findAccount">아이디 찾기</a> | <a
 					href="${cpath}/login/resetPw">비밀번호 재발급</a>
-			</p>
-		</div>
+				</p>
+			</div>
+			</div>
 		</article>
-	</section>
-
+		<article class="bannerImage" style="height: 340px; background-color:#3C5944; border-radius: 0 10px 10px 0">
+			<img src="${cpath }/resources/image/thecamping_logo.png" style="margin: 80px 10px;">
+		</article>
+	</div>
+	<%@ include file="../footer.jsp" %>
 </body>
 </html>

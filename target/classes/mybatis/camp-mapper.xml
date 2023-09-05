@@ -189,7 +189,7 @@
 	<select id="searchByKeyWord" parameterType="string"
 		resultType="item">
 		SELECT * FROM gocamp where facltNm like '%${srchKywrd}%'
-		order by clickCnt limit 10
+		order by clickCnt desc limit 10
 	</select>
 
 	<select id="countByKeyword" parameterType="string"
@@ -197,10 +197,6 @@
 		select count(*) from gocamp where facltNm like
 		'%${srchKywrd}%'
 	</select>
-
-
-
-
 
 	<insert id="addcamp" parameterType="camp">
 		insert into gocamp
@@ -315,7 +311,7 @@
 		and sigunguNm like '%${gungu}%'
 		and facltNm like '%${keyword}%'
 		and lctcl like '%${lctcl}%'
-		order by clickCnt
+		order by clickCnt desc
 	</select>
 	
 	<insert id="countSido" parameterType="string">
