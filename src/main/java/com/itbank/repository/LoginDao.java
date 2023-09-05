@@ -24,7 +24,7 @@ public interface LoginDao{
 
 	public int setAuth(String userid);
 
-	public List<MemberDTO> getUser();
+	public List<MemberDTO> adminpage();
 
 	public MemberDTO importMember(String userid);
 
@@ -41,5 +41,7 @@ public interface LoginDao{
 	public int getMemberIdx(String userid);
 
 	public List<MemberDTO> checkEnabled(String userid);
+
+	
 
 }

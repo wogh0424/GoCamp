@@ -5,30 +5,32 @@
 <div class="product_wrap">
 	<div class="pCategory_items">
 		<div class="pCategory_list">
+		<c:forEach var="dao" items="${list }">
 			<ul>
-				<li>카테고리 이름</li>
+				<li>${dao.pCategory }</li>
 				<li>수량</li>
 			</ul>
-			<ul>
-				<li>카테고리 이름</li>
-				<li>수량</li>
-			</ul>
-			<ul>
-				<li>카테고리 이름</li>
-				<li>수량</li>
-			</ul>
-			<ul>
-				<li>카테고리 이름</li>
-				<li>수량</li>
-			</ul>
-			<ul>
-				<li>카테고리 이름</li>
-				<li>수량</li>
-			</ul>
-			<ul>
-				<li>카테고리 이름</li>
-				<li>수량</li>
-			</ul>
+<!-- 			<ul> -->
+<!-- 				<li>카테고리 이름</li> -->
+<!-- 				<li>수량</li> -->
+<!-- 			</ul> -->
+<!-- 			<ul> -->
+<!-- 				<li>카테고리 이름</li> -->
+<!-- 				<li>수량</li> -->
+<!-- 			</ul> -->
+<!-- 			<ul> -->
+<!-- 				<li>카테고리 이름</li> -->
+<!-- 				<li>수량</li> -->
+<!-- 			</ul> -->
+<!-- 			<ul> -->
+<!-- 				<li>카테고리 이름</li> -->
+<!-- 				<li>수량</li> -->
+<!-- 			</ul> -->
+<!-- 			<ul> -->
+<!-- 				<li>카테고리 이름</li> -->
+<!-- 				<li>수량</li> -->
+<!-- 			</ul> -->
+		</c:forEach>
 		</div>
 		<div class="pCategory_search">
 			<ul>
@@ -46,8 +48,12 @@
 						<option>80개씩</option>
 					</select>
 				</li>
-				<li><input type="search" name="pSearch">
-					<button>검색</button></li>
+				<form>
+				   
+				     <input type="search" name="pName" placeholder="상품 검색">
+				     <input type="submit" value="검색">
+			
+				</form>
 			</ul>
 		</div>
 		<c:forEach var="dao" items="${list }">

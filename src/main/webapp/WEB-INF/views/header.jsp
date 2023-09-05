@@ -738,7 +738,7 @@ footer{
 aside {
 	height: 100%;
 	border-left: 0.25px solid black;
-	float: right;
+	float: left;
 }
 
 /*메뉴 드랍 다운 끝*/
@@ -857,13 +857,155 @@ aside {
 }
 .lastorder_items {
 	width: 1000px;
-	height: 1000px;
+	height: 100%;
 	margin: auto;
 	text-align: center;
 }
 .lastorder_status > ul{
 	display: flex;
 	justify-content: flex-end;
+}
+
+.admimpage_wrap {
+	width: 1920px;
+	height: 1300px;
+	border: 1px solid black;
+}
+.adminpage_items {
+	width: 100%;
+	height: 100%;
+}
+.adminpage_list > aside {
+	width: 10%;
+	height: 1300px;
+	float: left;
+	border: 1px solid black;
+}
+.adminpage_list > aside > ul > li {
+	width: 100%;
+	height: 30px;
+	transition-duration: 0.5s;
+}
+.adminpage_list > aside > ul > li:hover{
+	background-color: skyblue;
+	transition-duration: 0.5s;
+}
+
+.adminpage_list > aside > ul > li > a {
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+}
+.main_boardlist1 {
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	width: 90%;
+	height: 400px;
+ 	border: 1px solid black;
+ 	background-color: #EEF1F3;
+}
+.boardlist1_left {
+	margin: 5px;
+	width: 70%;
+	border: 1px solid black;
+	background-color: white;
+}
+.boardlist1_right {
+	margin: 5px;
+	width: 30%;
+	border: 1px solid black;
+	background-color: white;
+}
+.main_boardlist2 {
+	display: flex;
+	justify-content: center;
+	width: 90%;
+	height: 400px;
+ 	border: 1px solid black;
+ 	background-color: #EEF1F3;
+}
+.boardlist2_left {
+	margin: 10px;
+	width: 33%;
+	border: 1px solid black;
+	background-color: white;
+}
+.boardlist2_center{
+	margin: 10px;
+	width: 33%;
+	border: 1px solid black;
+	background-color: white;
+}
+.boardlist2_right{
+	margin: 10px;
+	width: 33%;
+	border: 1px solid black;
+	background-color: white;
+}
+.main_boardlist3 {
+	padding: 5px;
+	display: flex;
+	border: 1px solid black;
+	width: 90%;
+	background-color: #EEF1F3;
+}
+.main_boardlist3 > ul {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	background-color: skyblue;
+}
+.boardlist3_group > li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	height: 30px;
+	font-weight: bold;
+	color: white;
+	text-shadow: 1px 1px 1px black;
+}
+.main_boardlist4 {
+	padding: 5px;
+	display: flex;
+	width: 90%;
+	height: 462px;
+	border: 1px solid black;
+	font-size: 15px;
+	font-weight: bold;
+	background-color: #EEF1F3;
+}
+.boardlist4_tablelist {
+	background-color: white;
+	border: 1px solid black;
+	overflow: scroll;
+}
+.boardlist4_tablelist > ul {
+	display: flex;
+}
+.boardlist4_tablelist > ul > li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 132px;
+	height: 30px;
+	background-color: grey;
+	color: white;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px black;
+}
+.boardlist4_userlist > form > ul {
+	display: flex;
+}
+.boardlist4_userlist > form > ul > li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 132px;
+	height: 30px;
+	border-bottom: 1px solid lightgrey;
 }
 /*주무녈제 페이지 끝*/
 </style>
@@ -946,7 +1088,7 @@ $(document).ready(function() {
 				</c:if>
 				<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
 					<h3>
-						<a href="<c:url value="/admin/userData" />">관리자 홈</a>
+						<a href="<c:url value="/admin/adminpage" />">관리자 홈</a>
 					</h3>
 				</c:if>
 				<c:if

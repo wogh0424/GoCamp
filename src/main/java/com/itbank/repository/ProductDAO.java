@@ -18,8 +18,6 @@ public interface ProductDAO {
 
 	ProductDTO selectDetails(int idx);
 
-	ProductDTO selectpName(String pName);
-
 	List<ProductDTO> priceSelectAll();
 
 	List<ProductDTO> viewsSelectAll();
@@ -33,5 +31,7 @@ public interface ProductDAO {
 	int validategrocery(ProductDTO dto);
 
 	int updatecurrentgrocery(ProductDTO dto);
+
+	List<ProductDTO> selectOne(String name);
 
 }

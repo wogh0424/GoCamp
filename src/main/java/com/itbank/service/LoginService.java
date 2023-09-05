@@ -87,8 +87,8 @@ public class LoginService implements UserDetailsService{
 	}
 
 
-	public List<MemberDTO> getUser() {
-		return dao.getUser();
+	public List<MemberDTO> adminpage() {
+		return dao.adminpage();
 	}
 
 
@@ -119,4 +119,6 @@ public class LoginService implements UserDetailsService{
 	public List<MemberDTO> checkEnabled(String userid) {
 		return dao.checkEnabled(userid);
 	}
+
+
 }

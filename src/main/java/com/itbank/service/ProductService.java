@@ -31,10 +31,6 @@ public class ProductService {
 		return dao.selectDetails(idx);
 	}
 
-	public ProductDTO selectpName(String pName) {
-		return dao.selectpName(pName);
-	}
-
 	public List<ProductDTO> priceSelectAll() {
 		return dao.priceSelectAll();
 	}
@@ -60,6 +56,10 @@ public class ProductService {
 			row = dao.grocery(dto);			
 		}
 		return row;
+	}
+		
+	public List<ProductDTO> selectOne(String name) {
+		return dao.selectOne(name);
 	}
 
 }
