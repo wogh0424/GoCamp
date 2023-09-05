@@ -31,7 +31,6 @@ public interface CampDAO {
 
 	int countByKeyword(String srchKywrd);
 
-
 	void insertLike(LikesDTO like);
 
 	void deleteLike(int member, int review);
@@ -59,6 +58,8 @@ public interface CampDAO {
 	void countSido(String sido);
 
 	void countMulSido(List<String> sido);
+
+	List<ItemDTO> selectBest5();
 
 
 }

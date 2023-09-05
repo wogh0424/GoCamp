@@ -3,7 +3,7 @@
 <%@ include file="header.jsp"%>
 
 <!-- camping_top_list 시작 -->
-<div class="camping_top_wrap">
+<div class="camping_top_wrap" style="margin: 60px auto; ">
 	<div class="camping_left_list">
 		<ul>
 			<li>이미지</li>

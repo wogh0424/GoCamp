@@ -197,4 +197,8 @@ public class CampService {
 		return campDAO.autocompletion(dto);
 	}
 
+	public List<ItemDTO> selectBest5() {
+		return campDAO.selectBest5();
+	}
+
 }

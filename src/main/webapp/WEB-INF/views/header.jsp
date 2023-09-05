@@ -1066,8 +1066,8 @@ $(document).ready(function() {
 			<a href="${cpath }/"><img
 				src="${cpath }/resources/image/thecamping_logo.png"></a>
 		</div>
-		<div class="header_login">
-			<ul>
+		<div class="header_login" >
+			<ul  style="margin-right: 10%;">
 				<c:if test="${pageContext.request.userPrincipal != null}">
 					<li>현재 접속 아이디 ${pageContext.request.userPrincipal.name}</li>
 					<!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
@@ -1145,9 +1145,9 @@ $(document).ready(function() {
 			</div>
 		</div>
 	</nav>
-	<div class="header_bottom" style="display: flex; justify-content: right; height: 40px; align-items:center;">
+	<div class="header_bottom" style="display: flex; justify-content: right; height: 40px; align-items:center; padding-right: 10%; width: 100%; background-color: #3C5944;">
 		<form action="${cpath }/main/search">
-			<input type="search" name="srchKywrd" placeholder="검색어를 입력하세요">
+			<input type="search" name="srchKywrd" placeholder="검색어를 입력하세요" autocomplete="off">
 			<input type="submit" value="검색">
 		</form>
 	</div>
