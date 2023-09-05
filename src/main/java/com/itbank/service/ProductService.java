@@ -63,8 +63,16 @@ public class ProductService {
 		return dao.selectOne(name);
 	}
 
-	public List<BasketDTO> basketSelectAll() {
-		return dao.basketSelectAll();
+	public List<BasketDTO> basketSelectAll(String userId) {
+		return dao.basketSelectAll(userId);
+	}
+
+	public int basketdelete(int idx) {
+		return dao.basketdelete(idx);
+	}
+
+	public int basketmodify(BasketDTO dto) {
+		return dao.basketmodify(dto);
 	}
 
 }

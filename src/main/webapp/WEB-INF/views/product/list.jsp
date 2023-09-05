@@ -5,32 +5,30 @@
 <div class="product_wrap">
 	<div class="pCategory_items">
 		<div class="pCategory_list">
-		<c:forEach var="dao" items="${list }">
 			<ul>
-				<li>${dao.pCategory }</li>
+				<li>카테고리 이름</li>
 				<li>수량</li>
 			</ul>
-<!-- 			<ul> -->
-<!-- 				<li>카테고리 이름</li> -->
-<!-- 				<li>수량</li> -->
-<!-- 			</ul> -->
-<!-- 			<ul> -->
-<!-- 				<li>카테고리 이름</li> -->
-<!-- 				<li>수량</li> -->
-<!-- 			</ul> -->
-<!-- 			<ul> -->
-<!-- 				<li>카테고리 이름</li> -->
-<!-- 				<li>수량</li> -->
-<!-- 			</ul> -->
-<!-- 			<ul> -->
-<!-- 				<li>카테고리 이름</li> -->
-<!-- 				<li>수량</li> -->
-<!-- 			</ul> -->
-<!-- 			<ul> -->
-<!-- 				<li>카테고리 이름</li> -->
-<!-- 				<li>수량</li> -->
-<!-- 			</ul> -->
-		</c:forEach>
+			<ul>
+				<li>카테고리 이름</li>
+				<li>수량</li>
+			</ul>
+			<ul>
+				<li>카테고리 이름</li>
+				<li>수량</li>
+			</ul>
+			<ul>
+				<li>카테고리 이름</li>
+				<li>수량</li>
+			</ul>
+			<ul>
+				<li>카테고리 이름</li>
+				<li>수량</li>
+			</ul>
+			<ul>
+				<li>카테고리 이름</li>
+				<li>수량</li>
+			</ul>
 		</div>
 		<div class="pCategory_search">
 			<ul>

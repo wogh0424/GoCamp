@@ -35,6 +35,10 @@ public interface ProductDAO {
 
 	List<ProductDTO> selectOne(String name);
 
-	List<BasketDTO> basketSelectAll();
+	List<BasketDTO> basketSelectAll(String userId);
+
+	int basketdelete(int idx);
+
+	int basketmodify(BasketDTO dto);
 
 }
