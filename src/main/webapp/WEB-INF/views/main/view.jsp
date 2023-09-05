@@ -203,7 +203,7 @@
 			<div class="intro2">
 				<div class="viewImageTT">▶️ 주변 사진</div>
 				<div id="viewImage"></div>
-				<div class="notion">※ 모든 컨텐츠의 저작권은 고캠핑에 있습니다. 무단 사용 및 불법 재배포는
+				<div class="notion">※ 모든 컨텐츠의 저작권은 더캠핑에 있습니다. 무단 사용 및 불법 재배포는
 					법적 조치를 받을 수 있습니다.</div>
 			</div>
 			<div class="intro3">
