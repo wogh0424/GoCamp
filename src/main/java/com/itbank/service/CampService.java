@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.itbank.model.CampDTO;
 import com.itbank.model.ImageDTO;
 import com.itbank.model.ItemDTO;
-import com.itbank.model.LikesDTO;
 import com.itbank.model.PageAndSearchDTO;
 import com.itbank.model.SearchDTO;
 import com.itbank.model.TagDTO;

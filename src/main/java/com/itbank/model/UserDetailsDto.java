@@ -9,6 +9,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserDetailsDto implements UserDetails{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String USERID;
 	private String USERPW;
 	private boolean ENABLED;
