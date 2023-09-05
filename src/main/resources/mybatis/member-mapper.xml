@@ -30,7 +30,7 @@
 		insert into member_auth (userid) values (#{userid})
 	</insert>
 	
-	<select id="getUser" resultType="member">
+	<select id="adminpage" resultType="member">
 		select * from member mem join member_auth au on mem.userid = au.userid
 	</select>
 	

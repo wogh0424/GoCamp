@@ -44,10 +44,10 @@ public class AdminController {
 	@GetMapping("/Sales")
 	public void Sales() {}
 	
-	@GetMapping("/userData")
+	@GetMapping("/adminpage")
 	public ModelAndView requestData(HttpServletRequest request, Model model) {
-		ModelAndView mav = new ModelAndView("/admin/userData");
-		List<MemberDTO> list = loginService.getUser();
+		ModelAndView mav = new ModelAndView("/admin/adminpage");
+		List<MemberDTO> list = loginService.adminpage();
 		mav.addObject("list",list);
 		return mav;
 	}
