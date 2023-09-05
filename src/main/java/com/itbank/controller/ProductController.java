@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.model.BasketDTO;
 import com.itbank.model.ProductDTO;
 import com.itbank.model.ShopPagingDTO;
 import com.itbank.service.ProductService;
@@ -81,6 +82,8 @@ public class ProductController {
 	@GetMapping("/basket")
 	public ModelAndView basket() {
 		ModelAndView mav = new ModelAndView("product/basket");
+		List<BasketDTO> basketlist = productService.basketSelectAll();
+		mav.addObject("basketlist", basketlist);
 		return mav;
 	}
 	
@@ -95,6 +98,13 @@ public class ProductController {
 	@GetMapping("/lastorder")
 	public ModelAndView lastoder() {
 		ModelAndView mav = new ModelAndView("product/lastorder");
+		return mav;
+	}
+	
+	// 주문목록
+	@GetMapping("/orderlist")
+	public ModelAndView orderlist() {
+		ModelAndView mav = new ModelAndView("product/orderlist");
 		return mav;
 	}
 }
