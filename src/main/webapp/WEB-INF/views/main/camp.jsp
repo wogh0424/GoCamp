@@ -13,7 +13,7 @@
 	<div class="overlay"></div>
 	<div class="modal_body">
 		<div class="detailed_search_head">
-			<h2>상세검색 메뉴</h2>
+			<h2>🔍 원하는 캠핑장을 더 <span class="highlight">상세하게</span> 검색해보세요</h2>
 		</div>
 		
 		<div class="detailed_search_choice">

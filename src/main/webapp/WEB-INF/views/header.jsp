@@ -667,7 +667,8 @@ footer{
 	height: 300px;
 }
 .camping_left_content {
-	background-color: lightgrey;
+	background-color: #eeeeee;
+	padding: 15px;
 }
 .camping_right_list {
 	display: flex;
@@ -680,9 +681,13 @@ footer{
 .camping_right_contents > h3 {
 	text-align: center;
 }
+.blue {
+	color: blue;
+}
 /*camping_top_wrap 캠핑장 랭크 끝*/
 /*메뉴 드랍 다운 시작 */
 #menu {
+		box-sizing: border-box;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -703,7 +708,7 @@ footer{
 		align-items: center;
 		float:left;
 		width:140px;
-		height: 80px;
+		height: 85px;
 		position:relative;
 		list-style: none;
 		padding: 0;
@@ -715,20 +720,30 @@ footer{
 		position: absolute;
 		font-size:14px;
 		background: white;
-		top: 80px;
+		top: 86px;
 		left: 0px;
 }
+#menu > ul > li:hover {
+	background-color: #6f8c77;
+}
+
 
 #menu > ul > li:hover > ul {
 		display:block;
 		z-index: 1;
 }
 
+#menu > ul > li > ul > li {
+		background-color: #6f8c77;
+		border: 1px solid lightgrey;
+		border-top: none;
+}
+
 #menu > ul > li > ul > li:hover {
 		background: orange;
-		transition: ease 1s;
+		transition: ease 0.5s;
 }
-#menu > ul > li > a {
+#menu > ul > li a {
 		text-decoration: none;
 		color: white;
 		font-weight: bold;
@@ -1032,6 +1047,12 @@ aside {
 	border-bottom: 1px solid lightgrey;
 }
 /*주무녈제 페이지 끝*/
+
+.camping_right_list:hover {
+	background-color: #F4C752;
+	color: #1146D5;
+	transition: ease 0.3s;
+}
 </style>
 
 <script>
@@ -1090,8 +1111,8 @@ $(document).ready(function() {
 			<a href="${cpath }/"><img
 				src="${cpath }/resources/image/thecamping_logo.png"></a>
 		</div>
-		<div class="header_login">
-			<ul>
+		<div class="header_login" >
+			<ul  style="margin-right: 10%;">
 				<c:if test="${pageContext.request.userPrincipal != null}">
 					<li>현재 접속 아이디 ${pageContext.request.userPrincipal.name}</li>
 					<!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
@@ -1124,18 +1145,26 @@ $(document).ready(function() {
 			</ul>
 		</div>
 	</header>
+	<div class="header_bottom" style="display: flex; justify-content: right; height: 40px; align-items:center; padding-right: 10%; width: 100%; background-color: #3C5944;">
+		<form action="${cpath }/main/search">
+			<div style="display: flex; justify-content: space-between; background-color: white; font-size: 16px;">
+			<input type="search" name="srchKywrd" placeholder="검색어를 입력하세요" style="border: none; background-color: white; width: 250px; height: 30px;">
+			<span style="line-height: 30px;">🔍</span>
+			</div>
+		</form>
+	</div>
 	<nav>
 		<div class="header_top">
 			<div id="menu">
 				<ul>
-					<li><a href="#">검색</a>
+					<li><a href="">검색</a>
 						<ul>
 							<li><a href="${cpath }/main/camp">캠핑장</a></li>
 							<li><a href="">SUB_MENU</a></li>
 							<li><a href="">SUB_MENU</a></li>
 						</ul>
 					</li>
-					<li><a href="#">게시판</a>
+					<li><a href="">게시판</a>
 						<ul>
 							<li><a href="${cpath }/noticeBoard">공지게시판</a></li>
 							<li><a href="${cpath }/eventBoard">이벤트게시판</a></li>
@@ -1144,37 +1173,32 @@ $(document).ready(function() {
 							<li><a href="${cpath }/main/like">좋아요</a></li>
 						</ul>
 					</li>
-					<li><a href="#">쇼핑몰</a>
+					<li><a href="">쇼핑몰</a>
 						<ul>
 							<li><a href="${cpath }/product/list">MENU</a></li>
 							<li><a href="${cpath }/product/basket">SUB_MENU</a></li>
 							<li><a href="">SUB_MENU</a></li>
 						</ul>
 					</li>
-					<li><a href="#">MENU</a>
+					<li><a href="">MENU</a>
 						<ul>
-							<li><a href="#">SUB_MENU</a></li>
-							<li><a href="#">SUB_MENU2</a></li>
-							<li><a href="#">SUB_MENU3</a></li>
+							<li><a href="">SUB_MENU</a></li>
+							<li><a href="">SUB_MENU2</a></li>
+							<li><a href="">SUB_MENU3</a></li>
 						</ul>
 					</li>
-					<li><a href="#">MENU</a>
+					<li><a href="">MENU</a>
 						<ul>
-							<li><a href="#">SUB_MENU</a></li>
-							<li><a href="#">SUB_MENU2</a></li>
-							<li><a href="#">SUB_MENU3</a></li>
+							<li><a href="">SUB_MENU</a></li>
+							<li><a href="">SUB_MENU2</a></li>
+							<li><a href="">SUB_MENU3</a></li>
 						</ul>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<div class="header_bottom" style="display: flex; justify-content: right; height: 40px; align-items:center;">
-		<form action="${cpath }/main/search">
-			<input type="search" name="srchKywrd" placeholder="검색어를 입력하세요">
-			<input type="submit" value="검색">
-		</form>
-	</div>
+	
 	
 	
 

@@ -332,6 +332,10 @@
 				1
 			</foreach>
 	</update>
+	
+	<select id="selectBest5" resultType="item">
+		select * from gocamp order by clickCnt desc limit 5
+	</select>
 </mapper>
 
 
