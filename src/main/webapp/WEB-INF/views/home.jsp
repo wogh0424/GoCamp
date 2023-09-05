@@ -6,18 +6,18 @@
 <div class="camping_top_wrap" style="margin: 60px auto; ">
 	<div class="camping_left_list" style="margin-right: 30px;">
 		<ul>
-			<li><video src="${cpath }/resources/upload/camp/jaeho.mp4" width="100%" height="100%" controls loop></video></li>
+			<li style="background-color: #c7ebf1;"><video src="${cpath }/resources/upload/camp/jaeho.mp4" width="100%" height="100%" controls loop></video></li>
 			<li class="camping_left_content" style="text-align: center;">
 			<h3>🏞️<span class="blue">ojm0827</span>의 여행후기</h3>
-				<div style="width: 250px; font-size: 16px; margin:80px auto 0; text-align: center; font-weight: bold;"><a href="${cpath }/main/view/7255" style="color: black;">"김OO과 함께해서 아주 즐거운 여행이 되었던 것 같습니다 ^^b"</a></div>
+				<div style="width: 250px; font-size: 16px; margin:80px auto 0; text-align: center; font-weight: bold;"><a href="${cpath }/main/view/1" style="color: black;">"김OO과 함께해서 아주 즐거운 여행이 되었던 것 같습니다 ^^b"</a></div>
 			</li>
 		</ul>
 		<ul>
 			<li class="camping_left_content" style="text-align: center;">
 				<h3>🛣️<span class="blue">Jaeho1234</span>의 여행후기</h3>
-				<div style="width: 250px; font-size: 16px; margin:60px auto 0; text-align: center; font-weight: bold;"><a href="${cpath }/main/view/7255" style="color: black;">"이곳은 자연의 아름다움과 문화의 조화가 빛나며, 푸르른 산과 맑은 계곡이 만들어내는 풍경은 그림 같이 아름다웠습니다. 이곳에서의 경험은 정말 잊지 못할 것입니다."</a></div>
+				<div style="width: 250px; font-size: 16px; margin:60px auto 0; text-align: center; font-weight: bold;"><a href="${cpath }/main/view/1" style="color: black;">"이곳은 자연의 아름다움과 문화의 조화가 빛나며, 푸르른 산과 맑은 계곡이 만들어내는 풍경은 그림 같이 아름다웠습니다. 이곳에서의 경험은 정말 잊지 못할 것입니다."</a></div>
 			</li>
-			<li><img src="${cpath }/resources/image/mainView/산.jpg" width="100%" height="250px" style="margin: 25px 0;"></li>
+			<li style="background-color: #c7ebf1;"><video src="${cpath }/resources/upload/camp/jaeho2.mp4" width="100%" height="100%" controls loop></video></li>
 		</ul>
 	</div>
 	<div class="camping_right_items" >

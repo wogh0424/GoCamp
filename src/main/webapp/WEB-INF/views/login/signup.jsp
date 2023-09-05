@@ -11,7 +11,7 @@
 		display: none;
 	}
 	#signForm{
-		width: 530px;
+		width: 550px;
 		margin: 50px auto;
 		border: 1px solid black;
 		padding: 20px;
@@ -44,6 +44,9 @@
 	#dupCheckBtn {
 		float: right;
 		margin-right: 15px;
+		background-color: #4476D5;
+		color: white;
+		height: 52px;
 	}
 	
 	#dubMessage {
@@ -72,9 +75,12 @@
 	}
 	
 	#sendAuthNumber {
-		margin: 0px 15px;
 		float: right;
-		width: 96px;
+		width: 110px;
+		height: 52px;
+		background-color: #4476D5;
+		color: white;
+		text-align: center;
 	}
 	
 	#errorMessage,
@@ -100,6 +106,7 @@
 	#checkAuthNumber {
 		float: right;
 		margin-right: 10px;
+		
 	}
 	
 	

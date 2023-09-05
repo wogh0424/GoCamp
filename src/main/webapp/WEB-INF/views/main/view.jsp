@@ -45,7 +45,12 @@
 <div id="view">
 	<div id="viewMain">
 		<div id="firstImage">
-			<img src="${view.firstImageUrl }">
+			<c:if test="${fn:contains(view.firstImageUrl, 'gocamping') }">
+				<img src="${view.firstImageUrl }" style="margin-right: 30px;">
+			</c:if>
+			<c:if test="${!fn:contains(view.firstImageUrl, 'gocamping') }">
+				<img src="${cpath }/resources/upload/camp/${view.firstImageUrl }" style="margin-right: 30px;">
+			</c:if>
 		</div>
 		<div id="viewDescription">
 			<table id="viewDescriptionTable">
