@@ -23,6 +23,7 @@ public class FreeBoardReplyService {
 
 	public int writeReply(FreeBoardReplyDTO reply) {
 		int row = dao.updateReplyCount(reply);
+		System.out.println(row);
 		System.out.println(reply + "개의 댓글이 추가");
 		return dao.insertReply(reply);
 	}

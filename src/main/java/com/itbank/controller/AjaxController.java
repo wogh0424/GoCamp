@@ -7,21 +7,19 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.ImageDTO;
 import com.itbank.model.MemberDTO;
+import com.itbank.model.SearchDTO;
 import com.itbank.service.CampService;
 import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
@@ -75,8 +73,8 @@ public class AjaxController {
 	// 정민's ajaxController ///////////////////////////////////////
 	// 이미지가 존재하는지 판단한다.
 	@PostMapping("/imageStatus")
-	public boolean imageStatus(@RequestBody ImageDTO imageUrl) {
-		return checkImageExists(imageUrl.getImageUrl());
+	public boolean imageStatus(@RequestBody ImageDTO imageSrc) {
+		return checkImageExists(imageSrc.getImageSrc());
 	}
 	
 	// (view)이미지가 존재하는지 판단한다.
@@ -92,13 +90,26 @@ public class AjaxController {
         }
     }
 	
-	// (view)DB에서 이미지 url들을 가져온다.
+	// (view, modify)DB에서 이미지 url들을 가져온다.
 	@GetMapping("/getImageList/{contentId}")
 	private List<String> getImageList(@PathVariable("contentId") String contentId) {
 		List<String> imageList = campService.getImageList(contentId);
 		return imageList;
 	}
 	
+	// (modify) 이미지를 하나 삭제한다.
+	@PostMapping("/deleteImageItem")
+	private boolean deleteImageItem(@RequestBody ImageDTO imageInfo) {
+		return campService.deleteImageItem(imageInfo);
+	}
+	
+	// (camp) 자동완성을 위한 데이터를 불러온다.
+	@PostMapping("/autocompletion")
+	private List<String> autocompletion(@RequestBody SearchDTO dto) {
+		return campService.autocompletion(dto);
+	}
+	
+	/////////////////////////////////////////////////////////////////////////
 	// 콘텐츠 아이디 중복을 체크한다.
 	@GetMapping("/cidDupCheck/{contentId}")
 	public boolean cidDupCheck(@PathVariable("contentId") String contentId) {
@@ -111,4 +122,8 @@ public class AjaxController {
 		List<MemberDTO> list = loginService.checkEnabled(userid);
 		return list;
 	}
+
+	
+	
+
 }

@@ -42,5 +42,8 @@ public interface GocampReviewDAO {
 	List<GocampReviewDTO> searchByKeyword(String srchKywrd);
 
 	int countByKeyword(String srchKywrd);
+
+
+	
 	
 }

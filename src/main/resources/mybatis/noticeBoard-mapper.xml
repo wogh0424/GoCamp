@@ -8,7 +8,7 @@
 			select * from notice_board 
 				where title like '%${order}%' or content like '%${order}%'
 				order by 
-					idx desc
+					pin desc, idx desc
 				offset #{offset} rows
 				fetch next #{perPage} rows only
 		</select>
@@ -41,8 +41,8 @@
 		
 		<insert id="insertBoard" parameterType="noticeboard">
 			insert into notice_board
-				(title, content) 
-					values (#{title}, #{content})
+				(title, content, pin) 
+					values (#{title}, #{content}, #{pin})
 		</insert>
 		
 		<insert id="insertFile" parameterType="hashmap">

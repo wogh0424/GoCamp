@@ -162,7 +162,7 @@
 	</div>
 	
 </div>
-
+<%@include file="../footer.jsp" %>
 <script>
 	window.onload = keywordMarkHandler
 	const key = '${keyword}'

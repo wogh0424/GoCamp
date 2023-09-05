@@ -11,7 +11,7 @@
          <li>가격 : ${dto.price }</li>
          <li>별점 : ${dto.pStar }</li>
          <li>${dto.amount }</li>
-         <li>${dto.views} | ${dto.pick } | <button>장바구니</button></li>
+         <li>${dto.views} | ${dto.pick } | <button id="grocery">장바구니</button></li>
       </ul>
    </div>
    <div class="reivew">
@@ -26,5 +26,10 @@
    </div>
    <div><img src="${cpath }/resources/image/${dto.image}">상품 설명 사진 위치</div>
 </div>
+
+<script>
+
+</script>
+
 </body>
 </html>

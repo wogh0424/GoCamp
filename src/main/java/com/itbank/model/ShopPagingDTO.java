@@ -28,7 +28,7 @@ public class ShopPagingDTO {
 			this.page = page;	// 파라미터를 멤버 필드에 대입
 		}
 		offset = (page - 1) * perPage;
-		
+		if (offset < 0) offset = 0;
 		end = ((page - 1) / perSection + 1) * perSection;
 		begin = end - perSection + 1;
 		section = (end - 1) / 10;

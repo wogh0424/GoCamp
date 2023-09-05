@@ -1,7 +1,6 @@
 package com.itbank.controller;
 
 import java.security.Principal;
-import java.util.List;
 import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.MemberDTO;
 import com.itbank.service.LoginService;
@@ -55,8 +53,6 @@ public class LoginController {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String pw = encoder.encode(dto.getUserpw());
 			dto.setUserpw(pw);
-			int startidx = 9;
-			int endidx = 12;
 			String pnum = dto.getPnum();
 			// 전화번호에 - 이 있으면 그대로 replaceChar 함수 실행
 			if(pnum.length() == 13) {

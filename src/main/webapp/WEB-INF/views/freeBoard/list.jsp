@@ -29,10 +29,10 @@
 			<div class="idx">${dto.idx }</div>
 			<div class="title">
 			  <c:if test="${dto.replyCount >= 1}">
-				<a href="${cpath}/freeBoard/view/${dto.idx}">${dto.title }  [${dto.replyCount}]</a>
+				<a href="${cpath}/freeBoard/view/${dto.idx}" class="searchKey">${dto.title }  [${dto.replyCount}]</a>
 			 </c:if>
 			 <c:if test="${dto.replyCount == 0}">
-				<a href="${cpath}/freeBoard/view/${dto.idx}">${dto.title }</a>
+				<a href="${cpath}/freeBoard/view/${dto.idx}" class="searchKey">${dto.title }</a>
 			 </c:if>
 			</div>
 			<div class="writer">${dto.writer }</div>
@@ -55,7 +55,7 @@
 
 <div class="paging">
 	<c:if test="${paging.prev }">
-		<a href="${cpath }/freeBoard?page=${paging.begin - paging.perPage}&search=${paging.order}">[이전]</a>
+		<a href="${cpath }/freeBoard?page=${paging.begin - paging.perPage}&search=${paging.order}" >[이전]</a>
 	</c:if>
 	<c:forEach var="i" begin="${paging.begin }" end="${paging.end }">
 		<a href="${cpath }/freeBoard?page=${i }&search=${paging.order}">[${i }]</a>
@@ -64,5 +64,21 @@
 		<a href="${cpath }/freeBoard?page=${paging.end + 1}&search=${paging.order}">[다음]</a>
 	</c:if>
 </div>
+
+<script>
+	window.onload = keywordMarkHandler
+	const key = '${param.order}'
+	
+	function keywordMarkHandler() {
+		const links = document.querySelectorAll('a.searchKey')
+		links.forEach(a => {
+			if (a.innerText.includes(key)) {
+				let text = a.innerText.replace(key, '<span class="highlight">' + key + '</span>')
+				a.innerHTML = text				
+			}
+		})
+	}
+</script>
+
 
 </html>

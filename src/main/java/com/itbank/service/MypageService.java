@@ -32,4 +32,10 @@ public class MypageService {
 		return result;
 	}
 
+	public int getMemberIdx(String userid) {
+		return dao.getMemberIdx(userid);
+	}
+
+	
+
 }

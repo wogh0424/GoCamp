@@ -38,6 +38,8 @@ public interface LoginDao{
 
 	public int banUser(MemberDTO dto);
 
+	public int getMemberIdx(String userid);
+
 	public List<MemberDTO> checkEnabled(String userid);
 
 	

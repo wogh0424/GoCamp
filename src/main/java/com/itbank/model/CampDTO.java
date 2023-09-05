@@ -5,8 +5,15 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class CampDTO {
+	// 멀티파일
+	private List<MultipartFile> featureImages;
+	private List<String> imageSrc;
+	
+	// 대표이미지
 	private MultipartFile imageFile;
 	private String firstImageUrl;
+	
+	// 파라미터 하나
 	private String contentId;
 	private String facltNm;
 	private String lineIntro;
@@ -18,24 +25,29 @@ public class CampDTO {
 	private String direction;
 	private String sitedStnc = "0";
 	
+	// 주소관련
 	private String doNm;
 	private String sigunguNm;
 	private String addr1;
 	private String mapX;
 	private String mapY;
 	
+	// 체크되지 않으면 N 값을 넣음
 	private String trlerAcmpnyAt = "N";
 	private String caravAcmpnyAt = "N";
 	private String exprnProgrmAt = "N";
 	private String clturEventAt = "N";
 	
+	// 선택이 하나
 	private String brazierCl;
 	private String animalCmgCl;
 	private String facltDivNm;
 	
+	// textarea
 	private String sbrsEtc;
 	private String posblFcltyEtc;
 	
+	// 선택이 중복 가능
 	private List<String> lctcl = null;
 	private List<String> operPdcl;
 	private List<String> operDecl;
@@ -47,6 +59,18 @@ public class CampDTO {
 	private List<String> posblFcltyCl;
 	private List<String> tag;
 	
+	public List<MultipartFile> getFeatureImages() {
+		return featureImages;
+	}
+	public void setFeatureImages(List<MultipartFile> featureImages) {
+		this.featureImages = featureImages;
+	}
+	public List<String> getImageSrc() {
+		return imageSrc;
+	}
+	public void setImageSrc(List<String> imageSrc) {
+		this.imageSrc = imageSrc;
+	}
 	public String getBrazierCl() {
 		return brazierCl;
 	}

@@ -1,6 +1,7 @@
 package com.itbank.controller;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import com.itbank.model.GocampReviewDTO;
 import com.itbank.model.ItemDTO;
 import com.itbank.model.PageAndSearchDTO;
 import com.itbank.model.MainPagingDTO;
+import com.itbank.model.MemberDTO;
 import com.itbank.model.NoticeBoardDTO;
 import com.itbank.model.SearchDTO;
 import com.itbank.model.TagDTO;
@@ -28,6 +30,8 @@ import com.itbank.service.CampService;
 import com.itbank.service.EventBoardService;
 import com.itbank.service.FreeBoardService;
 import com.itbank.service.GocampReviewService;
+import com.itbank.service.LikeService;
+import com.itbank.service.MypageService;
 import com.itbank.service.NoticeBoardService;
 
 @Controller
@@ -40,6 +44,8 @@ public class MainController {
 	@Autowired private GocampReviewService reviewService;
 	@Autowired private GocampReviewService gocampReviewService;	
 	@Autowired private FreeBoardService freeService;
+	@Autowired private LikeService likeService;
+	@Autowired private MypageService mypageService;
 	
 	@GetMapping("/camp")
 	public ModelAndView main(@RequestParam(value="page", defaultValue="1") int page, 
@@ -60,9 +66,11 @@ public class MainController {
 	}
 	
 	// 캠핑장 당 리뷰 
+	
 	@GetMapping("/view/{contentId}")
-	public ModelAndView view(@PathVariable("contentId") String contentId) throws IOException	{
+	public ModelAndView view(@PathVariable("contentId") String contentId, Principal principal) throws IOException	{
 		ModelAndView mav = new ModelAndView("/main/view");
+		
 		int row = campService.plusViewCount(contentId);
 		System.out.println(row);
 		ItemDTO view = campService.selectOne(contentId);
@@ -72,6 +80,19 @@ public class MainController {
 		List<GocampReviewDTO> list = gocampReviewService.selectAllReview(contentId);
 		mav.addObject("list", list);
 		
+		
+		// 찜 상태 확인하기( 연지)
+		if(principal!= null) {
+		 String username = principal.getName();
+		 MemberDTO dto = mypageService.importMember(username);
+		 int member = dto.getIdx();
+		  
+		 boolean isLiked = likeService.isLiked(contentId, member);
+		 
+		 mav.addObject("isLiked", isLiked);
+		}
+		
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(auth != null && auth.isAuthenticated()) {
 			String userid = auth.getName();
@@ -80,6 +101,8 @@ public class MainController {
 		}
 		return mav;
 	}
+	
+	
 	
 	@PostMapping("/view/{contentId}")
 	public String upload(GocampReviewDTO dto) {   
@@ -98,10 +121,59 @@ public class MainController {
 		System.out.println(row + "행이 삭제되었습니다.");
 		return "redirect:/main/view/" + contentId;
 	}
-	
+
 	// 리뷰 끝 
 	
-	// 통합검색
+	// 찜 추가
+	@PostMapping("/like")
+	public ModelAndView addLike(Principal principal, @RequestParam("gocamp") String gocamp) {
+	    ModelAndView mav = new ModelAndView();
+	    String userid = principal.getName();
+	    MemberDTO dto = mypageService.importMember(userid);
+	    int member = dto.getIdx();
+
+	    int row = likeService.saveLike(gocamp, member);
+	    System.out.println(row);
+	    mav.setViewName("redirect:/main/view/" + gocamp); // 찜한 후 찜 목록 페이지로 리다이렉트
+	    
+	    return mav;
+	}
+
+	// 찜 목록 조회
+	@GetMapping("/like")
+	public ModelAndView viewLikes(Principal principal) {
+		ModelAndView mav = new ModelAndView();
+		String userid = principal.getName();
+		MemberDTO dto = mypageService.importMember(userid);
+		int member = dto.getIdx();
+		
+		List<ItemDTO> likes = likeService.selectLike(member);
+		mav.addObject("likes", likes);
+		mav.setViewName("main/like"); // 찜 목록 페이지 뷰 이름
+		
+		return mav;
+	}
+	// 찜 삭제
+	@PostMapping("/dislike")
+	public ModelAndView removeLike(Principal principal, @RequestParam("gocamp") String gocamp) {
+	    ModelAndView mav = new ModelAndView();
+	    String userid = principal.getName();
+	    MemberDTO dto = mypageService.importMember(userid);
+	    int member = dto.getIdx();
+
+	    int row = likeService.removeLike(gocamp, member); 
+	    System.out.println(row);
+	    mav.setViewName("redirect:/main/view/" + gocamp); // 찜 삭제 후 찜 목록 페이지로 리다이렉트
+	    
+	    return mav;
+	}
+
+	
+	
+
+	
+
+	
 	@GetMapping("/search")
 	public ModelAndView search(String srchKywrd) {
 		ModelAndView mav = new ModelAndView("/main/search");
@@ -129,28 +201,43 @@ public class MainController {
 		mav.addObject("freeCnt", freeCnt);
 		return mav;
 	}
-	@GetMapping("/add") 
-	public ModelAndView addcamp() {
-		ModelAndView mav = new ModelAndView("/main/add");
-		List<TagDTO> tags = campService.selectTags();
-		mav.addObject("tags", tags);
-		return mav;
-	}
 	
 	// 캠핑장 추가	
-	@PostMapping("/add")
+	@PostMapping("/addcamp")
 	public String addcamp(CampDTO dto) {
 		int row = campService.addcamp(dto);
 		System.out.println("추가 : " + row);
 		return "redirect:/main/camp";
 	}
 	
-	@GetMapping("/modify/{contentId}")
+	@GetMapping("/modifycamp/{contentId}")
 	public ModelAndView modifycamp(@PathVariable("contentId") String contentId) {
-		ModelAndView mav = new ModelAndView("/main/modify/{contentId}");
+		ModelAndView mav = new ModelAndView("/main/modifycamp");
 		ItemDTO item = campService.selectOne(contentId);
+		List<TagDTO> tags = campService.selectTags();
+		mav.addObject("tags", tags);
 		mav.addObject("item", item);
 		return mav;
 	}
 	
-} 
+	@PostMapping("/modifycamp/{contentId}")
+	public String modifycamp(CampDTO dto) {
+		int row = campService.updatecamp(dto);
+		System.out.println("수정 : " + row);
+		return "redirect:/main/view/{contentId}";
+	}
+	
+	@GetMapping("/deletecamp/{contentId}")
+	public String deletecamp(@PathVariable("contentId") String contentId) {
+		int row = campService.deletecamp(contentId);
+		System.out.println(row);
+		return "redirect:/main/camp";
+	}
+
+	
+	
+	
+	
+	
+	
+}

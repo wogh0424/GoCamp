@@ -95,7 +95,7 @@ function viewBannerHandler() {
 					
 					const requestStatus = cpath + '/imageStatus'
 					const requestUrl = {
-							imageUrl: newUrl
+							imageSrc: newUrl
 					}
 					// imageStatus에 요청을 보내서 url에 이미지가 있는지 확인한다.
 					await fetch(requestStatus, {
@@ -106,7 +106,6 @@ function viewBannerHandler() {
 						body: JSON.stringify(requestUrl)
 					}).then(resp => resp.json())
 					.then(json => {
-						console.log(json)
 						if (json) {
 							newimgUrl = newUrl
 						}
@@ -203,5 +202,29 @@ function viewBannerHandler() {
 function modalCloseHandler() {  // 모달을 닫고 body의 스크롤을 복구한다.
 	document.getElementById('imageModal').style.display = 'none'
     document.body.style.overflow = 'auto';	 
+}
+
+function likeHandler(){
+	const mypickBtn = document.getElementById('mypickBtn')
+	
+	if(mypickBtn.innerHTML === '찜하기'){
+		mypickBtn.innerHTML = '찜 취소'
+		
+		$.post('${cpath}/main/like',
+				{gocamp: '${view.contentId}'},
+				function(data){
+					alert('찜하기 완료(찜 목록에서 확인해주세요)')
+				})
+	}
+	else{
+		mypickBtn.innerHTML = '찜하기'
+
+		$.post('${cpath}/main/dislike',
+				{gocamp: '${view.contentId}'},
+				function(data){
+					alert('찜하기 취소 완료')
+
+				})
+	}
 }
 

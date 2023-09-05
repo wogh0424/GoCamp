@@ -347,10 +347,8 @@
 					</select>		
 					</div>
 					<div id="mainSearchBtn">
-						<input list="searchBar" type="search" name="keyword" placeholder="검색어를 입력하세요" value="${param.keyword }" autocomplete="off">
-						<datalist id="searchBar">
-							
-						</datalist> 
+						<input list="searchBar" type="search" name="keyword" id="searchKeyword" placeholder="검색어를 입력하세요" value="${param.keyword }" autocomplete="off">
+						<datalist id="searchBar"></datalist> 
 						<button id="mainSearch">검색</button>
 						<button id="openModal">상세조건 +</button>
 					</div>
@@ -415,8 +413,10 @@
 						<div class="cnts">
 							<div class="clickCnt">조회수 ${item.clickCnt }</div>
 							<div class="recmCnt">추천수 ${item.recmCnt }</div>
-							<a href="${cpath }/main/modifycamp/${item.contentId}"><button class="modifyCampBtn">수정</button></a>
-							<a href="${cpath }/main/deletecamp/${item.contentId}"><button class="delectCampBtn">삭제</button></a>
+							<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
+								<a href="${cpath }/main/modifycamp/${item.contentId}"><button class="modifyCampBtn">정보 수정</button></a>
+								<a href="${cpath }/main/deletecamp/${item.contentId}" onclick="return confirm('정말로 삭제하시겠습니까? 삭제 후 복구는 불가능합니다.')"><button class="delectCampBtn">캠핑장 삭제</button></a>
+							</c:if>
 						</div>
 						<div class="where">
 							<div class="facltNm">
@@ -496,6 +496,9 @@
 	</c:if>
 	</div> <!-- end of gocampMain -->
 </div><!-- end of main -->
+
+<%@include file="../footer.jsp" %>
+
     <a style="display:scroll;position:fixed;bottom:50px;right:50px;text-decoration: none;" rel="nofollow" href="#" title="Back to Top"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
 <script>
 	// 상세검색 모달
@@ -580,8 +583,10 @@
 
 <script>
    // 검색어 자동완성 기능
-	const searchBar = document.getElementById('searchBar')
-
+	const dataList = document.getElementById('searchBar')
+	const search = document.getElementById('searchKeyword')
+	
+	search.onkeyup = autoCompletionHandler
 	
 </script>
 
