@@ -740,14 +740,9 @@ aside {
 	border-left: 0.25px solid black;
 	float: right;
 }
-<<<<<<< HEAD
+
 /*메뉴 드랍 다운 끝*/
 
-.highlight {
-		color: #c22187;
-		font-weight: bold;
-	}
-=======
 
 /*장바구니 페이지 시작*/
 .basket_status > ul{
@@ -871,7 +866,6 @@ aside {
 	justify-content: flex-end;
 }
 /*주무녈제 페이지 끝*/
->>>>>>> 70a4e8b736d9a071731c70d30a4ec10db707779a
 </style>
 
 <script>

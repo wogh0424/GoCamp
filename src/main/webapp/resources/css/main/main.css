@@ -160,6 +160,7 @@ a {
 #search button {
 	width: 140px;
 	height: 30px;
+	margin-left: 50px;
 	background-color: #333333;
 	border: 1px solid black;
 	color: white;
@@ -446,7 +447,7 @@ button#tag_resetBtn {
 }
 
 .sbrsCl {
-	width: 100%;
+	width: 104%;
 	margin-top: 20px;
 	display: flex;
 	padding: 15px;
@@ -666,6 +667,7 @@ button#tag_resetBtn {
 }
 
 .rpBtns {
+	display:flex;
 	margin-top: 20px;
 	width: 100%;
 }
@@ -683,7 +685,7 @@ button#tag_resetBtn {
 	color: white;
 }
 
-.mypickBtn {
+#mypickBtn {
 	background-color: #d0252b;
 	border: 1px solid #d0252b;
 	color: white;

@@ -56,5 +56,9 @@ public interface CampDAO {
 
 	List<String> autocompletion(SearchDTO dto);
 
+	void countSido(String sido);
+
+	void countMulSido(List<String> sido);
+
 
 }

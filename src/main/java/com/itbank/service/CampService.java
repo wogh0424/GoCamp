@@ -31,6 +31,18 @@ public class CampService {
 
 	
 	public int selectCnt(SearchDTO search) {
+		if (search.getSido() != null) {
+			if (search.getSido() != "") {
+				campDAO.countSido(search.getSido());
+			}
+		}
+		if (search.getDtl_sido() != null) {
+			if (search.getDtl_sido().size() != 0) {
+				List<String> tmp = search.getDtl_sido();
+				campDAO.countMulSido(tmp);
+			}
+		}
+		
 		if (search.getSearchTags() != null) {
 			if (search.getSearchTags() != "") {
 				List<String> tmp = Arrays.asList(search.getSearchTags().split(","));
@@ -180,13 +192,10 @@ public class CampService {
 		row += campDAO.deletecamp(contentId);
 		return row;
 	}
-<<<<<<< HEAD
-	
+
 	// 검색어 자동완성
 	public List<String> autocompletion(SearchDTO dto) {
 		return campDAO.autocompletion(dto);
 	}
-=======
 
->>>>>>> b8dce030271e0338fa804420a36c6d8a8d560c79
 }

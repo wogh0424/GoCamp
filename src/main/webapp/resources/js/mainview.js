@@ -204,3 +204,27 @@ function modalCloseHandler() {  // 모달을 닫고 body의 스크롤을 복구�
     document.body.style.overflow = 'auto';	 
 }
 
+function likeHandler(){
+	const mypickBtn = document.getElementById('mypickBtn')
+	
+	if(mypickBtn.innerHTML === '찜하기'){
+		mypickBtn.innerHTML = '찜 취소'
+		
+		$.post('${cpath}/main/like',
+				{gocamp: '${view.contentId}'},
+				function(data){
+					alert('찜하기 완료(찜 목록에서 확인해주세요)')
+				})
+	}
+	else{
+		mypickBtn.innerHTML = '찜하기'
+
+		$.post('${cpath}/main/dislike',
+				{gocamp: '${view.contentId}'},
+				function(data){
+					alert('찜하기 취소 완료')
+
+				})
+	}
+}
+

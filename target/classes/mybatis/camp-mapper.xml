@@ -317,6 +317,21 @@
 		and lctcl like '%${lctcl}%'
 		order by clickCnt
 	</select>
+	
+	<insert id="countSido" parameterType="string">
+		insert into sidoChooseCount (${sido}) values (1)
+	</insert>
+	
+	<update id="countMulSido" parameterType="list">
+		insert into sidoChooseCount 
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+			     ${item}
+			</foreach>
+			values
+			<foreach collection="list" open="(" close=")" separator=",">
+				1
+			</foreach>
+	</update>
 </mapper>
 
 
