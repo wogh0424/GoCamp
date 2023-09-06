@@ -54,7 +54,7 @@
          SELECT * from product	where idx = ${idx}
     </select>
     
-<<<<<<< HEAD
+
     <select id="selectMaxIdxFromUpload" resultType="int">   
 		select max(idx) from product
 	</select>
@@ -87,7 +87,6 @@
 	<select id="showProductImages" parameterType="int" resultType="product_file">
 		select * from product_file where product_idx = #{idx}
 	</select>
-=======
     <insert id="grocery" parameterType="product">
     	insert into basket (userid, pid, pName, price, amount) values 
     		(#{userid}, #{idx}, #{pName}, #{price}, #{amount})
@@ -100,5 +99,4 @@
     <update id="updatecurrentgrocery" parameterType="product">
     	update basket set amount = amount + #{amount} where userid = #{userid} and pid = #{idx} and pName = #{pName}
     </update>
->>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
 </mapper>
