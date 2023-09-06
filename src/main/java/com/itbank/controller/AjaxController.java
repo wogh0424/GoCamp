@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itbank.model.AdminDTO;
 import com.itbank.model.ImageDTO;
 import com.itbank.model.IncomeDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.model.Product_fileDTO;
+import com.itbank.model.ReportDTO;
 import com.itbank.model.ProductDTO;
 import com.itbank.model.SalesDTO;
 import com.itbank.model.SearchDTO;
@@ -175,7 +177,6 @@ public class AjaxController {
 
 	        formattedDTO.setFormattedDate(formattedDate);
 	        formattedDTO.setIncome(originaldto.getIncome());
-	        System.out.println(formattedDTO.getFormattedDate());
 	        formattedList.add(formattedDTO);
 	    }   
 	    
@@ -186,4 +187,30 @@ public class AjaxController {
 	private boolean deletefile(@RequestBody Product_fileDTO dto) {
 		return productService.deletefile(dto.getFilePath());
 	}
+	
+	
+	@GetMapping("/admin/requestReportedData")
+	private List<ReportDTO> requestReportedData(){
+	 List<ReportDTO> originalList = adminService.requestReportedData();
+	    List<ReportDTO> formattedList = new ArrayList<>();
+
+	    for(ReportDTO originaldto : originalList) {
+	    	ReportDTO formattedDTO = new ReportDTO();
+
+	        // 복사 필드들
+	        formattedDTO.setReportedDate(originaldto.getReportedDate()); // Date 필드 복사
+
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        String formattedDate = dateFormat.format(originaldto.getReportedDate());
+	        
+	        formattedDTO.setFormattedDate(formattedDate);
+	        formattedDTO.setReportedReason(originaldto.getReportedReason());
+	        formattedDTO.setReported_user(originaldto.getReported_user());
+	        formattedDTO.setReportCount(originaldto.getReportCount());
+	        System.out.println(formattedDTO.getFormattedDate());
+	        formattedList.add(formattedDTO);
+	    }
+	    return formattedList;
+	}
 }
+
