@@ -113,6 +113,7 @@ pre {
 	background-color: white;
 }
 
+<<<<<<< HEAD
 #reviewContainer {
 	width: 80%;
 	margin: 0 auto;
@@ -132,6 +133,28 @@ pre {
 	padding: 20px;
 	border-radius: 5px;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+=======
+  #reviewContainer {
+  	width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #reviewContainer > h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  
+  #reviewForm {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+>>>>>>> 5fa8b888a6cfccf33b9ed605ba3a14344267c021
 }
 
 .inputReview {
@@ -145,6 +168,7 @@ pre {
 }
 
 #reviewContainer textarea[name="review_content"] {
+<<<<<<< HEAD
 	width: 720px;
 	height: 200px;
 	padding: 10px;
@@ -152,6 +176,17 @@ pre {
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	box-sizing: border-box;
+=======
+  width: 100%;
+  height: 200px;
+  resize: none;
+  padding: 10px;
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+
+>>>>>>> 5fa8b888a6cfccf33b9ed605ba3a14344267c021
 }
 
 #reviewContainer input[type="file"] {
@@ -186,11 +221,18 @@ pre {
 }
 
 .reviewHeader {
+<<<<<<< HEAD
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
 	margin-bottom: 10px;
+=======
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+>>>>>>> 5fa8b888a6cfccf33b9ed605ba3a14344267c021
 }
 
 .reviewIdx {
@@ -259,8 +301,17 @@ pre {
 
 /* 숨겨진 리뷰 내용에 대한 스타일 */
 .hiddenReview {
+<<<<<<< HEAD
 	display: none; /* 숨겨진 상태로 시작 */
 	padding: 10px; /* 여백 추가 (선택 사항) */
+=======
+  display: none; /* 숨겨진 상태로 시작 */
+  padding: 10px; /* 여백 추가 (선택 사항) */
+  width: 100%;
+  border-right: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+>>>>>>> 5fa8b888a6cfccf33b9ed605ba3a14344267c021
 }
 
 /* 리뷰 제목에 대한 스타일 */
@@ -745,10 +796,16 @@ footer {
 	z-index: 1;
 }
 
+<<<<<<< HEAD
 #menu>ul>li>ul>li {
 	background-color: #6f8c77;
 	border: 1px solid lightgrey;
 	border-top: none;
+=======
+#menu > ul > li > ul > li {
+		background-color: #6f8c77;
+		border-bottom: 1px solid lightgrey;
+>>>>>>> 5fa8b888a6cfccf33b9ed605ba3a14344267c021
 }
 
 #menu>ul>li>ul>li:hover {
@@ -1667,6 +1724,11 @@ aside {
 					style="border: none; background-color: white; width: 250px; height: 30px; padding: 10px;">
 				<span style="line-height: 30px; cursor: pointer;"
 					onclick="submitForm()">🔍</span>
+	<div class="header_bottom" style="display: flex; justify-content: right; height: 40px; align-items:center; padding-right: 10%; width: 100%; background-color: #3C5944;">
+		<form  action="${cpath }/main/search">
+			<div style="display: flex; justify-content: space-between; background-color: white; font-size: 16px;  margin-top:10px;">
+			<input id="totalsearchInput" type="search" name="srchKywrd" placeholder="검색어를 입력하세요" style="border: none; background-color: white; width: 250px; height: 30px; padding: 10px;">
+			<span style="line-height: 30px; cursor: pointer;" onclick="submitForm()">🔍</span>
 			</div>
 		</form>
 	</div>

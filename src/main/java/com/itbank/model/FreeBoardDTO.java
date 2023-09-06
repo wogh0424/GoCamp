@@ -30,6 +30,16 @@ public class FreeBoardDTO {
 	private Date date;
 	private int replyCount;
 	
+	private List<String> deleteImages;
+
+	public List<String> getDeleteImages() {
+	    return deleteImages;
+	}
+
+	public void setDeleteImages(List<String> deleteImages) {
+	    this.deleteImages = deleteImages;
+	}
+	
 	public int getIdx() {
 		return idx;
 	}

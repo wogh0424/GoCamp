@@ -21,9 +21,10 @@
 	</div>
 	<c:forEach var="dto" items="${list }">
 		<div class="item">
-			<div class="idx">${dto.idx }</div>
+			<div class="boardIdx">${dto.idx }</div>
 			<div class="title">
-				<a href="${cpath}/eventBoard/view/${dto.idx}">${dto.title }</a>
+				<a href="${cpath}/eventBoard/view/${dto.idx}">
+				<c:if test="${dto.pin == 1 }">⭐중요⭐</c:if>${dto.title }</a>
 			</div>
 			<div class="writeDate">${dto.postdate }</div>
 			<div class="viewCount">${dto.view_cnt }</div>

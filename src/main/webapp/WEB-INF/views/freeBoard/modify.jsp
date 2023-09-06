@@ -7,57 +7,53 @@
 </div>
 
 
-<form id="insertForm" method="POST" enctype="multipart/form-data" >
-	<div>
-			<p><input type="text" name="title" value="${dto.title }" required autofocus></p>
-			<p><input type="text" name="writer" value="${dto.writer }" readonly></p>
-			<p><input type="date" name="writeDate" value="${dto.date }" readonly></p>
-			<label for="upload">수정 첨부파일 미리보기:</label>
-<!-- 			<div id="preview"> -->
-			
-<!-- 			<div> -->
-<!-- 			    <p>현재 이미지:</p> -->
-<%-- 			    <img src="${dto.filePath}" alt="현재사진" style="max-height: 200px;"> --%>
-<!-- 			    <p>이미지 삭제: <input type="checkbox" name="deleteImage"></p> -->
-<!-- 			</div> -->
-<!-- 			</div> -->
-	    <c:forEach var="filePath" items="${dto.filePath}" varStatus="loop">
-            <img src="${cpath}/upload/${filePath}" height="200">
-            <p>이미지 삭제: <input type="checkbox" name="deleteImage_${loop.index}" value="${filePath}"></p>
-            <p>새 이미지 업로드: <input name="upload_${loop.index}" type="file" accept="image/*"></p>
-        </c:forEach>
-<%-- 			<div><p><input name="upload" type="file" id="upload" value="${dto.filePath }" accept="image/*" multiple ></p></div> --%>
-			<p><textarea id="content" name="content" required >${dto.content }</textarea></p>
-			<p><input type="submit"></p>
-	</div>
-</form>	
+<form id="insertForm" method="POST" enctype="multipart/form-data">
+  
+    <div id="boardTitle"><input type="text" name="title" value="${dto.title}" required autofocus></div>
 
-    <script>
-        const input = document.querySelector('input[name="upload"]')
-        const preview = document.getElementById('preview')
-     
 
-       	function changeHandler(event) {
-  		preview.innerHTML = ''
-			
-		    if (event.target.files) {
-		        const files = event.target.files
-		        for (const file of files) {
-		            const reader = new FileReader()
-		            reader.onload = function(e) {
-		                const image = new Image()
-		                image.src = e.target.result
-		                image.style.height = '200px'
-		                preview.appendChild(image)
-		            }
-		            reader.readAsDataURL(file)
-		        }
-		      
-		    } 
-		}
-		
-		input.onchange = changeHandler
-    </script>
+    <div id="boardWriter"><input type="text" name="writer" value="${dto.writer}" readonly></div>
+
+    <div id="boardDate"><input type="date" name="writeDate" value="${dto.date}" readonly></div>
+
+    <!-- 이미지 미리보기 , 삭제 체크박스 -->
+    <c:forEach var="filePath" items="${dto.filePath}" varStatus="loop">
+        <img src="${cpath}/upload/${filePath}" height="200">
+       <div id="boardSelectImage">이미지 삭제: <input type="checkbox" name="deleteImages" value="${filePath}"></div>
+    </c:forEach>
+
+    <!-- 새로운 이미지 업로드 -->
+    <label for="upload">새 이미지 업로드:</label>
+    <input name="upload" type="file" accept="image/*" multiple>
+
+
+   <div id="boardContent"><textarea id="content" name="content" required>${dto.content}</textarea></div>
+    <div id="boardSubmit"><input type="submit"></div>
+</form>
+
+<!-- 미리보기 영역 -->
+<div id="preview"></div>
+
+<script>
+    document.querySelector('input[name="upload"]').addEventListener('change', function(event) {
+        const preview = document.getElementById('preview');
+        preview.innerHTML = '';
+        
+        if (event.target.files) {
+            const files = event.target.files;
+            for (const file of files) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const image = new Image();
+                    image.src = e.target.result;
+                    image.style.height = '200px';
+                    preview.appendChild(image);
+                }
+                reader.readAsDataURL(file);
+            }
+        } 
+    });
+</script>
 
 
 

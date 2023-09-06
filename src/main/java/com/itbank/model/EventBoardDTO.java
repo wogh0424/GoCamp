@@ -18,9 +18,21 @@ public class EventBoardDTO {
 	private String content;
 	private Date postdate;
 	private int view_cnt;
+	private int pin;
 	
 	private String filePath;
 	private List<MultipartFile> upload;
+	
+	private List<String> deleteImages;
+
+	public List<String> getDeleteImages() {
+	    return deleteImages;
+	}
+
+	public void setDeleteImages(List<String> deleteImages) {
+	    this.deleteImages = deleteImages;
+	}
+	
 	
 	public String getFilePath() {
 		return filePath;
@@ -63,6 +75,14 @@ public class EventBoardDTO {
 	}
 	public void setView_cnt(int view_cnt) {
 		this.view_cnt = view_cnt;
+	}
+
+	public int getPin() {
+		return pin;
+	}
+
+	public void setPin(int pin) {
+		this.pin = pin;
 	}
 	
 	

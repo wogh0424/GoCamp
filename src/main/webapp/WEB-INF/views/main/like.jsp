@@ -7,6 +7,7 @@
 <div id ="likesContainer">
 <c:forEach items="${likes}" var="like">
     <div>${like.facltNm}</div>
+    <div><img src="${like.firstImageUrl }"></div>
 </c:forEach>
 </div>
 </body>

@@ -7,11 +7,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itbank.model.EventBoardDTO;
+import com.itbank.model.NoticeBoardDTO;
 import com.itbank.model.PagingDTO;
 import com.itbank.repository.EventBoardDAO;
 
@@ -87,24 +93,52 @@ public class EventBoardService {
 	
 	// 게시글 삭제
 	public int delete(int idx) {
-		List<String> fileList = dao.selectFileList(idx);
-		for(String fileName : fileList) {
-			File file = new File(dir, fileName);			
-			if(file.exists()) {				
-				file.delete();					
-			}
-		}
-		
-		int row = 0;
-		row += dao.deleteFile(idx);
-		row += dao.delete(idx);
-		return row;
+		return dao.delete(idx);
 	}
 		
 	// 게시글 수정
-	public int update(EventBoardDTO dto) {
-		return dao.update(dto);
-	}
+		@Transactional
+		public int update(EventBoardDTO dto){
+		    int row = 0;
+
+		    // 게시글 내용 수정
+		    row += dao.update(dto);
+		    
+		    // 체크된 이미지 삭제
+		    if(dto.getDeleteImages() != null && !dto.getDeleteImages().isEmpty()) {
+		    for (String filePath : dto.getDeleteImages()) { // deleteImages는 선택된 이미지의 경로 리스트
+		        File file = new File(dir, filePath);
+		        if(file.exists()) {				
+		            file.delete();					
+		        }
+		        dao.deleteFile(filePath);
+		    }
+		    }
+
+		    // 새로 업로드된 파일 처리
+		    List<MultipartFile> uploadList = dto.getUpload();
+		    for (MultipartFile file : uploadList) {
+		        String ymd = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		        String fileName = file.getOriginalFilename();
+		        
+		        if (!fileName.equals("")) {
+		            ArrayList<String> fileNameList = new ArrayList<>();
+		            fileName = file.getOriginalFilename().substring(0, fileName.lastIndexOf("."));
+		            String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
+		            File dest = new File(dir, fileName + "_" + ymd + "." + ext);
+		            fileNameList.add(dest.getName());
+		            try {
+		                file.transferTo(dest);
+		            } catch (Exception e) {}				
+		            int fk = dto.getIdx(); 
+		            HashMap<String, Object> param = new HashMap<>();
+		            param.put("upload", fk);
+		            param.put("list", fileNameList);
+		            row += dao.insertFile(param);
+		        }
+		    }
+		    return row;
+		}
 	
 	// 통합검색용 쿼리
 		public List<EventBoardDTO> searchByKeyWord(String srchKywrd) {
@@ -114,6 +148,28 @@ public class EventBoardService {
 
 		public int countByKeyword(String srchKywrd) {
 			return dao.countByKeyword(srchKywrd);
+		}
+
+
+		public void reduceViewCnt(int idx, HttpServletResponse response, HttpServletRequest request) {
+			Cookie[] cookies = request.getCookies();
+			boolean isVisited = true;
+
+			if (cookies != null) {
+				for (Cookie cookie : cookies) {
+					if ("viewCount".equals(cookie.getName())) {
+						isVisited = false;
+						break;
+					}
+				}
+			}
+			if(isVisited) {
+				dao.updateViewCount(idx);
+				Cookie cookie = new Cookie("viewCount","true");
+				cookie.setMaxAge(20);
+				response.addCookie(cookie);
+			}
+			
 		}
 
 }

@@ -3,6 +3,9 @@ package com.itbank.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +41,10 @@ public class EventBoardController {
 	}
 	
 	@GetMapping("/view/{idx}")
-	public ModelAndView view(@PathVariable("idx") int idx) {   
+	public ModelAndView view(@PathVariable("idx") int idx, HttpServletResponse response, HttpServletRequest request) {   
 		ModelAndView mav = new ModelAndView("/eventBoard/view"); 
+		
+		eventBoardService.reduceViewCnt(idx, response,request);
 		
 		EventBoardDTO dto = eventBoardService.selectOne(idx);
 		mav.addObject("dto", dto);

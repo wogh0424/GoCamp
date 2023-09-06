@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+		"-//mybatis.org//DTD Mapper 3.0//EN"
+		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+		
+<mapper namespace="com.itbank.repository.RecommendDAO">
+
+<!--     캠핑장 추천하기 -->
+
+	<insert id="insertRecommend" parameterType="recommend">
+		insert into recommend(member, gocamp) values(#{member},#{gocamp})
+	</insert>
+
+	<update id="increaseRecommendCount" parameterType="string">
+	    update recommend set recommendCampCnt = recommendCampCnt + 1 where gocamp = #{gocamp}
+	</update>
+	
+	<delete id="deleteRecommend" parameterType="recommend">
+		delete from recommend where gocamp = #{gocamp} and member = #{member}
+	</delete>
+	
+	<update id="decreaseRecommendCount" parameterType="string">
+  	  update recommend set recommendCampCnt = recommendCampCnt - 1 where gocamp = #{gocamp} and recommendCampCnt > 0
+	</update>
+	
+	
+	<select id="isCampRecommended" parameterType="recommend" resultType="int">
+		select count(*) from recommend
+			where gocamp = #{gocamp} and member = #{member}
+	</select>
+	
+	<select id="getCampRecommendCount" resultType="int">
+  	  select count(*) from recommend where gocamp = #{gocamp}
+	</select>
+	
+	<!--     캠핑장리뷰 추천하기 -->
+	
+	<insert id="insertReviewRecommend" parameterType="recommend">
+		insert into recommend(member, review) values(#{member},#{review})
+	</insert>
+
+	<update id="increaseReviewRecommendCount" parameterType="int">
+	    update recommend set recommendReviewCnt = recommendReviewCnt + 1 where review = #{review}
+	</update>
+	
+	<delete id="deleteReviewRecommend" parameterType="recommend">
+		delete from recommend where review = #{review} and member = #{member}
+	</delete>
+	
+	<update id="decreaseReviewRecommendCount" parameterType="int">
+  	  update recommend set recommendReviewCnt = recommendReviewCnt - 1 where review = #{review} and recommendReviewCnt > 0
+	</update>
+	
+	
+	<select id="isReviewRecommended" parameterType="recommend" resultType="int">
+		select count(*) from recommend
+			where review = #{review} and member = #{member}
+	</select>
+	
+	<select id="getReviewRecommendCount" resultType="int">
+  	  select count(*) from recommend where review = #{review}
+	</select>
+	
+	<update id="reviewRecommend" parameterType="int">
+		update recommend set recommendReviewCnt = recommendReviewCnt + 1 where review = #{idx}
+	</update>
+	
+</mapper>	

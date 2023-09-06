@@ -2,6 +2,21 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../header.jsp"%>
+<style>
+	#mypageBanner {
+		width: 100%;
+		height: 240px;
+		background-image: url('${cpath}/resources/image/main/banner.jpg');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+	}
+</style>
+
+
+<div id="mypageBanner">
+	
+</div>
 
 <div class="mypage_wrap">
 	<div class="mypage_items">
@@ -30,6 +45,8 @@
 		</c:forEach>
 	</div>
 </div>
+
+<%@ include file="../footer.jsp"%>
 
 <script>
 	// 비밀번호를 Service에서  암호화된 Pw와 비교한 다음 submit을 실행

@@ -109,11 +109,11 @@ input {
 }
 </style>
 	
-	<div style="margin: 50px 0 30px; text-align: center; font-weight: bolder;">
+	<div style="margin: 50px auto 30px; text-align: center; font-weight: bolder;">
 		<h1>로그인</h1>
 		<p style="color: grey;">더캠핑의 다양한 서비스와 혜택을 누리세요</p>
 	</div>
-	
+	<div style="display:flex; justify-content: center;">
 	<div id="section">
 		<article class="loginForm_frame">
 			<div style="width: 400px; height: 300px; background-color: white; padding: 20px; border-radius: 10px;">
@@ -153,6 +153,7 @@ input {
 		<article class="bannerImage" style="height: 340px; background-color:#3C5944; border-radius: 0 10px 10px 0">
 			<img src="${cpath }/resources/image/thecamping_logo.png" style="margin: 80px 10px;">
 		</article>
+	</div>
 	</div>
 	<%@ include file="../footer.jsp" %>
 </body>

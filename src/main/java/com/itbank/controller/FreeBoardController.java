@@ -152,20 +152,10 @@ public class FreeBoardController {
 	
 	
 	
-	// 댓글 수정 삭제
-	@GetMapping("/modifyReply/{idx}")
-	public ModelAndView modifyReply(@PathVariable("idx") int idx) {
-		ModelAndView mav = new ModelAndView("/freeBoard/modifyReply");
-		List<FreeBoardReplyDTO> dto = freeBoardReplyService.getReply(idx);
-		mav.addObject("dto", dto);
-		return mav;
-	}
 	
-	@PostMapping("/modifyReply/{idx}")
-	public String modifyReply(FreeBoardReplyDTO dto) {
-		freeBoardReplyService.updateReply(dto);
-		return "redirect:/freeBoard";
-	}
+	
+	// 댓글  삭제
+
 	
 	@GetMapping("/deleteReply/{idx}")
 	public String deleteReply(@PathVariable("idx") int idx, Integer freeBoardIdx) {

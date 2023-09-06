@@ -26,7 +26,7 @@
 	</div>
 	<c:forEach var="dto" items="${list }">
 		<div class="item">
-			<div class="idx">${dto.idx }</div>
+			<div class="boardIdx">${dto.idx }</div>
 			<div class="title">
 			  <c:if test="${dto.replyCount >= 1}">
 				<a href="${cpath}/freeBoard/view/${dto.idx}" class="searchKey">${dto.title }  [${dto.replyCount}]</a>
@@ -36,7 +36,7 @@
 			 </c:if>
 			</div>
 			<div class="writer">${dto.writer }</div>
-			<div class="date">${dto.date }</div>
+			<div class="writeDate">${dto.date }</div>
 			<div class="viewCount">${dto.view_cnt }</div>
 		</div>
 	</c:forEach>
