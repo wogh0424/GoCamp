@@ -46,12 +46,21 @@
 						<option>80개씩</option>
 					</select>
 				</li>
+				<li><input type="search" name="pSearch">
+					<button>검색</button></li>
+				<li><a href="${cpath}/product/addProduct">상품 등록</a></li>
+
+				<li><input type="search" name="pSearch">
+					<button>검색</button></li>
+				<li><a href="${cpath}/product/addProduct">상품 등록</a></li>
+
 				<form>
 				   
 				     <input type="search" name="pName" placeholder="상품 검색">
 				     <input type="submit" value="검색">
 			
 				</form>
+
 			</ul>
 		</div>
 		<c:forEach var="dao" items="${list }">
@@ -59,9 +68,10 @@
 				<ul>
 					<li><a href="${cpath }/product/view/${dao.idx}">
 					<img src="${cpath }/resources/image/${dao.image}"></a></li>
+<%-- 					<li id="currentImageOverView"><a href="${cpath }/product/view/${dao.idx}"></a></li> --%>
 				</ul>
 				<ul>
-					<li id="product_pName">상품이름 : ${dao.pName }</li>
+					<li id="product_pName"><a href="${cpath }/product/view/${dao.idx}">상품이름 : ${dao.pName }</a></li>
 					<li id="product_pContent">상품설명 : ${dao.pContent }</li>
 					<li>분류 : ${dao.pCategory } | 조회수 : ${dao.views }</li>
 					<li>가격 : ${dao.price }원</li>
@@ -72,7 +82,7 @@
 						<li id="event_ico_event">EVENT</li>
 					</ul>
 					<li>
-						<a href=""><button>수정</button></a>
+						<a href="${cpath }/product/modify/${dao.idx}"><button>수정</button></a>
 						<a href="${cpath }/product/delete/${dao.idx}"><button>삭제</button></a>
 					</li>
 				</ul>
@@ -112,5 +122,6 @@
 	    <a style="display:scroll;position:fixed;bottom:50px;right:50px;" rel="nofollow" href="#" title="Back to Top"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
 	
 </div>
+
 </body>
 </html>

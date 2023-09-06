@@ -359,7 +359,7 @@
 			<div>
 			<p><strong class="green">현재 올라간 이미지</strong></p>
 				<div id="currentImagePreview">
-					<img >
+					
 				</div>
 			<p><strong class="green">풍경사진 업로드</strong>
 			<label class="image" for="featureImages">풍경 이미지 넣기</label></p>

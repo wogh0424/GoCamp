@@ -15,9 +15,8 @@
 		<typeAlias type="com.itbank.model.ShopPagingDTO" alias="shopPaging"/>
 		<typeAlias type="com.itbank.model.MemberDTO" alias="member"/>
 		<typeAlias type="com.itbank.model.ProductDTO" alias="product"/>
+		<typeAlias type="com.itbank.model.Product_fileDTO" alias="product_file"/>
 		<typeAlias type="com.itbank.model.BasketDTO" alias="basket"/>
-		
-		
 		
 		
 		<typeAlias type="com.itbank.model.FreeBoardDTO" alias="freeboard"/>
@@ -26,10 +25,11 @@
 		<typeAlias type="com.itbank.model.EventBoardDTO" alias="eventboard"/>
 		<typeAlias type="com.itbank.model.GocampReviewDTO" alias="gocampreview"/>
 		<typeAlias type="com.itbank.model.LikesDTO" alias="like"/>
-
 		<typeAlias type="com.itbank.model.AdminDTO" alias="admin"/>
-
+		<typeAlias type="com.itbank.model.SalesDTO" alias="sales"/>
+		<typeAlias type="com.itbank.model.IncomeDTO" alias="income"/>
 		
+
 		
 		<!-- 정민 -->
 		<typeAlias type="com.itbank.model.ItemDTO" alias="item"/>
