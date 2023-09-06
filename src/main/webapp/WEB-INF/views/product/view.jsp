@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 
-<<<<<<< HEAD
 <div class="detail_wrap">
 	<div class="detail_items">
 		<div class="view_img">
@@ -33,32 +32,7 @@
 	</div>
 	<div class="view_longimg">
 	</div>
-</div><script>
-const productid = '${dto.idx}'
-	
-	window.onload = imageViewHandler()
-	
-	async function imageViewHandler() {
-		const url = cpath + "/showProductImage/" + productid
-		const currImageView = document.getElementById('currentImageOverView')
-		await fetch(url)
-		.then(resp => resp.json())
-		.then(json => {
-			currImageView.innerHTML = ''
-			json.forEach(ob => {
-				const img = document.createElement('img')
-				img.src = cpath + '/resources/upload/' + ob.filePath
-				img.classList.add('currImages')
-				img.style.width = '300px';
-				img.style.height = '300px';
-				currImageView.appendChild(img)
-			})
-			
-			const currImages = document.querySelectorAll('img.currImages')
-			
-		})
-	}
-</script>
+</div>
 
 <script>
 const pid = '${dto.idx}'
@@ -86,31 +60,6 @@ const pid = '${dto.idx}'
 		})
 	}
 </script>
-=======
-<div class="detail_item">
-<%--    <div class="pImage"><img src="${cpath }/resource/image/${dto.image}"></div> --%>
-   <div><img src="${cpath }/resources/image/noimage.png"></div>
-   <div>
-      <ul>
-         <li>상품명 : ${dto.pName }</li>
-         <li>가격 : ${dto.price }</li>
-         <li>별점 : ${dto.pStar }</li>
-         <li>${dto.amount }</li>
-         <li>${dto.views} | ${dto.pick } | <button id="grocery">장바구니</button></li>
-      </ul>
-   </div>
-   <div class="reivew">
-      <div class="">유저 정보
-         <ul>
-            <li>${dto.pStar }</li>
-            <li>유저 아이디 | ${dto.sDate }</li>
-         </ul>
-      </div>
-      <div class="">리뷰 내용</div>
-      <div class="">리뷰 이미지</div>
-   </div>
-   <div><img src="${cpath }/resources/image/${dto.image}">상품 설명 사진 위치</div>
-</div>
 
 <script>
 	const grocery = document.getElementById('grocery')
@@ -154,7 +103,5 @@ const pid = '${dto.idx}'
 		}
 	}
 </script>
-
->>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
 </body>
 </html>
