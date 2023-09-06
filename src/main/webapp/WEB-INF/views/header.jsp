@@ -7,6 +7,9 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="cpath" value="${pageContext.request.contextPath }" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -946,7 +949,6 @@ aside {
 }
 .boardlist1_left {
 	margin: 5px;
-	width: 70%;
 	border: 1px solid black;
 	background-color: white;
 }
@@ -966,16 +968,11 @@ aside {
 }
 .boardlist2_left {
 	margin: 10px;
-	width: 33%;
+	width: 66%;
 	border: 1px solid black;
 	background-color: white;
 }
-.boardlist2_center{
-	margin: 10px;
-	width: 33%;
-	border: 1px solid black;
-	background-color: white;
-}
+
 .boardlist2_right{
 	margin: 10px;
 	width: 33%;

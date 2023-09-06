@@ -26,10 +26,11 @@
 		<typeAlias type="com.itbank.model.EventBoardDTO" alias="eventboard"/>
 		<typeAlias type="com.itbank.model.GocampReviewDTO" alias="gocampreview"/>
 		<typeAlias type="com.itbank.model.LikesDTO" alias="like"/>
-
 		<typeAlias type="com.itbank.model.AdminDTO" alias="admin"/>
-
+		<typeAlias type="com.itbank.model.SalesDTO" alias="sales"/>
+		<typeAlias type="com.itbank.model.IncomeDTO" alias="income"/>
 		
+
 		
 		<!-- 정민 -->
 		<typeAlias type="com.itbank.model.ItemDTO" alias="item"/>

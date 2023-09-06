@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,9 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.itbank.model.ImageDTO;
+import com.itbank.model.IncomeDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.model.ProductDTO;
+import com.itbank.model.SalesDTO;
 import com.itbank.model.SearchDTO;
+import com.itbank.service.AdminService;
 import com.itbank.service.CampService;
 import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
@@ -33,6 +39,8 @@ public class AjaxController {
 	@Autowired private MypageService mypageService;
 	@Autowired private CampService campService;
 	@Autowired private ProductService productService;
+	@Autowired private AdminService adminService;
+
 	
 	@GetMapping("/dupCheck/{userid}")
 	public int dupCheck(@PathVariable("userid") String userid) {
@@ -132,5 +140,40 @@ public class AjaxController {
 		return row;
 	}
 	
+	@GetMapping("/admin/requestYesternayData")
+	public List<SalesDTO> requestYesternayData(){
+		List<SalesDTO> list = adminService.requestYesternayData();
+		return list;	
+	}
+	
+	@GetMapping("/admin/requestTodayChartData")
+	public List<SalesDTO> requestTodayChartData(){
+		List<SalesDTO> list = adminService.requestTodayChartData();
+		return list;	
+	}
+	
+	@GetMapping("/admin/requestincome")
+	public List<IncomeDTO> requestincome(){
+	    List<IncomeDTO> originalList = adminService.requestincome();
+	    List<IncomeDTO> formattedList = new ArrayList<>();
+
+	    for(IncomeDTO originaldto : originalList) {
+	        IncomeDTO formattedDTO = new IncomeDTO();
+
+	        // 복사 필드들
+	        formattedDTO.setDate(originaldto.getDate()); // Date 필드 복사
+
+	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+	        String formattedDate = dateFormat.format(originaldto.getDate());
+
+	        formattedDTO.setFormattedDate(formattedDate);
+	        formattedDTO.setIncome(originaldto.getIncome());
+	        System.out.println(formattedDTO.getFormattedDate());
+	        formattedList.add(formattedDTO);
+	    }   
+	    
+	    return formattedList;
+	}
+
 
 }
