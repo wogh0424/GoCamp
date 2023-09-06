@@ -72,7 +72,6 @@ public class ProductController {
 		return "redirect:/product/list";
 	}
 	
-<<<<<<< HEAD
     // 상품 상세페이지
     @GetMapping("/view/{idx}")
     public ModelAndView view(@PathVariable("idx") int idx) {
@@ -82,13 +81,6 @@ public class ProductController {
        return mav;
     }
 
-	// 장바구니
-	@GetMapping("/basket")
-	public ModelAndView basket() {
-		ModelAndView mav = new ModelAndView("product/basket");
-		return mav;
-	}
-	
 	// 상품 등록
 	@GetMapping("/addProduct")
 	public void addProduct() {	}
@@ -116,17 +108,6 @@ public class ProductController {
 		System.out.println(row != 0 ? "수정 성공" : "수정 실패");
 		return "redirect:/product/view/{idx}";
 	}	 
-	
-=======
-	   // 상품 상세페이지
-	   @GetMapping("/view/{idx}")
-	   public ModelAndView view(@PathVariable("idx") int idx) {
-	      ModelAndView mav = new ModelAndView("product/view");
-	      ProductDTO dto = productService.selectDetails(idx);
-	      mav.addObject("dto", dto);
-	      return mav;
-	      
-	   }
 	   
 	   // 장바구니
 	   @GetMapping("/basket")
@@ -152,7 +133,7 @@ public class ProductController {
 		    mav.addObject("basketlist", basketlist); 
 		    return mav;
 		}
->>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
+
 	// 주문결제
 	@GetMapping("/orderpay")
 	public ModelAndView orderpay() {
