@@ -189,7 +189,7 @@
 	<select id="searchByKeyWord" parameterType="string"
 		resultType="item">
 		SELECT * FROM gocamp where facltNm like '%${srchKywrd}%'
-		order by clickCnt limit 10
+		order by clickCnt desc limit 10
 	</select>
 
 	<select id="countByKeyword" parameterType="string"
@@ -302,6 +302,36 @@
 	<delete id="deletecamp" parameterType="string">
 		delete from gocamp where contentId = #{contentId}
 	</delete>
+	
+	
+	<!-- 자동완성을 위한 쿼리 -->
+	<select id="autocompletion" parameterType="search" resultType="string">
+		select facltNm from gocamp
+		where doNm like '%${sido}%'
+		and sigunguNm like '%${gungu}%'
+		and facltNm like '%${keyword}%'
+		and lctcl like '%${lctcl}%'
+		order by clickCnt desc
+	</select>
+	
+	<insert id="countSido" parameterType="string">
+		insert into sidoChooseCount (${sido}) values (1)
+	</insert>
+	
+	<update id="countMulSido" parameterType="list">
+		insert into sidoChooseCount 
+			<foreach collection="list" item="item" open="(" separator="," close=")">
+			     ${item}
+			</foreach>
+			values
+			<foreach collection="list" open="(" close=")" separator=",">
+				1
+			</foreach>
+	</update>
+	
+	<select id="selectBest5" resultType="item">
+		select * from gocamp order by clickCnt desc limit 5
+	</select>
 </mapper>
 
 

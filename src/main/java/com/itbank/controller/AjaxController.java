@@ -19,7 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itbank.model.ImageDTO;
 import com.itbank.model.MemberDTO;
+<<<<<<< HEAD
 import com.itbank.model.Product_fileDTO;
+=======
+import com.itbank.model.ProductDTO;
+import com.itbank.model.SearchDTO;
+>>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
 import com.itbank.service.CampService;
 import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
@@ -105,6 +110,13 @@ public class AjaxController {
 		return campService.deleteImageItem(imageInfo);
 	}
 	
+	// (camp) 자동완성을 위한 데이터를 불러온다.
+	@PostMapping("/autocompletion")
+	private List<String> autocompletion(@RequestBody SearchDTO dto) {
+		return campService.autocompletion(dto);
+	}
+	
+	/////////////////////////////////////////////////////////////////////////
 	// 콘텐츠 아이디 중복을 체크한다.
 	@GetMapping("/cidDupCheck/{contentId}")
 	public boolean cidDupCheck(@PathVariable("contentId") String contentId) {
@@ -118,12 +130,19 @@ public class AjaxController {
 		return list;
 	}
 
+<<<<<<< HEAD
 	
 	//정현's ajaxController 
 	@GetMapping("/showProductImage/{idx}")
 	public List<Product_fileDTO> showProductImage(@PathVariable("idx") int idx) {
 		List<Product_fileDTO> list = productService.showProductImages(idx);
 		return list;
+=======
+	@PostMapping("/grocery")
+	public int grocery(@RequestBody ProductDTO dto) {
+		int row = productService.grocery(dto);
+		return row;
+>>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
 	}
 	
 	@PostMapping("/deletefile")

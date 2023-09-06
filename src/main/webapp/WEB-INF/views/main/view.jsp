@@ -45,7 +45,12 @@
 <div id="view">
 	<div id="viewMain">
 		<div id="firstImage">
-			<img src="${view.firstImageUrl }">
+			<c:if test="${fn:contains(view.firstImageUrl, 'gocamping') }">
+				<img src="${view.firstImageUrl }" style="margin-right: 30px;">
+			</c:if>
+			<c:if test="${!fn:contains(view.firstImageUrl, 'gocamping') }">
+				<img src="${cpath }/resources/upload/camp/${view.firstImageUrl }" style="margin-right: 30px;">
+			</c:if>
 		</div>
 		<div id="viewDescription">
 			<table id="viewDescriptionTable">
@@ -106,10 +111,9 @@
 			<div class="rpBtns">
 				<button class="recommendBtn">추천하기</button>
 
-
-				<form method="POST" action="${cpath}/main/like" onsubmit="event.preventDefault(); likeHandler();">
+				<form method="POST" action="${cpath}/main/like" onsubmit="event.preventDefault(); likeHandler();" style="width: 140px; margin: 0 5px;">
 				    <input type="hidden" name="gocamp" value="${view.contentId}">
-				    <button id="mypickBtn" type="submit">${isLiked ? '찜 취소' : '찜하기'}</button>					 
+				    <button id="mypickBtn" type="submit" style="width:140px;">${isLiked ? '찜 취소' : '찜하기'}</button>					 
 				</form>
 
 				<button class="modifyRequest">정보수정요청</button>
@@ -204,116 +208,98 @@
 			<div class="intro2">
 				<div class="viewImageTT">▶️ 주변 사진</div>
 				<div id="viewImage"></div>
-				<div class="notion">※ 모든 컨텐츠의 저작권은 고캠핑에 있습니다. 무단 사용 및 불법 재배포는
+				<div class="notion">※ 모든 컨텐츠의 저작권은 더캠핑에 있습니다. 무단 사용 및 불법 재배포는
 					법적 조치를 받을 수 있습니다.</div>
 			</div>
 			<div class="intro3">
 				<div class="viewmapTT">▶️ 찾아오시는 길</div>
 				<div id="viewMap"></div>
-
-			</div>
-
-
-			<!--               	  캠핑장 리뷰 페이지 - 연지 -->
-
-			<div class="intro4">
-				<div id="reviewContainer">
-					<h3>리뷰작성</h3>
-					<c:if test="${pageContext.request.userPrincipal != null}">
-						<form method="POST" enctype="multipart/form-data" id="reviewForm">
-							<div class="inputReview">
+            </div>
+            <div class="intro4">
+				<div id="reviewContainer" style="margin: 20px auto; width: 100%;">
+						<c:if test="${pageContext.request.userPrincipal != null}">
+							<form method="POST" enctype="multipart/form-data" id="reviewForm">
+								<div class="inputReview">
 								<p>
 									<input type="text" name="title" placeholder="제목"
-										value="[${view.facltNm}]" required autofocus>
+										value="[${view.facltNm}] " required autofocus>
 								</p>
 								<p>
-									<input type="text" name="writer" value="${nickname}" readonly>
+									<input type="text" name="writer" value="${nickname}" readonly style="height: 50px;">
 								</p>
-							</div>
-							<p>
-								<textarea name="review_content" placeholder="리뷰작성" required></textarea>
-							</p>
-							<input type="hidden" name="gocamp" value="${view.contentId }" />
-							<p>
-								<input type="file" name="upload" multiple>
-							</p>
-							<p>
-								<input type="submit" id="reviewBtn" value="리뷰 등록">
-							</p>
-
-						</form>
-					</c:if>
-
-					<c:if test="${pageContext.request.userPrincipal == null}">
-						<fieldset id="login-message">
-							<p>
-								로그인해야 리뷰를 작성할 수 있습니다😄<a href="${cpath }/login/loginForm">
-									로그인go</a>
-							</p>
-						</fieldset>
-					</c:if>
-				</div>
-
-				<fieldset>
-					<c:choose>
-						<c:when
-							test="${empty list && pageContext.request.userPrincipal != null}">
-							<p>아직 등록된 리뷰가 없습니다.</p>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="review" items="${list }">
-
-
-								<div class="gocampReview">
-
-									<div class="reviewHeader">
-										<div id="reviewIdx">${review.idx}</div>
-										<div class="reviewTitle">${review.title}</div>
-										<div id="reviewWriter">${review.writer}</div>
-										<div id="reviewDate">
-											<fmt:formatDate value="${review.reviewdate}"
-												pattern="yyyy-MM-dd" />
-										</div>
-									</div>
-
-									<div class="hiddenReview">
-										<div id="reviewContent">${review.review_content}</div>
-										<div id="btnRecommend">
-											<button>추천하기</button>
-										</div>
-										<c:if test="${review.writer == nickname}">
-											<a class="deleteReviewLink"
-												href="${cpath}/main/deleteReview/${review.idx}"><button>삭제</button></a>
-										</c:if>
-
-										<div id="reviewImages">
-											<c:forTokens var="filePath" items="${review.filePath}"
-												delims=",">
-												<img id="reviewImage" src="${cpath}/upload/${filePath}"
-													alt="Review Image">
-											</c:forTokens>
-										</div>
-									</div>
-
-
 								</div>
-
-
-
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</fieldset>
-			</div>
-			<!-- 캠핑자  리뷰페이지 연지 끝  -->
-
-		</div>
-		<!--end of view-->
-	</div>
-	<!-- end of campIntro -->
+								<p>
+									<textarea name="review_content" placeholder="리뷰작성" required style="width:100%; resize:none;"></textarea>
+								</p>
+									<input type="hidden" name="gocamp" value="${view.contentId }" />
+								<p>
+									<input type="file" name="upload" multiple>
+								</p>
+								<p>
+									<input type="submit" id="reviewBtn" value="리뷰 등록">
+								</p>
+							</form>
+							</c:if>
+							<c:if test="${pageContext.request.userPrincipal == null}">
+								<fieldset id="login-message" style="text-align: center;">
+									<span style="height: 30px; line-height: 30px;">
+									로그인해야 리뷰를 작성할 수 있습니다😄<a href="${cpath }/login/loginForm" style="color:blue;">&nbsp로그인</a>🔒
+								</span>
+								</fieldset>
+							</c:if>
+						</div>
+						<fieldset>
+							<c:choose>
+								<c:when
+									test="${empty list && pageContext.request.userPrincipal != null}">
+									<p>아직 등록된 리뷰가 없습니다.</p>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="review" items="${list }">
+										<div class="gocampReview" style="border: none; border-top: 2px solid black;">
+											<div class="reviewHeader" style="border: 1px solid lightgrey; margin-bottom: 0; width: 100%;">
+												<div id="reviewIdx">${review.idx}</div>
+												<div class="reviewTitle">${review.title}</div>
+												<div id="reviewWriter">${review.writer}</div>
+												<div id="reviewDate">
+													<fmt:formatDate value="${review.reviewdate}"
+														pattern="yyyy-MM-dd" />
+												</div>
+											</div>
+											<div class="hiddenReview" style="border-top: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey; border-right: 1px solid lightgrey; width: 100%;">
+												<div id="reviewContent">${review.review_content}</div>
+												<div id="btnRecommend">
+													<button>추천하기</button>
+												</div>
+												<c:if test="${review.writer == nickname}">
+													<a class="deleteReviewLink"
+														href="${cpath}/main/deleteReview/${review.idx}"><button>삭제</button></a>
+												</c:if>
+		
+												<div id="reviewImages">
+													<c:forTokens var="filePath" items="${review.filePath}"
+														delims=",">
+														<img id="reviewImage" src="${cpath}/upload/${filePath}"
+															alt="Review Image">
+													</c:forTokens>
+												</div>
+											</div>
+										</div>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</fieldset>
+					</div>
+					<!-- 캠핑자  리뷰페이지 연지 끝  -->
+     <!--end of view-->
+        </div> <!-- end of campIntro -->
+  	</div>  
+  <!-- end of view -->
 </div>
-<!-- end of view -->
 
+
+			<!--  캠핑장 리뷰 페이지 - 연지 -->
+<%@include file="../footer.jsp" %>  
 <a
 	style="display: scroll; position: fixed; bottom: 50px; right: 50px; text-decoration: none;"
 	rel="nofollow" href="#" title="Back to Top"><span
@@ -352,13 +338,8 @@
 		        mypickBtn.innerHTML = mypickBtn.innerHTML === '찜하기' ? '찜 취소' : '찜하기';
 		    });
 		}
-		
-		
-		
-	
-	
-    </script>
-    
+
+</script>
 
 <!--    연지 리뷰 보여주기  scipt -->
 <script>
@@ -379,39 +360,7 @@
     	    })
     	  })
     	})
-    	
-    	function likeHandler(){
-    		const mypickBtn = document.getElementById('mypickBtn')
-    		
-    		if(mypickBtn.innerHTML === '찜하기'){
-    			mypickBtn.innerHTML = '찜 취소'
-    			
-    			$.post('${cpath}/main/like',
-    					{gocamp: '${view.contentId}'},
-    					function(data){
-    						alert('찜하기 완료(찜 목록에서 확인해주세요)')
-    					})
-    		}
-    		else{
-    			mypickBtn.innerHTML = '찜하기'
-
-    			$.post('${cpath}/main/dislike',
-    					{gocamp: '${view.contentId}'},
-    					function(data){
-    						alert('찜하기 취소 완료')
-
-    					})
-    		}
-    }
-
-
-
-
-
-
     </script>
-
-
 <script>
     	const lctCl = '${view.lctCl}'
         // 헤더의 배경이미지 설정용 자바스크립트
@@ -464,9 +413,5 @@
         const viewShowMap = document.getElementById('viewShowMap')
         viewShowMap.addEventListener('click', viewMapHandler)
     </script>
-
-
-
-
 </body>
 </html>

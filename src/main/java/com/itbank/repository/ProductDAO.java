@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.itbank.model.BasketDTO;
 import com.itbank.model.ProductDTO;
 import com.itbank.model.Product_fileDTO;
 import com.itbank.model.ShopPagingDTO;
@@ -20,8 +21,6 @@ public interface ProductDAO {
 
 	ProductDTO selectDetails(int idx);
 
-	ProductDTO selectpName(String pName);
-
 	List<ProductDTO> priceSelectAll();
 
 	List<ProductDTO> viewsSelectAll();
@@ -30,6 +29,7 @@ public interface ProductDAO {
 
 	List<ProductDTO> pStarSelectAll();
 
+<<<<<<< HEAD
 	int selectMaxIdxFromUpload();
 
 	int addFile(HashMap<String, Object> param);
@@ -49,5 +49,20 @@ public interface ProductDAO {
 	boolean deletefile(String filePath);
 
 	int updateFile(HashMap<String, Object> param);
+=======
+	int grocery(ProductDTO dto);
+
+	int validategrocery(ProductDTO dto);
+
+	int updatecurrentgrocery(ProductDTO dto);
+
+	List<ProductDTO> selectOne(String name);
+
+	List<BasketDTO> basketSelectAll(String userId);
+
+	int basketdelete(int idx);
+
+	int basketmodify(BasketDTO dto);
+>>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
 
 }

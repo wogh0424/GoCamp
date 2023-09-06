@@ -112,7 +112,7 @@
 			<div style="flex: 1;"> <!-- 두번째 단락 -->
 				<strong class="blue">캠핑장 홈페이지 url</strong>
 				<p><input type="text" name="homepage" placeholder="캠핑장 url 입력" autocomplete="off"></p>	
-				<br><strong class="blue">전화번호 </strong>
+				<br><strong class="blue">전화번호(-를 포함해서 작성) </strong>
 				<p><input type="text" name="tel" placeholder="전화번호 입력(-도 같이 입력)" autocomplete="off"></p>	
 				<br><strong class="blue">캠핑장 이용 팁 </strong>
 				<p><textarea name="tooltip" autocomplete="off" placeholder="캠핑장 이용 팁"></textarea>		</p>	
@@ -376,6 +376,8 @@
 	</form>
 
 </div>
+
+<%@include file="../footer.jsp" %>
 
 <script>
 		// 이미지 미리보기

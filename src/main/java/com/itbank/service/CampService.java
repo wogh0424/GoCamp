@@ -15,7 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.itbank.model.CampDTO;
 import com.itbank.model.ImageDTO;
 import com.itbank.model.ItemDTO;
-import com.itbank.model.LikesDTO;
 import com.itbank.model.PageAndSearchDTO;
 import com.itbank.model.SearchDTO;
 import com.itbank.model.TagDTO;
@@ -31,6 +30,18 @@ public class CampService {
 
 	
 	public int selectCnt(SearchDTO search) {
+		if (search.getSido() != null) {
+			if (search.getSido() != "") {
+				campDAO.countSido(search.getSido());
+			}
+		}
+		if (search.getDtl_sido() != null) {
+			if (search.getDtl_sido().size() != 0) {
+				List<String> tmp = search.getDtl_sido();
+				campDAO.countMulSido(tmp);
+			}
+		}
+		
 		if (search.getSearchTags() != null) {
 			if (search.getSearchTags() != "") {
 				List<String> tmp = Arrays.asList(search.getSearchTags().split(","));
@@ -179,6 +190,15 @@ public class CampService {
 		row += campDAO.deleteFile(contentId);
 		row += campDAO.deletecamp(contentId);
 		return row;
+	}
+
+	// 검색어 자동완성
+	public List<String> autocompletion(SearchDTO dto) {
+		return campDAO.autocompletion(dto);
+	}
+
+	public List<ItemDTO> selectBest5() {
+		return campDAO.selectBest5();
 	}
 
 }

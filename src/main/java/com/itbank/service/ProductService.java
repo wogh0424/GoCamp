@@ -12,7 +12,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+<<<<<<< HEAD
 import com.itbank.model.CampDTO;
+=======
+import com.itbank.model.BasketDTO;
+>>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
 import com.itbank.model.ProductDTO;
 import com.itbank.model.Product_fileDTO;
 import com.itbank.model.ShopPagingDTO;
@@ -47,10 +51,6 @@ public class ProductService {
 		return dao.selectDetails(idx);
 	}
 
-	public ProductDTO selectpName(String pName) {
-		return dao.selectpName(pName);
-	}
-
 	public List<ProductDTO> priceSelectAll() {
 		return dao.priceSelectAll();
 	}
@@ -67,6 +67,7 @@ public class ProductService {
 		return dao.pStarSelectAll();
 	}
 
+<<<<<<< HEAD
 	public List<ProductDTO> addProduct() {
 		return dao.addProduct();
 	}
@@ -154,3 +155,33 @@ public class ProductService {
 	}
 	
 }
+=======
+	public int grocery(ProductDTO dto) {
+		int row = 0;
+		if (dao.validategrocery(dto) != 0) {
+			row = dao.updatecurrentgrocery(dto);
+		}
+		else {
+			row = dao.grocery(dto);			
+		}
+		return row;
+	}
+		
+	public List<ProductDTO> selectOne(String name) {
+		return dao.selectOne(name);
+	}
+
+	public List<BasketDTO> basketSelectAll(String userId) {
+		return dao.basketSelectAll(userId);
+	}
+
+	public int basketdelete(int idx) {
+		return dao.basketdelete(idx);
+	}
+
+	public int basketmodify(BasketDTO dto) {
+		return dao.basketmodify(dto);
+	}
+
+}
+>>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8

@@ -1,7 +1,7 @@
 package com.itbank.repository;
 
 import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.stereotype.Repository;
 
@@ -18,10 +18,6 @@ public interface LikeDAO {
 	List<ItemDTO> selectLike(int member);
 
 	int insertLike(LikesDTO like);
-
-
-
-	
 
 	int isLiked(LikesDTO like);
 

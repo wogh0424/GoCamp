@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.itbank.model.GocampReviewDTO;
-import com.itbank.model.LikesDTO;
 import com.itbank.model.PagingDTO;
 
 @Repository

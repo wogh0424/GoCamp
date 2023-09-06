@@ -46,9 +46,18 @@
 						<option>80개씩</option>
 					</select>
 				</li>
+<<<<<<< HEAD
 				<li><input type="search" name="pSearch">
 					<button>검색</button></li>
 				<li><a href="${cpath}/product/addProduct">상품 등록</a></li>
+=======
+				<form>
+				   
+				     <input type="search" name="pName" placeholder="상품 검색">
+				     <input type="submit" value="검색">
+			
+				</form>
+>>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
 			</ul>
 		</div>
 		<c:forEach var="dao" items="${list }">
@@ -94,7 +103,7 @@
 		</div>
 	</div>
 	<aside>
-		<ui>인기검색어
+		<ul>인기검색어
 			<li>1. 상품명</li>
 			<li>2. 상품명</li>
 			<li>3. 상품명</li>
@@ -105,8 +114,7 @@
 			<li>8. 상품명</li>
 			<li>9. 상품명</li>
 			<li>10. 상품명</li>
-		</ui>
-		
+		</ul>
 	</aside>
 	    <a style="display:scroll;position:fixed;bottom:50px;right:50px;" rel="nofollow" href="#" title="Back to Top"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
 	

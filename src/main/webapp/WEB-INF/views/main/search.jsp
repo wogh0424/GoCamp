@@ -34,7 +34,16 @@
 						<li>
 							<div class="campSearchItem">
 								<div>
-									<a href="${cpath }/main/view/${camp.contentId}"><img src="${camp.firstImageUrl }" style="width: 240px; height: 160px; margin-right: 30px;"></a>
+									<a href="${cpath }/main/view/${camp.contentId}"><c:if
+											test="${fn:contains(camp.firstImageUrl, 'gocamping') }">
+											<img src="${camp.firstImageUrl }" style="margin-right: 30px; width: 240px; height: 160px;">
+										</c:if> <c:if
+											test="${!fn:contains(camp.firstImageUrl, 'gocamping') }">
+											<img
+												src="${cpath }/resources/upload/camp/${camp.firstImageUrl }"
+												style="margin-right: 30px; width: 240px; height: 160px;">
+										</c:if>
+									</a>
 								</div>
 								<div>
 									<p style="font-size:18px;"><a href="${cpath }/main/view/${camp.contentId}" class="searchKey">${camp.facltNm }</a></p>
@@ -162,7 +171,7 @@
 	</div>
 	
 </div>
-
+<%@include file="../footer.jsp" %>
 <script>
 	window.onload = keywordMarkHandler
 	const key = '${keyword}'

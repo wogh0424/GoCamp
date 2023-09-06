@@ -448,7 +448,7 @@ a{
 #login_btn {
 	font-weight: bold;
 }
-/*2023-08-29 쇼핑몰 페이지 추가 - 재우 */
+/*쇼핑몰 목록 시작*/
 .product_wrap {
 	flex-wrap: wrap;
 	width: 100%;
@@ -502,6 +502,7 @@ a{
 	background-color: lightgreen;
 	color: black;
 }
+/*쇼핑몰 목록 끝*/
 /*list 카테고리 리스트 시작 */
 .pCategory_items {
 	width: 900px;
@@ -543,7 +544,7 @@ a{
 	padding: 5px;
 	
 }
-/* 카테고리 리스트 끝 *?
+/* 카테고리 리스트 끝 */
 
 /*footer 시작 */
 footer{
@@ -667,7 +668,8 @@ footer{
 	height: 300px;
 }
 .camping_left_content {
-	background-color: lightgrey;
+	background-color: #c1dfc7;
+	padding: 15px;
 }
 .camping_right_list {
 	display: flex;
@@ -680,9 +682,13 @@ footer{
 .camping_right_contents > h3 {
 	text-align: center;
 }
+.blue {
+	color: blue;
+}
 /*camping_top_wrap 캠핑장 랭크 끝*/
 /*메뉴 드랍 다운 시작 */
 #menu {
+		box-sizing: border-box;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -703,7 +709,7 @@ footer{
 		align-items: center;
 		float:left;
 		width:140px;
-		height: 80px;
+		height: 85px;
 		position:relative;
 		list-style: none;
 		padding: 0;
@@ -715,20 +721,30 @@ footer{
 		position: absolute;
 		font-size:14px;
 		background: white;
-		top: 80px;
+		top: 86px;
 		left: 0px;
 }
+#menu > ul > li:hover {
+	background-color: #6f8c77;
+}
+
 
 #menu > ul > li:hover > ul {
 		display:block;
 		z-index: 1;
 }
 
+#menu > ul > li > ul > li {
+		background-color: #6f8c77;
+		border: 1px solid lightgrey;
+		border-top: none;
+}
+
 #menu > ul > li > ul > li:hover {
 		background: orange;
-		transition: ease 1s;
+		transition: ease 0.5s;
 }
-#menu > ul > li > a {
+#menu > ul > li a {
 		text-decoration: none;
 		color: white;
 		font-weight: bold;
@@ -738,17 +754,10 @@ footer{
 aside {
 	height: 100%;
 	border-left: 0.25px solid black;
-	float: right;
+	float: left;
 }
-<<<<<<< HEAD
+
 /*메뉴 드랍 다운 끝*/
-
-.highlight {
-		color: #c22187;
-		font-weight: bold;
-	}
-=======
-
 /*장바구니 페이지 시작*/
 .basket_status > ul{
 	display: flex;
@@ -804,7 +813,7 @@ aside {
 	color: white;
 }
 /*장바구니 페이지 끝*/
-/*주무녈제 페이지 시작*/
+/*주문결제 페이지 시작*/
 .orderpay_items {
 	width: 1000px;
 	height: 1000px;
@@ -862,14 +871,19 @@ aside {
 }
 .lastorder_items {
 	width: 1000px;
-	height: 1000px;
+	height: 100%;
 	margin: auto;
 	text-align: center;
 }
 .lastorder_status > ul{
 	display: flex;
 	justify-content: flex-end;
+}.orderlist_items {
+	width: 1000px;
+	height: 1000px;
+	margin: auto;
 }
+<<<<<<< HEAD
 /*주무녈제 페이지 끝*/
 /* 쇼핑몰 상품 추가 페이지 시작 */
 .addProduct_wrap {
@@ -1156,6 +1170,198 @@ aside {
 	border: 1px solid black;
 }
 >>>>>>> 70a4e8b736d9a071731c70d30a4ec10db707779a
+=======
+.orderlist_list {
+	border-top: 2px solid black;
+	border-bottom: 1px solid grey;
+}
+.orderlist_list > ul {
+	display: flex;
+	justify-content: center;
+}
+.orderlist_list > ul > li {
+	padding: 5px;
+	text-align: center;
+}
+.orderlist_pay > ul {
+	display: flex;
+	justify-content: center;
+	margin: 5px;
+}
+.orderlist_pay > ul > li {
+	padding: 5px;
+}
+
+.admimpage_wrap {
+	width: 1920px;
+	height: 1300px;
+	border: 1px solid black;
+}
+.adminpage_items {
+	width: 100%;
+	height: 100%;
+}
+.adminpage_list > aside {
+	width: 10%;
+	height: 1300px;
+	float: left;
+	border: 1px solid black;
+}
+.adminpage_list > aside > ul > li {
+	width: 100%;
+	height: 30px;
+	transition-duration: 0.5s;
+}
+.adminpage_list > aside > ul > li:hover{
+	background-color: skyblue;
+	transition-duration: 0.5s;
+}
+
+.adminpage_list > aside > ul > li > a {
+	text-decoration: none;
+	font-weight: bold;
+	color: black;
+}
+.main_boardlist1 {
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	width: 90%;
+	height: 400px;
+ 	border: 1px solid black;
+ 	background-color: #EEF1F3;
+}
+.boardlist1_left {
+	margin: 5px;
+	width: 70%;
+	border: 1px solid black;
+	background-color: white;
+}
+.boardlist1_right {
+	margin: 5px;
+	width: 30%;
+	border: 1px solid black;
+	background-color: white;
+}
+.main_boardlist2 {
+	display: flex;
+	justify-content: center;
+	width: 90%;
+	height: 400px;
+ 	border: 1px solid black;
+ 	background-color: #EEF1F3;
+}
+.boardlist2_left {
+	margin: 10px;
+	width: 33%;
+	border: 1px solid black;
+	background-color: white;
+}
+.boardlist2_center{
+	margin: 10px;
+	width: 33%;
+	border: 1px solid black;
+	background-color: white;
+}
+.boardlist2_right{
+	margin: 10px;
+	width: 33%;
+	border: 1px solid black;
+	background-color: white;
+}
+.main_boardlist3 {
+	padding: 5px;
+	display: flex;
+	border: 1px solid black;
+	width: 90%;
+	background-color: #EEF1F3;
+}
+.main_boardlist3 > ul {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	background-color: skyblue;
+}
+.boardlist3_group > li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	height: 30px;
+	font-weight: bold;
+	color: white;
+	text-shadow: 1px 1px 1px black;
+}
+.main_boardlist4 {
+	padding: 5px;
+	display: flex;
+	width: 90%;
+	height: 462px;
+	border: 1px solid black;
+	font-size: 15px;
+	font-weight: bold;
+	background-color: #EEF1F3;
+}
+.boardlist4_tablelist {
+	background-color: white;
+	border: 1px solid black;
+	overflow: scroll;
+}
+.boardlist4_tablelist > ul {
+	display: flex;
+}
+.boardlist4_tablelist > ul > li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 132px;
+	height: 30px;
+	background-color: grey;
+	color: white;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px black;
+}
+.boardlist4_userlist > form > ul {
+	display: flex;
+}
+.boardlist4_userlist > form > ul > li {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 132px;
+	height: 30px;
+	border-bottom: 1px solid lightgrey;
+}
+/*관리자페이지 끝 */
+/*주문결제 페이지 끝*/
+
+.camping_right_list:hover {
+	background-color: #F4C752;
+	color: #1146D5;
+	transition: ease 0.3s;
+}
+
+/* 마이페이지  시작 */
+.mypage_items {
+	display: flex;
+	justify-content: center;
+	width: 500px;
+	border: 1px solid black;
+	border-radius: 10px;
+	margin: auto;
+}
+.deleted_board {
+	display: flex;
+	justify-content: center;
+	width: 500px;
+	height: 300px;
+	border: 1px solid black;
+	border-radius: 10px;
+	margin: auto;
+}
+/* 마이페이지  끝 */
+>>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
 </style>
 
 <script>
@@ -1214,10 +1420,10 @@ $(document).ready(function() {
 			<a href="${cpath }/"><img
 				src="${cpath }/resources/image/thecamping_logo.png"></a>
 		</div>
-		<div class="header_login">
-			<ul>
+		<div class="header_login" >
+			<ul  style="margin-right: 10%;">
 				<c:if test="${pageContext.request.userPrincipal != null}">
-					<li>현재 접속 아이디 ${pageContext.request.userPrincipal.name}</li>
+					<li>${pageContext.request.userPrincipal.name}님 환영합니다.</li>
 					<!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
 				</c:if>
 				<sec:authorize access="isAnonymous()">			
@@ -1235,70 +1441,66 @@ $(document).ready(function() {
 					<li><a href="${cpath }/login/signup">회원가입</a></li>
 				</c:if>
 				<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
-					<h3>
-						<a href="<c:url value="/admin/userData" />">관리자 홈</a>
-					</h3>
+						<li><a href="<c:url value="/admin/adminpage" />">관리자 홈</a></li>
 				</c:if>
 				<c:if
 					test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }">
-					<h3>
-						<a href="${cpath }/mypage/main">마이페이지</a>
-					</h3>
+						<li><a href="${cpath }/mypage/main">마이페이지</a></li>
 				</c:if>
 			</ul>
 		</div>
 	</header>
+	<div class="header_bottom" style="display: flex; justify-content: right; height: 40px; align-items:center; padding-right: 10%; width: 100%; background-color: #3C5944;">
+		<form  action="${cpath }/main/search">
+			<div style="display: flex; justify-content: space-between; background-color: white; font-size: 16px;">
+			<input id="totalsearchInput" type="search" name="srchKywrd" placeholder="검색어를 입력하세요" style="border: none; background-color: white; width: 250px; height: 30px; padding: 10px;">
+			<span style="line-height: 30px; cursor: pointer;" onclick="submitForm()">🔍</span>
+			</div>
+		</form>
+	</div>
 	<nav>
 		<div class="header_top">
 			<div id="menu">
 				<ul>
-					<li><a href="#">검색</a>
+					<li><a href="">캠핑장</a>
 						<ul>
-							<li><a href="${cpath }/main/camp">캠핑장</a></li>
-							<li><a href="">SUB_MENU</a></li>
-							<li><a href="">SUB_MENU</a></li>
+							<li><a href="${cpath }/main/camp">캠핑장검색</a></li>
 						</ul>
 					</li>
-					<li><a href="#">게시판</a>
+					<li><a href="">소식</a>
 						<ul>
 							<li><a href="${cpath }/noticeBoard">공지게시판</a></li>
 							<li><a href="${cpath }/eventBoard">이벤트게시판</a></li>
+
+						</ul>
+					</li>
+					<li><a href="">캠핑도구</a>
+						<ul>
+							<li><a href="${cpath }/product/list">쇼핑몰</a></li>
+						</ul>
+					</li>
+					<li><a href="">게시판</a>
+						<ul>
 							<li><a href="${cpath }/freeBoard">자유게시판(+ 댓글)</a></li>
 							<li><a href="${cpath }/reviewBoard">전체리뷰게시판</a></li>
 							<li><a href="${cpath }/main/like">좋아요</a></li>
 						</ul>
 					</li>
-					<li><a href="#">쇼핑몰</a>
+					<li><a href="">고객센터</a>
 						<ul>
-							<li><a href="${cpath }/product/list">MENU</a></li>
-							<li><a href="${cpath }/product/basket">SUB_MENU</a></li>
-							<li><a href="">SUB_MENU</a></li>
-						</ul>
-					</li>
-					<li><a href="#">MENU</a>
-						<ul>
-							<li><a href="#">SUB_MENU</a></li>
-							<li><a href="#">SUB_MENU2</a></li>
-							<li><a href="#">SUB_MENU3</a></li>
-						</ul>
-					</li>
-					<li><a href="#">MENU</a>
-						<ul>
-							<li><a href="#">SUB_MENU</a></li>
-							<li><a href="#">SUB_MENU2</a></li>
-							<li><a href="#">SUB_MENU3</a></li>
+							<li><a href="">캠핑장정보 수정요청</a></li>
+							<li><a href="">등록 야영장 확인문의</a></li>
 						</ul>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<div class="header_bottom" style="display: flex; justify-content: right; height: 40px; align-items:center;">
-		<form action="${cpath }/main/search">
-			<input type="search" name="srchKywrd" placeholder="검색어를 입력하세요">
-			<input type="submit" value="검색">
-		</form>
-	</div>
 	
+	<script>
+	function submitForm() {
+        document.getElementById("totalsearchInput").form.submit();
+    }
+	</script>
 	
 

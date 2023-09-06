@@ -53,8 +53,6 @@ public class LoginController {
 			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 			String pw = encoder.encode(dto.getUserpw());
 			dto.setUserpw(pw);
-			int startidx = 9;
-			int endidx = 12;
 			String pnum = dto.getPnum();
 			// 전화번호에 - 이 있으면 그대로 replaceChar 함수 실행
 			if(pnum.length() == 13) {

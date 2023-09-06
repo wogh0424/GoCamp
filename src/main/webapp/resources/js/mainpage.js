@@ -330,6 +330,40 @@ function orderByHandler(event) {
 		} 
 	}
     
+	// 검색어 자동완성
+	async function autoCompletionHandler() {
+		const sido = document.querySelector('select[name="sido"]').value
+		const gungu = document.querySelector('select[name="gungu"]').value
+		const lctcl = document.querySelector('select[name="lctcl"]').value
+		const key = search.value
+	   	if (key.length < 3) {
+	   		return
+	   	}
+				
+		const requestlist =  cpath + '/autocompletion'
+		const params = {
+			sido: sido,
+			gungu: gungu,
+			lctcl: lctcl,
+			keyword: key
+		}
+		await fetch(requestlist, {
+		      method: 'POST',
+		      headers: {
+		        'Content-Type' : 'application/json'
+		      },
+		      body: JSON.stringify(params)
+		    }).then(resp => resp.json())
+		    .then(json => {
+		    	dataList.innerHTML = ''
+		    		json.slice(0, 10).forEach(nm => {
+		    		   const option = document.createElement('option');
+		    		   option.innerText = nm
+		    		   dataList.appendChild(option);
+		    	});
+		    });
+	}
+	
 //	달력===================================
 	
 	function buildCalendar() {

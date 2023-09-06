@@ -2,32 +2,24 @@ package com.itbank.controller;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.itbank.model.CampDTO;
 import com.itbank.model.EventBoardDTO;
 import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.GocampReviewDTO;
 import com.itbank.model.ItemDTO;
-import com.itbank.model.LikesDTO;
 import com.itbank.model.PageAndSearchDTO;
 import com.itbank.model.MainPagingDTO;
 import com.itbank.model.MemberDTO;
@@ -90,6 +82,7 @@ public class MainController {
 		
 		
 		// 찜 상태 확인하기( 연지)
+		if(principal!= null) {
 		 String username = principal.getName();
 		 MemberDTO dto = mypageService.importMember(username);
 		 int member = dto.getIdx();
@@ -97,7 +90,7 @@ public class MainController {
 		 boolean isLiked = likeService.isLiked(contentId, member);
 		 
 		 mav.addObject("isLiked", isLiked);
-		
+		}
 		
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -131,7 +124,6 @@ public class MainController {
 
 	// 리뷰 끝 
 	
-
 	// 찜 추가
 	@PostMapping("/like")
 	public ModelAndView addLike(Principal principal, @RequestParam("gocamp") String gocamp) {
@@ -141,6 +133,7 @@ public class MainController {
 	    int member = dto.getIdx();
 
 	    int row = likeService.saveLike(gocamp, member);
+	    System.out.println(row);
 	    mav.setViewName("redirect:/main/view/" + gocamp); // 찜한 후 찜 목록 페이지로 리다이렉트
 	    
 	    return mav;
@@ -169,6 +162,7 @@ public class MainController {
 	    int member = dto.getIdx();
 
 	    int row = likeService.removeLike(gocamp, member); 
+	    System.out.println(row);
 	    mav.setViewName("redirect:/main/view/" + gocamp); // 찜 삭제 후 찜 목록 페이지로 리다이렉트
 	    
 	    return mav;
@@ -180,9 +174,6 @@ public class MainController {
 	
 
 	
-
-	// 통합검색
-
 	@GetMapping("/search")
 	public ModelAndView search(String srchKywrd) {
 		ModelAndView mav = new ModelAndView("/main/search");
@@ -210,7 +201,8 @@ public class MainController {
 		mav.addObject("freeCnt", freeCnt);
 		return mav;
 	}
-	@GetMapping("/addcamp") 
+	
+	@GetMapping("/addcamp")
 	public ModelAndView addcamp() {
 		ModelAndView mav = new ModelAndView("/main/addcamp");
 		List<TagDTO> tags = campService.selectTags();
@@ -218,16 +210,6 @@ public class MainController {
 		return mav;
 	}
 	
-
-
-	
-	
-	
-	
-	
-	
-
-
 	// 캠핑장 추가	
 	@PostMapping("/addcamp")
 	public String addcamp(CampDTO dto) {
@@ -259,4 +241,11 @@ public class MainController {
 		System.out.println(row);
 		return "redirect:/main/camp";
 	}
-} 
+
+	
+	
+	
+	
+	
+	
+}

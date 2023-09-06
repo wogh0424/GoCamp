@@ -15,7 +15,7 @@
 		</div>
 		<h3>주문을 해주셔서 감사합니다</h3>
 		<h3>주문완료를 누르시면 주문을 하신 목록을 확인 하실수 있습니다</h3>
-		<p><button id="lastorderBtn">주문완료</button></p>
+		<p><a href="${cpath }/product/orderlist"><button id="lastorderBtn">주문완료</button></a></p>
 	</div>
 </div>
 
