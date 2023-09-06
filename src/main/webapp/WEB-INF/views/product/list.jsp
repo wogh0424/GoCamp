@@ -46,18 +46,18 @@
 						<option>80개씩</option>
 					</select>
 				</li>
-<<<<<<< HEAD
+
 				<li><input type="search" name="pSearch">
 					<button>검색</button></li>
 				<li><a href="${cpath}/product/addProduct">상품 등록</a></li>
-=======
+
 				<form>
 				   
 				     <input type="search" name="pName" placeholder="상품 검색">
 				     <input type="submit" value="검색">
 			
 				</form>
->>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
+
 			</ul>
 		</div>
 		<c:forEach var="dao" items="${list }">
