@@ -109,15 +109,23 @@
 				</c:if>
 			</table>
 			<div class="rpBtns">
-				<button class="recommendBtn">추천하기</button>
-
-				<form method="POST" action="${cpath}/main/like" onsubmit="event.preventDefault(); likeHandler();" style="width: 140px; margin: 0 5px;">
+				<form method="POST" action="${cpath}/main/recommend" onsubmit="event.preventDefault(); recommendCampHandler();">
 				    <input type="hidden" name="gocamp" value="${view.contentId}">
-				    <button id="mypickBtn" type="submit" style="width:140px;">${isLiked ? '찜 취소' : '찜하기'}</button>					 
+				    <button id="recommendCampBtn" type="submit">${isCampRecommended ? '추천 취소🥲':'추천하기👍'}</button>					 
+				</form>
+			<div id="recommendCampCount">추천수 : ${campRecommendCount}</div>
+				
+				
+
+				
+				<form method="POST" action="${cpath}/main/like" onsubmit="event.preventDefault(); likeHandler();">
+				    <input type="hidden" name="gocamp" value="${view.contentId}">
+				    <button id="mypickBtn" type="submit">${isLiked ? '찜취소❤️' : '찜하기🤍'}</button>					 
 				</form>
 
 				<button class="modifyRequest">정보수정요청</button>
 			</div>
+			s
 		</div>
 	</div>
 	<!--end of viewMain-->
@@ -213,84 +221,107 @@
 			</div>
 			<div class="intro3">
 				<div class="viewmapTT">▶️ 찾아오시는 길</div>
+				
+				
 				<div id="viewMap"></div>
             </div>
-            <div class="intro4">
-				<div id="reviewContainer" style="margin: 20px auto; width: 100%;">
-						<c:if test="${pageContext.request.userPrincipal != null}">
-							<form method="POST" enctype="multipart/form-data" id="reviewForm">
-								<div class="inputReview">
+            
+            
+			<!--               	  캠핑장 리뷰 페이지 - 연지 -->
+
+			<div class="intro4">
+				<div id="reviewContainer">
+					<h3>리뷰작성</h3>
+					<c:if test="${pageContext.request.userPrincipal != null}">
+						<form method="POST" enctype="multipart/form-data" id="reviewForm">
+							<div class="inputReview">
 								<p>
 									<input type="text" name="title" placeholder="제목"
-										value="[${view.facltNm}] " required autofocus>
+										value="[${view.facltNm}]" required autofocus>
 								</p>
 								<p>
-									<input type="text" name="writer" value="${nickname}" readonly style="height: 50px;">
+									<input type="text" name="writer" value="${nickname}" readonly>
 								</p>
-								</div>
-								<p>
-									<textarea name="review_content" placeholder="리뷰작성" required style="width:100%; resize:none;"></textarea>
-								</p>
-									<input type="hidden" name="gocamp" value="${view.contentId }" />
-								<p>
-									<input type="file" name="upload" multiple>
-								</p>
-								<p>
-									<input type="submit" id="reviewBtn" value="리뷰 등록">
-								</p>
-							</form>
-							</c:if>
-							<c:if test="${pageContext.request.userPrincipal == null}">
-								<fieldset id="login-message" style="text-align: center;">
-									<span style="height: 30px; line-height: 30px;">
-									로그인해야 리뷰를 작성할 수 있습니다😄<a href="${cpath }/login/loginForm" style="color:blue;">&nbsp로그인</a>🔒
-								</span>
-								</fieldset>
-							</c:if>
-						</div>
-						<fieldset>
-							<c:choose>
-								<c:when
-									test="${empty list && pageContext.request.userPrincipal != null}">
-									<p>아직 등록된 리뷰가 없습니다.</p>
-								</c:when>
-								<c:otherwise>
-									<c:forEach var="review" items="${list }">
-										<div class="gocampReview" style="border: none; border-top: 2px solid black;">
-											<div class="reviewHeader" style="border: 1px solid lightgrey; margin-bottom: 0; width: 100%;">
-												<div id="reviewIdx">${review.idx}</div>
-												<div class="reviewTitle">${review.title}</div>
-												<div id="reviewWriter">${review.writer}</div>
-												<div id="reviewDate">
-													<fmt:formatDate value="${review.reviewdate}"
-														pattern="yyyy-MM-dd" />
-												</div>
-											</div>
-											<div class="hiddenReview" style="border-top: none; border-left: 1px solid lightgrey; border-bottom: 1px solid lightgrey; border-right: 1px solid lightgrey; width: 100%;">
-												<div id="reviewContent">${review.review_content}</div>
-												<div id="btnRecommend">
-													<button>추천하기</button>
-												</div>
-												<c:if test="${review.writer == nickname}">
-													<a class="deleteReviewLink"
-														href="${cpath}/main/deleteReview/${review.idx}"><button>삭제</button></a>
-												</c:if>
-		
-												<div id="reviewImages">
-													<c:forTokens var="filePath" items="${review.filePath}"
-														delims=",">
-														<img id="reviewImage" src="${cpath}/upload/${filePath}"
-															alt="Review Image">
-													</c:forTokens>
-												</div>
-											</div>
-										</div>
-									</c:forEach>
-								</c:otherwise>
-							</c:choose>
+							</div>
+							<p>
+								<textarea name="review_content" placeholder="리뷰작성" required></textarea>
+							</p>
+							<input type="hidden" name="gocamp" value="${view.contentId }" />
+							<label for="upload">첨부파일 미리보기:</label>
+								<div id="preview"></div>
+								<div><p><input name="upload" type="file" id="upload" accept="image/*" multiple ></p></div>
+							<p><input type="submit" id="reviewBtn" value="리뷰 등록"></p>
+						
+
+						</form>
+					</c:if>
+
+					<c:if test="${pageContext.request.userPrincipal == null}">
+						<fieldset id="login-message">
+							<p>
+								로그인해야 리뷰를 작성할 수 있습니다😄<a href="${cpath }/login/loginForm">
+									로그인go</a>
+							</p>
 						</fieldset>
-					</div>
-					<!-- 캠핑자  리뷰페이지 연지 끝  -->
+					</c:if>
+				</div>
+
+				<fieldset>
+					<c:choose>
+						<c:when
+							test="${empty list && pageContext.request.userPrincipal != null}">
+							<p>아직 등록된 리뷰가 없습니다.</p>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="review" items="${list }">
+
+
+								<div class="gocampReview">
+
+									<div class="reviewHeader">
+										<div class="reviewIdx">${review.idx}</div>
+										<div class="reviewTitle">${review.title}</div>
+										<div id="reviewWriter">${review.writer}</div>
+										<div id="reviewDate">
+											<fmt:formatDate value="${review.reviewdate}"
+												pattern="yyyy-MM-dd" />
+										</div>
+									</div>
+
+									<div class="hiddenReview">
+										<div id="reviewContent">${review.review_content}</div>
+										
+										<c:if test="${review.writer == nickname}">
+											<a class="deleteReviewLink"
+												href="${cpath}/main/deleteReview/${review.idx}"><button>삭제</button></a>
+										</c:if>
+
+										<div id="reviewImages">
+											<c:forTokens var="filePath" items="${review.filePath}"
+												delims=",">
+												<img id="reviewImage" src="${cpath}/upload/${filePath}"
+													alt="Review Image" height="200px">
+											</c:forTokens>
+										</div>
+										
+										<div id="btnReviewRecommendReview">
+																							
+											    <button class="recommendReviewBtn">${isReviewRecommended ? '추천 취소🥲':'추천하기👍'}</button>					 
+											
+										</div>
+									</div>
+
+
+								</div>
+
+
+
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</fieldset>
+			</div>
+			<!-- 캠핑자  리뷰페이지 연지 끝  -->
      <!--end of view-->
         </div> <!-- end of campIntro -->
   	</div>  
@@ -305,52 +336,132 @@
 	rel="nofollow" href="#" title="Back to Top"><span
 	style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
 
-
 <script>
 		const mypickBtn = document.getElementById('mypickBtn')
+		const recommendCampBtn = document.getElementById('recommendCampBtn');
+
+		
 		const loginId = '${pageContext.request.userPrincipal.name}'
-		const campin = '${gocamp}'
+
+		
+		// 찜하기 
 		
 		mypickBtn.onclick = function(event){
 
-		if(loginId == ''){
-			const confirmation = confirm('로그인 후 사용하실 수 있는 기능입니다. 로그인 하시겠습니까?')
-			if(!confirmation){
-			event.preventDefault()
-			}
-			else {
-				event.preventDefault()
-				window.location.href = '${cpath}/login/loginForm'
-			} 
-		}
-		
+			if(loginId == ''){
+				const confirmation = confirm('로그인 후 사용하실 수 있는 기능입니다. 로그인 하시겠습니까?')
+				if(!confirmation){
+					event.preventDefault()
+				}
+				else {
+					event.preventDefault()
+					window.location.href = '${cpath}/login/loginForm'
+				} 
+			}		
 		}
 		
 		function likeHandler() {
 		    const mypickBtn = document.getElementById('mypickBtn');
 		    
-		    // 현재 상태에 따라 URL 및 메시지 변경
-		    let requestUrl = mypickBtn.innerHTML === '찜하기' ? '${cpath}/main/like' : '${cpath}/main/dislike';
-		    let successMessage = mypickBtn.innerHTML === '찜하기' ? '찜하기 완료(찜 목록에서 확인해주세요)' : '찜하기 취소 완료';
+		    let requestUrl = mypickBtn.innerHTML === '찜하기🤍' ? '${cpath}/main/like' : '${cpath}/main/dislike';
+		    let successMessage = mypickBtn.innerHTML === '찜하기🤍' ? '찜완료❤️(찜 목록에서 확인해주세요)' : '찜❤️ 취소 완료';
 
 		    $.post(requestUrl, {gocamp: '${view.contentId}'}, function(data) {
 		        alert(successMessage);
-		        mypickBtn.innerHTML = mypickBtn.innerHTML === '찜하기' ? '찜 취소' : '찜하기';
+		        mypickBtn.innerHTML = mypickBtn.innerHTML === '찜하기🤍' ? '찜취소❤️' : '찜하기🤍';
 		    });
 		}
+		
+		// 캠핑장 추천하기
+		
+		recommendCampBtn.onclick = function(event){
 
-</script>
+			if(loginId == ''){
+				const confirmation = confirm('로그인 후 사용하실 수 있는 기능입니다. 로그인 하시겠습니까?')
+				if(!confirmation){
+				event.preventDefault()
+				}
+				else {
+					event.preventDefault()
+					window.location.href = '${cpath}/login/loginForm'
+				} 
+			}
+			
+			}
+		function recommendCampHandler() {
+		    const recommendCampBtn = document.getElementById('recommendCampBtn');
+		    
+		    let requestUrl = recommendCampBtn.innerHTML === '추천하기👍' ? '${cpath}/main/recommend' : '${cpath}/main/disRecommend';
+		    let successMessage = recommendCampBtn.innerHTML === '추천하기👍' ? '추천완료❤️' : '추천 취소🥲완료';
+
+		    $.post(requestUrl, {gocamp: '${view.contentId}'}, function(data) {
+		        alert(successMessage);
+		        recommendCampBtn.innerHTML = recommendCampBtn.innerHTML === '추천하기👍' ? '추천 취소🥲' : '추천하기👍';
+		    });
+		}
+		
+		// 리뷰 추천하기 스크립트
+		
+		const reviewIdx = document.querySelectorAll('div.reviewIdx')
+		const recommendReviewBtn = document.querySelectorAll('button.recommendReviewBtn');
+		const cid = '${view.contentId}'
+		recommendReviewBtn.forEach((ob, index) => ob.addEventListener('click', () => recommendReviewHandler(ob, index)))
+		
+		async function recommendReviewHandler(ob, index) {
+			const reviewId = reviewIdx[index].innerText
+			const url = cpath + '/reviewRecommend/' + reviewId
+			await fetch(url)
+			.then(resp => resp.json())
+			.then(json => {
+				console.log(json)
+			})
+			
+		}
+    </script>
+    
+<script>
+        const input = document.querySelector('input[name="upload"]')
+        const preview = document.getElementById('preview')
+     
+
+       	function changeHandler(event) {
+  		preview.innerHTML = ''
+			
+		    if (event.target.files) {
+		        const files = event.target.files
+		        for (const file of files) {
+		            const reader = new FileReader()
+		            reader.onload = function(e) {
+		                const image = new Image()
+		                image.src = e.target.result
+		                image.style.height = '200px'
+		                preview.appendChild(image)
+		            }
+		            reader.readAsDataURL(file)
+		        }
+		      
+		    } 
+		}
+		
+		input.onchange = changeHandler
+    </script>
+		
+		
+	
+	
+  
+    
 
 <!--    연지 리뷰 보여주기  scipt -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-    	  // 모든 리뷰 헤더를 가져옵니다.
+    	 
     	  const reviewHeaders = document.querySelectorAll('.reviewHeader');
 
-    	  // 각 리뷰 헤더에 대한 이벤트 리스너를 등록합니다.
+    	 
     	  reviewHeaders.forEach(function(reviewHeader) {
     	    reviewHeader.addEventListener('click', function() {
-    	      // 클릭한 리뷰 아이템에서만 숨겨진 리뷰 내용을 토글합니다.
+    	     
     	      const hiddenReview = reviewHeader.nextElementSibling; // 다음 형제 요소 가져오기
     	      if (hiddenReview.style.display !== 'block') {
     	        hiddenReview.style.display = 'block'
@@ -360,7 +471,17 @@
     	    })
     	  })
     	})
+ 
+
+
+
+
     </script>
+
+
+
+
+
 <script>
     	const lctCl = '${view.lctCl}'
         // 헤더의 배경이미지 설정용 자바스크립트

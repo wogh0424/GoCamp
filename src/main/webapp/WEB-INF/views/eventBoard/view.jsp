@@ -6,7 +6,8 @@
 
 <div id="boardView">
 
-		<h3>${dto.idx } | ${dto.title }</h3>
+		<h3>${dto.idx }</h3>
+		<c:if test="${dto.pin == 1}">⭐중요⭐</c:if><div>${dto.title }</div>
 		<h4>조회수 : ${dto.view_cnt }</h4>
 		<h4>작성날짜 : <fmt:formatDate value="${dto.postdate }"/></h4>
 		<pre>${dto.content }</pre>

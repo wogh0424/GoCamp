@@ -9,9 +9,8 @@
 <div id="noticeBoardView">
 
 		<div>${dto.idx }</div>
-		<c:if test="${dto.pin == 1}">
-		 <div>${dto.title }</div>
-		 </c:if>
+		<c:if test="${dto.pin == 1}">⭐필독⭐</c:if><div>${dto.title }</div>
+		 
 		<h4>조회수 : ${dto.view_cnt }</h4>
 		<h4>작성날짜 : <fmt:formatDate value="${dto.postdate }"/></h4>
 		<pre>${dto.content }</pre>

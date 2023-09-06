@@ -3,6 +3,9 @@ package com.itbank.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +41,10 @@ public class NoticeBoardController {
 	}
 	
 	@GetMapping("/view/{idx}")
-	public ModelAndView view(@PathVariable("idx") int idx) {   
+	public ModelAndView view(@PathVariable("idx") int idx, HttpServletResponse response, HttpServletRequest request) {   
 		ModelAndView mav = new ModelAndView("/noticeBoard/view"); 
+		
+		noticeBoardService.reduceViewCnt(idx, response,request);
 		
 		NoticeBoardDTO dto = noticeBoardService.selectOne(idx);
 		mav.addObject("dto", dto);
@@ -47,6 +52,7 @@ public class NoticeBoardController {
 	}
 	
 	
+	// 작성
 	@GetMapping("/write")
 	public void write() {}
 	
@@ -57,7 +63,7 @@ public class NoticeBoardController {
 		return "redirect:/noticeBoard";
 	}
 	
-
+	// 삭제
 	@GetMapping("/delete/{idx}")
 	public String delete(@PathVariable("idx") int idx) {
 		int row = noticeBoardService.delete(idx);
@@ -65,6 +71,7 @@ public class NoticeBoardController {
 		return "redirect:/noticeBoard";
 	}
 	
+	// 수정
 	@GetMapping("/modify/{idx}")
 	public ModelAndView modify(@PathVariable("idx") int idx) {
 		ModelAndView mav = new ModelAndView("/noticeBoard/modify");

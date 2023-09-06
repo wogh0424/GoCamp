@@ -8,7 +8,7 @@
 <div>
 	<p><input type="text" name="title" placeholder="제목" required autofocus> </p> 
 		<label for="option">옵션 선택:</label>
-	<select id="option" name="pin">
+	<select id="optionNotice" name="pin">
 	  <option value="0">일반</option>
 	  <option value="1">필독</option>
 	</select>

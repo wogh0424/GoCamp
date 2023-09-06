@@ -23,6 +23,17 @@ public class NoticeBoardDTO {
 	private String filePath;
 	private List<MultipartFile> upload;
 	
+	private List<String> deleteImages;
+
+	public List<String> getDeleteImages() {
+	    return deleteImages;
+	}
+
+	public void setDeleteImages(List<String> deleteImages) {
+	    this.deleteImages = deleteImages;
+	}
+	
+	
 	public String getFilePath() {
 		return filePath;
 	}

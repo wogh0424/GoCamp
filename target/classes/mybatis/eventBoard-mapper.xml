@@ -8,7 +8,7 @@
 			select * from event_board 		
 				where title like '%${order}%' or content like '%${order}%'
 				order by 
-					idx desc
+					pin desc, idx desc
 				offset #{offset} rows
 				fetch next #{perPage} rows only
 		</select>
@@ -24,9 +24,7 @@
 		
 		<select id="selectOne" parameterType="int" resultType="eventboard">
 				 SELECT 
-		        event_board.idx,
-		        event_board.title,
-		        event_board.content,
+		        event_board.*,
 		        (SELECT GROUP_CONCAT(filePath SEPARATOR ',')
 		         FROM event_board_file
 		         WHERE event_board_file.event_board = event_board.idx) AS filePath 
@@ -60,15 +58,15 @@
 				delete from event_board where idx=#{idx}
 		</delete>
 		
-		<delete id="deleteFile" parameterType="int">
-				delete from event_board_file where event_board = #{idx}
-		</delete>
 		
 		<update id="update"  parameterType="eventboard" >
 				update event_board
-					set title=#{title}, content=#{content} 
+					set title=#{title}, content=#{content}, pin=#{pin} 
 						where idx=#{idx}
 		</update>
+		<delete id="deleteFile" parameterType="string">
+				delete from event_board_file where filePath = #{filePath }
+		</delete>
 		
 		<select id="searchByKeyWord" parameterType="string" resultType="eventboard">
 			select * from event_board where title like '%${srchKywrd}%' or content like '%${srchKywrd}%'

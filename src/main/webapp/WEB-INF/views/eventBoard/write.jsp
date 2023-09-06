@@ -6,8 +6,13 @@
 <h3>이벤트글 작성</h3>
 <form id="insertForm" method="POST" enctype="multipart/form-data" >
 <div>
-	<p><input type="text" name="title" placeholder="제목" required autofocus> </p>
-		<label for="upload">첨부파일 미리보기:</label>
+	<p><input type="text" name="title" placeholder="제목" required autofocus> </p> 
+		<label for="option">옵션 선택:</label>
+	<select id="optionNotice" name="pin">
+	  <option value="0">일반</option>
+	  <option value="1">중요</option>
+	</select>
+
 		<div id="preview"></div>
 		<div><p><input name="upload" type="file" id="upload" accept="image/*" multiple ></p></div>
 	<p><textarea id="content" name="content" required></textarea> </p>
@@ -40,6 +45,14 @@
 		}
 		
 		input.onchange = changeHandler
+    </script>
+    
+    <script>
+    var selectedOption = document.querySelector('input[name="option"]:checked').value;
+
+ 
+	 console.log(selectedOption);
+    
     </script>
 
 
