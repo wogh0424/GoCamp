@@ -1445,7 +1445,7 @@ $(document).ready(function() {
 	</header>
 	<div class="header_bottom" style="display: flex; justify-content: right; height: 40px; align-items:center; padding-right: 10%; width: 100%; background-color: #3C5944;">
 		<form  action="${cpath }/main/search">
-			<div style="display: flex; justify-content: space-between; background-color: white; font-size: 16px;">
+			<div style="display: flex; justify-content: space-between; background-color: white; font-size: 16px;  margin-top:10px;">
 			<input id="totalsearchInput" type="search" name="srchKywrd" placeholder="검색어를 입력하세요" style="border: none; background-color: white; width: 250px; height: 30px; padding: 10px;">
 			<span style="line-height: 30px; cursor: pointer;" onclick="submitForm()">🔍</span>
 			</div>
