@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.ProductDTO;
@@ -70,22 +72,49 @@ public class ProductController {
 		return "redirect:/";
 	}
 	
-	   // 상품 상세페이지
-	   @GetMapping("/view/{idx}")
-	   public ModelAndView view(@PathVariable("idx") int idx) {
-	      ModelAndView mav = new ModelAndView("product/view");
-	      ProductDTO dto = productService.selectDetails(idx);
-	      mav.addObject("dto", dto);
-	      return mav;
-	   }
+    // 상품 상세페이지
+    @GetMapping("/view/{idx}")
+    public ModelAndView view(@PathVariable("idx") int idx) {
+       ModelAndView mav = new ModelAndView("product/view");
+       ProductDTO dto = productService.selectDetails(idx);
+       mav.addObject("dto", dto);
+       return mav;
+    }
 
-	
 	// 장바구니
 	@GetMapping("/basket")
 	public ModelAndView basket() {
 		ModelAndView mav = new ModelAndView("product/basket");
 		return mav;
 	}
+	
+	// 상품 등록
+	@GetMapping("/addProduct")
+	public void addProduct() {	}
+	
+
+	@PostMapping("/addProduct")
+	public String addProduct(ProductDTO dto) {
+		int row = productService.addProduct(dto);
+		System.out.println(row != 0 ? "추가 성공" : "추가 실패");
+		return "redirect:/product/list";
+	}
+	
+	// 상품 수정
+	@GetMapping("/modify/{idx}")
+	public ModelAndView modify(@PathVariable("idx") int idx) {
+		ModelAndView mav = new ModelAndView("product/modify");
+		ProductDTO dto = productService.selectDetails(idx);
+		mav.addObject("dto", dto);
+		return mav;
+	}
+	
+	@PostMapping("/modify/{idx}")
+	public String modify(ProductDTO dto) {
+		int row = productService.update(dto);
+		System.out.println(row != 0 ? "수정 성공" : "수정 실패");
+		return "redirect:/product/view/{idx}";
+	}	 
 	
 	// 주문결제
 	@GetMapping("/orderpay")

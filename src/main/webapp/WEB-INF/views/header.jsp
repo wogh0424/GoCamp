@@ -871,6 +871,290 @@ aside {
 	justify-content: flex-end;
 }
 /*주무녈제 페이지 끝*/
+/* 쇼핑몰 상품 추가 페이지 시작 */
+.addProduct_wrap {
+	border: 1px solid #ededed;
+	margin: auto;
+	width: 600px;
+}
+.addForm {
+	margin: 30px;
+}
+.addProduct_title {
+	font-size: 20px;
+}
+.addForm > input {
+	width: 400px;
+	border: 1px solid #ededed;
+}
+.addin {
+	border: 1px solid #ededed;
+}
+.addin:hover {
+	border: 1px solid black;
+}
+.addProduct_submit {
+	margin: auto;
+	text-align: center;
+	border: 1px solid #ededed;
+	background-color: #04B45F;
+	color: white;
+	height: 30px;
+	width: 80px;
+}
+.addProduct_submit:hover {
+	border: 1px solid black;
+}
+
+/* 쇼핑몰 상품 추가 페이지 끝 */
+/* 쇼핑몰 상품 상세 페이지 시작 */
+.detail_wrap {
+	border-bottom: 1px solid black;
+	width: 900px;
+	margin: auto;
+	height: 2600px;
+}
+.detail_items {
+	display: flex;
+}
+.view_img {
+	border: 1px solid #ededed;
+}
+.view_info {
+	border: 1px solid #ededed;
+}
+.view_info > ul {
+	width: 600px;
+}
+.view_info > ul > li {
+	margin: 25px;
+	padding: 5px;
+	list-style: none;
+	border-bottom: 1px solid #ededed;
+}
+.view_pName {
+	font-size: 40px;
+	margin-bottom: 25px;	
+}
+.view_price {
+	font-size: 30px;
+	color: #6b90dc;
+	text-align: right;
+}
+.view_pStar {
+	font-size: 20px;
+}
+.view_pContent {
+	margin-top: 15px;
+	font-size: 20px;
+}
+.view_amount {
+	font-size: 20px;
+}
+.view_und {
+	font-size: 20px;
+}
+.view_und > button {
+	border: 1px solid black;
+	width: 30px;
+}
+.view_und > button:hover {
+	background-color: #04B45F;
+}
+.view_choice {
+	width: 30px;
+}
+.view_btn > button {
+	color: white;
+	background-color: #04B45F;
+	font-size: 20px;
+	border: 1px solid #ededed;
+}
+.view_btn > button:hover {
+	border: 1px solid black;
+	color: black;
+}
+.view_longimg {
+	margin-top: 30px;
+}
+.view_review {
+	display: flex;
+	padding: 15px;
+}
+.review_user {
+	display: flex;
+}
+.review_user > ul > li {
+	margin: 5px;
+}
+/* 쇼핑몰 상품 상세 페이지 끝 */
+/* 쇼핑몰 상품 수정 페이지 */
+.modify_wrap {
+	border: 1px solid #ededed;
+	margin: auto;
+	width: 900px;
+}
+.modify_product {
+	margin: 30px;
+}
+.modify_title {
+	font-size: 20px;
+}
+.modify_product > input {
+	width: 400px;
+	border: 1px solid #ededed;
+}
+/* 쇼핑몰 상품 추가 페이지 시작 */
+.addProduct_wrap {
+	border: 1px solid #ededed;
+	margin: auto;
+	width: 600px;
+}
+.addForm {
+	margin: 30px;
+}
+.addProduct_title {
+	font-size: 20px;
+}
+.addForm > input {
+	width: 400px;
+	border: 1px solid #ededed;
+}
+.addin {
+	border: 1px solid #ededed;
+}
+.addin:hover {
+	border: 1px solid black;
+}
+.addProduct_submit {
+	margin: auto;
+	text-align: center;
+	border: 1px solid #ededed;
+	background-color: #04B45F;
+	color: white;
+	height: 30px;
+	width: 80px;
+}
+.addProduct_submit:hover {
+	border: 1px solid black;
+}
+
+/* 쇼핑몰 상품 추가 페이지 끝 */
+/* 쇼핑몰 상품 상세 페이지 시작 */
+.detail_wrap {
+	border-bottom: 1px solid black;
+	width: 900px;
+	margin: auto;
+	height: 2600px;
+}
+.detail_items {
+	display: flex;
+}
+.view_img {
+	border: 1px solid #ededed;
+}
+.view_info {
+	border: 1px solid #ededed;
+}
+.view_info > ul {
+	width: 600px;
+}
+.view_info > ul > li {
+	margin: 25px;
+	padding: 5px;
+	list-style: none;
+	border-bottom: 1px solid #ededed;
+}
+.view_pName {
+	font-size: 40px;
+	margin-bottom: 25px;	
+}
+.view_price {
+	font-size: 30px;
+	color: #6b90dc;
+	text-align: right;
+}
+.view_pStar {
+	font-size: 20px;
+}
+.view_pContent {
+	margin-top: 15px;
+	font-size: 20px;
+}
+.view_amount {
+	font-size: 20px;
+}
+.view_und {
+	font-size: 20px;
+}
+.view_und > button {
+	border: 1px solid black;
+	width: 30px;
+}
+.view_und > button:hover {
+	background-color: #04B45F;
+}
+.view_choice {
+	width: 30px;
+}
+.view_btn > button {
+	color: white;
+	background-color: #04B45F;
+	font-size: 20px;
+	border: 1px solid #ededed;
+}
+.view_btn > button:hover {
+	border: 1px solid black;
+	color: black;
+}
+.view_longimg {
+	margin-top: 30px;
+}
+.view_review {
+	display: flex;
+	padding: 15px;
+}
+.review_user {
+	display: flex;
+}
+.review_user > ul > li {
+	margin: 5px;
+}
+/* 쇼핑몰 상품 상세 페이지 끝 */
+/* 쇼핑몰 상품 수정 페이지 */
+.modify_wrap {
+	border: 1px solid #ededed;
+	margin: auto;
+	width: 900px;
+}
+.modify_product {
+	margin: 30px;
+}
+.modify_title {
+	font-size: 20px;
+}
+.modify_product > input {
+	width: 400px;
+	border: 1px solid #ededed;
+}
+.addin { 
+	border: 1px solid #ededed; 
+} 
+.addin:hover { 
+	border: 1px solid black; 
+} 
+.modify_submit {
+	margin: auto;
+	text-align: center;
+	border: 1px solid #ededed;
+	background-color: #04B45F;
+	color: white;
+	height: 30px;
+	width: 80px;
+}
+.modify_submit:hover {
+	border: 1px solid black;
+}
 >>>>>>> 70a4e8b736d9a071731c70d30a4ec10db707779a
 </style>
 

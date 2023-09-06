@@ -19,9 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itbank.model.ImageDTO;
 import com.itbank.model.MemberDTO;
+import com.itbank.model.Product_fileDTO;
 import com.itbank.service.CampService;
 import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
+import com.itbank.service.ProductService;
 
 @RestController
 public class AjaxController {
@@ -29,6 +31,7 @@ public class AjaxController {
 	@Autowired private LoginService loginService;
 	@Autowired private MypageService mypageService;
 	@Autowired private CampService campService;
+	@Autowired private ProductService productService;
 	
 	@GetMapping("/dupCheck/{userid}")
 	public int dupCheck(@PathVariable("userid") String userid) {
@@ -116,6 +119,16 @@ public class AjaxController {
 	}
 
 	
+	//정현's ajaxController 
+	@GetMapping("/showProductImage/{idx}")
+	public List<Product_fileDTO> showProductImage(@PathVariable("idx") int idx) {
+		List<Product_fileDTO> list = productService.showProductImages(idx);
+		return list;
+	}
 	
+	@PostMapping("/deletefile")
+	private boolean deletefile(@RequestBody Product_fileDTO dto) {
+		return productService.deletefile(dto.getFilePath());
+	}
 
 }

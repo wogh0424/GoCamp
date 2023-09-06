@@ -1,6 +1,9 @@
 package com.itbank.model;
 
 import java.sql.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class ProductDTO {
 	   private int idx;
@@ -13,6 +16,7 @@ public class ProductDTO {
 	   private Date sDate;
 	   private int pick;
 	   private String image;
+	   private List<MultipartFile> upload;
 	   private int userid;
 	   private int pStar;
 	   
@@ -70,11 +74,18 @@ public class ProductDTO {
 	public void setPick(int pick) {
 		this.pick = pick;
 	}
+	
 	public String getImage() {
 		return image;
 	}
 	public void setImage(String image) {
 		this.image = image;
+	}
+	public List<MultipartFile> getUpload() {
+		return upload;
+	}
+	public void setUpload(List<MultipartFile> upload) {
+		this.upload = upload;
 	}
 	public int getUserid() {
 		return userid;
@@ -88,6 +99,9 @@ public class ProductDTO {
 	public void setpStar(int pStar) {
 		this.pStar = pStar;
 	}
-	   
+	public void setthumbnailUrl(String firstImage) {
+		// TODO Auto-generated method stub
+		
+	}
 	   
 }

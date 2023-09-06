@@ -5,7 +5,9 @@
 	
 <mapper namespace="com.itbank.repository.ProductDAO">
 	<select id="selectAll" resultType="product" parameterType="paging"> <!-- 쇼핑몰 페이징 10개씩 -->
-		select * from product orders limit #{offset}, #{perPage}
+		select p.*, (SELECT filePath 
+	        FROM product_file 
+	         WHERE product_file.product_idx = p.idx limit 1) AS image from product p limit #{offset}, #{perPage}
 	</select>
 	
 	<select id="selectpName" resultType="product" parameterType="String">
@@ -33,10 +35,43 @@
 	</select>
 	
 	<delete id="delete" parameterType="int"> <!-- 상품 삭제 기능 -->
-		delete from product where idx = #{idx}
+    	delete from product where idx = #{idx}
 	</delete>
 	
 	<select id="selectDetails" parameterType="int" resultType="product">
-         select * from product where idx=#{idx}
+         SELECT * from product	where idx = ${idx}
     </select>
+    
+    <select id="selectMaxIdxFromUpload" resultType="int">   
+		select max(idx) from product
+	</select>
+    
+    <insert id="addProduct" parameterType="product">
+    	insert into product (pName, price, amount, pContent, pCategory) 
+    		values (#{pName}, #{price}, #{amount}, #{pContent}, #{pCategory})
+    </insert>
+    
+    <insert id="addFile" parameterType="hashmap">
+			insert into product_file (product_idx, filePath) 
+		<foreach item="item" collection="list" separator="  UNION ALL  " >
+			select #{upload}, #{item} from dual
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterType="product">
+		update product set pName = #{pName}, price = #{price}, amount = #{amount}, 
+							pContent = #{pContent}, pCategory = #{pCategory} where idx = #{idx}
+	</update>
+	
+	<delete id="deletefile" parameterType="string">
+		delete from product_file where filePath = #{filePath};
+	</delete>
+	
+	<select id="getImageList" parameterType="string" resultType="string">
+		select filePath from product_file where product_idx = #{product_idx}
+	</select>
+	
+	<select id="showProductImages" parameterType="int" resultType="product_file">
+		select * from product_file where product_idx = #{idx}
+	</select>
 </mapper>
