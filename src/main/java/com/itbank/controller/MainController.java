@@ -202,6 +202,14 @@ public class MainController {
 		return mav;
 	}
 	
+	@GetMapping("/addcamp")
+	public ModelAndView addcamp() {
+		ModelAndView mav = new ModelAndView("/main/addcamp");
+		List<TagDTO> tags = campService.selectTags();
+		mav.addObject("tags", tags);
+		return mav;
+	}
+	
 	// 캠핑장 추가	
 	@PostMapping("/addcamp")
 	public String addcamp(CampDTO dto) {

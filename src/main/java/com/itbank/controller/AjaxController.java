@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.itbank.model.ImageDTO;
 import com.itbank.model.IncomeDTO;
 import com.itbank.model.MemberDTO;
+import com.itbank.model.Product_fileDTO;
 import com.itbank.model.ProductDTO;
 import com.itbank.model.SalesDTO;
 import com.itbank.model.SearchDTO;
@@ -133,7 +134,13 @@ public class AjaxController {
 		List<MemberDTO> list = loginService.checkEnabled(userid);
 		return list;
 	}
-
+	
+	//정현's ajaxController 
+	@GetMapping("/showProductImage/{idx}")
+	public List<Product_fileDTO> showProductImage(@PathVariable("idx") int idx) {
+		List<Product_fileDTO> list = productService.showProductImages(idx);
+		return list;
+	}
 	@PostMapping("/grocery")
 	public int grocery(@RequestBody ProductDTO dto) {
 		int row = productService.grocery(dto);
@@ -175,5 +182,8 @@ public class AjaxController {
 	    return formattedList;
 	}
 
-
+	@PostMapping("/deletefile")
+	private boolean deletefile(@RequestBody Product_fileDTO dto) {
+		return productService.deletefile(dto.getFilePath());
+	}
 }

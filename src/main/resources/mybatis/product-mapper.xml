@@ -5,7 +5,9 @@
 
 <mapper namespace="com.itbank.repository.ProductDAO">
 	<select id="selectAll" resultType="product" parameterType="paging"> <!-- 쇼핑몰 페이징 10개씩 -->
-		select * from product orders limit #{offset}, #{perPage}
+		select p.*, (SELECT filePath 
+	        FROM product_file 
+	         WHERE product_file.product_idx = p.idx limit 1) AS image from product p limit #{offset}, #{perPage}
 	</select>
 	
 	<select id="priceSelectAll" resultType="product"> <!-- 가격정렬 기능(오름차순/내림차순 둘다 가능)  -->
@@ -24,26 +26,69 @@
 		select * from product order by pStar desc
 	</select>
 	
-	<select id="basketSelectAll" resultType="basket">
-		select * from basket order by idx;
+	<select id="basketSelectAll" resultType="basket"> <!-- 장바구니 목록 불러오기 로그인이 되어있는 유저에 한하여 -->
+		select * from basket where userid = #{userid} order by idx;
 	</select>
 	
-	<select id="selectCount" resultType="int">
+	<select id="selectCount" resultType="int"> <!-- 페이징 카운트 -->
 		select count(*) from product	
 	</select>
 	
-	<select id="selectOne" resultType="product" parameterType="String">
+	<select id="selectOne" resultType="product" parameterType="String"> <!-- 상품이름 검색  -->
 		select * from product where pName like #{%pname%};
 	</select>
 	
 	<delete id="delete" parameterType="int"> <!-- 상품 삭제 기능 -->
-		delete from product where idx = #{idx}
+    	delete from product where idx = #{idx}
 	</delete>
 	
+	<delete id="basketdelete" parameterType="int"> <!-- 장바구니 삭제 기능 -->
+		delete from basket where idx = #{idx}
+	</delete>
+	
+	<update id="basketmodify" parameterType="basket">
+		update basket set amount = #{amount} where idx = #{idx}
+	</update>
+	
 	<select id="selectDetails" parameterType="int" resultType="product">
-         select * from product where idx=#{idx}
+         SELECT * from product	where idx = ${idx}
     </select>
     
+
+
+    <select id="selectMaxIdxFromUpload" resultType="int">   
+		select max(idx) from product
+	</select>
+    
+    <insert id="addProduct" parameterType="product">
+    	insert into product (pName, price, amount, pContent, pCategory) 
+    		values (#{pName}, #{price}, #{amount}, #{pContent}, #{pCategory})
+    </insert>
+    
+    <insert id="addFile" parameterType="hashmap">
+			insert into product_file (product_idx, filePath) 
+		<foreach item="item" collection="list" separator="  UNION ALL  " >
+			select #{upload}, #{item} from dual
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterType="product">
+		update product set pName = #{pName}, price = #{price}, amount = #{amount}, 
+							pContent = #{pContent}, pCategory = #{pCategory} where idx = #{idx}
+	</update>
+	
+	<delete id="deletefile" parameterType="string">
+		delete from product_file where filePath = #{filePath};
+	</delete>
+	
+	<select id="getImageList" parameterType="string" resultType="string">
+		select filePath from product_file where product_idx = #{product_idx}
+	</select>
+	
+	<select id="showProductImages" parameterType="int" resultType="product_file">
+		select * from product_file where product_idx = #{idx}
+	</select>
+	
     <insert id="grocery" parameterType="product">
     	insert into basket (userid, pid, pName, price, amount) values 
     		(#{userid}, #{idx}, #{pName}, #{price}, #{amount})
