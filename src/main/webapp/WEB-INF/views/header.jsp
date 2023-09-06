@@ -1169,8 +1169,6 @@ aside {
 .modify_submit:hover {
 	border: 1px solid black;
 }
->>>>>>> 70a4e8b736d9a071731c70d30a4ec10db707779a
-=======
 .orderlist_list {
 	border-top: 2px solid black;
 	border-bottom: 1px solid grey;
@@ -1361,7 +1359,6 @@ aside {
 	margin: auto;
 }
 /* 마이페이지  끝 */
->>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
 </style>
 
 <script>
