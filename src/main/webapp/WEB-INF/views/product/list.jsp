@@ -49,12 +49,18 @@
 				<li><input type="search" name="pSearch">
 					<button>검색</button></li>
 				<li><a href="${cpath}/product/addProduct">상품 등록</a></li>
+
+				<li><input type="search" name="pSearch">
+					<button>검색</button></li>
+				<li><a href="${cpath}/product/addProduct">상품 등록</a></li>
+
 				<form>
 				   
 				     <input type="search" name="pName" placeholder="상품 검색">
 				     <input type="submit" value="검색">
 			
 				</form>
+
 			</ul>
 		</div>
 		<c:forEach var="dao" items="${list }">

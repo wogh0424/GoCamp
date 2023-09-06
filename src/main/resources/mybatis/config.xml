@@ -18,6 +18,7 @@
 		<typeAlias type="com.itbank.model.Product_fileDTO" alias="product_file"/>
 		<typeAlias type="com.itbank.model.BasketDTO" alias="basket"/>
 		
+		
 		<typeAlias type="com.itbank.model.FreeBoardDTO" alias="freeboard"/>
 		<typeAlias type="com.itbank.model.FreeBoardReplyDTO" alias="freeboardreply"/>
 		<typeAlias type="com.itbank.model.NoticeBoardDTO" alias="noticeboard"/>

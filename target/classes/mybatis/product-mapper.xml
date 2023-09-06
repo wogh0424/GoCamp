@@ -54,6 +54,8 @@
          SELECT * from product	where idx = ${idx}
     </select>
     
+
+
     <select id="selectMaxIdxFromUpload" resultType="int">   
 		select max(idx) from product
 	</select>
