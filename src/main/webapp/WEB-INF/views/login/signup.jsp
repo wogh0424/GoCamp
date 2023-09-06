@@ -57,13 +57,13 @@
 	#dupCheckBtn,
 	#sendAuthNumber,
 	#checkAuthNumber,
-	button[type="submit"] {
+	input[type="submit"] {
 		padding: 10px;
 		border: none;
 		border-radius: 5px;
 		cursor: pointer;
 	}
-	button[type="submit"] {
+	input[type="submit"] {
 		width: 300px;
 		background-color: rgb(90, 209, 110);
 		margin-top: 20px;
@@ -105,8 +105,9 @@
 	
 	#checkAuthNumber {
 		float: right;
-		margin-right: 10px;
-		
+		color: white;
+		height: 52px;
+		background-color: #4476D5;
 	}
 	
 	
@@ -123,8 +124,6 @@
 				</p>
 			  
 				<span id="dubMessage"></span>
-			        
-		
 				<p>
 					<input type="password" name="userpw" id="userpw" placeholder="비밀번호 입력" required>
 				</p>
@@ -156,7 +155,7 @@
 					<span id="authMessage">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
 				</p>
 				<p>
-					<button type="submit">회원가입</button>
+					<input id="signupSubmitBtn" type="submit" value="회원가입">
 				</p>
 			</div>
 		</form>
@@ -166,10 +165,10 @@
 	<script>
 		const dupCheckBtn = document.getElementById('dupCheckBtn')
 		const sendAuthNumber = document.getElementById('sendAuthNumber')
+		const userid = document.querySelector('input[name="userid"]')
 		// 계정 중복확인
 		async function dupCheckHandler() {
 			const dupMessage = document.getElementById('dubMessage')
-			const userid = document.querySelector('input[name="userid"]')
 			
 			if(userid.value == ''){
 				dupCheckBtn.focus()
@@ -185,6 +184,7 @@
 			}
 			if(count == 0) {
 				dupMessage.innerText = '사용 가능한 ID입니다'
+				dupMessage.classList.add('check')
 				dupMessage.style.color = 'blue'
 			}
 			else {
@@ -204,7 +204,6 @@
 			
 			if(json.success == 1){
 				document.querySelector('div.hidden').classList.remove('hidden')
-				document.querySelector('button[type="submit"]').disabled = 'disabled'
 			}
 		}
 		sendAuthNumber.onclick = sendAuthNumberHandler
@@ -220,8 +219,8 @@
 			const row = await fetch(url).then(resp => resp.text())
 			const authMessage = document.getElementById('authMessage')
 			if(row != 0){
-				document.querySelector('button[type="submit"]').removeAttribute('disabled')
 				authMessage.innerText = '인증 성공'
+				authMessage.classList.add('check')
 				authMessage.style.color = 'blue'
 			}
 			else {
@@ -249,6 +248,47 @@
 			// onchange : JS를 통해 변화가 일어났는지 감지한다. addEventListener와 같은 기능
 			confirmpw.onkeyup = validatepw
 			// onkeyup : 사용자가 키보드의 키를 눌렀다가 땠을 때
+	</script>
+	
+	<script>
+		const signForm = document.getElementById('signForm')	
+	
+		signForm.addEventListener('submit', function(event) {
+			event.preventDefault();
+			const check = document.querySelectorAll('span.check')
+			console.log(check)
+			if (check.length == 0) {
+				alert('아이디, 인증번호 체크가 완료되지 않았습니다.')
+				return
+			}
+			else if (check.length == 1) {
+				alert('필수 항목 인증이 완료되지 않았습니다')
+				return
+			}
+			else {
+				alert('회원가입이 성공하였습니다.')
+// 				await couponHandler()
+			}
+			
+		})
+		
+		async function couponHandler() {
+			const url = cpath + '/coupon/' + userid.value
+			
+			await fetch(url)
+			.then(resp => resp.json())
+			.then(json => {
+				if (json) {
+					alert('축하합니다! 가입기념쿠폰이 발급되었습니다. 마이페이지에서 확인하세요')
+					signForm.submit()
+				}
+				else {
+					alert('회원가입 중 문제가 발생하였습니다')
+					return
+				}
+			})
+		}
+		
 	</script>
 
 

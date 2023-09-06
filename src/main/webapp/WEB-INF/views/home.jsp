@@ -20,7 +20,7 @@
 			<li style="background-color: #c7ebf1;"><video src="${cpath }/resources/upload/camp/jaeho2.mp4" width="100%" height="100%" controls loop></video></li>
 		</ul>
 	</div>
-	<div class="camping_right_items" >
+	<div class="camping_right_items" style="margin-top: 20px;">
 	<!-- c:foreach 만들어야 범위 시작  -->
 		<c:forEach items="${ camplist}" var="item">
 		<a href="${cpath }/main/view/${item.contentId}" style="text-decoration: none; color: black;">
