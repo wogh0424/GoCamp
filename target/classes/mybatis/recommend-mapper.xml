@@ -63,7 +63,7 @@
 	</select>
 	
 	<update id="reviewRecommend" parameterType="int">
-		update recommend set recommendReviewCnt = recommendReviewCnt + 1 where review = #{idx}
+		update recommend set recommendReviewCnt = recommendReviewCnt + 1 where review = #{review}
 	</update>
 	
 </mapper>	

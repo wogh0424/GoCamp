@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.ImageDTO;
 import com.itbank.model.IncomeDTO;
@@ -32,6 +35,7 @@ import com.itbank.service.CampService;
 import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
 import com.itbank.service.ProductService;
+import com.itbank.service.RecommendService;
 
 @RestController
 public class AjaxController {
@@ -41,6 +45,7 @@ public class AjaxController {
 	@Autowired private CampService campService;
 	@Autowired private ProductService productService;
 	@Autowired private AdminService adminService;
+	@Autowired private RecommendService recommendService;
 
 	
 	@GetMapping("/dupCheck/{userid}")
@@ -186,4 +191,74 @@ public class AjaxController {
 	private boolean deletefile(@RequestBody Product_fileDTO dto) {
 		return productService.deletefile(dto.getFilePath());
 	}
+	
+	// 연지's AjaxController
+	
+		// 
+		@GetMapping("/reviewRecommend/{reviewId}")
+		public HashMap<String, Object > recommend(@PathVariable("reviewId") int review, Principal principal) {
+			 HashMap<String, Object> map = new HashMap<>();
+			
+			
+			if (principal != null) {
+				String userid = principal.getName();
+				MemberDTO dto = mypageService.importMember(userid);
+				int member = dto.getIdx();
+				
+
+		        boolean isReviewRecommended = recommendService.isReviewRecommended(review, member);
+		        int getReviewRecommendCount = recommendService.getReviewRecommendCount(review);
+		       
+
+		        map.put("isReviewRecommended", isReviewRecommended);
+		        map.put("getReviewRecommendCount", getReviewRecommendCount);
+		       
+		    }
+			
+			return map;
+		}
+		
+		// 캠핑장리뷰 추천수
+
+		// 추천하기
+		@PostMapping("/reviewRecommend/{reviewId}")
+		@ResponseBody
+		public int insertReviewRecommend(Principal principal, @PathVariable("reviewId") int review) {
+			
+			int row = 0;
+			
+			if (principal != null) {
+		     String userid = principal.getName();
+			 MemberDTO dto = mypageService.importMember(userid);
+			 int member = dto.getIdx();
+			 
+			 row = recommendService.insertReviewRecommend(review, member);
+			}
+			    
+			 return row;
+		}
+		
+		// 추천취소
+		@PostMapping("/reviewDisRecommend/{reviewId}")
+		@ResponseBody
+		public int deleteReviewRecommend(Principal principal, @PathVariable("reviewId") int review) {
+			
+			int row = 0;
+			
+			if (principal != null) {
+			 String userid = principal.getName();
+			 MemberDTO dto = mypageService.importMember(userid);
+			 int member = dto.getIdx();
+			 
+
+		    row = recommendService.deleteReviewRecommend(review, member); 
+			}
+		    return row;
+		}
+		
+		
+		
+		
+	
+	
 }

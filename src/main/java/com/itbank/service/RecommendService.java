@@ -136,10 +136,7 @@ public class RecommendService {
 		return dao.getReviewRecommendCount(review);
 	}
 
-	public boolean reviewRecommend(int idx, int member) {
-		
-		return dao.reviewRecommend(idx, member);
-	}
+	
 
 	
 	
