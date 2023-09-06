@@ -74,7 +74,7 @@ footer{
 </div>
 <div class="footer_bottom">
 	<p>
-		부산 해운대구 센텀2로 25 센텀드림월드 11층 (우동 1510) KG아이디뱅크 부산학원 <br>
+		부산 해운대구 센텀2로 25 센텀드림월드 11층 (우동 1510) KG아이티뱅크 부산학원 <br>
 		SITE : http://busan.kgitbank.com  TEL : 051-744-7799 (상담시간 : 평일 08:30~20:00)<br>
 		Copyrights(c) 2023 FINAL PROJECT ALL RIGHTS RESERVED.
 	</p>

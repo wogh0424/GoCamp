@@ -19,11 +19,27 @@
 			<div class="main_boardlist1">
 				<canvas class="boardlist1_left" id="boardlist1_lefts"
 					style="height: 380px; width: 62%"></canvas>
-				<div class="boardlist1_right">list1_right</div>
+				<canvas class="boardlist1_right" id="boardlist1_right">list1_right</canvas>
 			</div>
 			<div class="main_boardlist2">
-				<canvas class="boardlist2_left" id="boardlist2_left">list2_left</canvas>
-				<div class="boardlist2_right">list2_right</div>
+				<canvas class="boardlist2_left" id="boardlist2_left" style="height: 380px; width: 62%">list2_left</canvas>
+				<div class="boardlist2_right">
+					<div class="report_content">
+							<div id="report_header"><p>신고당한 유저</p></div>
+							<div id="category">
+								<div id="category_user"><p>신고당한 유저</p></div>
+								<div id="category_reason"><p>신고사유</p></div>
+								<div id="category_date"><p>신고일</p></div>
+							</div>
+						<c:forEach var="report" items="${adminList }">
+						<div class="report_wrap">
+							<div id="reported_user">${report.reported_user }</div>
+							<div id="reported_reason">${report.reportedReason }</div>
+							<div id="reportedDate">${report.reportedDate }</div>
+						</div>						
+						</c:forEach>
+					</div>
+				</div>
 			</div>
 			<div class="main_boardlist3">
 				<ul class="boardlist3_group">
@@ -125,7 +141,6 @@ btnList.forEach((element, index) => {
 })
 </script>
 
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
@@ -138,7 +153,7 @@ btnList.forEach((element, index) => {
 		  for (let key in TodayData[0]) {
 		    Todayarr.push(TodayData[0][key]);
 		  }
-		  console.log(Todayarr)
+		  
 		  for (let key in YesterdayDatas[0]) {
 		    YesterDayarr.push(YesterdayDatas[0][key]);
 		  }
@@ -188,8 +203,6 @@ btnList.forEach((element, index) => {
 		  });
 		}
 
-
-	
 	
 	$.getJSON("${cpath}/admin/requestYesternayData", function(yesterdayData) {
 	  $.each(yesterdayData, function(index, obj) {
@@ -219,7 +232,7 @@ btnList.forEach((element, index) => {
 	            labels: date,
 	            datasets: [
 	                {
-	                    label: '수익',
+	                	label: '수익',
 	                    data: incomearr,
 	                    borderColor: '#1DDB16',
 	                    backgroundColor: '#FFC19E',
@@ -227,9 +240,23 @@ btnList.forEach((element, index) => {
 	                    pointHoverRadius: 15 
 	                }
 	            ]
-	        }
+	        },
+	        options: {
+		    	  responsive: false,
+		    	  plugins: {
+		    	    legend: { 
+		    	      position: 'top',
+		    	    },
+		    	    title: {
+		    	      display: true,
+		    	      text: '주간 수익'
+		    	    }
+		    	  }
+		    	}
 	    });
 	}
+	
+	
 	
 	$.getJSON("${cpath}/admin/requestincome", function(incomeData){
 		$.each(incomeData, function(index, obj){
@@ -239,9 +266,61 @@ btnList.forEach((element, index) => {
 		createIncomeChart()
 	})
 	</script>
-
-
-
+	
+	<script>
+		var reportcnt = []	
+		var reportUser = []
+	
+		function createReportChart(){
+			const ctx = document.getElementById('boardlist1_right').getContext('2d')
+			const myChart = new Chart(ctx, {
+		        type: 'bar', 
+		        data: {
+		            labels: reportUser,
+		            datasets: [
+		                {
+		                    label: '신고횟수',
+		                    data: reportcnt,
+		                    borderColor: '#1DDB16',
+		                    backgroundColor: [
+		                    '#FFC19E',
+	                    	'#ABF200',
+	                    	'#B5B2FF',
+	                    	'#FFD9FA',
+	                    	'#B2CCFF',
+	                    	'#1DDB16'
+	                    	],
+		                    pointStyle: 'circle', 
+		                    pointHoverRadius: 15 
+		                }
+		            ]
+		        },
+		        options: {
+		        	indexAxis: 'y',
+			    	  responsive: false,
+			    	  plugins: {
+			    	    legend: { 
+			    	      position: 'top',
+			    	    },
+			    	    title: {
+			    	      display: true,
+			    	      text: '베스트 신고당한유저'
+			    	    }
+			    	  }
+			    	}
+		    });
+			
+		}
+		
+		$.getJSON("${cpath}/admin/requestReportedData", function(reportDate) {
+			$.each(reportDate, function(index, obj){
+				reportcnt.push(obj.reportCount)
+				reportUser.push(obj.reported_user)
+			})
+			createReportChart()
+		})
+			
+		</script>
 
 </body>
 </html>

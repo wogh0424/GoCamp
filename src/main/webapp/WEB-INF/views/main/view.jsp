@@ -113,10 +113,6 @@
 				    <input type="hidden" name="gocamp" value="${view.contentId}">
 				    <button id="recommendCampBtn" type="submit">${isCampRecommended ? '추천 취소🥲':'추천하기👍'}</button>					 
 				</form>
-			<div id="recommendCampCount">추천수 : ${campRecommendCount}</div>
-				
-				
-
 				
 				<form method="POST" action="${cpath}/main/like" onsubmit="event.preventDefault(); likeHandler();">
 				    <input type="hidden" name="gocamp" value="${view.contentId}">
@@ -125,7 +121,7 @@
 
 				<button class="modifyRequest">정보수정요청</button>
 			</div>
-			s
+
 		</div>
 	</div>
 	<!--end of viewMain-->
@@ -240,7 +236,7 @@
 										value="[${view.facltNm}]" required autofocus>
 								</p>
 								<p>
-									<input type="text" name="writer" value="${nickname}" readonly>
+									<input type="text" name="writer" value="${nickname}" readonly style="height: 50px; line-height: 50px;">
 								</p>
 							</div>
 							<p>

@@ -118,7 +118,7 @@ a {
  }
 
   #reviewContainer {
-  	width: 80%;
+  	width: 100%;
     margin: 0 auto;
     padding: 20px;
     background-color: #ffffff;
@@ -152,8 +152,9 @@ a {
 
 
 #reviewContainer textarea[name="review_content"] {
-  width: 720px;
+  width: 100%;
   height: 200px;
+  resize: none;
   padding: 10px;
   margin-top: 15px;
   border: 1px solid #ccc;
@@ -200,7 +201,6 @@ a {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 10px;
 }
 
 .reviewIdx {
@@ -271,6 +271,10 @@ a {
 .hiddenReview {
   display: none; /* 숨겨진 상태로 시작 */
   padding: 10px; /* 여백 추가 (선택 사항) */
+  width: 100%;
+  border-right: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
 }
 
 /* 리뷰 제목에 대한 스타일 */
@@ -739,8 +743,7 @@ footer{
 
 #menu > ul > li > ul > li {
 		background-color: #6f8c77;
-		border: 1px solid lightgrey;
-		border-top: none;
+		border-bottom: 1px solid lightgrey;
 }
 
 #menu > ul > li > ul > li:hover {

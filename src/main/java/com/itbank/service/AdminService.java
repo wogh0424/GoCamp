@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.itbank.model.AdminDTO;
 import com.itbank.model.IncomeDTO;
+import com.itbank.model.ReportDTO;
 import com.itbank.model.SalesDTO;
 import com.itbank.repository.AdminDAO;
 
@@ -31,4 +32,11 @@ public class AdminService {
 		return dao.requestincome();
 	}
 
+	public List<AdminDTO> requestReport() {
+		return dao.reportedReason();
+	}
+
+	public List<ReportDTO> requestReportedData() {
+		return dao.requestReportedData();
+	}
 }
