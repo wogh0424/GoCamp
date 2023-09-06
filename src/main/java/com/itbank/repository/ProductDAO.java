@@ -29,7 +29,6 @@ public interface ProductDAO {
 
 	List<ProductDTO> pStarSelectAll();
 
-<<<<<<< HEAD
 	int selectMaxIdxFromUpload();
 
 	int addFile(HashMap<String, Object> param);
@@ -49,7 +48,7 @@ public interface ProductDAO {
 	boolean deletefile(String filePath);
 
 	int updateFile(HashMap<String, Object> param);
-=======
+
 	int grocery(ProductDTO dto);
 
 	int validategrocery(ProductDTO dto);
@@ -63,6 +62,5 @@ public interface ProductDAO {
 	int basketdelete(int idx);
 
 	int basketmodify(BasketDTO dto);
->>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
 
 }
