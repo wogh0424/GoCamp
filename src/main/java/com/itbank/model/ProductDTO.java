@@ -16,12 +16,8 @@ public class ProductDTO {
 	   private Date sDate;
 	   private int pick;
 	   private String image;
-<<<<<<< HEAD
 	   private List<MultipartFile> upload;
 	   private int userid;
-=======
-	   private String userid;
->>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
 	   private int pStar;
 	   
 	public int getIdx() {
@@ -78,14 +74,12 @@ public class ProductDTO {
 	public void setPick(int pick) {
 		this.pick = pick;
 	}
-	
 	public String getImage() {
 		return image;
 	}
 	public void setImage(String image) {
 		this.image = image;
 	}
-<<<<<<< HEAD
 	public List<MultipartFile> getUpload() {
 		return upload;
 	}
@@ -93,12 +87,9 @@ public class ProductDTO {
 		this.upload = upload;
 	}
 	public int getUserid() {
-=======
-	public String getUserid() {
->>>>>>> 01cdba27456be5c3dd472d5cfc67b23ce895ecd8
 		return userid;
 	}
-	public void setUserid(String userid) {
+	public void setUserid(int userid) {
 		this.userid = userid;
 	}
 	public int getpStar() {
@@ -107,9 +98,6 @@ public class ProductDTO {
 	public void setpStar(int pStar) {
 		this.pStar = pStar;
 	}
-	public void setthumbnailUrl(String firstImage) {
-		// TODO Auto-generated method stub
-		
-	}
+	   
 	   
 }
