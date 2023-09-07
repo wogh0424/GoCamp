@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 
-<div id="camping_intro_search">
+<div id="camping_intro_search" style="background-image: url('${cpath}/resources/image/main/homeBannerImage.jpg');">
 	<div id="simple_search_panel">
 		<div>
 			<br>
@@ -110,33 +110,35 @@
 <!-- camping_top_list 끝 -->
 
 <!-- review 페이지 시작  -->
+<<<<<<< HEAD
+<h3>BEST REVIEW</h3>
 <div class="review_rank">
+<c:forEach items="${reviewList }" var="list">
+ 	<a href="${cpath }/reviewBoard/view/${list.idx}">
+
+<div class="review_rank" style="background-image: url('${cpath}/resources/image/bg-image.jpg');">
 	<div class="review_rank_items">
+
 		<div class="review_rank_image">
-			<img src="${cpath }/resources/image/review_test_image.jpg">
-				<div class="review_rank_content">
-					Nullam ultricies id turpis nec elementum. Morbi luctus consectetur aliquet. Praesent volutpat congue nunc vitae varius. Integer sit amet malesuada tellus. Fusce felis nisl, interdum porttitor massa eu, commodo tempus turpis. Suspendisse potenti. Aliquam sit amet velit nec erat rhoncus pretium. Integer nec elit id mi posuere scelerisque. Nunc quis sem velit. Proin accumsan, velit et porttitor faucibus, nunc orci pharetra leo, a ultrices elit lacus ut ante.
-			</div>
-			<div class="review_rank_campingName">캠핑장 이름</div>
-			<div class="review_rank_cityName">캠핑장 지역</div>
+		 <c:choose>
+       		 <c:when test="${empty list.filePath}">
+          	  <img src="${cpath}/resources/image/Review_thecamping.png" height="200">
+        </c:when>
+
+       
+        <c:otherwise>
+        
+		<c:forTokens var="filePath" items="${list.filePath}" delims=",">
+		        <img src="${cpath}/upload/${filePath}" height="200">
+		</c:forTokens>
+		 </c:otherwise>
+    </c:choose>
 		</div>
-		<div class="review_rank_image">
-			<img src="${cpath }/resources/image/review_test_image.jpg">
-		<div class="review_rank_content">
-					Nullam ultricies id turpis nec elementum. Morbi luctus consectetur aliquet. Praesent volutpat congue nunc vitae varius. Integer sit amet malesuada tellus. Fusce felis nisl, interdum porttitor massa eu, commodo tempus turpis. Suspendisse potenti. Aliquam sit amet velit nec erat rhoncus pretium. Integer nec elit id mi posuere scelerisque. Nunc quis sem velit. Proin accumsan, velit et porttitor faucibus, nunc orci pharetra leo, a ultrices elit lacus ut ante.
-			</div>
-			<div class="review_rank_campingName">캠핑장 이름</div>
-			<div class="review_rank_cityName">캠핑장 지역</div>
-		</div>
-		<div class="review_rank_image">
-			<img src="${cpath }/resources/image/review_test_image.jpg">
-				<div class="review_rank_content">
-					Nullam ultricies id turpis nec elementum. Morbi luctus consectetur aliquet. Praesent volutpat congue nunc vitae varius. Integer sit amet malesuada tellus. Fusce felis nisl, interdum porttitor massa eu, commodo tempus turpis. Suspendisse potenti. Aliquam sit amet velit nec erat rhoncus pretium. Integer nec elit id mi posuere scelerisque. Nunc quis sem velit. Proin accumsan, velit et porttitor faucibus, nunc orci pharetra leo, a ultrices elit lacus ut ante.
-			</div>
-			<div class="review_rank_campingName">캠핑장 이름</div>
-			<div class="review_rank_cityName">캠핑장 지역</div>
-		</div>
-	</div>
+			<div class="review_rank_content">${list.review_content }</div>
+			<div class="review_rank_campingName">${list.title }</div>
+			<div class="review_rank_cityName">${list.writer }</div>
+	</a>
+	</c:forEach>
 </div>
 <!-- review 페이지 끝  -->
 

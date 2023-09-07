@@ -44,6 +44,11 @@ public interface GocampReviewDAO {
 	int countByKeyword(String srchKywrd);
 
 
+	// 추천순으로 화면에 띄울 리뷰
+	List<GocampReviewDTO> selectMainReview();
+
+
+
 	
 	
 }

@@ -10,5 +10,8 @@
     <div><img src="${like.firstImageUrl }"></div>
 </c:forEach>
 </div>
+
+<%@include file="../footer.jsp"%>
+
 </body>
 </html>

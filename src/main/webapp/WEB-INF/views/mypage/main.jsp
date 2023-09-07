@@ -62,6 +62,16 @@
     .mypageItems.selected {
 		display: block;
 	}
+	
+	#likesContainer{
+		display: flex;
+		flex-flow: flex;
+		justify-content: flex-start;  /*무조건 왼쪽부터 */
+		
+	}
+	#likeImage > img{
+		width: 100px;
+		height: 100px;}
 </style>
 
 
@@ -114,7 +124,16 @@
 			</div>
 		</div>
 		</div>
-		<div class="mypageItems">2
+		
+		
+		<div class="mypageItems">2(연지 좋아요)
+
+			<div id ="likesContainer">
+			<c:forEach items="${likes}" var="like">
+			   <div>${like.facltNm}</div>
+			   <div id="likeImage"><img src="${like.firstImageUrl }"></div>
+			</c:forEach>
+			</div>		
 		
 		</div>
 		<div class="mypageItems">3

@@ -181,20 +181,20 @@ public class MainController {
 	    return mav;
 	}
 
-	// 찜 목록 조회
-	@GetMapping("/like")
-	public ModelAndView viewLikes(Principal principal) {
-		ModelAndView mav = new ModelAndView();
-		String userid = principal.getName();
-		MemberDTO dto = mypageService.importMember(userid);
-		int member = dto.getIdx();
-		
-		List<ItemDTO> likes = likeService.selectLike(member);
-		mav.addObject("likes", likes);
-		mav.setViewName("main/like"); // 찜 목록 페이지 뷰 이름
-		
-		return mav;
-	}
+//	// 찜 목록 조회
+//	@GetMapping("/like")
+//	public ModelAndView viewLikes(Principal principal) {
+//		ModelAndView mav = new ModelAndView();
+//		String userid = principal.getName();
+//		MemberDTO dto = mypageService.importMember(userid);
+//		int member = dto.getIdx();
+//		
+//		List<ItemDTO> likes = likeService.selectLike(member);
+//		mav.addObject("likes", likes);
+//		mav.setViewName("main/like"); // 찜 목록 페이지 뷰 이름
+//		
+//		return mav;
+//	}
 	// 찜 삭제
 	@PostMapping("/dislike")
 	public ModelAndView removeLike(Principal principal, @RequestParam("gocamp") String gocamp) {

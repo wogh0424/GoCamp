@@ -6,28 +6,26 @@
 </div>
 
 
-<form method="GET" class="search-form">
-  <div id="column" class="search-column">
-    <div class="search-input-container">
-      <input type="search" name="order" value="${param.order}" class="search-input" placeholder="검색">
-      <button type="submit" class="search-submit">🔍</button>
+<form method="GET" class="boardSearchForm">
+    <div class="searchInputContainer">
+      <input type="search" name="order" value="${param.order}" class="boardSearchInput" placeholder="검색">
+      <button type="submit" class="boardSearchSubmit">🔍</button>
     </div>
-  </div>
 </form>
 
 
-<div id="boardList">
-	<div class="item columns">
-		<div class="idx">번호</div>
-		<div class="title">제목</div>
-		<div class="writer">작성자</div>
-		<div class="date">작성일시</div>
-		<div class="view_cnt">조회수</div>
+<div class="boardList">
+	<div class="boardColumns">
+		<div class="boardIdx">번호</div>
+		<div class="boardTitle">제목</div>
+		<div class="boardWriter">작성자</div>
+		<div class="boardDate">작성일시</div>
+		<div class="boardViewcount">조회수</div>
 	</div>
 	<c:forEach var="dto" items="${list }">
-		<div class="item">
-			<div class="boardIdx">${dto.idx }</div>
-			<div class="title">
+		<div class="dtoItem">
+			<div class="boardIdxPrint">${dto.idx }</div>
+			<div class="boardTitlePrint">
 			  <c:if test="${dto.replyCount >= 1}">
 				<a href="${cpath}/freeBoard/view/${dto.idx}" class="searchKey">${dto.title }  [${dto.replyCount}]</a>
 			 </c:if>
@@ -35,22 +33,17 @@
 				<a href="${cpath}/freeBoard/view/${dto.idx}" class="searchKey">${dto.title }</a>
 			 </c:if>
 			</div>
-			<div class="writer">${dto.writer }</div>
-			<div class="writeDate">${dto.date }</div>
-			<div class="viewCount">${dto.view_cnt }</div>
+			<div class="boardWriterPrint">${dto.writer }</div>
+			<div class="boardDatePrint">${dto.date }</div>
+			<div class="boardViewcountPrint">${dto.view_cnt }</div>
 		</div>
 	</c:forEach>
 </div>
 
-<div class="menubar">
-	<div>
-		
-	</div>
-	<div>
+<div class="boardMenubar">
 	<c:if test="${pageContext.request.userPrincipal != null}">
 		<a href="${cpath }/freeBoard/write"><button>새 글 작성</button></a>
 	</c:if>
-	</div>
 </div>
 
 <div class="paging">
@@ -79,6 +72,9 @@
 		})
 	}
 </script>
+
+<%@include file="../footer.jsp"%>
+
 
 
 </html>
