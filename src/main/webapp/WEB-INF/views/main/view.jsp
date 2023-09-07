@@ -335,7 +335,7 @@
 
 <script>
 		const mypickBtn = document.getElementById('mypickBtn')
-		const recommendCampBtn = document.getElementById('recommendCampBtn');
+		const recommendCampBtn = document.getElementById('recommendCampBtn')
 
 		
 		const loginId = '${pageContext.request.userPrincipal.name}'
@@ -358,15 +358,15 @@
 		}
 		
 		function likeHandler() {
-		    const mypickBtn = document.getElementById('mypickBtn');
+		    const mypickBtn = document.getElementById('mypickBtn')
 		    
-		    let requestUrl = mypickBtn.innerHTML === '찜하기🤍' ? '${cpath}/main/like' : '${cpath}/main/dislike';
-		    let successMessage = mypickBtn.innerHTML === '찜하기🤍' ? '찜완료❤️(찜 목록에서 확인해주세요)' : '찜❤️ 취소 완료';
+		    let requestUrl = mypickBtn.innerHTML === '찜하기🤍' ? '${cpath}/main/like' : '${cpath}/main/dislike'
+		    let successMessage = mypickBtn.innerHTML === '찜하기🤍' ? '찜완료❤️(찜 목록에서 확인해주세요)' : '찜❤️ 취소 완료'
 
 		    $.post(requestUrl, {gocamp: '${view.contentId}'}, function(data) {
-		        alert(successMessage);
-		        mypickBtn.innerHTML = mypickBtn.innerHTML === '찜하기🤍' ? '찜취소❤️' : '찜하기🤍';
-		    });
+		        alert(successMessage)
+		        mypickBtn.innerHTML = mypickBtn.innerHTML === '찜하기🤍' ? '찜취소❤️' : '찜하기🤍'
+		    })
 		}
 		
 		// 캠핑장 추천하기
@@ -386,55 +386,73 @@
 			
 			}
 		function recommendCampHandler() {
-		    const recommendCampBtn = document.getElementById('recommendCampBtn');
+		    const recommendCampBtn = document.getElementById('recommendCampBtn')
 		    
-		    let requestUrl = recommendCampBtn.innerHTML === '추천하기👍' ? '${cpath}/main/recommend' : '${cpath}/main/disRecommend';
-		    let successMessage = recommendCampBtn.innerHTML === '추천하기👍' ? '추천완료❤️' : '추천 취소🥲완료';
+		    let requestUrl = recommendCampBtn.innerHTML === '추천하기👍' ? '${cpath}/main/recommend' : '${cpath}/main/disRecommend'
+		    let successMessage = recommendCampBtn.innerHTML === '추천하기👍' ? '추천완료❤️' : '추천 취소🥲완료'
 
 		    $.post(requestUrl, {gocamp: '${view.contentId}'}, function(data) {
-		        alert(successMessage);
-		        recommendCampBtn.innerHTML = recommendCampBtn.innerHTML === '추천하기👍' ? '추천 취소🥲' : '추천하기👍';
-		    });
+		        alert(successMessage)
+		        recommendCampBtn.innerHTML = recommendCampBtn.innerHTML === '추천하기👍' ? '추천 취소🥲' : '추천하기👍'
+		    })
 		}
 		
-		// 리뷰 추천하기 스크립트
+		/// 리뷰 추천하기 스크립트
 		
 		
-		const recommendReviewBtn = document.querySelectorAll('button.recommendReviewBtn');
-		const reviewIdx = document.querySelectorAll('div.reviewIdx');
+		const recommendReviewBtn = document.querySelectorAll('button.recommendReviewBtn')
+		const reviewIdx = document.querySelectorAll('div.reviewIdx')
+		
+		// 새로고침해도 유지시켜주기 위해 추가
+		document.addEventListener('DOMContentLoaded', async function() {
+		    for (let i = 0; i < reviewIdx.length; i++) {
+		        const reviewId = reviewIdx[i].innerText.trim()
+		        let url = cpath + '/reviewRecommend/' + reviewId
+		        
+		        let response = await fetch(url)
+		        let json = await response.json()
+		        
+		        if (json.isReviewRecommended) {
+		            recommendReviewBtn[i].innerHTML = '추천취소🥲'
+		        } else {
+		            recommendReviewBtn[i].innerHTML = '추천하기👍'
+		        }
+		    }
+		})
 		
 		recommendReviewBtn.forEach((btn, index) => {
 		    btn.addEventListener('click', async function(event) {
 		        if (loginId == '') {
-		            const confirmation = confirm('로그인 후 사용하실 수 있는 기능입니다. 로그인 하시겠습니까?');
+		            const confirmation = confirm('로그인 후 사용하실 수 있는 기능입니다. 로그인 하시겠습니까?')
 		            if (!confirmation) {
 		                event.stopPropagation();  // 이벤트 전파 막음, 안 막으면 취소 눌러도 밑에 코드가 진행
-		                return;
+		                return
 		            } else {
 		                event.stopPropagation();  
-		                window.location.href = '${cpath}/login/loginForm';
-		                return;
+		                window.location.href = '${cpath}/login/loginForm'
+		                return
 		            }
 		        }
 		
-		        const reviewId = reviewIdx[index].innerText.trim();
-		        let url = cpath + '/reviewRecommend/' + reviewId;
+		        const reviewId = reviewIdx[index].innerText.trim()
+		        let url = cpath + '/reviewRecommend/' + reviewId
 		
-		        let response = await fetch(url);
-		        let json = await response.json();
-		        console.log(json);
+		        let response = await fetch(url)
+		        let json = await response.json()
+		        console.log(json)
 		
-		        let requestUrl = btn.innerHTML === '추천하기👍' ? cpath + '/reviewRecommend/' + reviewId : cpath + '/reviewDisRecommend/' + reviewId;
-		        let successMessage = btn.innerHTML === '추천하기👍' ? '추천완료❤️' : '추천 취소🥲완료';
+		        let requestUrl = btn.innerHTML === '추천하기👍' ? cpath + '/reviewRecommend/' + reviewId : cpath + '/reviewDisRecommend/' + reviewId
+		        let successMessage = btn.innerHTML === '추천하기👍' ? '추천완료❤️' : '추천 취소🥲완료'
 		
 		        $.post(requestUrl, {review: reviewId}, function(data) {
-		            alert(successMessage);
-		            btn.innerHTML = btn.innerHTML === '추천하기👍' ? '추천 취소🥲' : '추천하기👍';
-		        });
+		            alert(successMessage)
+		            btn.innerHTML = btn.innerHTML === '추천하기👍' ? '추천 취소🥲' : '추천하기👍'
+		        })
 		        
-		        console.log(reviewId);
-		    });
-		});
+		        console.log(reviewId)
+		    })
+		})
+		
 
 		
 	
