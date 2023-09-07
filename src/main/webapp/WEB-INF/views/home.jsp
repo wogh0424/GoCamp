@@ -6,7 +6,7 @@
 	<div id="simple_search_panel">
 		<div>
 			<br>
-			<h1 style="color: white; font-weight: bolder; text-shadow: 4px 2px 2px grey;">지금은 <span style="font-size: 50px; color:#F0AD33; ">캠핑갈</span> 시간!</h1>
+			<h1 style="color: white; font-weight: bolder; text-shadow: 4px 2px 2px grey;">지금은 <span style="font-size: 50px; color:#F0AD33; ">캠핑</span>갈 시간!</h1>
 			<h4 style="color: white; font-weight: bold; text-shadow: 2px 2px 2px grey;">더 캠핑에서 다양한 정보를 찾고 경험을 공유해보세요 🧡</h4>
 		</div>
 		<div style="height: 180px;">

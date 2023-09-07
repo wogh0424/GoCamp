@@ -143,6 +143,7 @@ public class MainController {
 			 int member = dto.getIdx();
 			 
 			 int row = recommendService.insertRecommend(gocamp, member);
+			 System.out.println(row);
 			 mav.setViewName("redirect:/main/view/" + gocamp); 
 			    
 			 return mav;
@@ -157,6 +158,7 @@ public class MainController {
 			    int member = dto.getIdx();
 
 			    int row = recommendService.deleteRecommend(gocamp, member); 
+			    System.out.println(row);
 			    mav.setViewName("redirect:/main/view/" + gocamp); 
 			    
 			    return mav;

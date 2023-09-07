@@ -30,6 +30,20 @@
 	</beans:bean>
 	
 	
+<!-- LoginCheckInterceptor -->
+<!-- 	<interceptors> -->
+<!-- 		<interceptor> -->
+		<!-- 인터셉터 처리를 적용할 경로 나열 --> 
+<!-- 			<mapping path="/product/basket"/> -->
+<!-- 			<mapping path="/mypage/main"/> -->
+<!-- 			<mapping path="/admin/adminpage"/> -->
+			
+<!-- 			<beans:bean id="loginInterceptor" -->
+<!-- 						class="com.itbank.interceptor.LoginCheckInterceptor"/> -->
+<!-- 		</interceptor> -->
+<!-- 	</interceptors> -->
+	
+	
 	<context:component-scan base-package="com.itbank.controller" />
 	
 	

@@ -676,7 +676,7 @@ footer{
 	height: 300px;
 }
 .camping_left_content {
-	background-color: #c1dfc7;
+	background-color: #ffe8b7;
 	padding: 15px;
 }
 .camping_right_list {
