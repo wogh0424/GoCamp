@@ -663,6 +663,7 @@ footer{
 }
 .camping_left_list {
 	border: 1px solid black;
+	border-radius: 0 40px 0 40px;
 	display: flex;
 }
 .camping_left_list > ul  {
@@ -1358,6 +1359,44 @@ aside {
 	margin: auto;
 }
 /* 마이페이지  끝 */
+
+/*홈페이지 - 옥*/
+#camping_intro_search {
+		background-image: url('${cpath}/resources/image/main/homeBannerImage.jpg');
+		background-repeat: no-repeat;
+		background-position: center;
+		width: 100%;
+		height: 600px;
+	}
+	#simple_search_panel {
+		width: 1200px;
+		height: 600px;
+		margin: 0 auto 50px;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+	}
+	#thecamp {
+		width: 400px;
+		height: 100px;
+		display: inline-block;
+	    padding: 10px 20px;
+	    background-color: orange;
+	    border: none;
+	    border-radius: 50px;
+	    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+	    color: white;
+	    cursor: pointer;
+	    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+	}
+	#thecamp:hover {
+		transform: scale(1.1);
+    	box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
+	}
+
+
 </style>
 
 <script>
