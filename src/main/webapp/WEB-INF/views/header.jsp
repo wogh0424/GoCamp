@@ -13,6 +13,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="${cpath }/resources/image/main/favicon.png">
 <meta charset="UTF-8">
 <title>GoCamping</title>
 
