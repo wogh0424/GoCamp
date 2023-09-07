@@ -1267,6 +1267,7 @@ aside {
 	width: 33%;
 	border: 1px solid black;
 	background-color: white;
+	overflow: scroll;
 }
 
 .report_content {
