@@ -19,10 +19,10 @@
 			<div class="main_boardlist1">
 				<canvas class="boardlist1_left" id="boardlist1_lefts"
 					style="height: 380px; width: 62%"></canvas>
-				<canvas class="boardlist1_right" id="boardlist1_right">list1_right</canvas>
+				<canvas class="boardlist1_right" id="boardlist1_right" style="height: 380px; width: 50%;">list1_right</canvas>
 			</div>
 			<div class="main_boardlist2">
-				<canvas class="boardlist2_left" id="boardlist2_left" style="height: 380px; width: 62%">list2_left</canvas>
+				<canvas class="boardlist2_left" id="boardlist2_left" style="height: 380px; width: 50%;">list2_left</canvas>
 				<div class="boardlist2_right">
 					<div class="report_content">
 							<div id="report_header"><p>신고당한 유저</p></div>
