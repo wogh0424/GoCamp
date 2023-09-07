@@ -41,7 +41,8 @@
 		float: left; 
 	}
 	
-	#dupCheckBtn {
+	#dupCheckBtn,
+	#nicCheckBtn {
 		float: right;
 		margin-right: 15px;
 		background-color: #4476D5;
@@ -55,6 +56,7 @@
 	}
 	
 	#dupCheckBtn,
+	#nicCheckBtn,
 	#sendAuthNumber,
 	#checkAuthNumber,
 	input[type="submit"] {
@@ -69,7 +71,8 @@
 		margin-top: 20px;
 	}
 	
-	#dupCheckBtn {
+	#dupCheckBtn,
+	#nicCheckBtn {
 		float: right;
 		margin-right: 15px;
 	}
