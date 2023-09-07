@@ -267,13 +267,13 @@
 			}
 			else {
 				alert('회원가입이 성공하였습니다.')
+				event.target.submit()
 // 				await couponHandler()
 			}
 			
 		})
 		
 		async function couponHandler() {
-			const url = cpath + '/coupon/' + userid.value
 			
 			await fetch(url)
 			.then(resp => resp.json())

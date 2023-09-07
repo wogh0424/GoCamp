@@ -148,7 +148,7 @@
 				alert('변경실패') 
 			}
 		}
-	   	mypage_form.addEventListener('submit',CheckPwHandler) 
+	   	form.addEventListener('submit',CheckPwHandler) 
 	</script>
 	
 	<script>

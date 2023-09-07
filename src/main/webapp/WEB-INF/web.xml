@@ -64,10 +64,19 @@
     </welcome-file-list>
 	
 	<error-page>
-	   <error-code>500</error-code>
-	   <location>/WEB-INF/views/error.jsp</location>
+		<error-code>500</error-code>
+		<location>/WEB-INF/error/error500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/error/notfoundpage404.jsp</location>
 	</error-page>
 
+	<error-page>
+		<exception-type>java.lang.NullPointerException</exception-type>
+		<location>/WEB-INF/error/notfoundpage404.jsp</location>
+	</error-page>
+	
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
