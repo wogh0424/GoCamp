@@ -1262,6 +1262,65 @@ aside {
 	background-color: white;
 	overflow: scroll;
 }
+.report_content {
+	width: 100%;
+}
+
+.report_wrap {
+	display: flex;
+	border: 1px solid black;
+	justify-content: space-evenly;
+	align-items: center;
+	word-wrap: break-word;
+	white-space: normal;
+	min-height: 40px; 
+}
+
+#reported_user {
+	width: 24%;
+	margin-left: 20px;
+}
+
+#reported_reason {
+	width: 33%;
+}
+
+#reportedDate {
+	width: 33%;
+}
+
+#report_header {
+	height: 70px;
+	border: 1px solid black;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #B7F0B1;
+}
+
+#category_user {
+	margin-left: 20px;
+	width: 33%;
+}
+
+#category_reason {
+	width: 33%;
+}
+
+#category_date {
+	width: 33%;
+}
+
+#category {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	background-color: grey;
+	color: white;
+}
 .main_boardlist3 {
 	padding: 5px;
 	display: flex;
