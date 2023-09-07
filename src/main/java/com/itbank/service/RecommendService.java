@@ -1,9 +1,5 @@
 package com.itbank.service;
 
-import java.security.Principal;
-
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -136,10 +132,7 @@ public class RecommendService {
 		return dao.getReviewRecommendCount(review);
 	}
 
-	public boolean reviewRecommend(int idx, int member) {
-		
-		return dao.reviewRecommend(idx, member);
-	}
+	
 
 	
 	

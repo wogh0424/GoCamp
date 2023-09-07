@@ -1268,14 +1268,6 @@ aside {
 	background-color: white;
 }
 
-.boardlist2_right {
-	margin: 10px;
-	width: 33%;
-	border: 1px solid black;
-	background-color: white;
-	overflow: auto;
-}
-
 .report_content {
 	width: 100%;
 }
@@ -1335,6 +1327,7 @@ aside {
 	background-color: grey;
 	color: white;
 }
+
 .main_boardlist3 {
 	padding: 5px;
 	display: flex;
@@ -1605,4 +1598,3 @@ $(document).ready(function() {
         document.getElementById("totalsearchInput").form.submit();
     }
 	</script>
-	

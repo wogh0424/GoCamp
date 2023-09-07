@@ -301,10 +301,11 @@
 										</div>
 										
 										<div id="btnReviewRecommendReview">
-																							
-											    <button class="recommendReviewBtn">${isReviewRecommended ? '추천 취소🥲':'추천하기👍'}</button>					 
-											
+										    <button class="recommendReviewBtn" >${isReviewRecommended ? '추천취소🥲' : '추천하기👍'}</button>
 										</div>
+										<div id="getReviewRecommendCount">${getReviewRecommendCount}</div>
+										
+										
 									</div>
 
 
@@ -397,22 +398,38 @@
 		}
 		
 		// 리뷰 추천하기 스크립트
-		
-		const reviewIdx = document.querySelectorAll('div.reviewIdx')
+		const reviewIdx = document.querySelectorAll('div.reviewIdx');
 		const recommendReviewBtn = document.querySelectorAll('button.recommendReviewBtn');
-		const cid = '${view.contentId}'
-		recommendReviewBtn.forEach((ob, index) => ob.addEventListener('click', () => recommendReviewHandler(ob, index)))
 		
-		async function recommendReviewHandler(ob, index) {
-			const reviewId = reviewIdx[index].innerText
-			const url = cpath + '/reviewRecommend/' + reviewId
-			await fetch(url)
-			.then(resp => resp.json())
-			.then(json => {
-				console.log(json)
-			})
+	
+		recommendReviewBtn.forEach((ob, index) => ob.addEventListener('click', () => recommendReviewHandler(ob, index)))
 			
-		}
+			async function recommendReviewHandler(ob, index) {
+				const reviewId = reviewIdx[index].innerText.trim();
+				let url = cpath + '/reviewRecommend/' + reviewId
+				
+				await fetch(url)
+				.then(resp => resp.json())
+				.then(json => {
+					console.log(json)
+				})
+				
+				let requestUrl = ob.innerHTML === '추천하기👍' ? cpath + '/reviewRecommend/' + reviewId : cpath + '/reviewDisRecommend/' + reviewId;
+			    let successMessage = ob.innerHTML === '추천하기👍' ? '추천완료❤️' : '추천 취소🥲완료';
+
+			    $.post(requestUrl, {review: reviewId}, function(data) {
+			        alert(successMessage);
+			        ob.innerHTML = ob.innerHTML === '추천하기👍' ? '추천 취소🥲' : '추천하기👍';
+			    });
+			    
+			    console.log(reviewId)
+			
+			}
+	
+		
+	
+
+
     </script>
     
 <script>

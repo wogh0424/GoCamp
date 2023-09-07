@@ -99,6 +99,8 @@ public class MainController {
 		}
 		
 		
+		
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(auth != null && auth.isAuthenticated()) {
 			String userid = auth.getName();
@@ -141,6 +143,7 @@ public class MainController {
 			 int member = dto.getIdx();
 			 
 			 int row = recommendService.insertRecommend(gocamp, member);
+			 System.out.println(row);
 			 mav.setViewName("redirect:/main/view/" + gocamp); 
 			    
 			 return mav;
@@ -155,10 +158,13 @@ public class MainController {
 			    int member = dto.getIdx();
 
 			    int row = recommendService.deleteRecommend(gocamp, member); 
+			    System.out.println(row);
 			    mav.setViewName("redirect:/main/view/" + gocamp); 
 			    
 			    return mav;
 			}
+			
+		
 	
 	// 찜 추가
 	@PostMapping("/like")
