@@ -54,11 +54,10 @@ public class GocampReviewController {
 		public ModelAndView view(@PathVariable("idx") int idx) {  
 			ModelAndView mav = new ModelAndView("reviewBoard/view"); 
 		
-
+				
 			
 			GocampReviewDTO dto = gocampReviewService.selectOneReview(idx);
 			mav.addObject("dto", dto);
-
 			
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			if(auth != null && auth.isAuthenticated()) {
@@ -71,6 +70,10 @@ public class GocampReviewController {
 			return mav;
 		}
 		
+	
+		
+	
+
 		
 		
 	

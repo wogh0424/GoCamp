@@ -289,7 +289,7 @@
 										
 										<c:if test="${review.writer == nickname}">
 											<a class="deleteReviewLink"
-												href="${cpath}/main/deleteReview/${review.idx}"><button>삭제</button></a>
+												href="${cpath}/main/deleteReview/${review.idx}"><button id="deleteReview">삭제</button></a>
 										</c:if>
 
 										<div id="reviewImages">
@@ -547,5 +547,8 @@
         const viewShowMap = document.getElementById('viewShowMap')
         viewShowMap.addEventListener('click', viewMapHandler)
     </script>
+    
+    <%@include file="../footer.jsp"%>
+    
 </body>
 </html>

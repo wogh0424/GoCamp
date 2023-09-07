@@ -2,34 +2,37 @@
     pageEncoding="UTF-8"%>
 <%@include file="../header.jsp" %>
 
+
 <div id=boardTitle>
-	<div id=board>BOARD > </div><div id=noticeBoard><a href="${cpath}/noticeBoard">noticeBoard</a></div>
+	<div id=board>BOARD > </div><div id=noticeBoard><a href="${cpath}/noticeBoard">NoticeBoard</a></div>
 </div>
 
-<div id="noticeBoardView">
+<div id="boardView">
 
-		<div>${dto.idx }</div>
-		<c:if test="${dto.pin == 1}">⭐필독⭐</c:if><div>${dto.title }</div>
-		 
-		<h4>조회수 : ${dto.view_cnt }</h4>
-		<h4>작성날짜 : <fmt:formatDate value="${dto.postdate }"/></h4>
-		<pre>${dto.content }</pre>
+		<div class=viewIdx>${dto.idx }</div>
+		<c:if test="${dto.pin == 1}">⭐필독⭐</c:if><div class=viewTitle>${dto.title }</div>
+		<div class=viewReadCount>조회수 : ${dto.view_cnt }</div>
+		<div class=viewDate>작성날짜 : <fmt:formatDate value="${dto.postdate }"/></div>
+		<div class=viewContent>${dto.content }</div>
 		<c:forTokens var="filePath" items="${dto.filePath}" delims=",">
-			<img src="${cpath }/upload/${filePath}" height="200">
+			<div class=viewUpload><img src="${cpath }/upload/${filePath}" height="200"></div>
 		</c:forTokens>
 </div>
-<div id="noticeBoardAdmin">
-		<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
-			 <h3><a href="${cpath }/noticeBoard/modify/${dto.idx}">수정</a></h3> 
-			 <h3><a href="${cpath }/noticeBoard/delete/${dto.idx}">삭제</a></h3> 
-		</c:if>
-</div>
 
-<div class="menubar">
+<div id="viewMenubar">
+		<div><a href="${cpath }/noticeBoard"><button>목록</button></a></div>
 		<div>
-		   <a href="${cpath }/noticeBoard"><button>목록</button></a>
+			<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
+				 <a href="${cpath }/noticeBoard/modify/${dto.idx}">
+				 	<button id="modifyBtn">수정</button></a>
+				 <a href="${cpath }/noticeBoard/delete/${dto.idx}">
+				 	<button id="deleteBtn">삭제</button></a>
+			</c:if>
 		</div>
 </div>
+
+
+<%@include file="../footer.jsp"%>
 
 </body>
 </html>

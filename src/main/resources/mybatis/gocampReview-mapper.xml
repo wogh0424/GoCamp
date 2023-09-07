@@ -94,6 +94,21 @@
 		
 		</select>
 		
+		<select id="selectMainReview" resultType="gocampreview">
+		
+			 SELECT 
+				    gr.*,
+				    (SELECT filePath 
+				     FROM gocampReview_file 
+				     WHERE gocampReview_file.gocampReview = gr.idx 
+				     LIMIT 1) AS filePath 
+				FROM gocampReview gr 
+				JOIN recommend r ON gr.idx = r.review 
+				ORDER BY r.recommendReviewCnt DESC 
+				LIMIT 3
+					
+		</select>
+		
 		
 		<select id="searchByKeyword" parameterType="string" resultType="gocampreview">
 			select * from gocampReview where title like '%${srchKywrd}%' or review_content like '%${srchKywrd}%'

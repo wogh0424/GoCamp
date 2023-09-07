@@ -449,6 +449,8 @@
 					</div> <!-- end of description -->
 				</div> <!-- end of item -->
 			</c:forEach>
+			
+			
 			<div class="main_paging">
 				<ul class="paging">
 				<c:if test="${paging.prev }">
@@ -466,6 +468,8 @@
 				</c:if>
 				</ul>
 			</div>
+			
+			
 		</div> <!-- end of mainList -->
 	</c:if>
 	

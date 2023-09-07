@@ -58,6 +58,7 @@
 
 
 
+<%@include file="../footer.jsp"%>
 
 
 

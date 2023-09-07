@@ -27,6 +27,8 @@
 body {
 	margin: 0;
 	padding: 0;
+	font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
 }
 
 ul {
@@ -112,11 +114,6 @@ a {
 /* 게시판  */
 
 /*리뷰게시판 */
-
- pre{
-	background-color: white;
- }
-
   #reviewContainer {
   	width: 100%;
     margin: 0 auto;
@@ -188,7 +185,7 @@ a {
   border-radius: 5px;
   padding: 15px;
   margin: 10px;
-  background-color: #f9f9f9;
+  background-color: #f7f7f7;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
@@ -262,26 +259,24 @@ a {
 
 /* 리뷰 헤더에 대한 스타일 */
 .reviewHeader {
-  cursor: pointer; /* 포인터 커서로 클릭 가능하도록 설정 */
-  border: 1px solid #ddd; /* 테두리 추가 (선택 사항) */
-  padding: 10px; /* 여백 추가 (선택 사항) */
+  cursor: pointer; 
+  padding: 10px; 
+  border-bottom: 1px solid lightgrey;
 }
 
 /* 숨겨진 리뷰 내용에 대한 스타일 */
 .hiddenReview {
-  display: none; /* 숨겨진 상태로 시작 */
-  padding: 10px; /* 여백 추가 (선택 사항) */
+  display: none;
+  padding: 10px; 
   width: 100%;
-  border-right: 1px solid lightgrey;
-  border-left: 1px solid lightgrey;
-  border-bottom: 1px solid lightgrey;
+
 }
 
 /* 리뷰 제목에 대한 스타일 */
 .reviewTitle {
-  font-weight: bold; /* 제목을 두껍게 표시 */
-  font-size: 16px; /* 원하는 글꼴 크기로 조정 */
-  margin-bottom: 5px; /* 아래 여백 추가 (선택 사항) */
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 5px; 
 }
 
 
@@ -290,7 +285,6 @@ a {
   
 /*자유게시판*/
 
-/*/
 
 /* 검색창 */
 
@@ -625,7 +619,7 @@ footer{
 	height: 500px;
 	display: flex;
 	justify-content: center;
-	background-image: url("./resources/image/bg-image.jpg");
+	background-image: url("./resources/image/bg-img.jpg");
 	
 }
 .review_rank_image  {
@@ -656,6 +650,8 @@ footer{
 	text-align: center;
 }
 /*main_review_rank 페이지 끝 */
+
+
 /*camping_top_wrap 캠핑장 랭크 시작*/
 .camping_top_wrap {
 	display: flex;
@@ -1479,7 +1475,9 @@ $(document).ready(function() {
 						<ul>
 							<li><a href="${cpath }/freeBoard">자유게시판(+ 댓글)</a></li>
 							<li><a href="${cpath }/reviewBoard">전체리뷰게시판</a></li>
+					<c:if test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }">
 							<li><a href="${cpath }/main/like">좋아요</a></li>
+					</c:if>
 						</ul>
 					</li>
 					<li><a href="">고객센터</a>
