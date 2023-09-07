@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 
-<div id="camping_intro_search">
+<div id="camping_intro_search" style="background-image: url('${cpath}/resources/image/main/homeBannerImage.jpg');">
 	<div id="simple_search_panel">
 		<div>
 			<br>
@@ -110,7 +110,7 @@
 <!-- camping_top_list 끝 -->
 
 <!-- review 페이지 시작  -->
-<div class="review_rank">
+<div class="review_rank" style="background-image: url('${cpath}/resources/image/bg-image.jpg');">
 	<div class="review_rank_items">
 		<div class="review_rank_image">
 			<img src="${cpath }/resources/image/review_test_image.jpg">
