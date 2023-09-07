@@ -135,7 +135,9 @@
 				</p>
 				<p>
 					<input type="text" name="nickname" placeholder="닉네임 입력" required>
+					<input type="button" id="nicCheckBtn" value="중복확인">
 				</p>
+				<span id="checknicmsg"></span>
 				<p>
 					<input type="date" name="birth" placeholder="생일 입력" required>
 				</p>
@@ -149,8 +151,9 @@
 				</p>
 				<div class="hidden" id="authNumber_wrap">
 					<input type="number" name="authNumber" placeholder="인증번호 6자리" required>
-					<input id="checkAuthNumber" type="button" value="인증번호 확인" required> <br> 
+					<input id="checkAuthNumber" type="button" value="인증번호 확인" required> <br>
 				</div>
+				<span id="isNumber"></span> 
 				<p>
 					<span id="authMessage">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
 				</p>
@@ -163,41 +166,86 @@
 
 
 	<script>
-		const dupCheckBtn = document.getElementById('dupCheckBtn')
-		const sendAuthNumber = document.getElementById('sendAuthNumber')
-		const userid = document.querySelector('input[name="userid"]')
-		// 계정 중복확인
-		async function dupCheckHandler() {
-			const dupMessage = document.getElementById('dubMessage')
-			
-			if(userid.value == ''){
-				dupCheckBtn.focus()
-				alert('먼저 사용할 ID를 입력해주세요')
-				return
-			}
-			const url = '${cpath}/dupCheck/' + userid.value
-			const count = await fetch(url).then(resp => resp.text())
-			
-			if(isNaN(count)){
-				alert('처리 도중 문제발생')
-				userid.focus()
-			}
-			if(count == 0) {
-				dupMessage.innerText = '사용 가능한 ID입니다'
-				dupMessage.classList.add('check')
-				dupMessage.style.color = 'blue'
-			}
-			else {
-				dupMessage.innerText = '이미 사용중인 ID입니다'
-				dupMessage.style.color = 'red'
-				userid.select()
-			}
-		}
-		dupCheckBtn.addEventListener('click', dupCheckHandler)
+	const userid = document.querySelector('input[name="userid"]');      // 유저id input
+	const dupCheckBtn = document.getElementById('dupCheckBtn');		    // 유저id 중복확인 버튼
+	const dupMessage = document.getElementById('dubMessage');		    // 중복체크 메시지
+
+	const nickname = document.querySelector('input[name="nickname"]');  // 닉네임 input
+	const nicCheckBtn = document.getElementById('nicCheckBtn');		    // 닉네임 중복확인 버튼
+	const checknicmsg = document.getElementById('checknicmsg');			// 중복체크 메시지
+	
+	const sendAuthNumber = document.getElementById('sendAuthNumber');   // 인증코드
+	const isNumber = document.getElementById('isNumber'); 				// 인증코드 입력 여부 메시지
+
+	async function checkInputHandler() {
+
+	    // ID 검사
+	    if (userid.value == '') {
+	        dupCheckBtn.focus();
+	        alert('먼저 사용할 ID를 입력해주세요');
+	        return;
+	    }
+
+	    const idUrl = '${cpath}/dupCheck/' + userid.value;
+	    const idCount = await fetch(idUrl).then(resp => resp.text());
+
+	    if (isNaN(idCount)) {
+	        alert('처리 도중 문제발생');
+	        userid.focus();
+	        return;
+	    }
+
+	    if (idCount != 0) {
+	        dupMessage.innerText = '이미 사용중인 ID입니다';
+	        dupMessage.style.color = 'red';
+	        userid.select();
+	        return;  // ID가 중복될 경우 함수 종료
+	    }
+
+	    dupMessage.innerText = '사용 가능한 ID입니다';
+	    dupMessage.classList.add('check');
+	    dupMessage.style.color = 'blue';
+
+	    // 닉네임 검사
+	    if (nickname.value == '') {
+	        nicCheckBtn.focus();
+	        alert('사용 가능한 ID입니다. 사용하실 닉네임을 입력해주세요.');			// ID가 사용가능하면 메시지를 띄우고 닉네임 입력하라고 띄움
+	        return;
+	    }
+
+	    const nicUrl = '${cpath}/dupCheck/' + nickname.value;
+	    const nicCount = await fetch(nicUrl).then(resp => resp.text());
+
+	    if (isNaN(nicCount)) {
+	        alert('처리 도중 문제발생');
+	        nickname.focus();
+	        return;
+	    }
+
+	    if (nicCount != 0) {
+	        checknicmsg.innerText = '이미 사용중인 닉네임입니다';
+	        checknicmsg.style.color = 'red';
+	        nickname.select();
+	        return;
+	    }
+
+	    checknicmsg.innerText = '사용 가능한 닉네임입니다';
+	    checknicmsg.classList.add('check');
+	    checknicmsg.style.color = 'blue';
+	}
+
+	dupCheckBtn.addEventListener('click', checkInputHandler);	// ID중복확인 버튼클릭 이벤트
+	nicCheckBtn.addEventListener('click', checkInputHandler);   // 닉네임중복확인 버튼클릭 이벤트
+
 		
 		// 인증번호 발송
 		async function sendAuthNumberHandler(){
 			const email = document.querySelector('input[name="email"]')
+			
+			if (!userid.value || !nickname.value) {
+		        alert('사용할 ID와 닉네임을 먼저 입력해주세요.');
+		        return;
+		    }
 			const url = '${cpath}/sendAuthNumber/' + email.value + '/'
 			const json = await fetch(url).then(resp => resp.json())
 			alert(json.message)
@@ -206,13 +254,19 @@
 				document.querySelector('div.hidden').classList.remove('hidden')
 			}
 		}
-		sendAuthNumber.onclick = sendAuthNumberHandler
 		
 		// 이메일 인증번호 확인
 		const checkAuthNumber = document.getElementById('checkAuthNumber')
 		async function checkAuthNumberHandler(){
 			const authNumber = document.querySelector('input[name="authNumber"]')
 			if(authNumber.value == ''){
+				isNumber.innerText = '인증코드를 입력하지 않았습니다.';
+				isNumber.style.color = 'red';
+			   
+				setTimeout(() => {
+			        isNumber.innerText = '';	// 메시지가 3초 후 사라짐
+			    }, 3000);
+
 				return
 			}
 			const url = '${cpath}/checkAuthNumber/' + authNumber.value
@@ -228,6 +282,7 @@
 				authMessage.style.color = 'red'	
 		}
 	}
+		sendAuthNumber.onclick = sendAuthNumberHandler
 		checkAuthNumber.onclick = checkAuthNumberHandler		
 	</script>
 
