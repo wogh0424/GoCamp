@@ -99,6 +99,8 @@ public class MainController {
 		}
 		
 		
+		
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(auth != null && auth.isAuthenticated()) {
 			String userid = auth.getName();
@@ -159,6 +161,8 @@ public class MainController {
 			    
 			    return mav;
 			}
+			
+		
 	
 	// 찜 추가
 	@PostMapping("/like")

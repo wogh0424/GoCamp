@@ -32,6 +32,7 @@
 		<typeAlias type="com.itbank.model.AdminDTO" alias="admin"/>
 		<typeAlias type="com.itbank.model.SalesDTO" alias="sales"/>
 		<typeAlias type="com.itbank.model.IncomeDTO" alias="income"/>
+		<typeAlias type="com.itbank.model.ReportDTO" alias="report"/>
 		
 
 		

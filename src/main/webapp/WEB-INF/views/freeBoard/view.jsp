@@ -2,12 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../header.jsp"%>
 
+<!-- Button trigger modal -->
+
 <div id=boardTitle>
 	<div id=board>BOARD ></div>
 	<div id=freeBoard>
 		<a href="${cpath}/freeBoard">FreeBoard</a>
+		
 	</div>
 </div>
+
+
+
 
 <div id="boardView">
 	<h3>${dto.idx }
@@ -18,11 +24,13 @@
 		작성날짜 :
 		<fmt:formatDate value="${dto.date }" />
 	</h4>
+	
 	<pre>${dto.content }</pre>
 	<c:forTokens var="filePath" items="${dto.filePath}" delims=",">
 		<%-- 		<h3>${filePath}</h3> --%>
 		<img src="${cpath }/upload/${filePath}" height="200">
 	</c:forTokens>
+	
 </div>
 
 
@@ -41,6 +49,7 @@
 		<p>
 			<input type="submit" value="댓글 작성">
 		</p>
+		
 	</form>
 </div>
 
@@ -57,6 +66,7 @@
 			<a href="${cpath }/freeBoard/deleteReply/${reply.idx}"><button
 					class="deleteReplyBtn">삭제</button></a>
 		</c:if>
+		
 	</div>
 </c:forEach>
 
@@ -71,9 +81,12 @@
 				id="modifyBtn">수정</button></a> <a
 			href="${cpath }/freeBoard/deleteFreeBoard/${dto.idx}"><button
 				id="deleteBtn">삭제</button></a>
+				<!-- Button trigger modal -->
+
+				
+				
 	</div>
 </div>
-
 
 
 

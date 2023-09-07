@@ -31,15 +31,16 @@ public interface RecommendDAO {
 
 	int deleteReviewRecommend(RecommendDTO recommend);
 	
-	int isReviewRecommended(RecommendDTO recommend);
-
+	int decreaseReviewRecommendCount(int idx);
+	
 	int increaseReviewRecommendCount(int review);
 	
-	int getReviewRecommendCount(int review);
+	int isReviewRecommended(RecommendDTO recommend);
 
-	int decreaseReviewRecommendCount(int review);
+	
+	
+	int getReviewRecommendCount(int idx);
 
-	boolean reviewRecommend(int idx, int member);
 
 
 

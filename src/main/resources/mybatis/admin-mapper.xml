@@ -45,8 +45,13 @@
 		group by date order by date
 	</select>
 
-
-
-
+	<select id="reportedReason" resultType="report">
+	    select * from reportedUser
+	</select>
+	
+	<select id="requestReportedData" resultType="report">
+		select reported_user , count(reportedReason) AS reportCount, reportedDate  from reportedUser ru group by reportedReason
+   	   order by reportCount DESC LIMIT 8	
+   	</select>
 </mapper>
 		

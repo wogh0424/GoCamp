@@ -11,6 +11,8 @@ public class AdminDTO {
 	private String userid;
 	
 	
+	
+	
 	public String getUserid() {
 		return userid;
 	}
