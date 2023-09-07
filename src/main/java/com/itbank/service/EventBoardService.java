@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itbank.model.EventBoardDTO;
-import com.itbank.model.NoticeBoardDTO;
 import com.itbank.model.PagingDTO;
 import com.itbank.repository.EventBoardDAO;
 

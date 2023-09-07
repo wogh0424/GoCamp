@@ -6,10 +6,8 @@ import java.net.URL;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,9 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.itbank.model.AdminDTO;
 import com.itbank.model.ImageDTO;
 import com.itbank.model.IncomeDTO;
 import com.itbank.model.MemberDTO;
@@ -196,67 +192,72 @@ public class AjaxController {
 
 	// 연지's AjaxController
 	
-		// 
-		@GetMapping("/reviewRecommend/{reviewId}")
-		public HashMap<String, Object > recommend(@PathVariable("reviewId") int review, Principal principal) {
-			 HashMap<String, Object> map = new HashMap<>();
-			
-			
-			if (principal != null) {
-				String userid = principal.getName();
-				MemberDTO dto = mypageService.importMember(userid);
-				int member = dto.getIdx();
+			// 
+			@GetMapping("/reviewRecommend/{reviewId}")
+			public HashMap<String, Object > recommend(@PathVariable("reviewId") int review, Principal principal) {
+				 HashMap<String, Object> map = new HashMap<>();
 				
+				
+				if (principal != null) {
+					String userid = principal.getName();
+					MemberDTO dto = mypageService.importMember(userid);
+					int member = dto.getIdx();
+					
 
-		        boolean isReviewRecommended = recommendService.isReviewRecommended(review, member);
-		        int getReviewRecommendCount = recommendService.getReviewRecommendCount(review);
-		       
+			        boolean isReviewRecommended = recommendService.isReviewRecommended(review, member);
+			        int getReviewRecommendCount = recommendService.getReviewRecommendCount(review);
+			       
 
-		        map.put("isReviewRecommended", isReviewRecommended);
-		        map.put("getReviewRecommendCount", getReviewRecommendCount);
-		       
-		    }
-			
-			return map;
-		}
-		
-		// 캠핑장리뷰 추천수
-
-		// 추천하기
-		@PostMapping("/reviewRecommend/{reviewId}")
-		@ResponseBody
-		public int insertReviewRecommend(Principal principal, @PathVariable("reviewId") int review) {
-			
-			int row = 0;
-			
-			if (principal != null) {
-		     String userid = principal.getName();
-			 MemberDTO dto = mypageService.importMember(userid);
-			 int member = dto.getIdx();
-			 
-			 row = recommendService.insertReviewRecommend(review, member);
+			        map.put("isReviewRecommended", isReviewRecommended);
+			        map.put("getReviewRecommendCount", getReviewRecommendCount);
+			       
+			    }
+				
+				return map;
 			}
-			    
-			 return row;
-		}
-		
-		// 추천취소
-		@PostMapping("/reviewDisRecommend/{reviewId}")
-		@ResponseBody
-		public int deleteReviewRecommend(Principal principal, @PathVariable("reviewId") int review) {
 			
-			int row = 0;
-			
-			if (principal != null) {
-			 String userid = principal.getName();
-			 MemberDTO dto = mypageService.importMember(userid);
-			 int member = dto.getIdx();
-			 
+			// 캠핑장리뷰 추천수
 
-		    row = recommendService.deleteReviewRecommend(review, member); 
+			// 추천하기
+			@PostMapping("/reviewRecommend/{reviewId}")
+			@ResponseBody
+			public int insertReviewRecommend(Principal principal, @PathVariable("reviewId") int review) {
+				
+				int row = 0;
+				
+				if (principal != null) {
+			     String userid = principal.getName();
+				 MemberDTO dto = mypageService.importMember(userid);
+				 int member = dto.getIdx();
+				 
+				 row = recommendService.insertReviewRecommend(review, member);
+				}
+				    
+				 return row;
 			}
-		    return row;
-		}
+			
+			// 추천취소
+			@PostMapping("/reviewDisRecommend/{reviewId}")
+			@ResponseBody
+			public int deleteReviewRecommend(Principal principal, @PathVariable("reviewId") int review) {
+				
+				int row = 0;
+				
+				if (principal != null) {
+				 String userid = principal.getName();
+				 MemberDTO dto = mypageService.importMember(userid);
+				 int member = dto.getIdx();
+				 
+
+			    row = recommendService.deleteReviewRecommend(review, member); 
+				}
+			    return row;
+			}
+			
+			
+			
+			
+			
 		
 		
 		
