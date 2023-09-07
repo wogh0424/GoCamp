@@ -10,6 +10,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="icon" href="${cpath }/resources/image/main/favicon.png">
+<meta charset="UTF-8">
+<title>GoCamping</title>
 <script>
 	const cpath = '${cpath}'
 </script>
@@ -155,5 +158,3 @@ $(document).ready(function() {
         document.getElementById("totalsearchInput").form.submit();
     }
 	</script>
-	
-
