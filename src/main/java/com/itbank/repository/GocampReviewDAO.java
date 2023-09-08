@@ -47,6 +47,10 @@ public interface GocampReviewDAO {
 	// 추천순으로 화면에 띄울 리뷰
 	List<GocampReviewDTO> selectMainReview();
 
+	int updateViewCount(int idx);
+
+	List<GocampReviewDTO> selectReview(String nick);
+
 
 
 	

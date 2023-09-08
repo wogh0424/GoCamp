@@ -3,8 +3,8 @@
 <%@include file="../header.jsp" %>
 
 
-<div id=boardTitle>
-	<div id=board>BOARD > </div><div id=noticeBoard><a href="${cpath}/noticeBoard">NoticeBoard</a></div>
+<div id=boardTitle style="background-image: url('${cpath}/resources/image/board/fireImg.jpg');">
+	<div id=board><a href="${cpath}/noticeBoard">Notice</a></div>
 </div>
 
 <div id="boardView">

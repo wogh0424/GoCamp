@@ -4,6 +4,8 @@ package com.itbank.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -51,13 +53,16 @@ public class GocampReviewController {
 	
 	// 리뷰조회
 		@GetMapping("/view/{idx}")
-		public ModelAndView view(@PathVariable("idx") int idx) {  
+		public ModelAndView view(@PathVariable("idx") int idx,  HttpServletResponse response, HttpServletRequest request) {  
 			ModelAndView mav = new ModelAndView("reviewBoard/view"); 
 		
 				
 			
 			GocampReviewDTO dto = gocampReviewService.selectOneReview(idx);
 			mav.addObject("dto", dto);
+			
+			gocampReviewService.reduceViewCnt(idx, response,request);
+
 			
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			if(auth != null && auth.isAuthenticated()) {

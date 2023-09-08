@@ -1,22 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../header.jsp"%>
-<div id=boardTitle>
-<div id=board>BOARD > </div><div id=freeBoard><a href="${cpath}/freeBoard">FreeBoard</a></div>
+
+<div id="boardContainer" >
+<div id=boardTitle style="background-image: url('${cpath}/resources/image/board/river.jpg');">
+<div id=board><a href="${cpath}/freeBoard">Board</a></div>
 </div>
 
 
-<form method="GET" class="boardSearchForm">
     <div class="searchInputContainer">
-      <input type="search" name="order" value="${param.order}" class="boardSearchInput" placeholder="검색">
-      <button type="submit" class="boardSearchSubmit">🔍</button>
+		<form method="GET" class="boardSearchForm">
+		      <input type="search" name="order" value="${param.order}" class="boardSearchInput" placeholder="검색">
+		      <button type="submit" class="boardSearchSubmit">🔍</button>
+		</form>
     </div>
-</form>
 
 
 <div class="boardList">
 	<div class="boardColumns">
-		<div class="boardIdx">번호</div>
+		<div class="boardIdx">번호</div> 
 		<div class="boardTitle">제목</div>
 		<div class="boardWriter">작성자</div>
 		<div class="boardDate">작성일시</div>
@@ -48,14 +50,15 @@
 
 <div class="paging">
 	<c:if test="${paging.prev }">
-		<a href="${cpath }/freeBoard?page=${paging.begin - paging.perPage}&search=${paging.order}" >[이전]</a>
+		<a href="${cpath }/freeBoard?page=${paging.begin - paging.perPage}&search=${paging.order}"><button class="boardPaging"><</button></a>
 	</c:if>
 	<c:forEach var="i" begin="${paging.begin }" end="${paging.end }">
-		<a href="${cpath }/freeBoard?page=${i }&search=${paging.order}">[${i }]</a>
+		<a href="${cpath }/freeBoard?page=${i }&search=${paging.order}"><button>${i }</button></a>
 	</c:forEach>
 	<c:if test="${paging.next }">
-		<a href="${cpath }/freeBoard?page=${paging.end + 1}&search=${paging.order}">[다음]</a>
+		<a href="${cpath }/freeBoard?page=${paging.end + 1}&search=${paging.order}"><button class="boardPaging">></button></a>
 	</c:if>
+</div>
 </div>
 
 <script>

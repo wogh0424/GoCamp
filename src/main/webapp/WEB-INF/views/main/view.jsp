@@ -293,11 +293,11 @@
 												href="${cpath}/main/deleteReview/${review.idx}"><button id="deleteReview">삭제</button></a>
 										</c:if>
 
-										<div id="reviewImages">
+										<div class="reviewImages">
 											<c:forTokens var="filePath" items="${review.filePath}"
 												delims=",">
-												<img id="reviewImage" src="${cpath}/upload/${filePath}"
-													alt="Review Image" height="200px">
+												<img class="reviewImage" src="${cpath}/upload/${filePath}"
+													alt="Review Image">
 											</c:forTokens>
 										</div>
 										
