@@ -17,6 +17,7 @@
 		margin: 50px auto;
 		border-radius: 30px;
 		display: flex;
+		box-shadow: 7px 7px 7px grey;
 	}
 	#mypageNav {
 		flex: 1;
@@ -56,12 +57,102 @@
 	
 	.mypageItems {
 		display: none;
-		
 	} 
 	
     .mypageItems.selected {
 		display: block;
 	}
+	
+	.mypage_items {
+		background-color: white;
+	}
+	
+	#personalInfor {
+	  width: 100%;
+	  margin: 20px auto;
+	  border-collapse: collapse;
+	  border: 1px solid #ccc;
+	}
+	
+	#personalInfor th,
+	#personalInfor td {
+	  padding: 10px;
+	  text-align: left;
+	  border-bottom: 1px solid #ccc;
+	}
+	
+	#personalInfor th {
+	  background-color: #f2f2f2;
+	  font-weight: bold;
+	}
+	
+	#personalInfor input[type="password"] {
+	  width: 100%;
+	  padding: 5px;
+	  border: 1px solid #ccc;
+	  border-radius: 5px;
+	}
+	#mypage_form input[type="submit"],
+	#mypage_form input[type="reset"] {
+	  background-color: #007BFF;
+	  color: #fff;
+	  padding: 10px 20px;
+	  border: none;
+	  border-radius: 5px;
+	  cursor: pointer;
+	  margin-right: 10px;
+	}
+	
+	#mypage_form input[type="submit"]:hover,
+	#mypage_form input[type="reset"]:hover {
+	  background-color: #0056b3;
+	}
+	
+	.deleted_board {
+	  margin-top: 10px;
+	  background-color: white;
+	  max-height: 200px;
+	  height: 200px;
+	  overflow-y: scroll; 
+	  border: 1px solid #ccc;
+	  padding: 10px;
+	  display: flex;
+	  flex-direction: column;
+	  position: relative;
+	}
+
+	.deleted_list {
+		position: absolute;
+		top: 0;
+	}
+
+	/* 자식 요소인 .banned_content */
+	.banned_content {
+	  margin: 10px 0;
+	  padding: 10px;
+	  width: 450px;
+	  border: 1px solid #ddd;
+	  border-radius: 5px;
+	  background-color: #f9f9f9;
+	}
+	
+	#title {
+	  font-weight: bold;
+	}
+	
+	#reason {
+	  margin-top: 5px;
+	}
+	
+	#date {
+	  font-size: 12px;
+	  color: #777;
+	}
+	.red {
+		color: red;
+	}
+	/*  여기  로그인 폼용*/
+	
 	
 	#likesContainer{
 		display: flex;
@@ -82,6 +173,7 @@
 		border: 1px solid black;
 		background-color: white;
 	}
+
 </style>
 
 
@@ -109,13 +201,32 @@
 			<div class="mypage_wrap">
 			<div class="mypage_items">
 				<form id="mypage_form" method="POST" action="${cpath }/changePw">
-					<p><b>마이페이지 비밀번호 변경</b></p>
-					<p>아이디 : ${dto.userid }</p>
-					<p>현재 비밀번호 : <input type="password" name="currentuserpw" placeholder="현재 비밀번호 입력"></p>
-					<p>새로운 비밀번호 : <input type="password" name="newuserpw" placeholder="새로운 비밀번호 입력"></p>
-					<p>닉네임 : ${dto.nickname }</p>
-					<p>이메일 : ${dto.email }</p>
-					<p>전화번호 : ${dto.pnum }</p>
+					<table id="personalInfor">
+						<tr>
+							<th>아이디</th>
+							<td>${dto.userid }</td>
+						</tr>
+						<tr>
+							<th>현재 비밀번호</th>
+							<td><input type="password" name="currentuserpw" placeholder="현재 비밀번호 입력"></td>
+						</tr>
+						<tr>
+							<th>새 비밀번호</th>
+							<td><input type="password" name="newuserpw" placeholder="새로운 비밀번호 입력"></td>
+						</tr>
+						<tr>
+							<th>내 닉네임</th>
+							<td>${dto.nickname }</td>
+						</tr>
+						<tr>
+							<th>이메일</th>
+							<td>${dto.email }</td>
+						</tr>
+						<tr>
+							<th>전화번호</th>
+							<td>${dto.pnum }</td>
+						</tr>
+					</table>
 					<p>
 						<input type="submit" value="비밀번호 변경">
 						<input type="reset" value="다시입력">
@@ -123,14 +234,18 @@
 				</form>
 			</div>
 			<div class="deleted_board">
-			<p>운영자에 의해 삭제된 글</p>
+				<div class="deleted_list">
+				<h4>운영자에게 제제를 받은 댓글 : <span class="red">${deleted.size() }</span>개</h4>
 				<c:forEach var="board" items="${deleted }">
+					<details>
 					<div class="banned_content">
-						<div id="title">${board.title }</div>
-						<div id="reason">${board.reason }</div>
-						<div id="date">${board.deleted_date }</div>
+							<div id="title">${board.title }</div>
+							<div id="reason">${board.reason }</div>
+							<div id="date">${board.deleted_date }</div>
 					</div>
+					</details>
 				</c:forEach>
+				</div>
 			</div>
 			<div>
 				

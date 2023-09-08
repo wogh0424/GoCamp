@@ -259,32 +259,59 @@
 		}
 		
 		// 이메일 인증번호 확인
-		const checkAuthNumber = document.getElementById('checkAuthNumber')
-		async function checkAuthNumberHandler(){
-			const authNumber = document.querySelector('input[name="authNumber"]')
-			if(authNumber.value == ''){
-				isNumber.innerText = '인증코드를 입력하지 않았습니다.';
-				isNumber.style.color = 'red';
-			   
-				setTimeout(() => {
-			        isNumber.innerText = '';	// 메시지가 3초 후 사라짐
-			    }, 3000);
-
-				return
-			}
-			const url = '${cpath}/checkAuthNumber/' + authNumber.value
-			const row = await fetch(url).then(resp => resp.text())
-			const authMessage = document.getElementById('authMessage')
-			if(row != 0){
-				authMessage.innerText = '인증 성공'
-				authMessage.classList.add('check')
-				authMessage.style.color = 'blue'
-			}
-			else {
-				authMessage.innerText = '인증 실패'
-				authMessage.style.color = 'red'	
+		async function checkAuthNumberHandler() {
+		    const authNumber = document.querySelector('input[name="authNumber"]');
+		    if (authNumber.value === '') {
+		        isNumber.innerText = '인증코드를 입력하지 않았습니다.';
+		        isNumber.style.color = 'red';
+		
+		        setTimeout(() => {
+		            isNumber.innerText = ''; // 메시지가 3초 후 사라짐
+		        }, 3000);
+		
+		        return;
+		    }
+		    const url = '${cpath}/checkAuthNumber/' + authNumber.value;
+		    const row = await fetch(url).then(resp => resp.text());
+		    const authMessage = document.getElementById('authMessage');
+		    if (row !== '0') {
+		        authMessage.innerText = '인증 성공';
+		        authMessage.classList.add('check');
+		        authMessage.style.color = 'blue';
+		    } else {
+		        authMessage.innerText = '인증 실패';
+		        authMessage.style.color = 'red';
+		    }
 		}
-	}
+		
+		const submitBtn = document.getElementById('signupSubmitBtn');
+
+		submitBtn.addEventListener('click', async function(event) {
+		    event.preventDefault(); // 버튼의 기본 동작인 폼 제출을 중단
+
+		    const check = document.querySelectorAll('span.check');
+		    console.log(check);
+		    
+		    // 인증번호가 성공적으로 확인되었는지 확인
+		    const authMessage = document.querySelector('#authMessage.check');
+		    
+		    if (authMessage === null) {
+		        alert('인증번호 확인이 완료되지 않았습니다.');
+		        return;
+		    }
+
+		    if (check.length === 0) {
+		        alert('아이디, 인증번호 체크가 완료되지 않았습니다.');
+		    } else if (check.length === 1) {
+		        alert('필수 항목 인증이 완료되지 않았습니다.');
+		    } else {
+		        alert('회원가입이 성공하였습니다.');
+		        const signForm = document.getElementById('signForm');
+		        signForm.submit(); // 폼 제출
+		        // await couponHandler()
+		    }
+		});
+		
 		sendAuthNumber.onclick = sendAuthNumberHandler
 		checkAuthNumber.onclick = checkAuthNumberHandler		
 	</script>
@@ -309,27 +336,6 @@
 	</script>
 	
 	<script>
-		const signForm = document.getElementById('signForm')	
-	
-		signForm.addEventListener('submit', function(event) {
-			event.preventDefault();
-			const check = document.querySelectorAll('span.check')
-			console.log(check)
-			if (check.length == 0) {
-				alert('아이디, 인증번호 체크가 완료되지 않았습니다.')
-				return
-			}
-			else if (check.length == 1) {
-				alert('필수 항목 인증이 완료되지 않았습니다')
-				return
-			}
-			else {
-				alert('회원가입이 성공하였습니다.')
-				event.target.submit()
-// 				await couponHandler()
-			}
-			
-		})
 		
 		async function couponHandler() {
 			
