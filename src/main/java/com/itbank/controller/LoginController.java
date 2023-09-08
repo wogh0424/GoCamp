@@ -83,6 +83,6 @@ public class LoginController {
 		int row = loginService.changePw(dto,userid);
 		
 			System.out.println(row != 0? "변경성공" : "변경실패");
-		return "redirect:/login/loginForm";
+		return "/home";
 	}
 }

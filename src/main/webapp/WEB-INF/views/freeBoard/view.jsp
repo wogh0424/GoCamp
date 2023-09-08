@@ -30,9 +30,9 @@
 	<hr>
 	<div class=reply>댓글</div>
 	<form method="POST">
-		<div class=replyWriter><input type="text" name="writer" value="${nickname}" readonly></div>
+		<div class=replyWriter><input type="text" name="writer" value="🤵‍♂️    ${nickname}" readonly></div>
 		<input type="hidden" name="board" value="${dto.idx}" />
-			<textarea name="reply_content" placeholder="댓글작성" required></textarea>
+			<textarea name="reply_content" placeholder="댓글작성.....✍️" required></textarea>
 			<input type="submit" value="댓글 작성">
 
 		
@@ -42,7 +42,7 @@
 
 <c:forEach var="reply" items="${replyList }">
 	<div id="freeBoardReplyview">
-			<div class="replywriter">${reply.writer }</div> | <fmt:formatDate value="${reply.replydate }" />
+			<div class="replywriter">${reply.writer }</div> (<fmt:formatDate value="${reply.replydate }" />)
 		<div class="boardReplyView">${reply.reply_content }</div>
 		<c:if test="${reply.writer == nickname }">
 			<a href="${cpath }/freeBoard/deleteReply/${reply.idx}"><button

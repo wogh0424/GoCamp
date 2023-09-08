@@ -1,7 +1,9 @@
 package com.itbank.service;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.itbank.component.MailComponent;
+import com.itbank.model.CouponDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.model.UserDetailsDto;
 import com.itbank.repository.LoginDao;
@@ -120,5 +123,41 @@ public class LoginService implements UserDetailsService{
 		return dao.checkEnabled(userid);
 	}
 
+	public int couponcheck(String userid) {
+		CouponDTO dto = new CouponDTO();
+		String hexcode = "";
+		for(int i = 0; i < 4; i++) {
+			hexcode += generateRandomHex() + "-";
+		}
+		hexcode = hexcode.substring(0, hexcode.length() - 1 );
+		dto.setCouponNum(hexcode);
+		dto.setUserid(userid);
+		dto.setDiscnt(0.9);
+		Calendar date = Calendar.getInstance();
+	    Date startDate = new Date(date.getTimeInMillis());
+	    dto.setStartDate(startDate);
+	    date.add(Calendar.DATE, 8);
+	    Date dueDate = new Date(date.getTimeInMillis());
+		dto.setDueDate(dueDate);
+		int row = dao.couponcheck(dto);
+		return row;
+	}
+	
+	public static String generateRandomHex() {
+        Random rand = new Random();
 
+        int randomNumber = rand.nextInt(65536);
+
+        String hexString = Integer.toHexString(randomNumber);
+
+        while (hexString.length() < 4) {
+            hexString = "0" + hexString;
+        }
+
+        return hexString.toUpperCase();
+    }
+	
+	public List<CouponDTO> couponSelectAll(String userid) {
+		return dao.couponSelectAll(userid);
+	}
 }

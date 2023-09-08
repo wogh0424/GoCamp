@@ -10,13 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.AdminDTO;
+
 import com.itbank.model.GocampReviewDTO;
+
+import com.itbank.model.CouponDTO;
+
 import com.itbank.model.ItemDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.service.AdminService;
 import com.itbank.service.FreeBoardService;
 import com.itbank.service.GocampReviewService;
 import com.itbank.service.LikeService;
+import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
 
 @Controller
@@ -27,8 +32,8 @@ public class MypageController {
 	private MypageService mypageService;
 
 	@Autowired FreeBoardService freeBoardService;
-	
 	@Autowired AdminService adminService;
+	@Autowired LoginService loginService;
 	
 	@Autowired private GocampReviewService gocampReviewService;
 	@Autowired private LikeService likeService;
@@ -41,6 +46,7 @@ public class MypageController {
 		String userid = principal.getName();
 		String nick = freeBoardService.getnick(userid);
 		
+		List<CouponDTO> couponlist = loginService.couponSelectAll(userid);
 		List<AdminDTO> deletedBoard = adminService.deletedBoard(nick);
 		MemberDTO dto = mypageService.importMember(userid);
 		int member = dto.getIdx();
@@ -75,6 +81,7 @@ public class MypageController {
 		
 		mav.addObject("dto", dto);
 		mav.addObject("deleted",deletedBoard);
+		mav.addObject("couponlist", couponlist);
 		return mav;
 	}
 

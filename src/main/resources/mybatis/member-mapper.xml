@@ -83,6 +83,14 @@
 		select enabled from member where userid = #{userid}
 	</select>
 		
+	<insert id="couponcheck" parameterType="coupon">
+		insert into coupon (couponNum, discnt, userid, cDate, dueDate)
+			values (#{couponNum}, #{discnt}, #{userid}, #{startDate}, #{dueDate})
+	</insert>
+	
+	<select id="couponSelectAll" parameterType="coupon">
+		select discnt, useava, dueDate from coupon where userid = #{userid}
+	</select>
 </mapper>
 
 

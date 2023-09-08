@@ -148,8 +148,8 @@
 	    slidesToShow: 3,
 	    slidesToScroll: 3,
 	    arrows: true,
-	    infinite: false, // 무한 스크롤 방지
-	    vertical: false  // 수직 슬라이딩 방지
+	    infinite: false, 
+	    vertical: false  
 	});
  </script>
 
@@ -158,7 +158,11 @@
 
 <!-- review 페이지 끝  -->
 
+<a style="display:scroll;position:fixed;bottom:30px;right:50px;text-decoration: none;" rel="nofollow" href="#" title="Back to Top" id="scrollToTop"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
+
 <%@ include file="footer.jsp" %>
+
+
 
 </body>
 </html>

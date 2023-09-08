@@ -29,9 +29,8 @@
 
 
 
-<div class="viewMenubar">
-		<div class=goBoardList><a href="${cpath }/reviewBoard"><button id="boardListBtn">목록</button></a></div>
-</div>
+<div class="reviewMenubar"><a href="${cpath }/reviewBoard"><button id="boardListBtn">목록</button></a></div>
+
 
 <%@include file="../footer.jsp"%>
 

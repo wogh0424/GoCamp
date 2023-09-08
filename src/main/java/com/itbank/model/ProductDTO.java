@@ -17,7 +17,7 @@ public class ProductDTO {
 	   private int pick;
 	   private String image;
 	   private List<MultipartFile> upload;
-	   private int userid;
+	   private String userid;
 	   private int pStar;
 	   
 	public int getIdx() {
@@ -86,10 +86,11 @@ public class ProductDTO {
 	public void setUpload(List<MultipartFile> upload) {
 		this.upload = upload;
 	}
-	public int getUserid() {
+	
+	public String getUserid() {
 		return userid;
 	}
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 	public int getpStar() {

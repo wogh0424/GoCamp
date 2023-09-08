@@ -26,6 +26,7 @@
 		<typeAlias type="com.itbank.model.GocampReviewDTO" alias="gocampreview"/>
 		<typeAlias type="com.itbank.model.LikesDTO" alias="like"/>
 		<typeAlias type="com.itbank.model.RecommendDTO" alias="recommend"/>
+		<typeAlias type="com.itbank.model.CouponDTO" alias="coupon"/>
 		
 		
 		
