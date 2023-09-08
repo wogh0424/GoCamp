@@ -122,6 +122,25 @@
 	    <a style="display:scroll;position:fixed;bottom:50px;right:50px;" rel="nofollow" href="#" title="Back to Top"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
 	
 </div>
+<script>
+async function imageRequestHandler(id) {   		
+	let url = cpath + '/getImageList/' + id
+	let arr = await fetch(url)
+	.then(resp => resp.json())
+	const viewImage = document.getElementById('currentImagePreview');
+	const noimg = '<div class="noImageNotion"><img src="'+ cpath +'/resources/image/mainView/noimg.gif"></div>'
+	
+	if (arr.length == 0) {
+		viewImage.innerHTML = noimg
+	}
+	else {
+		viewImage.innerHTML = ''
+			let newimgUrl = ''
+			newimgUrl = cpath + '/resources/upload/camp/' + arr[0];
 
+	};
+
+}
+</script>
 </body>
 </html>

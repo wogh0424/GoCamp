@@ -144,6 +144,8 @@ public class AjaxController {
 		List<Product_fileDTO> list = productService.showProductImages(idx);
 		return list;
 	}
+	
+	// 장바구니
 	@PostMapping("/grocery")
 	public int grocery(@RequestBody ProductDTO dto) {
 		int row = productService.grocery(dto);
@@ -184,12 +186,18 @@ public class AjaxController {
 	    return formattedList;
 	}
 
+	// 게시글 수정 내 파일 삭제
 	@PostMapping("/deletefile")
 	private boolean deletefile(@RequestBody Product_fileDTO dto) {
 		return productService.deletefile(dto.getFilePath());
 	}
 	
-
+	// 쿠폰 발급
+	@GetMapping("/coupon/{userid}")
+	public int coupon (@PathVariable("userid") String userid) {
+		int row = loginService.couponcheck(userid);
+		return row;
+	}
 	// 연지's AjaxController
 	
 			// 

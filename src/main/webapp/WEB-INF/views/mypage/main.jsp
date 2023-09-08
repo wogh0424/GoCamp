@@ -71,7 +71,17 @@
 	}
 	#likeImage > img{
 		width: 100px;
-		height: 100px;}
+		height: 100px;
+	}
+	table {
+		border: 2px solid black;
+		border-collapse: collapse;
+		background-color: green;
+	}
+	th, td  {
+		border: 1px solid black;
+		background-color: white;
+	}
 </style>
 
 
@@ -122,6 +132,9 @@
 					</div>
 				</c:forEach>
 			</div>
+			<div>
+				
+			</div>
 		</div>
 		</div>
 		
@@ -139,8 +152,21 @@
 		<div class="mypageItems">3
 		
 		</div>
-		<div class="mypageItems">4
-		
+		<div class="mypageItems">
+			<c:forEach items="${couponlist}" var="coupon">
+				<table>
+					<tr>
+						<th>할인율</th>
+						<th>사용 여부</th>
+						<th>사용 기한</th>
+					</tr>
+					<tr>
+						<td>${coupon.discnt}</td>
+						<td>${coupon.useava}</td>
+						<td>${coupon.dueDate}</td>
+					</tr>
+				</table>
+			</c:forEach>
 		</div>
 	</div>
 </div>
