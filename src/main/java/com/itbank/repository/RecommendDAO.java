@@ -31,7 +31,7 @@ public interface RecommendDAO {
 
 	int deleteReviewRecommend(RecommendDTO recommend);
 	
-	int decreaseReviewRecommendCount(int idx);
+	int decreaseReviewRecommendCount(int review);
 	
 	int increaseReviewRecommendCount(int review);
 	
@@ -39,7 +39,7 @@ public interface RecommendDAO {
 
 	
 	
-	int getReviewRecommendCount(int idx);
+	int getReviewRecommendCount(int review);
 
 
 

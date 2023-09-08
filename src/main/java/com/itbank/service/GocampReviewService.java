@@ -136,5 +136,9 @@ public class GocampReviewService {
 		return dao.countByKeyword(srchKywrd);
 	}
 
+	public List<GocampReviewDTO> selectMainReview() {
+		return dao.selectMainReview();
+	}
+
 }
 

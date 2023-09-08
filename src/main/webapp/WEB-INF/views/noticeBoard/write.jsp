@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../header.jsp" %>
-
+<div id=boardTitle>
+	<div id=board>BOARD > </div><div id="noticeBoard"><a href="noticeBoard">NoticeBoard</a></div>
+</div>
 
 <h3>공지 작성</h3>
-<form id="insertForm" method="POST" enctype="multipart/form-data" >
+<form id="insertBoardForm" method="POST" enctype="multipart/form-data" >
 <div>
-	<p><input type="text" name="title" placeholder="제목" required autofocus> </p> 
+	<div class=writeTitle><input type="text" name="title" placeholder="제목" required autofocus> </div> 
 		<label for="option">옵션 선택:</label>
 	<select id="optionNotice" name="pin">
 	  <option value="0">일반</option>
@@ -62,6 +64,7 @@
 
 
 
+<%@include file="../footer.jsp"%>
 
 
 

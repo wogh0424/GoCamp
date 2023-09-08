@@ -10,9 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.AdminDTO;
+import com.itbank.model.ItemDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.service.AdminService;
 import com.itbank.service.FreeBoardService;
+import com.itbank.service.GocampReviewService;
+import com.itbank.service.LikeService;
 import com.itbank.service.MypageService;
 
 @Controller
@@ -26,16 +29,28 @@ public class MypageController {
 	
 	@Autowired AdminService adminService;
 	
+	@Autowired private GocampReviewService gocampReviewService;
+	@Autowired private LikeService likeService;
+
+
+	
 	@GetMapping("/main")
 	public ModelAndView importMember(Principal principal) {
 		ModelAndView mav = new ModelAndView("/mypage/main");
 		String userid = principal.getName();
 		String nick = freeBoardService.getnick(userid);
+		
 		List<AdminDTO> deletedBoard = adminService.deletedBoard(nick);
 		MemberDTO dto = mypageService.importMember(userid);
+		int member = dto.getIdx();
+		
+		List<ItemDTO> likes = likeService.selectLike(member);
+		mav.addObject("likes", likes);
+		
 		int startidx = 9;
 		int endidx = 12;
 		String pnum = dto.getPnum();
+		
 		// 전화번호에 - 이 있으면 그대로 replaceChar 함수 실행
 		if(pnum.length() == 13) {
 		String modifypnum = replaceChar(pnum, startidx, endidx);
@@ -51,6 +66,7 @@ public class MypageController {
 			String modifypnum = replaceChar(modifiedPnum, startidx, endidx);
 			dto.setPnum(modifypnum);
 		}
+		
 		mav.addObject("dto", dto);
 		mav.addObject("deleted",deletedBoard);
 		return mav;

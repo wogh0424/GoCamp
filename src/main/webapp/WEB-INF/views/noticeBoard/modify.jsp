@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../header.jsp" %>
 
+
 <h3>${dto.idx }번 게시글 수정 </h3>
 
 <form id="insertForm" method="POST" enctype="multipart/form-data">
@@ -55,6 +56,7 @@
     });
 </script>
 
+<%@include file="../footer.jsp"%>
 
 
 </body>
