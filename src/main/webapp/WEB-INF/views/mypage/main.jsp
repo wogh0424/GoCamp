@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../header.jsp"%>
-<link rel="stylesheet" href="${cpath }/resources/css/mainpage.css" type="text/css">
+<link rel="stylesheet" href="${cpath }/resources/css/mypage.css" type="text/css">
 
 <div id="mypageBanner" style="background-image: url('${cpath}/resources/image/main/banner.jpg');">
 	<div style="max-width:1200px; padding: 50px; margin: 0px auto; font-size: 50px; font-weight: bolder; color: white; text-shadow: 4px 2px 2px gray; ">
