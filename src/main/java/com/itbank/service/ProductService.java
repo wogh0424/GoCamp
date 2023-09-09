@@ -25,44 +25,31 @@ public class ProductService {
 	
 	private File dir = new File("C:\\Users/capta/git/GoCamp/src/main/webapp/resources/upload/");
 		
-		public ProductService() {
-			if(dir.exists() == false) {
-				dir.mkdirs();
-			}
+	public ProductService() {
+		if(dir.exists() == false) {
+			dir.mkdirs();
 		}
-	
-	public List<ProductDTO> selectAll(ShopPagingDTO paging) {
-		return dao.selectAll(paging);
 	}
-
+	
+	public int selectCount(String pName) {
+		return dao.selectCount(pName);
+	}
+	
+	public List<ProductDTO> selecAll(int page, String sort, String pName, ShopPagingDTO dto) {
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("sort", sort);
+		params.put("pName", pName);
+		params.put("paging", dto);
+		return dao.selectAll(params);
+	}
+	
 	public int delete(int idx) {
 		return dao.delete(idx);
-	}
-
-	public int selectCount() {
-		return dao.selectCount();
 	}
 
 	public ProductDTO selectDetails(int idx) {
 		return dao.selectDetails(idx);
 	}
-
-	public List<ProductDTO> priceSelectAll() {
-		return dao.priceSelectAll();
-	}
-
-	public List<ProductDTO> viewsSelectAll() {
-		return dao.viewsSelectAll();
-	}
-
-	public List<ProductDTO> sDateSelectAll() {
-		return dao.sDateSelectAll();
-	}
-
-	public List<ProductDTO> pStarSelectAll() {
-		return dao.pStarSelectAll();
-	}
-
 	public List<ProductDTO> addProduct() {
 		return dao.addProduct();
 	}
@@ -160,11 +147,7 @@ public class ProductService {
 		}
 		return row;
 	}
-		
-	public List<ProductDTO> selectOne(String name) {
-		return dao.selectOne(name);
-	}
-
+	
 	public List<BasketDTO> basketSelectAll(String userId) {
 		return dao.basketSelectAll(userId);
 	}
@@ -176,5 +159,7 @@ public class ProductService {
 	public int basketmodify(BasketDTO dto) {
 		return dao.basketmodify(dto);
 	}
+
+	
 
 }

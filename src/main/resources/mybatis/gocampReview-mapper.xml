@@ -105,9 +105,18 @@
 				FROM gocampReview gr 
 				JOIN recommend r ON gr.idx = r.review 
 				ORDER BY r.recommendReviewCnt DESC 
-				LIMIT 3
+				LIMIT 6
 					
 		</select>
+		
+			
+		<update id="updateViewCount" parameterType="int">
+				update gocampReview
+					set
+						view_cnt = view_cnt + 1
+					where
+						idx = #{idx}
+		</update>
 		
 		
 		<select id="searchByKeyword" parameterType="string" resultType="gocampreview">
@@ -116,6 +125,11 @@
 		
 		<select id="countByKeyword" parameterType="string" resultType="int">
 			select count(*) from gocampReview where title like '%${srchKywrd}%' or review_content like '%${srchKywrd}%'
+		</select>
+		
+		
+		<select id="selectReview" parameterType="string">
+			select * from gocampReview where writer=#{nick} order by idx desc
 		</select>
 </mapper>
 		

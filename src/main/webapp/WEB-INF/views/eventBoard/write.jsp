@@ -1,27 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../header.jsp" %>
-<div id=boardTitle>
-	<div id=board>BOARD > </div><div id="eventBoard"><a href="eventBoard">EventBoard</a></div>
+
+
+<div id=boardTitle style="background-image: url('${cpath}/resources/image/board/flowers.jpg');">
+	<div id=board><a href="${cpath}/eventBoard">Event</a></div>
 </div>
 
 
-<h3>이벤트글 작성</h3>
-<form id="insertBoardForm" method="POST" enctype="multipart/form-data" >
-<div>
-<input type="text" name="title" placeholder="제목" required autofocus>
-		<label for="option">옵션 선택:</label>
-	<select id="optionNotice" name="pin">
+<form class="insertBoardForm" method="POST" enctype="multipart/form-data" >
+
+<div class=insertBoardTitle><input type="text" name="title" placeholder="제목" required autofocus></div>
+	<label for="option">옵션 선택</label>
+	<select id="optionEvent" name="pin">
 	  <option value="0">일반</option>
 	  <option value="1">중요</option>
 	</select>
 
 		<div id="preview"></div>
-		<div><p><input name="upload" type="file" id="upload" accept="image/*" multiple ></p></div>
-	<p><textarea id="content" name="content" required></textarea> </p>
-	<p><input type="submit"></p>
-</div>
+		<input name="upload" type="file"  class="insertBoardFile" accept="image/*" multiple >
+	<textarea id="content" name="content" required></textarea> 
+	<input type="submit" class="boardSubmit">
 </form>	
+
 
     <script>
         const input = document.querySelector('input[name="upload"]')

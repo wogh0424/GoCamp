@@ -38,8 +38,8 @@
 		
 		<insert id="insertBoard" parameterType="eventboard">
 			insert into event_board
-				(title, content) 
-					values (#{title}, #{content})
+				(title, content, pin) 
+					values (#{title}, #{content}, #{pin})
 		</insert>
 		
 		<insert id="insertFile" parameterType="hashmap">

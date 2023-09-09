@@ -110,38 +110,80 @@
 <!-- camping_top_list 끝 -->
 
 <!-- review 페이지 시작  -->
-<h3>BEST REVIEW</h3>
-<div class="review_rank">
-<c:forEach items="${reviewList }" var="list">
- 	<a href="${cpath }/reviewBoard/view/${list.idx}">
 
-<div class="review_rank" style="background-image: url('${cpath}/resources/image/bg-image.jpg');">
-	<div class="review_rank_items">
 
-		<div class="review_rank_image">
-		 <c:choose>
-       		 <c:when test="${empty list.filePath}">
-          	  <img src="${cpath}/resources/image/Review_thecamping.png" height="200">
-        </c:when>
+<link rel="stylesheet" href="${cpath }/resources/css/main/header.css" type="text/css">
+<div class="bestReviewTitle">BEST REVIEW</div>
 
-       
-        <c:otherwise>
-        
-		<c:forTokens var="filePath" items="${list.filePath}" delims=",">
-		        <img src="${cpath}/upload/${filePath}" height="200">
-		</c:forTokens>
-		 </c:otherwise>
-    </c:choose>
-		</div>
-			<div class="review_rank_content">${list.review_content }</div>
-			<div class="review_rank_campingName">${list.title }</div>
-			<div class="review_rank_cityName">${list.writer }</div>
-	</a>
-	</c:forEach>
+<div class="reviewSlider"> 
+
+	<button class="prev">&lt;</button> <!-- 왼쪽 버튼 -->
+    <button class="next">&gt;</button> <!-- 오른쪽 버튼 -->
+    
+    
+ <div class="review_rank" style="background-image: url('${cpath}/resources/image/bg-img.jpg');">
+		<c:forEach items="${reviewList }" var="list">
+					<div class="review_rank_items">	
+			<!-- 		사진 띄우는 부분 -->
+						<div class="review_rank_image">
+						<c:choose>
+				       		  <c:when test="${empty list.filePath}">
+				          		  <img src="${cpath}/resources/image/Review_thecamping.png" height="200">
+				      		  </c:when>
+				      		  
+				    	 	<c:otherwise>
+						 	<c:forTokens var="filePath" items="${list.filePath}" delims=",">
+						    	    <img src="${cpath}/upload/${filePath}" height="200">
+						 	</c:forTokens>
+						 	</c:otherwise>
+				    	</c:choose>
+						</div>
+			<div class="review_rank_content">				
+	 			<a href="${cpath }/reviewBoard/view/${list.idx}">
+							<div class="review_rank_content">${list.review_content }</div>
+							<div class="review_rank_campingName">${list.title }</div>
+							<div class="review_rank_nickName">${list.writer }</div>
+				</a>
+			</div>
+					 </div>	
+		</c:forEach>
+	 </div>
 </div>
+
+<script>
+
+let slider = document.querySelector('.review_rank');
+let index = 0;
+
+document.querySelector('.reviewSlider .prev').addEventListener('click', function() {
+    index--;
+    if (index < 0) index = 0;
+    updateSlider();
+});
+
+document.querySelector('.reviewSlider .next').addEventListener('click', function() {
+    index++;
+    let maxIndex = slider.children.length - 1;
+    if (index > maxIndex) index = maxIndex;
+    updateSlider();
+});
+
+function updateSlider() {
+    let offset = -index * 100;
+    slider.style.transform = `translateX(${offset}%)`;
+}
+</script>
+
+	
+
+
 <!-- review 페이지 끝  -->
 
+<a style="display:scroll;position:fixed;bottom:30px;right:50px;text-decoration: none;" rel="nofollow" href="#" title="Back to Top" id="scrollToTop"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>
+
 <%@ include file="footer.jsp" %>
+
+
 
 </body>
 </html>

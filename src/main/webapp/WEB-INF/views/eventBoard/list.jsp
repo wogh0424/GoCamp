@@ -2,8 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../header.jsp"%>
 
-<div id=boardTitle>
-	<div id=board>BOARD > </div><div id=eventBoard><a href="${cpath}/eventBoard">eventBoard</a></div>
+
+<div id="boardContainer" >
+<div id=boardTitle style="background-image: url('${cpath}/resources/image/board/flowers.jpg');">
+	<div id=board><a href="${cpath}/eventBoard">Event</a></div>
 </div>
 
 <form method="GET" class="boardSearchForm">
@@ -17,16 +19,26 @@
 	<div class="boardColumns">
 		<div class="boardIdx">번호</div>
 		<div class="boardTitle">제목</div>
+		<div class="boardWriter">작성자</div>
 		<div class="boardDate">작성일시</div>
 		<div class="boardViewcount">조회수</div>
 	</div>
+	
+	
 	<c:forEach var="dto" items="${list }">
 		<div class="dtoItem">
-			<div class="boardIdxPrint">${dto.idx }</div>
-			<div class="boardTitlePrint">
-				<a href="${cpath}/eventBoard/view/${dto.idx}">
-				<c:if test="${dto.pin == 1 }">⭐중요⭐</c:if>${dto.title }</a>
+		
+			<div class="boardIdxPrint">
+				<c:if test="${dto.pin == 1 }">⭐</c:if>
+				<c:if test="${dto.pin == 0 }">${dto.idx }</c:if>
 			</div>
+			
+			<div class="boardTitlePrint">
+				<a href="${cpath}/eventBoard/view/${dto.idx}"  <c:if test="${dto.pin == 1}">style="font-weight: bold;"</c:if>>
+			${dto.title }
+			</a>
+			</div>
+			<div class="boardWriterPrint">관리자</div>
 			<div class="boardDatePrint">${dto.postdate }</div>
 			<div class="boardViewcountPrint">${dto.view_cnt }</div>
 		</div>
@@ -35,20 +47,21 @@
 
 <div class="boardMenubar">
 <c:if test="${pageContext.request.userPrincipal.name == 'admin'}">
-		<a href="${cpath }/eventBoard/write"><button>event글 작성</button></a> 
+		<button><a href="${cpath }/eventBoard/write">새 글 작성</a></button> 
 </c:if>
 </div>
 
 <div class="paging">
 	<c:if test="${paging.prev }">
-		<a href="${cpath }/eventBoard?page=${paging.begin - paging.perPage}&search=${paging.order}">[이전]</a>
+		<a href="${cpath }/eventBoard?page=${paging.begin - paging.perPage}&search=${paging.order}"><button class="boardPaging"><</button></a>
 	</c:if>
 	<c:forEach var="i" begin="${paging.begin }" end="${paging.end }">
-		<a href="${cpath }/eventBoard?page=${i }&search=${paging.order}">[${i }]</a>
+		<a href="${cpath }/eventBoard?page=${i }&search=${paging.order}"><button>${i }</button></a>
 	</c:forEach>
 	<c:if test="${paging.next }">
-		<a href="${cpath }/eventBoard?page=${paging.end + 1}&search=${paging.order}">[다음]</a>
+		<a href="${cpath }/eventBoard?page=${paging.end + 1}&search=${paging.order}"><button class="boardPaging">></button></a>
 	</c:if>
+</div>
 </div>
 
 <script>

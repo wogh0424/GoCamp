@@ -15,7 +15,7 @@
 				<li><details class="view_pContent">${dto.pContent }</details></li>
 				<li class="view_amount">${dto.amount }개 구매 가능</li>
 				<li class="view_und"><button>-</button><input class="view_choice" type="text" name="choice" placeholder="1"><button>+</button></li>
-				<li class="view_btn"><button>💳 결제하기</button>&nbsp;<button>💕 찜 ${dto.pick }</button>&nbsp;<button class="view_cart">🧺 장바구니</button></li>
+				<li class="view_btn"><button>💳 결제하기</button>&nbsp;<button>💕 찜 ${dto.pick }</button>&nbsp;<button id="grocery" class="view_cart" >🧺 장바구니</button></li>
 			</ul>
 		</div>
 	</div>
@@ -35,12 +35,12 @@
 </div>
 
 <script>
-const pid = '${dto.idx}'
+const vid = '${dto.idx}'
 	
 	window.onload = imageViewHandler()
 	
 	async function imageViewHandler() {
-		const url = cpath + "/showProductImage/" + pid
+		const url = cpath + "/showProductImage/" + vid
 		const currImageView = document.getElementById('currentImageOverView')
 		await fetch(url)
 		.then(resp => resp.json())
@@ -77,7 +77,7 @@ const pid = '${dto.idx}'
 			return
 		}
 		else {
-			const url = cpath + "/grocery"
+			const url = cpath + '/grocery';
 			const params = {
 				userid : userid,
 				idx : pid,

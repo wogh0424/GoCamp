@@ -2,41 +2,37 @@
 	pageEncoding="UTF-8"%>
 <%@include file="../header.jsp"%>
 
-<!-- Button trigger modal -->
-
-<div id=boardTitle>
-	<div id=board>BOARD ></div>
-	<div id=freeBoard>
-		<a href="${cpath}/freeBoard">FreeBoard</a>
-		
-	</div>
+<div id=boardTitle style="background-image: url('${cpath}/resources/image/board/river.jpg');">
+	<div id=board><a href="${cpath}/freeBoard">Board</a></div>
 </div>
 
 
 
 
 <div id="boardView">
-		<div class=viewIdx>${dto.idx }</div>
-		<div class=viewTitle>${dto.title }</div>
-		<div class="viewWriter">${dto.writer }</div>
+	<div class="boardViewHeader">
+		<div class="headerTitle">${dto.title }</div>
+		<div class="headerRight">${dto.idx } | <span id="writer">${dto.writer }</span> | <fmt:formatDate value="${dto.date }" /> | 조회수  ${dto.view_cnt }</div>
+	</div>
 	
-	    <div class=viewReadCount>조회수 : ${dto.view_cnt }</div>
-		<div class=viewDate>작성날짜 :<fmt:formatDate value="${dto.date }" /></div>	
-		<div class=viewContent>${dto.content }</div>
+	<div class="boardViewContent">
 		<c:forTokens var="filePath" items="${dto.filePath}" delims=",">
-			<div class=viewUpload><img src="${cpath }/upload/${filePath}" height="200"></div>
+			<div class=viewUpload><img src="${cpath }/upload/${filePath}" ></div>
 		</c:forTokens>	
+			<div class=viewContent>${dto.content }</div>
+	</div>
 </div>
+
 
 
 
 <div id="boardReplyInput">
 	<hr>
-	<div id=reply>댓글</div>
+	<div class=reply>댓글</div>
 	<form method="POST">
-		<div id=replyWriter><input type="text" name="writer" value="${nickname}" readonly></div>
+		<div class=replyWriter><input type="text" name="writer" value="🤵‍♂️    ${nickname}" readonly></div>
 		<input type="hidden" name="board" value="${dto.idx}" />
-			<textarea name="reply_content" placeholder="댓글작성" required></textarea>
+			<textarea name="reply_content" placeholder="댓글작성.....✍️" required></textarea>
 			<input type="submit" value="댓글 작성">
 
 		
@@ -46,24 +42,20 @@
 
 <c:forEach var="reply" items="${replyList }">
 	<div id="freeBoardReplyview">
-		<h3>
-			<span class="replywriter">${reply.writer }</span> |
-			<fmt:formatDate value="${reply.replydate }" />
-		</h3>
-		<h3>${reply.reply_content }</h3>
+			<div class="replywriter">${reply.writer }</div> (<fmt:formatDate value="${reply.replydate }" />)
+		<div class="boardReplyView">${reply.reply_content }</div>
 		<c:if test="${reply.writer == nickname }">
 			<a href="${cpath }/freeBoard/deleteReply/${reply.idx}"><button
 					class="deleteReplyBtn">삭제</button></a>
 		</c:if>
-		
 	</div>
 </c:forEach>
 
 
 
-<div class="viewMenubar">
-	<div><a href="${cpath }/freeBoard"><button id =goBoardList>목록</button></a></div>
-	<div>
+<div id="viewMenubar">
+	<div class=goBoardList><a href="${cpath }/freeBoard"><button id =boardListBtn>목록</button></a></div>
+	<div class="authBtn">
 		<a href="${cpath }/freeBoard/modify/${dto.idx}">
 			<button id="modifyBtn">수정</button></a> 
 		<a href="${cpath }/freeBoard/deleteFreeBoard/${dto.idx}">

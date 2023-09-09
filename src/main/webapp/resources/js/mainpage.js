@@ -215,7 +215,7 @@ function orderByHandler(event) {
 				map: map
 			})
 			const infoWindow = new naver.maps.InfoWindow({
-				content: '<div class="marker"><a href="${cpath }/view/' + cid + '"><b>' 
+				content: '<div class="marker"><a href="' + cpath + '/main/view/' + cid + '"><b>' 
 						    + facltNm + '</b></a><br>연락처 : ' + tel + 
 			   			 '</div>'
 			})
