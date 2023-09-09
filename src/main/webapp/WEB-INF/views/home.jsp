@@ -112,19 +112,20 @@
 <!-- review 페이지 시작  -->
 
 
-<link rel="stylesheet" href="${cpath }/resources/css/main/header.css" type="text/css">
 <div class="bestReviewTitle">BEST REVIEW</div>
 
 <div class="reviewSlider"> 
 
-	<button class="prev">&lt;</button> <!-- 왼쪽 버튼 -->
-    <button class="next">&gt;</button> <!-- 오른쪽 버튼 -->
     
     
  <div class="review_rank" style="background-image: url('${cpath}/resources/image/bg-img.jpg');">
+	<button class="prev">&lt;</button> <!-- 왼쪽 버튼 -->
+    <button class="next">&gt;</button> <!-- 오른쪽 버튼 -->
 		<c:forEach items="${reviewList }" var="list">
-					<div class="review_rank_items">	
+		
+				<div class="review_rank_items">	
 			<!-- 		사진 띄우는 부분 -->
+			<div class="sliderImg">
 						<div class="review_rank_image">
 						<c:choose>
 				       		  <c:when test="${empty list.filePath}">
@@ -138,41 +139,73 @@
 						 	</c:otherwise>
 				    	</c:choose>
 						</div>
-			<div class="review_rank_content">				
-	 			<a href="${cpath }/reviewBoard/view/${list.idx}">
-							<div class="review_rank_content">${list.review_content }</div>
-							<div class="review_rank_campingName">${list.title }</div>
-							<div class="review_rank_nickName">${list.writer }</div>
-				</a>
-			</div>
-					 </div>	
+						
+						<div class="review_rank_content">				
+				 			<a href="${cpath }/reviewBoard/view/${list.idx}">
+										<div class="review_rank_content">${list.review_content }</div>
+										<div class="review_rank_campingName">${list.title }</div>
+										<div class="review_rank_nickName">${list.writer }</div>
+							</a>
+						</div>
+						</div>
+				 </div>	
+				 
 		</c:forEach>
 	 </div>
 </div>
 
+
 <script>
+let currentIndex = 0;
+const reviewRank = document.querySelector('.review_rank');
+const reviewRankItems = document.querySelectorAll('.review_rank_items');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
 
-let slider = document.querySelector('.review_rank');
-let index = 0;
 
-document.querySelector('.reviewSlider .prev').addEventListener('click', function() {
-    index--;
-    if (index < 0) index = 0;
-    updateSlider();
-});
-
-document.querySelector('.reviewSlider .next').addEventListener('click', function() {
-    index++;
-    let maxIndex = slider.children.length - 1;
-    if (index > maxIndex) index = maxIndex;
-    updateSlider();
-});
-
-function updateSlider() {
-    let offset = -index * 100;
-    slider.style.transform = `translateX(${offset}%)`;
+// 첫 3개의 아이템을 보이게 설정
+for (let i = 0; i < 3 && i < reviewRankItems.length; i++) {
+    reviewRankItems[i].style.display = 'block';
 }
+
+prevButton.addEventListener('click', function() {
+    for (let i = 0; i < 3; i++) {
+        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'none';
+    }
+
+    currentIndex -= 3;
+    if (currentIndex < 0) {
+        currentIndex = reviewRankItems.length - 3; // 마지막 그룹으로 이동
+    }
+
+    for (let i = 0; i < 3; i++) {
+        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'block';
+    }
+
+    reviewRank.style.transform = `translateX(-${currentIndex * 430}px)`;
+});
+
+nextButton.addEventListener('click', function() {
+    for (let i = 0; i < 3; i++) {
+        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'none';
+    }
+
+    currentIndex += 3;
+    if (currentIndex >= reviewRankItems.length) {
+        currentIndex = 0; // 첫 번째 그룹으로 이동
+    }
+
+    for (let i = 0; i < 3; i++) {
+        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'block';
+    }
+
+    reviewRank.style.transform = `translateX(-${currentIndex * 430}px)`;
+});
+
+
+
 </script>
+
 
 	
 
