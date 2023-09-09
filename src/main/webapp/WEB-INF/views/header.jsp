@@ -25,7 +25,6 @@
 <link rel="stylesheet" href="${cpath }/resources/css/main/header.css" type="text/css">
 
 <link rel="icon" href="${cpath }/resources/image/main/favicon.png">
-<link rel="stylesheet" href="CSS/style.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>

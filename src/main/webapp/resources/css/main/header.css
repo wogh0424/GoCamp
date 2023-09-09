@@ -330,26 +330,6 @@ pre {
 	margin: auto;
 }
 
-.pCategory_list {
-	display: flex;
-	justify-content: center;
-}
-
-.pCategory_list>ul {
-	border-top: 2px solid black;
-}
-
-.pCategory_list>ul>li {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 150px;
-	height: 30px;
-	text-align: center;
-	font-size: 12px;
-	background-color: #F0F1F3;
-}
-
 .pCategory_search {
 	border: 1px solid black;
 	background-color: white;
