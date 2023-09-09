@@ -360,9 +360,22 @@
 				</c:if>
 				</div>		
 			</div>
-		</div>
-		<div class="mypageItems">3
+		<div class="mypageItems">2(연지 좋아요)
+
+			<div id ="likesContainer">
+			<c:forEach items="${likes}" var="like">
+			   <div id="likeFacltNm">${like.facltNm}</div>
+			   <div id="likeImage"><img src="${like.firstImageUrl }"></div>
+			</c:forEach>
+			</div>		
 		
+		</div>
+		
+		<div class="mypageItems">3(연지 내후기)
+		<c:forEach items="${reviews}" var="review">
+			   <div id="reviewsTitle">제목 : ${review.title}</div>
+			   <div id="reviewsContent">제목 : ${review.review_content}</div>		   
+			</c:forEach>
 		</div>
 		<div class="mypageItems">
 			<div id="couponBox">
@@ -389,6 +402,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 
 

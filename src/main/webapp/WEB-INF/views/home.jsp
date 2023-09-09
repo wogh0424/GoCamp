@@ -111,35 +111,51 @@
 
 <!-- review 페이지 시작  -->
 
-<h3>BEST REVIEW</h3>
-<div class="review_rank">
-<c:forEach items="${reviewList }" var="list">
- 	<a href="${cpath }/reviewBoard/view/${list.idx}">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 
-<div class="review_rank" style="background-image: url('${cpath}/resources/image/bg-image.jpg');">
-	<div class="review_rank_items">
+<div class="bestReviewTitle">BEST REVIEW</div>
+<div class="reviewSlider"> 
+ <div class="review_rank" style="background-image: url('${cpath}/resources/image/bg-img.jpg');">
+		<c:forEach items="${reviewList }" var="list">
+					<div class="review_rank_items">	
+			<!-- 		사진 띄우는 부분 -->
+						<div class="review_rank_image">
+						<c:choose>
+				       		  <c:when test="${empty list.filePath}">
+				          		  <img src="${cpath}/resources/image/Review_thecamping.png" height="200">
+				      		  </c:when>
+				      		  
+				    	 	<c:otherwise>
+						 	<c:forTokens var="filePath" items="${list.filePath}" delims=",">
+						    	    <img src="${cpath}/upload/${filePath}" height="200">
+						 	</c:forTokens>
+						 	</c:otherwise>
+				    	</c:choose>
+						</div>
+						
+ 			<a href="${cpath }/reviewBoard/view/${list.idx}">
+							<div class="review_rank_content">${list.review_content }</div>
+							<div class="review_rank_campingName">${list.title }</div>
+							<div class="review_rank_nickName">${list.writer }</div>
+			</a>
+					 </div>	
+		</c:forEach>
+	 </div>
+	 </div>
+ <script>
+ $('.reviewSlider').slick({
+	    slidesToShow: 3,
+	    slidesToScroll: 3,
+	    arrows: true,
+	    infinite: false, 
+	    vertical: false  
+	});
+ </script>
 
-		<div class="review_rank_image">
-		 <c:choose>
-       		 <c:when test="${empty list.filePath}">
-          	  <img src="${cpath}/resources/image/Review_thecamping.png" height="200">
-        </c:when>
+	
 
-       
-        <c:otherwise>
-        
-		<c:forTokens var="filePath" items="${list.filePath}" delims=",">
-		        <img src="${cpath}/upload/${filePath}" height="200">
-		</c:forTokens>
-		 </c:otherwise>
-    </c:choose>
-		</div>
-			<div class="review_rank_content">${list.review_content }</div>
-			<div class="review_rank_campingName">${list.title }</div>
-			<div class="review_rank_cityName">${list.writer }</div>
-	</a>
-	</c:forEach>
-</div>
+
 <!-- review 페이지 끝  -->
 
 <a style="display:scroll;position:fixed;bottom:30px;right:50px;text-decoration: none;" rel="nofollow" href="#" title="Back to Top" id="scrollToTop"><span style="width: 80px; height: 80px; font-size: 50px;">⏫</span></a>

@@ -145,7 +145,7 @@
 					<input type="date" name="birth" placeholder="생일 입력" required>
 				</p>
 				<p>
-					<input type="text" name="pnum" placeholder="전화번호 입력" required>
+					<input type="text" name="pnum" placeholder="전화번호 입력" minlength="11" maxlength="11" required>
 				</p>
 		
 				<p>
@@ -167,21 +167,41 @@
 		</form>
 		</div>
 
-
+	<!-- 회원가입 Javascript -->
 	<script>
 	const userid = document.querySelector('input[name="userid"]');      // 유저id input
 	const dupCheckBtn = document.getElementById('dupCheckBtn');		    // 유저id 중복확인 버튼
 	const dupMessage = document.getElementById('dubMessage');		    // 중복체크 메시지
-
+	
 	const nickname = document.querySelector('input[name="nickname"]');  // 닉네임 input
 	const nicCheckBtn = document.getElementById('nicCheckBtn');		    // 닉네임 중복확인 버튼
 	const checknicmsg = document.getElementById('checknicmsg');			// 중복체크 메시지
 	
 	const sendAuthNumber = document.getElementById('sendAuthNumber');   // 인증코드
 	const isNumber = document.getElementById('isNumber'); 				// 인증코드 입력 여부 메시지
-
+	
+	const email = document.querySelector('input[name="email"]');		// email input
+	
+	
+	// 정규표현식 한글 및 특수문자 사용못하도록
+	function removeKoreanAndSpecialChars(inputElement) {
+	    inputElement.addEventListener('input', function() {
+	        inputElement.value = inputElement.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\W]/g, '');
+	    });
+	}
+	
+	// 정규표현식 이메일 전용(영어 + 숫자  + @ + . 까지만 가능 )
+	function removeKoreanExceptAtForEmail(inputElement) {
+	    inputElement.addEventListener('input', function() {
+	    	inputElement.value = inputElement.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]|[^\w@.]/g, '');
+	    });
+	}
+	
+	removeKoreanAndSpecialChars(userid); // userid
+	removeKoreanExceptAtForEmail(email)  // email
+	
+	// 회원가입 핸들러
 	async function checkInputHandler() {
-
 	    // ID 검사
 	    if (userid.value == '') {
 	        dupCheckBtn.focus();
@@ -192,12 +212,6 @@
 	    const idUrl = '${cpath}/dupCheck/' + userid.value;
 	    const idCount = await fetch(idUrl).then(resp => resp.text());
 
-	    if (isNaN(idCount)) {
-	        alert('처리 도중 문제발생');
-	        userid.focus();
-	        return;
-	    }
-
 	    if (idCount != 0) {
 	        dupMessage.innerText = '이미 사용중인 ID입니다';
 	        dupMessage.style.color = 'red';
@@ -207,7 +221,7 @@
 
 	    dupMessage.innerText = '사용 가능한 ID입니다';
 	    dupMessage.classList.add('check');
-	    dupMessage.style.color = 'blue';
+	    dupMessage.style.color = 'blue'; 
 
 	    // 닉네임 검사
 	    if (nickname.value == '') {
@@ -316,6 +330,7 @@
 		checkAuthNumber.onclick = checkAuthNumberHandler		
 	</script>
 
+	<!-- 비밀번호 재확인 코드  -->
 	<script>		
 			const userpw = document.getElementById('userpw')
 			const confirmpw = document.getElementById('confirmpw')
@@ -333,6 +348,22 @@
 			// onchange : JS를 통해 변화가 일어났는지 감지한다. addEventListener와 같은 기능
 			confirmpw.onkeyup = validatepw
 			// onkeyup : 사용자가 키보드의 키를 눌렀다가 땠을 때
+	</script>
+	
+	<!-- 전화번호 입력칸에 숫자만 사용가능하도록 하는 코드  -->
+	<script>
+	const pnum = document.querySelector('input[name="pnum"]');
+
+	// pnum 입력 필드에 숫자 외의 문자를 입력하지 못하게 하는 이벤트 리스너
+	pnum.addEventListener('input', function() {
+	    // 숫자 외의 문자를 찾는 정규 표현식
+	    const nonNumericRegex = /[^0-9]/g;
+
+	    // pnum에 숫자 외의 문자가 포함되어 있다면 제거
+	    if (nonNumericRegex.test(pnum.value)) {
+	        pnum.value = pnum.value.replace(nonNumericRegex, '');
+	    }
+	});
 	</script>
 	
 	<script>

@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.AdminDTO;
+
+import com.itbank.model.GocampReviewDTO;
+
 import com.itbank.model.CouponDTO;
+
 import com.itbank.model.ItemDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.service.AdminService;
 import com.itbank.service.FreeBoardService;
+import com.itbank.service.GocampReviewService;
 import com.itbank.service.LikeService;
 import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
@@ -31,7 +36,7 @@ public class MypageController {
 	@Autowired private LoginService loginService;
 	
 	@Autowired private LikeService likeService;
-
+	@Autowired private GocampReviewService gocampReviewService;
 
 	
 	@GetMapping("/main")
@@ -45,8 +50,13 @@ public class MypageController {
 		MemberDTO dto = mypageService.importMember(userid);
 		int member = dto.getIdx();
 		
+		// 연지 내 찜 목록
 		List<ItemDTO> likes = likeService.selectLike(member);
 		mav.addObject("likes", likes);
+		
+		// 연지 내 후기 목록 
+		List<GocampReviewDTO> reviews = gocampReviewService.selectReview(nick);
+		mav.addObject("reviews", reviews);
 		
 		int startidx = 9;
 		int endidx = 12;

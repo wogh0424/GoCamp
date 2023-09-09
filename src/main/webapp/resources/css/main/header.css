@@ -3,6 +3,7 @@
 body {
 	margin: 0;
 	padding: 0;
+	background-color: #f5f5f5 !important;
 }
 
 ul {
@@ -11,8 +12,9 @@ ul {
 }
 
 a {
-	text-decoration: none;
-	color: black;
+	text-decoration: none !important;
+/* 	!important 쓰면 우선적용 */
+	
 }
 /* 타이틀 로고 부터 navbar까지 시작*/
 .title_logo {
@@ -207,10 +209,12 @@ pre {
 }
 
 .reviewImage {
-	max-height: 150px;
+	width: 200px;
+	height: 200px;
+	border: 2px solid white;
+	border-radius: 10px;
 	object-fit: cover;
-	border: 1px solid #ddd;
-	border-radius: 3px;
+	box-shadow: 3px 3px 3px black;
 }
 
 .deleteReviewLink {
@@ -254,164 +258,8 @@ pre {
 
 /* 리뷰게시판 끝 */
 
-/*자유게시판*/
 
-/*/
 
-/* 검색창 */
-.search-form {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 10px;
-}
-
-.search-column, .search-input, .search-select {
-	margin-right: 5px;
-}
-
-.search-input-container {
-	display: flex;
-	align-items: center;
-	background-color: #f9f9f9;
-	border: 1px solid #3C5944;
-	border-radius: 3px;
-}
-
-.search-input {
-	padding: 8px;
-	border: none;
-	border-radius: 3px;
-}
-
-.search-submit {
-	background-color: #f9f9f9;
-	border: none;
-	border-radius: 3px;
-	padding: 8px;
-}
-
-#boardTitle {
-	display: flex;
-	gap: 10px;
-	/* 		justify-content: center;  */
-	/* 		align-items: center; */
-	padding-left: 250px;
-	padding-top: 50px;
-}
-
-#board {
-	font-size: 25pt;
-	font-weight: bold;
-	line-height: 1
-}
-
-#freeBoard, #reviewBoard, #eventBoard, #noticeBoard {
-	font-size: 20pt;
-	font-weight: bold;
-	line-height: 1
-}
-
-#column {
-	display: flex;
-	gap: 10px;
-}
-
-#boardList {
-	width: 900px;
-	margin: 0 auto;
-}
-
-.item {
-	display: flex;
-	padding: 5px 10px;
-}
-
-.column {
-	display: flex;
-}
-
-.columns {
-	border-bottom: 3px solid #00743D;
-	border-top: 3px solid #00743D;
-}
-
-.item>.idx, .item>.writer, .item>.date, .item>.viewCount {
-	flex: 1;
-}
-
-.item>.title {
-	flex: 5;
-}
-
-.item>.idx {
-	color: #00743D;
-}
-
-.menubar {
-	display: flex;
-	width: 900px;
-	margin: 20px auto;
-	justify-content: space-between;
-}
-
-.flex {
-	display: flex;
-}
-
-.description {
-	width: 600px;
-}
-
-.lineIntro {
-	display: -webkit-box;
-	max-width: 60%;
-	-webkit-line-clamp: 1;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.intro {
-	display: -webkit-box;
-	max-width: 60%;
-	-webkit-line-clamp: 3;
-	-webkit-box-orient: vertical;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-
-.item {
-	display: flex;
-	padding: 5px 10px;
-}
-
-.columns {
-	background-color: white;
-}
-
-.item>.idx, .item>.writer, .item>.writeDate, .item>.viewCount {
-	flex: 1;
-}
-
-.item>.title {
-	flex: 5;
-}
-
-.menubar {
-	display: flex;
-	width: 900px;
-	margin: 20px auto;
-	justify-content: space-between;
-}
-
-a {
-	text-decoration: none;
-	color: black;
-}
-
-#login_btn {
-	font-weight: bold;
-}
 /*쇼핑몰 목록 시작*/
 .product_wrap {
 	flex-wrap: wrap;
@@ -580,7 +428,7 @@ footer {
 	display: flex;
 	justify-content: center;
 	padding: 10px;
-	margin: 10px;
+/* 	margin: 10px; */
 	text-align: center;
 }
 
@@ -626,12 +474,19 @@ footer {
 .review_rank_items {
 	display: flex;
 	margin: auto;
+	flex-direction: column;
 }
 
-.review_rank_campingName, .review_rank_cityName {
+.review_rank_campingName, .review_rank_nickName {
 	color: white;
 	font-weight: bold;
 	text-align: center;
+}
+.review_rank_image,
+.review_rank_content,
+.review_rank_campingName,
+.review_rank_nickName {
+    margin-bottom: 10px; 
 }
 /*main_review_rank 페이지 끝 */
 /*camping_top_wrap 캠핑장 랭크 시작*/
@@ -1494,3 +1349,433 @@ aside {
 	transform: scale(1.1);
 	box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.4);
 }
+
+
+
+
+/* 게시판 스타일 */
+
+/* 전체 컨테이너 스타일 */
+#boardContainer {
+ 
+background-repeat: no-repeat;
+width: 100%;
+background-size: cover;
+/* background-color: #f5f5f5; */
+   
+  
+}
+
+/* 컬럼 레이아웃 설정 */
+.boardColumns {
+    display: grid;
+    grid-template-columns: 1fr 3fr 2fr 2fr 2fr; 
+    gap: 10px; 
+    align-items: center;  
+    border-bottom: 1px solid black;
+/*     border-top: 1px solid black; */
+     padding: 10px 0;
+     text-align: center;
+     font-weight: bold;
+     color: black;
+	
+}
+
+.dtoItem {
+    display: grid;
+    grid-template-columns: 1fr 3fr 2fr 2fr 2fr; 
+    gap: 10px; 
+    align-items: center;  
+    border-bottom: 1px solid #e1e1e1;
+     padding: 10px 0;
+     text-align: center;
+     color: black;
+}
+
+.boardTitlePrint a {
+	 color: black;
+}
+
+
+
+/* 검색 */
+.searchInputContainer {
+    position: relative; 
+    width: 300px;
+/*     right: 10%;  */
+    margin-top: 20px;
+    margin-left: 1000px;
+
+}
+
+.boardSearchInput {
+    width: 100%;
+    padding: 8px 40px 8px 12px; 
+    border-radius: 20px; 
+    border: 1px solid #ccc; 
+    transition: border 0.3s; 
+    margin-bottom: 20px;
+    
+}
+
+.boardSearchInput:focus {
+    border-color: #007BFF; 
+    outline: none; 
+    
+}
+
+.boardSearchSubmit {
+    position: absolute;
+    right: 10px;
+    top: 36%;
+    transform: translateY(-50%);
+    background: none; 
+    border: none;
+    cursor: pointer;
+    font-size: 18px; 
+    
+}
+
+/*검색 끝*/
+
+.boardList {
+	margin-top: 40px;
+    width:1200px; 
+    margin: 0 auto;
+    background-color: #fff;
+/* 	border-top: 1px solid black; */
+/* 	border-bottom: 1px solid black; */
+	
+    padding: 10px;
+}
+
+.boardIdxPrint{
+	font-weight: bold;
+}
+.boardIdxPrint > img {
+	height: 20px;
+	width: 16px;
+}
+
+
+#boardTitle {
+    margin: 40px auto 10px; 
+    padding: 20px;
+/*     text-align: center; */
+    
+    
+    margin-bottom: 10px;
+    margin-top: 0;
+    height: 300px;
+
+    background-size: cover;
+    background-position:center;
+
+    background-repeat: no-repeat;
+   
+}
+
+
+#board { 
+	padding-left: 150px;
+	padding-top: 180px;
+}
+#board a{
+	color: white;
+	font-size: 50px;
+	font-weight: bold;
+}
+
+
+
+.boardMenubar button{
+	border: 1.5px solid black;
+	background-color: white;
+	color: black;
+	font-weight: bold;
+	
+	border-radius: 8px;
+	margin-left: 1200px;
+	margin-top: 20px;
+	
+}
+
+.paging button{
+	border: none;
+	border-bottom: 1px solid black;
+	wid: 2px;
+	background-color:#f5f5f5;
+	color: black;
+	font-weight: bold;
+}
+
+/* 게시판 글쓰기(write) css */
+
+.insertBoardForm {
+    width: 840px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.insertBoardTitle input, .boardSubmit {
+    width: 798px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+#content {
+    width: 700px;  
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+
+.boardSubmit {
+    display: block;
+    padding: 10px;
+    background-color: #3C5944;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.boardSubmit:hover {
+    background-color: #F4C752;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+#preview {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+label[for="option"], #optionNotice {
+    display: inline-block;
+}
+label[for="option"] {
+    margin-right: 10px;
+}
+
+.insertBoardFile{
+
+	margin-bottom: 10px;
+}
+
+/* ===============board write end====================== */
+
+
+
+/* ===============게시판 읽기(view)====================== */
+
+#boardView{
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto; /* 중앙 정렬 */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+#viewMenubar{
+	max-width: 800px;
+    width: 100%;
+    margin: 0 auto; /* 중앙 정렬 */
+    padding: 10px;
+	margin-bottom: 10px;
+}
+
+
+
+.boardViewHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.headerTitle{
+	font-size: large;
+	font-weight: bold;
+}
+.headerRight{
+	
+}
+
+.boardViewContent {
+    border-top: 1px solid #e0e0e0;
+    padding-top: 20px;
+}
+
+.viewContent {
+    margin-bottom: 20px;
+}
+
+.viewUpload {
+    display: inline-block; 
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.viewUpload img {
+    width: 200px;
+    height: 200px;
+}
+
+
+
+#boardListBtn, #modifyBtn, #deleteBtn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #3C5944;
+    color: #fff;
+    margin-right: 10px;
+}
+
+#boardListBtn:hover, #modifyBtn:hover, #deleteBtn:hover {
+    background-color: #F4C751;
+}
+
+#viewMenubar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.goBoardList {
+    flex: 1;
+}
+
+.authBtn {
+    display: flex;
+    align-items: center;
+}
+
+#modifyBtn, #deleteBtn {
+    margin-left: 10px;
+}
+
+/* 리뷰 목록 버튼 */
+.reviewMenubar {
+  
+}
+
+
+/* ===============baord view end====================== */
+
+/* ===============freeBoard reply start====================== */
+#boardReplyInput {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    padding-top: 0;
+}
+
+#boardReplyInput .reply {
+
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#boardReplyInput input[type="text"]{
+	border: none;
+	border-bottom: 1px solid black;
+	width: 80px;
+	margin-bottom: 10px;
+}
+
+#boardReplyInput textarea {
+	
+    width: 100%;
+    min-height: 60px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 10px;
+}
+
+#boardReplyInput input[type="submit"] {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #3C5944;
+    color: #fff;
+}
+
+#boardReplyInput input[type="submit"]:hover {
+    background-color: #F4C751;
+}
+
+/* 댓글 목록 영역 */
+#freeBoardReplyview {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.freeBoardReplyview .replywriter {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.boardReplyView {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.deleteReplyBtn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #3C5944;
+    color: #fff;
+}
+
+.deleteReplyBtn:hover {
+    background-color: #F4C751;
+}
+
+.headerTitle > img {
+	height: 20px;
+	width: 16px;
+}
+/* ===============freebaord reply end====================== */
+
+
