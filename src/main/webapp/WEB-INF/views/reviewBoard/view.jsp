@@ -29,7 +29,10 @@
 
 
 
-<div class="reviewMenubar"><a href="${cpath }/reviewBoard"><button id="boardListBtn">목록</button></a></div>
+<div class="reviewMenubar">
+	<div class=goBoardReview><a href="${cpath }/reviewBoard"><button id="boardListBtn">목록</button></a></div>
+	<div></div>
+</div>
 
 
 <%@include file="../footer.jsp"%>

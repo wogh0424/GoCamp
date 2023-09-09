@@ -12,8 +12,9 @@
 <form class="insertBoardForm" method="POST" enctype="multipart/form-data" >
 <div>
 	<div class=insertBoardTitle><input type="text" name="title" placeholder="제목" required autofocus> </div>
-	<div class="inserBoardWriter"></div><input type="text" name="writer" value="${nickname}" readonly> </div>
-<!-- 		<label for="upload">첨부파일 미리보기:</label> -->
+	<div class="insertBoardWriter"><input type="text" name="writer" value="${nickname}" readonly> </div>
+</div>
+
 		<div id="preview"></div>
 		<input name="upload" type="file" class="insertBoardFile" accept="image/*" multiple >
 	<textarea id="content" name="content" required></textarea> 

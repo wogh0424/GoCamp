@@ -44,7 +44,7 @@
 
 <div class="boardMenubar">
 	<c:if test="${pageContext.request.userPrincipal != null}">
-		<a href="${cpath }/freeBoard/write"><button>새 글 작성</button></a>
+		<button><a href="${cpath }/freeBoard/write">새 글 작성</a></button>
 	</c:if>
 </div>
 
