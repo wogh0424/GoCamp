@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.BasketDTO;
 import com.itbank.model.CouponDTO;
-import com.itbank.model.MemberDTO;
 import com.itbank.model.ProductDTO;
 import com.itbank.model.ShopPagingDTO;
 import com.itbank.service.LoginService;

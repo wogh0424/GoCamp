@@ -31,13 +31,12 @@ public class MypageController {
 	@Autowired
 	private MypageService mypageService;
 
-	@Autowired FreeBoardService freeBoardService;
-	@Autowired AdminService adminService;
-	@Autowired LoginService loginService;
+	@Autowired private FreeBoardService freeBoardService;
+	@Autowired private AdminService adminService;
+	@Autowired private LoginService loginService;
 	
-	@Autowired private GocampReviewService gocampReviewService;
 	@Autowired private LikeService likeService;
-
+	@Autowired private GocampReviewService gocampReviewService;
 
 	
 	@GetMapping("/main")

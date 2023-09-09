@@ -135,7 +135,7 @@ public class LoginService implements UserDetailsService{
 		dto.setDiscnt(0.9);
 		Calendar date = Calendar.getInstance();
 	    Date startDate = new Date(date.getTimeInMillis());
-	    dto.setStartDate(startDate);
+	    dto.setcDate(startDate);
 	    date.add(Calendar.DATE, 8);
 	    Date dueDate = new Date(date.getTimeInMillis());
 		dto.setDueDate(dueDate);

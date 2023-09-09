@@ -129,7 +129,7 @@
 		
 		
 		<select id="selectReview" parameterType="string">
-			select * from gocampReview where writer=#{nick}
+			select * from gocampReview where writer=#{nick} order by idx desc
 		</select>
 </mapper>
 		

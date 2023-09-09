@@ -4,12 +4,20 @@ import java.sql.Date;
 
 public class CouponDTO {
 	private int idx;
+	private String cName;
 	private String couponNum;
 	private String userid;
 	private double discnt;
 	private int useava;
-	private Date startDate;
+	private Date cDate;
 	private Date dueDate;
+	
+	public String getcName() {
+		return cName;
+	}
+	public void setcName(String cName) {
+		this.cName = cName;
+	}
 	public int getIdx() {
 		return idx;
 	}
@@ -41,11 +49,12 @@ public class CouponDTO {
 	public void setUseava(int useava) {
 		this.useava = useava;
 	}
-	public Date getStartDate() {
-		return startDate;
+	
+	public Date getcDate() {
+		return cDate;
 	}
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setcDate(Date cDate) {
+		this.cDate = cDate;
 	}
 	public Date getDueDate() {
 		return dueDate;
