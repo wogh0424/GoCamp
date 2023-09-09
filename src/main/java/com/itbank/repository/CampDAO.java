@@ -61,5 +61,7 @@ public interface CampDAO {
 
 	List<ItemDTO> selectBest5();
 
+	List<ItemDTO> requestCamp(HashMap<String, Integer> map);
+
 
 }

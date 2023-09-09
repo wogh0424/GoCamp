@@ -8,26 +8,13 @@ import org.springframework.stereotype.Repository;
 import com.itbank.model.BasketDTO;
 import com.itbank.model.ProductDTO;
 import com.itbank.model.Product_fileDTO;
-import com.itbank.model.ShopPagingDTO;
 
 @Repository
 public interface ProductDAO {
 
-	List<ProductDTO> selectAll(ShopPagingDTO paging);
-
 	int delete(int idx);
 
-	int selectCount();
-
 	ProductDTO selectDetails(int idx);
-
-	List<ProductDTO> priceSelectAll();
-
-	List<ProductDTO> viewsSelectAll();
-
-	List<ProductDTO> sDateSelectAll();
-
-	List<ProductDTO> pStarSelectAll();
 
 	int selectMaxIdxFromUpload();
 
@@ -55,12 +42,15 @@ public interface ProductDAO {
 
 	int updatecurrentgrocery(ProductDTO dto);
 
-	List<ProductDTO> selectOne(String name);
 
 	List<BasketDTO> basketSelectAll(String userId);
 
 	int basketdelete(int idx);
 
 	int basketmodify(BasketDTO dto);
+
+	List<ProductDTO> selectAll(HashMap<String, Object> params);
+
+	int selectCount(String pName);
 
 }

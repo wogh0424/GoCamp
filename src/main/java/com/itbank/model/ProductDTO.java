@@ -10,15 +10,11 @@ public class ProductDTO {
 	   private String pName;
 	   private int price;
 	   private int amount;
-	   private int views;
 	   private String pCategory;
 	   private String pContent;
 	   private Date sDate;
-	   private int pick;
 	   private String image;
 	   private List<MultipartFile> upload;
-	   private String userid;
-	   private int pStar;
 	   
 	public int getIdx() {
 		return idx;
@@ -44,12 +40,6 @@ public class ProductDTO {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	public int getViews() {
-		return views;
-	}
-	public void setViews(int views) {
-		this.views = views;
-	}
 	public String getpCategory() {
 		return pCategory;
 	}
@@ -68,12 +58,6 @@ public class ProductDTO {
 	public void setsDate(Date sDate) {
 		this.sDate = sDate;
 	}
-	public int getPick() {
-		return pick;
-	}
-	public void setPick(int pick) {
-		this.pick = pick;
-	}
 	public String getImage() {
 		return image;
 	}
@@ -85,20 +69,5 @@ public class ProductDTO {
 	}
 	public void setUpload(List<MultipartFile> upload) {
 		this.upload = upload;
-	}
-	
-	public String getUserid() {
-		return userid;
-	}
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-	public int getpStar() {
-		return pStar;
-	}
-	public void setpStar(int pStar) {
-		this.pStar = pStar;
-	}
-	   
-	   
+	} 
 }

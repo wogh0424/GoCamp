@@ -332,6 +332,10 @@
 	<select id="selectBest5" resultType="item">
 		select * from gocamp order by clickCnt desc limit 5
 	</select>
+	
+	<select id="requestCamp" resultType="item" parameterType="map">
+		select * from gocamp order by contentId limit ${offset}, ${perPage}
+	</select>
 </mapper>
 
 

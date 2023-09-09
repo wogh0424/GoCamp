@@ -3,10 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.request.contextPath }" />
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +24,6 @@
 <link rel="stylesheet" href="${cpath }/resources/css/main/header.css" type="text/css">
 
 <link rel="icon" href="${cpath }/resources/image/main/favicon.png">
-<link rel="stylesheet" href="CSS/style.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
@@ -31,8 +31,10 @@
 
 
 <!-- jquery 사용 위한 라이브러리 -->
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.8.1/slick.min.js"></script>
+
 
 <!-- 	텍스트에디터 api - summernote -->
 	<!-- include libraries(jQuery, bootstrap) -->
@@ -64,7 +66,7 @@
 			<ul  style="margin-right: 10%;">
 				<c:if test="${pageContext.request.userPrincipal != null}">
 					<li>${pageContext.request.userPrincipal.name}님 환영합니다.</li>
-					<!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
+					접속된 아이디 표시를 원하면 여기에 el태그 삽입
 				</c:if>
 				<sec:authorize access="isAnonymous()">			
 					<li id="login_btn">
@@ -72,10 +74,10 @@
 					</li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-					<%-- 			<form:form action="${pageContext.request.contextPath}/logout" method="POST"> --%>
+								<form:form action="${pageContext.request.contextPath}/logout" method="POST">
 					<li><a href="${cpath }/product/basket">장바구니</a></li>
 					<li><a href="${cpath }/logout">로그아웃</a></li>
-					<%-- 			</form:form> --%>
+								</form:form>
 				</sec:authorize>
 				<c:if test="${pageContext.request.userPrincipal == null}">
 					<li><a href="${cpath }/login/signup">회원가입</a></li>
@@ -83,10 +85,10 @@
 				<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
 						<li><a href="<c:url value="/admin/adminpage" />">관리자 홈</a></li>
 				</c:if>
-				<c:if
-					test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }">
-						<li><a href="${cpath }/mypage/main">마이페이지</a></li>
-				</c:if>
+				
+<%-- 					test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }"> --%>
+<%-- 						<li><a href="${cpath }/mypage/main">마이페이지</a></li> --%>
+<%-- 				</c:if> --%>
 			</ul>
 		</div>
 	</header>

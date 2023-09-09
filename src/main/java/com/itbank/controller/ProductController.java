@@ -1,7 +1,6 @@
 package com.itbank.controller;
 
 import java.security.Principal;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,36 +32,14 @@ public class ProductController {
 	@GetMapping("/list")
 	public ModelAndView list(
 	    @RequestParam(value="page", defaultValue="1") int page,
-	    @RequestParam(value="sort", required=false) String sortType,
-	    @RequestParam(value="pName", required=false) String pName // 검색어를 받아옵니다.
+	    @RequestParam(value="sort", defaultValue="pName") String sort,
+	    @RequestParam(value="pName", defaultValue="") String pName // 검색어를 받아옵니다.
 	) {
-	    List<ProductDTO> list;
+		int boardCount = productService.selectCount(pName);
+		ShopPagingDTO dto = new ShopPagingDTO(page, boardCount);
+	    List<ProductDTO> list = productService.selecAll(page, sort, pName, dto);
 	    ModelAndView mav = new ModelAndView("/product/list");
-	    
-	    if (pName != null && !pName.isEmpty()) {
-	        // 검색어가 제공된 경우, 검색을 수행합니다.
-	        list = productService.selectOne(pName);
-	    } else {
-	        if ("price".equals(sortType)) {
-	            list = productService.priceSelectAll(); // 가격 오름차순으로 상품 목록 가져옴
-	        } else if ("price_desc".equals(sortType)) {
-	            list = productService.priceSelectAll(); // 가격 내림차순으로 상품 목록 가져옴
-	            Collections.reverse(list); // 가져온 목록을 뒤집어서 내림차순으로 정렬된 것처럼 처리
-	        } else if ("views_desc".equals(sortType)) {
-	            list = productService.viewsSelectAll(); // 조회수 오름차순으로 상품 목록 가져옴
-	        } else if ("sDate_desc".equals(sortType)) {
-	            list = productService.sDateSelectAll(); // 날짜 오름차순으로 상품 목록 가져옴
-	        } else if ("pStar_desc".equals(sortType)) {
-	            list = productService.pStarSelectAll(); // 별점 오름차순으로 상품 목록 가져옴
-	        } else {
-	            int productCount = productService.selectCount();
-	            ShopPagingDTO paging = new ShopPagingDTO(page, productCount);
-	            
-	            list = productService.selectAll(paging); // 일반적인 상품 목록 가져옴
-	            mav.addObject("paging", paging);
-	        }
-	    }
-	    
+	    mav.addObject("paging", dto);
 	    mav.addObject("list", list);
 	    return mav;
 	}

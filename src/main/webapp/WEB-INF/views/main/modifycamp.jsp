@@ -410,8 +410,6 @@
         	    confirm('변경사항들을 적용하시겠습니까?')
         	    document.getElementById("modifyForm").submit()
         	});
-         
-         
     </script>
 
 </body>

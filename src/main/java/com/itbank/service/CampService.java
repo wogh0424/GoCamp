@@ -201,4 +201,13 @@ public class CampService {
 		return campDAO.selectBest5();
 	}
 
+	public List<ItemDTO> requestCamp(int page) {
+		int offset = (page - 1) * 50 + 1;
+		int perPage = (page) * 50;
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("offset", offset);
+		map.put("perPage", perPage);		
+		return campDAO.requestCamp(map);
+	}
+
 }
