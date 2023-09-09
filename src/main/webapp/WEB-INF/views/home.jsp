@@ -110,7 +110,6 @@
 <!-- camping_top_list 끝 -->
 
 <!-- review 페이지 시작  -->
-<<<<<<< HEAD
 <h3>BEST REVIEW</h3>
 <div class="review_rank">
 <c:forEach items="${reviewList }" var="list">

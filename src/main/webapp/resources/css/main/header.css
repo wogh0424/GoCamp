@@ -404,11 +404,6 @@ pre {
 	justify-content: space-between;
 }
 
-a {
-	text-decoration: none;
-	color: black;
-}
-
 #login_btn {
 	font-weight: bold;
 }
@@ -1353,6 +1348,67 @@ aside {
 	width: 33%;
 	border: 1px solid black;
 	background-color: white;
+	overflow: scroll;
+}
+
+.report_content {
+	width: 100%;
+}
+
+.report_wrap {
+	display: flex;
+	border: 1px solid black;
+	justify-content: space-evenly;
+	align-items: center;
+	word-wrap: break-word;
+	white-space: normal;
+	min-height: 40px;
+}
+
+#reported_user {
+	width: 24%;
+	margin-left: 20px;
+}
+
+#reported_reason {
+	width: 33%;
+}
+
+#reportedDate {
+	width: 33%;
+}
+
+#report_header {
+	height: 70px;
+	border: 1px solid black;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #B7F0B1;
+}
+
+#category_user {
+	margin-left: 20px;
+	width: 33%;
+}
+
+#category_reason {
+	width: 33%;
+}
+
+#category_date {
+	width: 33%;
+}
+
+#category {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	background-color: grey;
+	color: white;
 }
 
 .main_boardlist3 {
@@ -1408,7 +1464,6 @@ aside {
 	justify-content: center;
 	align-items: center;
 	width: 132px;
-	height: 30px;
 	background-color: grey;
 	color: white;
 	font-weight: bold;
@@ -1423,9 +1478,11 @@ aside {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 132px;
-	height: 30px;
+	width: 180px;
 	border-bottom: 1px solid lightgrey;
+	word-wrap: break-word;
+	white-space: normal;
+	min-height: 40px;
 }
 /*관리자페이지 끝 */
 /*주문결제 페이지 끝*/
@@ -1458,7 +1515,6 @@ aside {
 
 /*홈페이지 - 옥*/
 #camping_intro_search {
-	
 	background-repeat: no-repeat;
 	background-position: center;
 	width: 100%;
