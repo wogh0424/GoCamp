@@ -23,9 +23,8 @@
         <s:intercept-url pattern="/resources/**" access="permitAll" />
         <s:intercept-url pattern="/freeBoard/**" access="permitAll"/>
         <s:intercept-url pattern="/mypage/main" access="isAnonymous()"/>
-		<s:intercept-url pattern="/"/>
-        
-        <s:form-login login-page="/login/loginForm"
+
+       <s:form-login login-page="/login/loginForm"
                     default-target-url="/"
                     authentication-failure-url="/login/loginForm?error"
                     username-parameter="userid"

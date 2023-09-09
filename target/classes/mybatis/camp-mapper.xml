@@ -332,6 +332,10 @@
 	<select id="selectBest5" resultType="item">
 		select * from gocamp order by clickCnt desc limit 5
 	</select>
+	
+	<select id="requestCamp" resultType="camp" parameterType="int">
+		select facltNm,addr1 from gocamp limit #{requestCamp}
+	</select>
 </mapper>
 
 

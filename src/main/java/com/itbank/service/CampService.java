@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -199,6 +200,10 @@ public class CampService {
 
 	public List<ItemDTO> selectBest5() {
 		return campDAO.selectBest5();
+	}
+
+	public List<CampDTO> requestCamp(int pageSize) {
+		return campDAO.requestCamp(pageSize);
 	}
 
 }
