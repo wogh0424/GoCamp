@@ -39,20 +39,19 @@
 		</div>
 		<c:forEach var="dao" items="${list }">
 			<div class="product_items">
-				<ul>
-					<li><a href="${cpath }/product/view/${dao.idx}">
-					<img src="${cpath }/resources/image/${dao.image}"></a></li>
-				</ul>
-				<ul>
-					<li id="product_pName"><a href="${cpath }/product/view/${dao.idx}">상품이름 : ${dao.pName }</a></li>
-					<li id="product_pContent">상품설명 : ${dao.pContent }</li>
-					<li>가격 : ${dao.price }원</li>
-					<li>날짜 : ${dao.sDate }</li>
-					<li>
+				<div style="flex: 1;">
+					<a href="${cpath }/product/view/${dao.idx}"><img src="${cpath }/resources/image/${dao.image}" width="150px" height="150px"></a>
+				</div>
+				<div style="flex: 3;">
+					<p class="product_pName"><a href="${cpath }/product/view/${dao.idx}">상품이름 : ${dao.pName }</a></p>
+					<p class="product_pContent">상품설명 : ${dao.pContent }</p>
+					<p>가격 : ${dao.price }원</p>
+					<p>날짜 : ${dao.sDate }</p>
+					<p>
 						<a href="${cpath }/product/modify/${dao.idx}"><button>수정</button></a>
 						<a href="${cpath }/product/delete/${dao.idx}"><button>삭제</button></a>
-					</li>
-				</ul>
+					</p>
+				</div>
 			</div>
 		</c:forEach>
 		<div class="paging">

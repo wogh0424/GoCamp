@@ -269,8 +269,9 @@ pre {
 }
 
 .product_items {
-	display: flex-start;
-	justify-content: center;
+	padding: 10px 40px;
+	display: flex;
+	justify-content: space-around;
 	border-top: 1px solid grey;
 }
 
@@ -287,12 +288,11 @@ pre {
 	width: 150px;
 }
 
-#product_pContent {
+.product_pContent {
 	width: 250px;
-	height: 100px;
 }
 
-#product_pName {
+.product_pName {
 	font-weight: bold;
 }
 
