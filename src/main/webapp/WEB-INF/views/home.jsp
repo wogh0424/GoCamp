@@ -111,11 +111,16 @@
 
 <!-- review 페이지 시작  -->
 
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 
+<link rel="stylesheet" href="${cpath }/resources/css/main/header.css" type="text/css">
 <div class="bestReviewTitle">BEST REVIEW</div>
+
 <div class="reviewSlider"> 
+
+	<button class="prev">&lt;</button> <!-- 왼쪽 버튼 -->
+    <button class="next">&gt;</button> <!-- 오른쪽 버튼 -->
+    
+    
  <div class="review_rank" style="background-image: url('${cpath}/resources/image/bg-img.jpg');">
 		<c:forEach items="${reviewList }" var="list">
 					<div class="review_rank_items">	
@@ -133,25 +138,41 @@
 						 	</c:otherwise>
 				    	</c:choose>
 						</div>
-						
- 			<a href="${cpath }/reviewBoard/view/${list.idx}">
+			<div class="review_rank_content">				
+	 			<a href="${cpath }/reviewBoard/view/${list.idx}">
 							<div class="review_rank_content">${list.review_content }</div>
 							<div class="review_rank_campingName">${list.title }</div>
 							<div class="review_rank_nickName">${list.writer }</div>
-			</a>
+				</a>
+			</div>
 					 </div>	
 		</c:forEach>
 	 </div>
-	 </div>
- <script>
- $('.reviewSlider').slick({
-	    slidesToShow: 3,
-	    slidesToScroll: 3,
-	    arrows: true,
-	    infinite: false, 
-	    vertical: false  
-	});
- </script>
+</div>
+
+<script>
+
+let slider = document.querySelector('.review_rank');
+let index = 0;
+
+document.querySelector('.reviewSlider .prev').addEventListener('click', function() {
+    index--;
+    if (index < 0) index = 0;
+    updateSlider();
+});
+
+document.querySelector('.reviewSlider .next').addEventListener('click', function() {
+    index++;
+    let maxIndex = slider.children.length - 1;
+    if (index > maxIndex) index = maxIndex;
+    updateSlider();
+});
+
+function updateSlider() {
+    let offset = -index * 100;
+    slider.style.transform = `translateX(${offset}%)`;
+}
+</script>
 
 	
 

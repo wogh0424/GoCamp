@@ -23,15 +23,20 @@
 		<div class="boardDate">작성일시</div>
 		<div class="boardViewcount">조회수</div>
 	</div>
+	
+	
 	<c:forEach var="dto" items="${list }">
 		<div class="dtoItem">
+		
 			<div class="boardIdxPrint">
 				<c:if test="${dto.pin == 1 }">⭐</c:if>
 				<c:if test="${dto.pin == 0 }">${dto.idx }</c:if>
 			</div>
+			
 			<div class="boardTitlePrint">
-				<a href="${cpath}/eventBoard/view/${dto.idx}"  <c:if test="${dto.pin == 1}">style="font-weight: bold;"</c:if> >
-			${dto.title }</a>
+				<a href="${cpath}/eventBoard/view/${dto.idx}"  <c:if test="${dto.pin == 1}">style="font-weight: bold;"</c:if>>
+			${dto.title }
+			</a>
 			</div>
 			<div class="boardWriterPrint">관리자</div>
 			<div class="boardDatePrint">${dto.postdate }</div>
@@ -42,7 +47,7 @@
 
 <div class="boardMenubar">
 <c:if test="${pageContext.request.userPrincipal.name == 'admin'}">
-		<a href="${cpath }/eventBoard/write"><button>새 글 작성</button></a> 
+		<button><a href="${cpath }/eventBoard/write">새 글 작성</a></button> 
 </c:if>
 </div>
 

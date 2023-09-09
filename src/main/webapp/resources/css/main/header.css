@@ -424,11 +424,40 @@ footer {
 	font-weight: bold;
 	color: white;
 }
+
+
+
 /*main_review_rank 페이지 시작 */
+
+.reviewSlider {
+    overflow: hidden;
+    position: relative;
+}
+.reviewSlider button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.reviewSlider button.prev {
+    left: 10px;
+}
+
+.reviewSlider button.next {
+    right: 10px;
+}
+
 .review_rank {
 	height: 500px;
 	display: flex;
 	justify-content: center;
+	    transition: transform 0.5s;
+	
 }
 
 .review_rank_image {
@@ -469,6 +498,10 @@ footer {
     margin-bottom: 10px; 
 }
 /*main_review_rank 페이지 끝 */
+
+
+
+
 /*camping_top_wrap 캠핑장 랭크 시작*/
 .camping_top_wrap {
 	display: flex;
@@ -1333,9 +1366,9 @@ aside {
 
 
 
-/* 게시판 스타일 */
+/* BAORD STYLE (freeboard, eventboard, noticeboard, reviewboard)*/
 
-/* 전체 컨테이너 스타일 */
+
 #boardContainer {
  
 background-repeat: no-repeat;
@@ -1418,6 +1451,8 @@ background-size: cover;
 
 /*검색 끝*/
 
+/*BOARD LIST(freeboard, eventboard, noticeboard, reviewboard)*/
+
 .boardList {
 	margin-top: 40px;
     width:1200px; 
@@ -1471,13 +1506,14 @@ background-size: cover;
 .boardMenubar button{
 	border: 1.5px solid black;
 	background-color: white;
-	color: black;
 	font-weight: bold;
 	
 	border-radius: 8px;
 	margin-left: 1200px;
 	margin-top: 20px;
-	
+}
+.boardMenubar button a {
+	color: black;
 }
 
 .paging button{
@@ -1489,7 +1525,7 @@ background-size: cover;
 	font-weight: bold;
 }
 
-/* 게시판 글쓰기(write) css */
+/* baord write(freeboard, eventboard, noticeboard, reviewboard) */
 
 .insertBoardForm {
     width: 840px;
@@ -1507,7 +1543,35 @@ background-size: cover;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
+}
+.insertBoardWriter input {
+	border: none;
+	border-bottom: 1px solid black;
+	width: 130px;
+	margin-bottom: 10px;
+}
+.boardImageContainer {
+    display: inline-block; /* 가로로 정렬 */
+    width: 100px; /* 적당한 너비 설정. 이미지와 여백을 포함한 크기 */
+    vertical-align: top; /* 요소들을 상단에 정렬 */  
+}
+.modifyImage{
+	width: 100px;
+	height: 100px;
+	display: block; /* 이미지를 블록 수준 요소로 만듭니다. */
+    margin: 0 auto; /* 이미지를 가운데 정렬 */
+}
+.previewImage{
+	width: 100px;
+	height: 100px;
+	padding:2px;
+
+}
+
+.modifyOption, .modifyFile {
+    display: block;
+   
 }
 
 #content {
@@ -1542,12 +1606,11 @@ label {
     margin-bottom: 10px;
 }
 
-#preview {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
 
 label[for="option"], #optionNotice {
+    display: inline-block;
+}
+label[for="option"], #optionEvent {
     display: inline-block;
 }
 label[for="option"] {
@@ -1563,7 +1626,7 @@ label[for="option"] {
 
 
 
-/* ===============게시판 읽기(view)====================== */
+/* ===============게시판 읽기 (board view- freeboard, eventboard, noticeboard, reviewboard)====================== */
 
 #boardView{
     max-width: 800px;
@@ -1656,9 +1719,9 @@ label[for="option"] {
     margin-left: 10px;
 }
 
-/* 리뷰 목록 버튼 */
-.reviewMenubar {
-  
+.goBoardReview{
+	padding-left: 1050px;
+	margin-bottom: 10px;
 }
 
 

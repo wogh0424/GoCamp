@@ -12,7 +12,7 @@
 
 <div class=insertBoardTitle><input type="text" name="title" placeholder="제목" required autofocus></div>
 	<label for="option">옵션 선택</label>
-	<select id="optionNotice" name="pin">
+	<select id="optionEvent" name="pin">
 	  <option value="0">일반</option>
 	  <option value="1">중요</option>
 	</select>

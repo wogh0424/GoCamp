@@ -25,10 +25,12 @@
 	</div>
 	<c:forEach var="dto" items="${list }">
 		<div class="dtoItem">
+		
 			<div class="boardIdxPrint">
 				<c:if test="${dto.pin == 1 }"><img src="${cpath}/resources/image/board/notice.png"></c:if>
 				<c:if test="${dto.pin == 0 }">${dto.idx }</c:if>
 			</div>
+			
 			<div class="boardTitlePrint">
 				<a href="${cpath}/noticeBoard/view/${dto.idx}" <c:if test="${dto.pin == 1}">style="font-weight: bold;"</c:if>>
 				${dto.title }
@@ -43,7 +45,7 @@
 </div>
 <div class="boardMenubar">
 	<c:if test="${pageContext.request.userPrincipal.name == 'admin'}">
-			<a href="${cpath }/noticeBoard/write"><button>새 글 작성</button></a>
+			<button><a href="${cpath }/noticeBoard/write">새 글 작성</a></button>
 	</c:if>
 </div>
 
