@@ -12,10 +12,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <script type="text/javascript"
 	src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=x9jrgpo39q&submodules=geocoder"></script>
-<script src="${cpath }/resources/js/addr.js"></script>
-<script src="${cpath }/resources/js/mainadd.js"></script>
-<link rel="stylesheet" href="${cpath }/resources/css/main/mainCRUD.css"
-	type="text/css">
+<link rel="stylesheet" href="${cpath }/resources/css/main/mainCRUD.css" type="text/css">
 
 <style>
 body {
@@ -268,46 +265,18 @@ article.selected {
 	display: none;
 }
 
-#root {
-	border: 2px solid black;
-	width: 900px;
-	height: 850px;
-	overflow-y: auto;
-	margin: auto;
-	position: relative;
-}
-
-.item {
-	border: 1px solid grey;
+#campRoot {
+     border: 2px solid black;
+     width: 900px;
+     height: 850px;
+     margin: auto;
+     overflow-y: auto;
+ }
+        
+.managementCamps {
+	display: flex;
 	padding: 10px;
-}
-
-.item:hover {
-	background-color: #eee;
-}
-
-.item>.img {
-	float: left;
-	margin: 10px;
-}
-
-img {
-	height: 150px;
-}
-
-#loading {
-	background-image: url('loading.gif');
-	width: 100%;
-	height: 100%;
-	background-size: 150px;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-color: rgba(0, 0, 0, 0.4);
-	z-index: 5;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+	border-bottom: 1px solid grey;
 }
 </style>
 
@@ -421,9 +390,9 @@ img {
 				</article>
 				<!-- 캠핑장 관리페이지 -->
 				<article>
-					<div id="root"></div>
-					<div class="contents" pageNo="0" scrollable="true"></div>
-					<div id="loading" class="hidden"></div>
+					<div id="campRoot">
+						<div class="content" pageNo="0"></div>
+					</div>
 				</article>
 				<article></article>
 			</section>
@@ -431,8 +400,51 @@ img {
 	</div>
 </div>
 <script>
-	document.getElementById('root').addEventListener('scroll', scrollHandler)
+	const cpath = '${cpath}'
 	window.onload = loadHandler
+	
+	function loadHandler() {
+		const contents = document.querySelector('div.content')
+		const pageNo = +contents.getAttribute('pageNo') + 1
+		contents.setAttribute('pageNo', pageNo)
+		let url = cpath +  '/admin/getCampList/' + pageNo
+		fetch(url)
+		.then(resp => resp.json())
+		.then(json => {
+			let tag = ''
+			json.forEach(ob => {
+				tag += '<div class="managementCamps">' 
+				tag += '	<div class="id">' + ob.contentId  + '</div>'
+				tag += '	<div class="nm">' + ob.facltNm  + '</div>'
+				tag += '	<div class="addr">' + ob.addr1  + '</div>'
+				tag += '	<div class="campManageButtons">'
+				tag += '		<a href="' + cpath +  '/main/modifycamp/' + ob.contentId + '">'
+				tag += '			<button>수정하기</button>'			
+				tag += '		</a>'			
+				tag += '		<a href="' + cpath +  '/main/deletecamp/' + ob.contentId + '">'
+				tag += '			<button>삭제하기</button>'			
+				tag += '		</a>'			
+				tag += '	</div>'
+				tag += '</div>'
+			})
+			contents.innerHTML += tag
+		})
+	}
+	
+	function scrollHandler(event) {
+		const ob = {
+                scrollTop: event.target.scrollTop,
+                clientHeight: event.target.clientHeight,
+                scrollHeight: event.target.scrollHeight
+            }
+            console.log(ob)
+            const flag = ob.scrollTop + ob.clientHeight == ob.scrollHeight
+
+            if (flag) {
+                loadHandler()
+            }	
+	}
+	document.getElementById('campRoot').onscroll = scrollHandler
 </script>
 
 <script>

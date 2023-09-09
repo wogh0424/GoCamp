@@ -2,7 +2,6 @@ package com.itbank.repository;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.itbank.model.CampDTO;
 import com.itbank.model.ImageDTO;
@@ -62,7 +61,7 @@ public interface CampDAO {
 
 	List<ItemDTO> selectBest5();
 
-	List<CampDTO> requestCamp(int pageSize);
+	List<ItemDTO> requestCamp(HashMap<String, Integer> map);
 
 
 }

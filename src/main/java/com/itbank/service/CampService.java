@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -202,8 +201,13 @@ public class CampService {
 		return campDAO.selectBest5();
 	}
 
-	public List<CampDTO> requestCamp(int pageSize) {
-		return campDAO.requestCamp(pageSize);
+	public List<ItemDTO> requestCamp(int page) {
+		int offset = (page - 1) * 50 + 1;
+		int perPage = (page) * 50;
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("offset", offset);
+		map.put("perPage", perPage);		
+		return campDAO.requestCamp(map);
 	}
 
 }

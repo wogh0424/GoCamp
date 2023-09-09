@@ -8,7 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.itbank.model.CampDTO;
 import com.itbank.model.ImageDTO;
 import com.itbank.model.IncomeDTO;
+import com.itbank.model.ItemDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.model.Product_fileDTO;
 import com.itbank.model.ReportDTO;
@@ -287,9 +286,9 @@ public class AjaxController {
 		return formattedList;
 	}
 	
-	@GetMapping("/admin/reqiestCamp")
-	public List<CampDTO> requestCamp (@RequestParam("pageSize") int pageSize) {
-		List<CampDTO> list = campService.requestCamp(pageSize);
+	@GetMapping("/admin/getCampList/{pageNo}")
+	public List<ItemDTO> requestCamp (@PathVariable("pageNo") int page) {
+		List<ItemDTO> list = campService.requestCamp(page);
 		return list;
 	}
 }
