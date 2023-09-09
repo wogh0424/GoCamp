@@ -154,26 +154,102 @@
 	/*  여기  로그인 폼용*/
 	
 	
+	#mypageWrap {
+		width: 100%;
+		height: 100%;
+		position: relative;
+	}
 	#likesContainer{
+		overflow-y: scroll;
+		width: 100%;
+		height: 570px;
+		padding : 10px;	
+ 		position: absolute; 
+ 		top: 0;
+	}
+	.likesImage {
+		width: 190px;
+	}
+	.likesImage > a > img{
+		width: 170px;
+		height: 120px;
+	}
+	.likesItem {
+		position:relative;
 		display: flex;
-		flex-flow: flex;
-		justify-content: flex-start;  /*무조건 왼쪽부터 */
+		margin-bottom: 10px;
+		background-color: #d4f0c1;
+		padding: 10px;
+		border: 1px dashed grey;
+	}
+	.likesRemove {
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		background-color: black;
+		color: white;
+		border-radius: 5px;
+	}
+	#zzim {	
+		margin: 30px 240px;
+		width: 300px;
+		height: 50px;
+		border-radius: 10px;
+		background-color: #226FB3;
+		color: white;
+	}
+	#zzim:hover {
+		background-color: #0056b3;
+	}
+	
+	/*쿠폰*/
+	#couponBox {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+	#myCoupon {
+		overflow-y: scroll;
+		width: 100%;
+		height: 570px;
+		padding : 10px 40px;	
+ 		position: absolute; 
+ 		top: 0;
+	}
+	.couponItem {
+		display: flex;
+		height: 200px;
+	}
+	.discount {
+		background-color: white;
+		text-align: center;
+		padding: 20px;
+		font-size: 100px;
+		color: black;
+		text-shadow: 1px 2px 2px grey;
+		flex: 2;
+	}
+	.couponDetails {
+		display:flex;
+		flex-direction: column;
+		align-items: left;
+		justify-content:center;
+		border:1px dashed grey;
+		background-color: white;
+		flex: 1;
+	}
+	.dueDate {
+		background-color: black;
+		color: white;
+		width: 120px;
+		padding: 10px;
+		font-size: 16px;		
+		text-align: center;
+	}
+	.couponNm {
+		margin-top: 10px;
 		
 	}
-	#likeImage > img{
-		width: 100px;
-		height: 100px;
-	}
-	table {
-		border: 2px solid black;
-		border-collapse: collapse;
-		background-color: green;
-	}
-	th, td  {
-		border: 1px solid black;
-		background-color: white;
-	}
-
 </style>
 
 
@@ -235,7 +311,7 @@
 			</div>
 			<div class="deleted_board">
 				<div class="deleted_list">
-				<h4>운영자에게 제제를 받은 댓글 : <span class="red">${deleted.size() }</span>개</h4>
+				<h4>운영자에게 제제를 받은 게시글 : <span class="red">${deleted.size() }</span>개</h4>
 				<c:forEach var="board" items="${deleted }">
 					<details>
 					<div class="banned_content">
@@ -254,34 +330,63 @@
 		</div>
 		
 		
-		<div class="mypageItems">2(연지 좋아요)
-
-			<div id ="likesContainer">
-			<c:forEach items="${likes}" var="like">
-			   <div>${like.facltNm}</div>
-			   <div id="likeImage"><img src="${like.firstImageUrl }"></div>
-			</c:forEach>
-			</div>		
-		
+		<div class="mypageItems">
+			<div id="mypageWrap">
+				<div id ="likesContainer">
+				<c:if test="${likes.size() != 0 }">
+				<c:forEach items="${likes}" var="like">
+				   <div class="likesItem">
+				   		<div class="likesImage">
+				   			<a href="${cpath }/main/view/${like.contentId }"><img src="${like.firstImageUrl }"></a>
+				   		</div>
+				   		<div class="likesContent">
+				   			<h4><b><a href="${cpath}/main/view/${like.contentId}">${like.facltNm }</a></b></h4>
+				   			<c:if test="${like.lineIntro != '' }">
+				   			<p><b>${like.lineIntro }</b></p>
+				   			</c:if>
+				   			<p><img src="${cpath }/resources/image/main/location.png">${like.addr1 } &nbsp 
+				   			<img src="${cpath }/resources/image/main/phone.png">${like.tel }</p>
+				   		</div>
+				   		<div>
+				   			<button class="likesRemove">찜 삭제</button>
+				   		</div>
+				   </div>
+				</c:forEach>
+				</c:if>
+				<c:if test="${likes.size() == 0 }">
+					<br><br><br><br><br><br><br>
+					<h3 style="text-align: center;"><b>아직 <span class="red">찜</span>한 캠핑장이 없어요!</b></h3>
+					<a href="${cpath }/main/camp"><button id="zzim">캠핑장 찜하러 가기 ▶</button></a>
+				</c:if>
+				</div>		
+			</div>
 		</div>
 		<div class="mypageItems">3
 		
 		</div>
 		<div class="mypageItems">
-			<c:forEach items="${couponlist}" var="coupon">
-				<table>
-					<tr>
-						<th>할인율</th>
-						<th>사용 여부</th>
-						<th>사용 기한</th>
-					</tr>
-					<tr>
-						<td>${coupon.discnt}</td>
-						<td>${coupon.useava}</td>
-						<td>${coupon.dueDate}</td>
-					</tr>
-				</table>
-			</c:forEach>
+			<div id="couponBox">
+				<div id="myCoupon">
+					<c:forEach items="${couponlist}" var="coupon">
+						<div class="couponItem">
+							<div class="discount">
+							<fmt:formatNumber var="discnt" value="${(1 - coupon.discnt) * 100} " pattern="#"/> 
+								<p>${discnt}%</p>
+							</div>
+							<div class="couponDetails">
+								<fmt:parseDate var="start" value="${coupon.cDate}" pattern="yyyy-MM-dd"/>				
+								<fmt:parseDate var="end" value="${coupon.dueDate}" pattern="yyyy-MM-dd"/>				
+	  							<fmt:formatDate value="${start}" pattern="MM.dd" var="s" />
+	  							<fmt:formatDate value="${end}" pattern="MM.dd" var="e" />
+	  							<fmt:formatDate value="${now }" pattern="MM.dd" var="now"/>
+								<div class="dueDate">${s } ~ ${e }</div>
+								<div class="couponNm"><h4><b>${coupon.cName }</b></h4></div> 
+								<div class="couponConent">모든 결제에 적용</div>
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>

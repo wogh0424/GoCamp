@@ -483,7 +483,7 @@
 					<ul id="mapList">
 						<c:forEach items="${list }" var="item" varStatus="st">
 							<li class="mapItem" x="${item.mapX }" y="${item.mapY }" cid="${item.contentId }" st="${st.index }" facltNm="${item.facltNm }" tel="${item.tel }">
-								<a href="${cpath }/main/camp?view/${item.contentId}">[${item.doNm } ${item.sigunguNm }] ${item.facltNm }</a><br>
+								<a href="${cpath }/main/view/${item.contentId}">[${item.doNm } ${item.sigunguNm }] ${item.facltNm }</a><br>
 								<b>${item.addr1 }</b><br>
 								<b>${item.tel }</b>
 							</li>

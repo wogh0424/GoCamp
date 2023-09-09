@@ -89,7 +89,7 @@
 	</insert>
 	
 	<select id="couponSelectAll" parameterType="coupon">
-		select discnt, useava, dueDate from coupon where userid = #{userid}
+		select * from coupon where userid = #{userid}
 	</select>
 </mapper>
 

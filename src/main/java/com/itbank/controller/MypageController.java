@@ -15,7 +15,6 @@ import com.itbank.model.ItemDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.service.AdminService;
 import com.itbank.service.FreeBoardService;
-import com.itbank.service.GocampReviewService;
 import com.itbank.service.LikeService;
 import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
@@ -27,11 +26,10 @@ public class MypageController {
 	@Autowired
 	private MypageService mypageService;
 
-	@Autowired FreeBoardService freeBoardService;
-	@Autowired AdminService adminService;
-	@Autowired LoginService loginService;
+	@Autowired private FreeBoardService freeBoardService;
+	@Autowired private AdminService adminService;
+	@Autowired private LoginService loginService;
 	
-	@Autowired private GocampReviewService gocampReviewService;
 	@Autowired private LikeService likeService;
 
 
