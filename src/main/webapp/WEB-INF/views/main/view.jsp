@@ -120,7 +120,7 @@
 				    <button id="mypickBtn" type="submit">${isLiked ? '찜취소❤️' : '찜하기🤍'}</button>					 
 				</form>
 
-				<button class="modifyRequest">정보수정요청</button>
+				<button class="modifyRequest"><a href="${cpath}/noticeBoard/view/32764">정보수정요청</a></button>
 			</div>
 
 		</div>

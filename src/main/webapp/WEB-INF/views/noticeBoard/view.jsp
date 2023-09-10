@@ -15,7 +15,14 @@
 	
 	<div class="boardViewContent">
 		<c:forTokens var="filePath" items="${dto.filePath}" delims=",">
-			<div class=viewUpload><img src="${cpath }/upload/${filePath}"></div>
+			<c:choose>
+	        <c:when test="${fn:contains(filePath, '더캠핑 정보등록')}">
+	            <a href="${cpath}/upload/${filePath}" download>더캠핑 정보등록 양식 .xlsx</a>
+	        </c:when>
+	        <c:otherwise>
+	            <div class="viewUpload"><img src="${cpath}/upload/${filePath}"></div>
+	        </c:otherwise>
+	  		</c:choose>
 		</c:forTokens>
 			<div class=viewContent>${dto.content }</div>
 	</div>

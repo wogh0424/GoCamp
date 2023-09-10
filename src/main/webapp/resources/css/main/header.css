@@ -366,6 +366,9 @@ footer {
 	background-color: #363636;
 	border-bottom: 1px solid grey;
 }
+.footer_top a {
+	color: white;
+}
 
 .footer_top_logo>img {
 	width: 150px;
@@ -431,7 +434,7 @@ footer {
 
 
 .review_rank {
-	
+	paddind: 5px;
 	height: 500px;
 	display: flex;
 	overflow: hidden;
@@ -449,6 +452,7 @@ footer {
     border: none; 
     padding: 10px 20px; 
     cursor: pointer; 
+    margin: 10px;
 }
 
 .prev {
@@ -459,6 +463,8 @@ footer {
     right: 0;
 }
 
+
+
 .review_rank_items {
 	display: flex;
 	margin: auto;
@@ -467,10 +473,6 @@ footer {
 	flex-direction: row;
 	 width: 400px;
 	 margin-bottom: 100px;
-	
-  
-
-
 }
 
 .review_rank_image {

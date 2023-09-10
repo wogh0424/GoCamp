@@ -86,9 +86,10 @@
 						<li><a href="<c:url value="/admin/adminpage" />">관리자 홈</a></li>
 				</c:if>
 				
-<%-- 					test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }"> --%>
-<%-- 						<li><a href="${cpath }/mypage/main">마이페이지</a></li> --%>
-<%-- 				</c:if> --%>
+				<c:if
+					test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }">
+						<li><a href="${cpath }/mypage/main">마이페이지</a></li>
+				</c:if>
 			</ul>
 		</div>
 	</header>
