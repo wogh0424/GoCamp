@@ -556,7 +556,5 @@
         viewShowMap.addEventListener('click', viewMapHandler)
     </script>
     
-    <%@include file="../footer.jsp"%>
-    
 </body>
 </html>
