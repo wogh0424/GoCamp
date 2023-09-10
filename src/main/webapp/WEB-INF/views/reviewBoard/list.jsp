@@ -28,7 +28,7 @@
 		<div class="dtoItem">
 			<div class="boardIdxPrint">${dto.idx }</div>
 			<div class="boardTitlePrint">
-				<a href="${cpath}/reviewBoard/view/${dto.idx}">${dto.title }</a>
+				<a href="${cpath}/reviewBoard/view/${dto.idx}" class="searchKey">${dto.title }</a>
 			</div>
 			<div class="boardWriterPrint">${dto.writer }</div>
 			<div class="boardDatePrint">${dto.reviewdate }</div>
@@ -52,18 +52,10 @@
 </div>
 
 <script>
-	window.onload = keywordMarkHandler
-	const key = '${param.order}'
-	
-	function keywordMarkHandler() {
-		const links = document.querySelectorAll('a.searchKey')
-		links.forEach(a => {
-			if (a.innerText.includes(key)) {
-				let text = a.innerText.replace(key, '<span class="highlight">' + key + '</span>')
-				a.innerHTML = text				
-			}
-		})
-	}
+    window.onload = function() {
+        const key = '${param.order}';
+        keywordMarkHandler(key);
+    }
 </script>
 
 

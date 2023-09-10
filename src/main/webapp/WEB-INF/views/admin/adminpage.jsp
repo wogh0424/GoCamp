@@ -495,10 +495,12 @@ article.selected {
 <script>
 	const cpath = '${cpath}'
 	window.onload = loadHandler
+	
 	async function loadHandler() {
 		const contents = document.querySelector('div.content')
 		const pageNo = +contents.getAttribute('pageNo') + 1
 		contents.setAttribute('pageNo', pageNo)
+		let arr = []
 		let url = cpath +  '/admin/getCampList/' + pageNo
 		await fetch(url)
 		.then(resp => resp.json())
@@ -524,18 +526,18 @@ article.selected {
 				tag += '</div>'
 			})
 			contents.innerHTML += tag
-		})
+			arr = json
+		})	
 	}
 	
-	 function scrollHandler(event) {
+	function scrollHandler(event) {
 		const root = document.getElementById('campRoot')
 		const contents = document.querySelector('div.content')
-
-           const ob = {
-        scrollTop: event.target.scrollTop,
-        clientHeight: event.target.clientHeight,
-        scrollHeight: event.target.scrollHeight
-    }
+		const ob = {
+                scrollTop: event.target.scrollTop,
+                clientHeight: event.target.clientHeight,
+                scrollHeight: event.target.scrollHeight
+            }
             console.log(ob)
 
     const a = Math.round((ob.scrollTop + ob.clientHeight + 0.5) / 2)

@@ -366,6 +366,9 @@ footer {
 	background-color: #363636;
 	border-bottom: 1px solid grey;
 }
+.footer_top a {
+	color: white;
+}
 
 .footer_top_logo>img {
 	width: 150px;
@@ -429,35 +432,47 @@ footer {
 
 /*main_review_rank 페이지 시작 */
 
-.reviewSlider {
-    overflow: hidden;
+
+.review_rank {
+	paddind: 5px;
+	height: 500px;
+	display: flex;
+	overflow: hidden;
+	justify-content: center;
+    transition: transform 1s;
     position: relative;
 }
-.reviewSlider button {
+
+.prev, .next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 2;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-.reviewSlider button.prev {
-    left: 10px;
+    z-index: 10;
+    background-color: rgba(255, 255, 255, 0.6); 
+    border: none; 
+    padding: 10px 20px; 
+    cursor: pointer; 
+    margin: 10px;
 }
 
-.reviewSlider button.next {
-    right: 10px;
+.prev {
+    left: 0;
 }
 
-.review_rank {
-	height: 500px;
+.next {
+    right: 0;
+}
+
+
+
+.review_rank_items {
 	display: flex;
-	justify-content: center;
-	    transition: transform 0.5s;
-	
+	margin: auto;
+	flex-direction: column;
+	display: none;
+	flex-direction: row;
+	 width: 400px;
+	 margin-bottom: 100px;
 }
 
 .review_rank_image {
@@ -480,11 +495,6 @@ footer {
 	box-shadow: 2px 2px 2px black;
 }
 
-.review_rank_items {
-	display: flex;
-	margin: auto;
-	flex-direction: column;
-}
 
 .review_rank_campingName, .review_rank_nickName {
 	color: white;
@@ -1819,4 +1829,14 @@ label[for="option"] {
 	height: 20px;
 	width: 16px;
 }
+
+/* ===============freebaord reply end====================== */
+.highlight {
+    font-weight: bold;      
+    color: red;            
+     
+   
+}
+
+
 /* ===============freebaord reply end====================== */
