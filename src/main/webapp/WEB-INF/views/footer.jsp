@@ -6,10 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-a{
-	text-decoration: none;
-	color: white;
-}
 footer{
 	width: 100%;
 	height: 100px;
