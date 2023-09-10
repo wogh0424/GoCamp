@@ -259,8 +259,8 @@ article.selected {
 
         #campRoot {
             border: 2px solid black;
-            width: 1500px;
-            height: 600px;
+            width: 80%;
+            height: 70%;
             margin: 10px auto;
             overflow-y: auto;
             position: relative;
