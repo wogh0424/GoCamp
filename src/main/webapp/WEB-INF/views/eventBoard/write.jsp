@@ -25,40 +25,11 @@
 
 
     <script>
-        const input = document.querySelector('input[name="upload"]')
-        const preview = document.getElementById('preview')
-     
+    const input = document.querySelector('input[name="upload"]')
+    const preview = document.getElementById('preview')
 
-       	function changeHandler(event) {
-  		preview.innerHTML = ''
-			
-		    if (event.target.files) {
-		        const files = event.target.files
-		        for (const file of files) {
-		            const reader = new FileReader()
-		            reader.onload = function(e) {
-		                const image = new Image()
-		                image.src = e.target.result
-		                image.style.height = '200px'
-		                preview.appendChild(image)
-		            }
-		            reader.readAsDataURL(file)
-		        }
-		      
-		    } 
-		}
-		
-		input.onchange = changeHandler
+	input.onchange = changeHandler
     </script>
-    
-    <script>
-    var selectedOption = document.querySelector('input[name="option"]:checked').value;
-
- 
-	 console.log(selectedOption);
-    
-    </script>
-
 
 
 

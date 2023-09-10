@@ -17,9 +17,7 @@
 <title>GoCamping</title>
 
 
-<script>
-	const cpath = '${cpath}'
-</script>
+<script> const cpath = '${cpath}' </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
@@ -53,32 +51,8 @@
 
 </head>
 <body>
+<script src="${cpath }/resources/js/board.js"></script>
 
-<script>
-
-$(document).ready(function() {
-    $('#content').summernote({
-        toolbar: [
-        	// [groupName, [list of button]]
-    	    ['fontname', ['fontname']],
-    	    ['fontsize', ['fontsize']],
-    	    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-    	    ['color', ['forecolor','color']],
-    	    ['table', ['table']],
-    	    ['para', ['ul', 'ol', 'paragraph']],
-    	    ['height', ['height']],
-    	    ['view', ['fullscreen', 'help']]
-        ],
-        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-        
-        placeholder: '내용을 입력하세요',
-        tabsize: 2,
-        width: 800,
-        height: 200
-    });
-});
-</script>
 
 
 
@@ -151,9 +125,6 @@ $(document).ready(function() {
 						<ul>
 							<li><a href="${cpath }/freeBoard">자유게시판(+ 댓글)</a></li>
 							<li><a href="${cpath }/reviewBoard">전체리뷰게시판</a></li>
-<%-- 					<c:if test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }"> --%>
-<%-- 							<li><a href="${cpath }/main/like">좋아요</a></li> --%>
-<%-- 					</c:if> --%>
 						</ul>
 					</li>
 					<li><a href="">고객센터</a>
