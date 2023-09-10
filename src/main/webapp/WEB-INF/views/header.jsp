@@ -12,7 +12,6 @@
 <html>
 <head>
 
-<link rel="icon" href="${cpath }/resources/image/main/favicon.png">
 <meta charset="UTF-8">
 <title>GoCamping</title>
 
@@ -66,7 +65,7 @@
 			<ul  style="margin-right: 10%;">
 				<c:if test="${pageContext.request.userPrincipal != null}">
 					<li>${pageContext.request.userPrincipal.name}님 환영합니다.</li>
-					접속된 아이디 표시를 원하면 여기에 el태그 삽입
+					<!--접속된 아이디 표시를 원하면 여기에 el태그 삽입 --!>
 				</c:if>
 				<sec:authorize access="isAnonymous()">			
 					<li id="login_btn">

@@ -33,10 +33,6 @@ a {
 	important
 }
 
-article {
-	
-}
-
 .admimpage_wrap {
 	width: 100%;
 	height: 100%;
@@ -122,32 +118,32 @@ article {
 
 .report_content {
 	width: 100%;
-	height: 30%;
 }
 
-.report_wrap {
+.report_list_content {
 	display: flex;
+	border-bottom: 2px solid black;
+	align-items: center;
+	height: 45px;
+}
+.report_wrap {
 	border: 1px solid black;
 	justify-content: space-evenly;
 	align-items: center;
 	word-wrap: break-word;
 	white-space: normal;
-	min-height: 40px;
+	min-height: 40px; 
 }
-
 #reported_user {
 	width: 24%;
 	margin-left: 20px;
 }
-
 #reported_reason {
-	width: 33%;
+	width: 39%;
 }
-
 #reportedDate {
-	width: 33%;
+	width: 34%;
 }
-
 #report_header {
 	height: 70px;
 	border: 1px solid black;
@@ -157,20 +153,16 @@ article {
 	align-items: center;
 	background-color: #B7F0B1;
 }
-
 #category_user {
 	margin-left: 20px;
 	width: 33%;
 }
-
 #category_reason {
 	width: 33%;
 }
-
 #category_date {
 	width: 33%;
 }
-
 #category {
 	width: 100%;
 	display: flex;
@@ -265,22 +257,108 @@ article.selected {
 	display: none;
 }
 
-#campRoot {
-     border: 2px solid black;
-     width: 900px;
-     height: 850px;
-     margin: auto;
-     overflow-y: auto;
- }
+        #campRoot {
+            border: 2px solid black;
+            width: 1500px;
+            height: 600px;
+            margin: 10px auto;
+            overflow-y: auto;
+            position: relative;
+        }
         
-.managementCamps {
-	display: flex;
-	padding: 10px;
-	border-bottom: 1px solid grey;
-}
+        .managementCamps {
+            display: flex;
+            padding: 10px;
+            border-bottom: 1px solid grey;
+            justify-content: space-evenly;
+            border-radius: 20px;
+            margin: auto;
+        }
+        
+        .id {
+            width: 14%;
+        }
+        
+         .nm {
+            width: 36%;
+        }
+        
+         .addr {
+            width: 46%;
+        }
+        
+        .campManageButtons {
+            display: flex;
+            width: 46%;
+        } 
+        
+        .campManageButtons > .modify_btn {
+            width: 50%;
+        }
+        
+        .campManageButtons > .delete_btn {
+            width: 50%;
+        }
+        
+        #campList {
+            width: 100%;
+            padding-top: 20px;
+        }
+        
+        .content {
+        	padding: 20px;
+        	width: 100%;
+        }
+        #camp_list_top {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 50px;
+            border-bottom: 2px solid black;
+            display: flex;
+            box-sizing: border-box;
+            background-color: white;
+        }
+        .camp_top_wrap {
+        	width: 100%;
+        	display: flex;
+        }
+        
+        #camp_idx{
+        	width: 14%;
+        }
+        
+        #camp_name{
+        	width: 31%;
+        }
+        
+        #addr1{
+        	width: 22%;
+        }
+        
+        #modify_btn{
+        	width: 14%;
+        }
+        
+        #delete_btn{
+        	width: 8%;
+        }
+        .add_wrap {
+        	width: 90%;
+        } 	
+        #add_btn {
+        	margin: auto;
+        }
+        #modify_button {
+        	 background-color: black;
+            color: white
+        }
+        #delete_button {
+         background-color: black;
+            color: white
+        }
 </style>
 
-<script src="${cpath }/resources/js/scroll_paging.js"></script>
 
 <div class="admimpage_wrap">
 	<div class="adminpage_items">
@@ -290,7 +368,6 @@ article.selected {
 					<li><a href="${cpath }/">홈으로</a></li>
 					<li>회원관리</li>
 					<li>캠핑장 관리</li>
-					<li>매출관리</li>
 				</ul>
 			</aside>
 			<section id="section">
@@ -323,9 +400,11 @@ article.selected {
 								</div>
 								<div class="report_wrap">
 									<c:forEach var="report" items="${adminList }">
+										<div class="report_list_content">
 										<div id="reported_user">${report.reported_user }</div>
 										<div id="reported_reason">${report.reportedReason }</div>
 										<div id="reportedDate">${report.reportedDate }</div>
+										</div>
 									</c:forEach>
 								</div>
 							</div>
@@ -389,12 +468,26 @@ article.selected {
 					</div>
 				</article>
 				<!-- 캠핑장 관리페이지 -->
-				<article>
+				<article id="campList">
 					<div id="campRoot">
-						<div class="content" pageNo="0"></div>
+						<div class="content" pageNo="0" scrollable="true">
+						<div id="camp_list_top">
+							<div class="camp_top_wrap">
+								<div id="camp_idx"><p>고유번호</p></div>
+								<div id="camp_name"><p>이름</p></div>
+								<div id="addr1"><p>주소</p></div>
+								<div id="modify_btn"><p>수정버튼</p></div>
+								<div id="delete_btn"><p>삭제버튼</p></div>
+							</div>
+						</div>
+						</div>
+				
+		
+					</div>
+					<div style="display:flex; justify-content: center;">
+						<div id="add_btn" style="margin: 50px auto;"><a href="${cpath }/main/addcamp"><button style="width: 150px; height: 70px; background-color: #B7F0B1; color: black">캠핑장 추가</button></a></div>
 					</div>
 				</article>
-				<article></article>
 			</section>
 		</div>
 	</div>
@@ -412,37 +505,50 @@ article.selected {
 		await fetch(url)
 		.then(resp => resp.json())
 		.then(json => {
+			let tag = ''
+			json.forEach(ob => {
+				tag += '<div class="managementCamps">' 
+				tag += '	<div class="id">' + ob.contentId  + '</div>'
+				tag += '	<div class="nm">' + ob.facltNm  + '</div>'
+				tag += '	<div class="addr">' + ob.addr1  + '</div>'
+				tag += '	<div class="campManageButtons">'
+				tag += '<div class="modify_btn">'
+				tag += '		<a href="' + cpath +  '/main/modifycamp/' + ob.contentId + '">'
+				tag += '			<button id="modify_button">수정하기</button>'			
+				tag += '		</a>'
+				tag += '</div>'
+				tag += '<div class="delete_btn">'
+				tag += '		<a href="' + cpath +  '/main/deletecamp/' + ob.contentId + '">'
+				tag += '			<button id="delete_button">삭제하기</button>'			
+				tag += '		</a>'
+				tag += '</div>'
+				tag += '	</div>'
+				tag += '</div>'
+			})
+			contents.innerHTML += tag
 			arr = json
-		})
-		let tag = ''
-		arr.forEach(ob => {
-			tag += '<div class="managementCamps">' 
-			tag += '	<div class="id">' + ob.contentId  + '</div>'
-			tag += '	<div class="nm">' + ob.facltNm  + '</div>'
-			tag += '	<div class="addr">' + ob.addr1  + '</div>'
-			tag += '	<div class="campManageButtons">'
-			tag += '		<a href="' + cpath +  '/main/modifycamp/' + ob.contentId + '">'
-			tag += '			<button>수정하기</button>'			
-			tag += '		</a>'			
-			tag += '		<a href="' + cpath +  '/main/deletecamp/' + ob.contentId + '">'
-			tag += '			<button>삭제하기</button>'			
-			tag += '		</a>'			
-			tag += '	</div>'
-			tag += '</div>'
-		})
-		contents.innerHTML += tag
-		tag = ''
+		})	
 	}
 	
 	function scrollHandler(event) {
+		const root = document.getElementById('campRoot')
+		const contents = document.querySelector('div.content')
 		const ob = {
                 scrollTop: event.target.scrollTop,
                 clientHeight: event.target.clientHeight,
                 scrollHeight: event.target.scrollHeight
             }
-            const flag = ob.scrollTop + ob.clientHeight == ob.scrollHeight
+            console.log(ob)
 
-            if (flag) {
+    const a = Math.round((ob.scrollTop + ob.clientHeight + 0.5) / 2)
+    const b = Math.round(ob.scrollHeight / 2)
+
+
+    console.log(a, b)
+    const flag = a == b
+    const scrollable = contents.getAttribute('scrollable')
+
+            if (flag && scrollable == 'true') {
                 loadHandler()
             }	
 	}
