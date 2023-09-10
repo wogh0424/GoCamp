@@ -403,32 +403,35 @@ article.selected {
 	const cpath = '${cpath}'
 	window.onload = loadHandler
 	
-	function loadHandler() {
+	async function loadHandler() {
 		const contents = document.querySelector('div.content')
 		const pageNo = +contents.getAttribute('pageNo') + 1
 		contents.setAttribute('pageNo', pageNo)
+		let arr = []
 		let url = cpath +  '/admin/getCampList/' + pageNo
-		fetch(url)
+		await fetch(url)
 		.then(resp => resp.json())
 		.then(json => {
-			let tag = ''
-			json.forEach(ob => {
-				tag += '<div class="managementCamps">' 
-				tag += '	<div class="id">' + ob.contentId  + '</div>'
-				tag += '	<div class="nm">' + ob.facltNm  + '</div>'
-				tag += '	<div class="addr">' + ob.addr1  + '</div>'
-				tag += '	<div class="campManageButtons">'
-				tag += '		<a href="' + cpath +  '/main/modifycamp/' + ob.contentId + '">'
-				tag += '			<button>수정하기</button>'			
-				tag += '		</a>'			
-				tag += '		<a href="' + cpath +  '/main/deletecamp/' + ob.contentId + '">'
-				tag += '			<button>삭제하기</button>'			
-				tag += '		</a>'			
-				tag += '	</div>'
-				tag += '</div>'
-			})
-			contents.innerHTML += tag
+			arr = json
 		})
+		let tag = ''
+		arr.forEach(ob => {
+			tag += '<div class="managementCamps">' 
+			tag += '	<div class="id">' + ob.contentId  + '</div>'
+			tag += '	<div class="nm">' + ob.facltNm  + '</div>'
+			tag += '	<div class="addr">' + ob.addr1  + '</div>'
+			tag += '	<div class="campManageButtons">'
+			tag += '		<a href="' + cpath +  '/main/modifycamp/' + ob.contentId + '">'
+			tag += '			<button>수정하기</button>'			
+			tag += '		</a>'			
+			tag += '		<a href="' + cpath +  '/main/deletecamp/' + ob.contentId + '">'
+			tag += '			<button>삭제하기</button>'			
+			tag += '		</a>'			
+			tag += '	</div>'
+			tag += '</div>'
+		})
+		contents.innerHTML += tag
+		tag = ''
 	}
 	
 	function scrollHandler(event) {
@@ -437,7 +440,6 @@ article.selected {
                 clientHeight: event.target.clientHeight,
                 scrollHeight: event.target.scrollHeight
             }
-            console.log(ob)
             const flag = ob.scrollTop + ob.clientHeight == ob.scrollHeight
 
             if (flag) {
