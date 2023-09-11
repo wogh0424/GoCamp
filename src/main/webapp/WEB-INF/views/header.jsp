@@ -1,145 +1,194 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="cpath" value="${pageContext.request.contextPath }" />
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="sec"
-	uri="http://www.springframework.org/security/tags"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+package com.itbank.controller;
 
-<!DOCTYPE html>
-<html>
-<head>
+import java.util.List;
 
-<meta charset="UTF-8">
-<title>GoCamping</title>
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.model.BasketDTO;
+import com.itbank.model.CouponDTO;
+import com.itbank.model.MemberDTO;
+import com.itbank.model.ProductDTO;
+import com.itbank.model.ShopPagingDTO;
+import com.itbank.service.LoginService;
+import com.itbank.service.ProductService;
 
-<script> const cpath = '${cpath}' </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+@Controller
+@RequestMapping("/product")
+public class ProductController {
 
-<link rel="stylesheet" href="${cpath }/resources/css/main/header.css" type="text/css">
-
-<link rel="icon" href="${cpath }/resources/image/main/favicon.png">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-
-
-
-<!-- jquery 사용 위한 라이브러리 -->
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.8.1/slick.min.js"></script>
-
-
-<!-- 	텍스트에디터 api - summernote -->
-	<!-- include libraries(jQuery, bootstrap) -->
-<!-- include summernote css/js -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" >
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-<meta charset="UTF-8">
-<title>GoCamping</title>
-
-
-</head>
-<body>
-<script src="${cpath }/resources/js/board.js"></script>
-
-
-
-
-
-	<header>
-		<div class="title_logo">
-			<a href="${cpath }/"><img
-				src="${cpath }/resources/image/thecamping_logo.png"></a>
-		</div>
-		<div class="header_login" >
-			<ul  style="margin-right: 10%;">
-				<c:if test="${pageContext.request.userPrincipal != null}">
-					<li>${pageContext.request.userPrincipal.name}님 환영합니다.</li>
-					<!--접속된 아이디 표시를 원하면 여기에 el태그 삽입 --!>
-				</c:if>
-				<sec:authorize access="isAnonymous()">			
-					<li id="login_btn">
-						<a href="<c:url value="/login/loginForm" />">로그인</a>
-					</li>
-				</sec:authorize>
-				<sec:authorize access="isAuthenticated()">
-								<form:form action="${pageContext.request.contextPath}/logout" method="POST">
-					<li><a href="${cpath }/product/basket">장바구니</a></li>
-					<li><a href="${cpath }/logout">로그아웃</a></li>
-								</form:form>
-				</sec:authorize>
-				<c:if test="${pageContext.request.userPrincipal == null}">
-					<li><a href="${cpath }/login/signup">회원가입</a></li>
-				</c:if>
-				<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
-						<li><a href="<c:url value="/admin/adminpage" />">관리자 홈</a></li>
-				</c:if>
-				
-				<c:if
-					test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }">
-						<li><a href="${cpath }/mypage/main">마이페이지</a></li>
-				</c:if>
-			</ul>
-		</div>
-	</header>
-	<div class="header_bottom" style="display: flex; justify-content: right; height: 40px; align-items:center; padding-right: 10%; width: 100%; background-color: #3C5944;">
-		<form  action="${cpath }/main/search">
-			<div style="display: flex; justify-content: space-between; background-color: white; font-size: 16px;  margin-top:10px;">
-			<input id="totalsearchInput" type="search" name="srchKywrd" placeholder="검색어를 입력하세요" style="border: none; background-color: white; width: 250px; height: 30px; padding: 10px;">
-			<span style="line-height: 30px; cursor: pointer;" onclick="submitForm()">🔍</span>
-			</div>
-		</form>
-	</div>
-	<nav>
-		<div class="header_top">
-			<div id="menu">
-				<ul>
-					<li><a href="">캠핑장</a>
-						<ul>
-							<li><a href="${cpath }/main/camp">캠핑장검색</a></li>
-						</ul>
-					</li>
-					<li><a href="">소식</a>
-						<ul>
-							<li><a href="${cpath }/noticeBoard">공지게시판</a></li>
-							<li><a href="${cpath }/eventBoard">이벤트게시판</a></li>
-
-						</ul>
-					</li>
-					<li><a href="">캠핑도구</a>
-						<ul>
-							<li><a href="${cpath }/product/list">쇼핑몰</a></li>
-						</ul>
-					</li>
-					<li><a href="">게시판</a>
-						<ul>
-							<li><a href="${cpath }/freeBoard">자유게시판(+ 댓글)</a></li>
-							<li><a href="${cpath }/reviewBoard">전체리뷰게시판</a></li>
-						</ul>
-					</li>
-					<li><a href="">고객센터</a>
-						<ul>
-							<li><a href="">캠핑장정보 수정요청</a></li>
-							<li><a href="">등록 야영장 확인문의</a></li>
-						</ul>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</nav>
+	@Autowired private ProductService productService;
+	@Autowired private LoginService loginService;
 	
-	<script>
-	function submitForm() {
-        document.getElementById("totalsearchInput").form.submit();
+	// 목록 - 페이징  - 단일검색
+	@GetMapping("/list")
+	public ModelAndView list(
+	    @RequestParam(value="page", defaultValue="1") int page,
+	    @RequestParam(value="sort", defaultValue="pName") String sort,
+	    @RequestParam(value="pName", defaultValue="") String pName // 검색어를 받아옵니다.
+	) {
+		int boardCount = productService.selectCount(pName);
+		ShopPagingDTO dto = new ShopPagingDTO(page, boardCount);
+	    List<ProductDTO> list = productService.selecAll(page, sort, pName, dto);
+	    ModelAndView mav = new ModelAndView("/product/list");
+	    mav.addObject("paging", dto);
+	    mav.addObject("list", list);
+	    return mav;
+	}
+	
+	// 삭제
+	@GetMapping("/delete/{idx}")
+	public String delete(@PathVariable("idx") int idx) {
+		int row = productService.delete(idx);
+		System.out.println(row + "행이 삭제되었습니다");
+		return "redirect:/product/list";
+	}
+	
+    // 상품 상세페이지
+    @GetMapping("/view/{idx}")
+    public ModelAndView view(@PathVariable("idx") int idx) {
+       ModelAndView mav = new ModelAndView("product/view");
+       ProductDTO dto = productService.selectDetails(idx);
+       mav.addObject("dto", dto);
+       return mav;
     }
-	</script>
+
+	// 상품 등록
+	@GetMapping("/addProduct")
+	public void addProduct() {	}
+	
+
+	@PostMapping("/addProduct")
+	public String addProduct(ProductDTO dto) {
+		int row = productService.addProduct(dto);
+		System.out.println(row != 0 ? "추가 성공" : "추가 실패");
+		return "redirect:/product/list";
+	}
+	
+	// 상품 수정
+	@GetMapping("/modify/{idx}")
+	public ModelAndView modify(@PathVariable("idx") int idx) {
+		ModelAndView mav = new ModelAndView("product/modify");
+		ProductDTO dto = productService.selectDetails(idx);
+		mav.addObject("dto", dto);
+		return mav;
+	}
+	
+	@PostMapping("/modify/{idx}")
+	public String modify(ProductDTO dto) {
+		int row = productService.update(dto);
+		System.out.println(row != 0 ? "수정 성공" : "수정 실패");
+		return "redirect:/product/view/{idx}";
+	}	 
+	   
+	   // 장바구니
+	   @GetMapping("/basket")
+	   public ModelAndView basket() {
+		    ModelAndView mav = new ModelAndView("product/basket");
+		    // 1. 로그인된 사용자의 userid 얻기
+		    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		    String userId = null;
+		    
+		    if (principal instanceof UserDetails) {
+		        userId = ((UserDetails) principal).getUsername(); // getUsername()은 userid를 반환한다고 가정
+		    } else {
+		        userId = principal.toString();
+		    }
+		    if (userId == null) {
+		    // 에러 처리 (예: 로그인 페이지로 리다이렉트)
+		        return new ModelAndView("redirect:/login");
+		    }
+		    // 2. 해당 userid의 장바구니 항목 가져오기
+		    List<BasketDTO> basketlist = productService.basketSelectAll(userId);
+		    List<CouponDTO> coupon = loginService.couponSelectAll(userId);
+		    // 3. 결과를 ModelAndView 객체에 추가하고 반환
+		    mav.addObject("basketlist", basketlist);
+		    mav.addObject("coupon", coupon);
+		    return mav;
+		}
+
+	// 주문결제
+	@GetMapping("/orderpay")
+	public ModelAndView orderpay() {
+		ModelAndView mav = new ModelAndView("product/orderpay");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userId = null;
+		
+		if (principal instanceof UserDetails) {
+	        userId = ((UserDetails) principal).getUsername(); // getUsername()은 userid를 반환한다고 가정
+	    } else {
+	        userId = principal.toString();
+	    }
+	    if (userId == null) {
+	    // 에러 처리 (예: 로그인 페이지로 리다이렉트)
+	        return new ModelAndView("redirect:/login");
+	    }
+	    // 2. 해당 userid의 장바구니 항목 가져오기]
+	    List<MemberDTO> userInfo = productService.getuserInfo(userId);
+	    List<BasketDTO> orderlist = productService.basketSelectAll(userId);
+	    List<CouponDTO> coupon = loginService.couponSelectAll(userId);
+	    // 3. 결과를 ModelAndView 객체에 추가하고 반환
+	    mav.addObject("userInfo", userInfo);
+	    mav.addObject("orderlist", orderlist);
+	    mav.addObject("coupon", coupon);
+		return mav;
+	}
+	
+	// 주문완료
+	@GetMapping("/lastorder")
+	public ModelAndView lastoder() {
+		ModelAndView mav = new ModelAndView("product/lastorder");
+		return mav;
+	}
+	
+	// 주문목록
+	@GetMapping("/orderlist")
+	public ModelAndView orderlist() {
+		ModelAndView mav = new ModelAndView("product/orderlist");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userId = null;
+		
+		if (principal instanceof UserDetails) {
+	        userId = ((UserDetails) principal).getUsername(); // getUsername()은 userid를 반환한다고 가정
+	    } else {
+	        userId = principal.toString();
+	    }
+	    if (userId == null) {
+	    // 에러 처리 (예: 로그인 페이지로 리다이렉트)
+	        return new ModelAndView("redirect:/login");
+	    }
+	    // 2. 해당 userid의 장바구니 항목 가져오기
+	    List<BasketDTO> basketlist = productService.basketSelectAll(userId);
+	    List<CouponDTO> coupon = loginService.couponSelectAll(userId);
+	    // 3. 결과를 ModelAndView 객체에 추가하고 반환
+	    mav.addObject("basketlist", basketlist);
+	    mav.addObject("coupon", coupon);
+		return mav;
+	}
+	
+	
+	// 장바구니 삭제
+	@GetMapping("/basket/{idx}")
+	public String basketdelete(@PathVariable("idx") int idx) {
+		int row = productService.basketdelete(idx);
+		System.out.println(row + "행이 삭제되었습니다");
+		return "redirect:/product/basket";
+	}
+	
+	// 장바구니 수량 삭제
+	@PostMapping("/basketmodify/{idx}")
+	public String basketmodify(BasketDTO dto) {	// 커맨드 객체는 PathVariable도 파라미터 자동 주입
+		int row = productService.basketmodify(dto);
+		System.out.println(row + "행이 수정되었습니다");
+		return "redirect:/product/basket/{idx}";
+	}
+	
+}
