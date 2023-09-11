@@ -62,12 +62,9 @@
 				</li>
 				<li></li>
 				<li id="totalOrderAmount">주문금액  0원</li>
-<<<<<<< HEAD
  				<li><a href="${cpath}/product/orderpay"><button id="payAllBtn">TheCamping Market 0건 주문하기</button></a></li>
-=======
 				<li><a href="${cpath}/product/orderpay"><button id="payAllBtn">TheCamping Market 0건 주문하기</button></a></li>
 				<li><a href="${cpath }/product/orderpay"><button>임시 버튼</button></a></li>
->>>>>>> c38b43ed72a27927375025fe6ea7aad6397059f3
 			</ul>
 		</div>
 	</div>
