@@ -204,16 +204,13 @@ public class AjaxController {
 		return row;
 	}
 	
-<<<<<<< HEAD
+
 	@PostMapping("/gotopay/{userid}")
 	public int gotopay (@RequestBody PaylistDTO dto) {
 		int row = productService.paylist(dto);
 		return row;
 	}
-=======
-	
-	
->>>>>>> c38b43ed72a27927375025fe6ea7aad6397059f3
+
 	// 연지's AjaxController
 
 	@GetMapping("/reviewRecommend/{reviewId}")
