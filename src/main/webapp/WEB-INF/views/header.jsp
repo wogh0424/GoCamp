@@ -98,7 +98,7 @@ $(document).ready(function() {
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<%-- 			<form:form action="${pageContext.request.contextPath}/logout" method="POST"> --%>
-					<li><a href="${cpath }/product/basket">장바구니</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/basket">장바구니</a></li>
 					<li><a href="${cpath }/logout">로그아웃</a></li>
 					<%-- 			</form:form> --%>
 				</sec:authorize>
@@ -110,7 +110,7 @@ $(document).ready(function() {
 				</c:if>
 				<c:if
 					test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }">
-						<li><a href="${cpath }/mypage/main">마이페이지</a></li>
+						<li><a href="${pageContext.request.contextPath}/mypage/main">마이페이지</a></li>
 				</c:if>
 			</ul>
 		</div>
