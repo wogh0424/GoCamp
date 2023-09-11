@@ -204,9 +204,9 @@ public class AjaxController {
 		return row;
 	}
 	
-	@PostMapping("/gotopay/{userid}")
+	@PostMapping("/gotopay")
 	public int gotopay (@RequestBody PaylistDTO dto) {
-		int row = productService.paylist(dto);
+		int row = productService.gotopay(dto);
 		return row;
 	}
 	

@@ -1,12 +1,5 @@
 package com.itbank.model;
 
-//idx 			int		auto_increment primary key,
-//userid		varchar(30)	not null,
-//totalOrderPrice			int		not null,
-//totalOrderAmount	int		default 0
-//);
-
-
 public class PaylistDTO {
 	private int idx;
 	private String userid;

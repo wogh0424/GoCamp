@@ -96,4 +96,8 @@
     		(#{userid}, #{totalOrderPrice}, #{totalOrderAmount})
     </insert>
     
+    <select id="payList" resultType="basket"> <!-- 장바구니 목록 불러오기 로그인이 되어있는 유저에 한하여 -->
+		select * from paylist where userid = #{userid}
+	</select>
+    
 </mapper>

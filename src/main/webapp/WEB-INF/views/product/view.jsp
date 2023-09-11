@@ -11,7 +11,6 @@
 			<ul>
 				<li class="view_pName"><strong>${dto.pName }</strong></li>
 				<li class="view_price">${dto.price }원</li>
-<%-- 				<li>별점 : <strong class="view_pStar">${dto.pStar } / 5</strong></li> --%>
 				<li><details class="view_pContent">${dto.pContent }</details></li>
 				<li class="view_amount">${dto.amount }개 구매 가능</li>
 <!-- 				<li class="view_und"><button>-</button><input class="view_choice" type="text" name="choice" placeholder="1"><button>+</button></li> -->
@@ -35,7 +34,7 @@ const pid = '${dto.idx}'
 			currImageView.innerHTML = ''
 			json.forEach(ob => {
 				const img = document.createElement('img')
-				img.src = cpath + '/resources/upload/' + ob.filePath
+				img.src = cpath + '/usr/local/tomcat/webapps/upload/' + ob.filePath
 				img.classList.add('currImages')
 				img.style.width = '300px';
 				img.style.height = '300px';

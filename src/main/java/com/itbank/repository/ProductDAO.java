@@ -58,6 +58,8 @@ public interface ProductDAO {
 
 	List<MemberDTO> getuserInfo(String userId);
 
-	int setPayList(PaylistDTO dto);
+	List<PaylistDTO> payList(String userId);
+
+	int gotopay(PaylistDTO dto);
 
 }

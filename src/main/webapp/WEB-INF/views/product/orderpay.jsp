@@ -58,38 +58,40 @@
 			</c:forEach>	
 		</div>
 		<div class="orderpay_details">
+			<c:forEach var="paylist" items="${paylist }">
 			<ul>
 				<li id="deliveryInfo_title">결제상세<li>
-				<li id="totalOrderAmount">주문금액 : 0원</li>
+				<li id="totalOrderAmount">주문금액 : ${paylist.totalOrderPrice }원</li>
 				<li id="totalOrderPrice">상품금액 : 0원</li>
 				<li id="discntPrice">할인 : 0원</li>
 				<li id="totalOrderAmount">결제할 금액 : 0원<li> 
 			</ul>
+			</c:forEach>
 		</div>
 			<p><a href="${cpath }/product/lastorder"><button id="orderpayBtn">결제하기</button></a></p>
 	</div>
 </div>
 <script>
-const price = document.querySelectorAll('.product-price')	// product-price라는 클래스
-const numbersInput = document.querySelectorAll('.product-number input[type="hidden"]')
+// const price = document.querySelectorAll('.product-price')	// product-price라는 클래스
+// const numbersInput = document.querySelectorAll('.product-number input[type="hidden"]')
 	
-	// 가격을 합산
-	let total = 0;	// 총 합계
-	let totalnumber = 0; // 총 수량
+// 	// 가격을 합산
+// 	let total = 0;	// 총 합계
+// 	let totalnumber = 0; // 총 수량
 	
-	price.forEach(priceElement => {
-	// '원' 문자를 제거하고 숫자만 추출하여 합산
-	    total += parseInt(priceElement.innerText.replace('원', '').trim())
-	})
+// 	price.forEach(priceElement => {
+// 	// '원' 문자를 제거하고 숫자만 추출하여 합산
+// 	    total += parseInt(priceElement.innerText.replace('원', '').trim())
+// 	})
 	
-	numbersInput.forEach(numberElement => {
-		totalnumber += parseInt(numberElement.value)
-		console.log(totalnumber)
-		console.log(total)
-	})
+// 	numbersInput.forEach(numberElement => {
+// 		totalnumber += parseInt(numberElement.value)
+// 		console.log(totalnumber)
+// 		console.log(total)
+// 	})
 	
-	document.getElementById('totalOrderAmount').innerText = '총 주문금액 : ' + total + ' 원'
-	document.getElementById('totalOrderPrice').innerText = '상품 금액 : ' + totalnumber + '원'
+// 	document.getElementById('totalOrderAmount').innerText = '총 주문금액 : ' + total + ' 원'
+// 	document.getElementById('totalOrderPrice').innerText = '상품 금액 : ' + totalnumber + '원'
 </script>
 
 
