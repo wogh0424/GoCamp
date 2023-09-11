@@ -29,6 +29,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
+ <script src="${cpath }/resources/js/board.js"></script>
 
 
 <!-- jquery 사용 위한 라이브러리 -->
@@ -50,32 +51,6 @@
 
 </head>
 <body>
-
-<script>
-
-$(document).ready(function() {
-    $('#content').summernote({
-        toolbar: [
-        	// [groupName, [list of button]]
-    	    ['fontname', ['fontname']],
-    	    ['fontsize', ['fontsize']],
-    	    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-    	    ['color', ['forecolor','color']],
-    	    ['table', ['table']],
-    	    ['para', ['ul', 'ol', 'paragraph']],
-    	    ['height', ['height']],
-    	    ['view', ['fullscreen', 'help']]
-        ],
-        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-        
-        placeholder: '내용을 입력하세요',
-        tabsize: 2,
-        width: 800,
-        height: 200
-    });
-});
-</script>
 
 
 
