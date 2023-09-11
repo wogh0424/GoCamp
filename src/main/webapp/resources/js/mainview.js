@@ -115,7 +115,7 @@ function viewBannerHandler() {
 					})
 				}
 				else {
-					newimgUrl = cpath + '/resources/upload/' + arr[i];
+					newimgUrl = cpath + '/upload/' + arr[i];
 				}
 				
 				// 이미지 url에 값이 들어왔을 때만 요소를 생성
