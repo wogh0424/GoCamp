@@ -78,7 +78,7 @@
 					<%-- 			</form:form> --%>
 				</sec:authorize>
 				<c:if test="${pageContext.request.userPrincipal == null}">
-					<li><a href="${cpath }/login/signup">회원가입</a></li>
+					<li><a href="${cpath }/login/register">회원가입</a></li>
 				</c:if>
 				<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
 						<li><a href="<c:url value="/admin/adminpage" />">관리자 홈</a></li>
