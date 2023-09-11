@@ -263,73 +263,6 @@ function orderByHandler(event) {
     	location.href = cpath + '/main/camp?listTy='+ listTy +'&searchTags=' + tagList
     }
     
-   
-    
-    async function autoCompletionHandler(event) {		
-    	const keyword = event.target.value
-		const requestParam = {
-			keyword : keyword,
-			sido : document.querySelector('select[name="sido"]').value,
-			gungu : document.querySelector('select[name="gungu"]').value,
-			lctcl : document.querySelector('select[name="lctcl"]').value
-		}
-		const url = cpath + '/autocompletion' 
-		autocomplete.style.display = 'block'
-		// 부를 때 한번 비워준다.
-		await fetch(url, {
-			method: 'POST',
-			headers: {
-				'Content-Type' : 'application/json'
-			},
-			body: JSON.stringify(requestParam)
-		})
-			.then(resp => resp.json())
-			.then(json => {
-				autocomplete.innerHTML = ''
-				json.forEach(ob => {
-					const tmp = ob.facltNm.replace(keyword, '<span class="highlight">' + keyword + '</span>')
-					autocomplete.innerHTML += '<div class="line">'+ tmp +'</div>'					
-				})
-			})
-		await arrowKeyHandler(event)
-	}
-	
-    
-	async function arrowKeyHandler(event) {
-		let lines = document.querySelectorAll('div.line')
-		if (lines.length != 0) {
-			lines.forEach(l => l.classList.remove('lineChoice'))
-			switch (event.keyCode) {
-			    // UP KEY
-			    case 38:
-			      nowIndex = Math.max(nowIndex - 1, 0);
-			      lines[nowIndex].classList.add('lineChoice')
-			      break;
-			
-			    // DOWN KEY
-			    case 40:
-			      nowIndex = Math.min(nowIndex + 1, lines.length - 1);
-			      lines[nowIndex].classList.add('lineChoice')
-			      break;
-			
-			    // ENTER KEY
-			    case 13:
-			      searchBar.value = lines[nowIndex].innerText;
-			      location.href = cpath + '/main/camp?listTy=LIST&sido='	
-			       			+ document.querySelector('select[name="sido"]').value 
-			       			+ '&gungu=' + document.querySelector('select[name="gungu"]').value
-			       			+ '&lctcl=' + document.querySelector('select[name="lctcl"]').value
-			       			+ '&keyword=' + lines[nowIndex].innerText;
-			      break;
-			    // 그외 다시 초기화
-			    default:
-			      nowIndex = 0;
-			   	  lines[nowIndex].classList.add('lineChoice')
-			      break;
-		  }
-		} 
-	}
-    
 	// 검색어 자동완성
 	async function autoCompletionHandler() {
 		const sido = document.querySelector('select[name="sido"]').value
@@ -337,7 +270,7 @@ function orderByHandler(event) {
 		const lctcl = document.querySelector('select[name="lctcl"]').value
 		const key = search.value
 	   	if (key.length < 3) {
-	   		return
+	   		return    // 만약 입력된 search.value의 길이가 3보다 작으면 return
 	   	}
 				
 		const requestlist =  cpath + '/autocompletion'
@@ -347,6 +280,7 @@ function orderByHandler(event) {
 			lctcl: lctcl,
 			keyword: key
 		}
+		// 파라미터들을 수집해서 AJAX 요청을 보냄
 		await fetch(requestlist, {
 		      method: 'POST',
 		      headers: {
@@ -356,6 +290,7 @@ function orderByHandler(event) {
 		    }).then(resp => resp.json())
 		    .then(json => {
 		    	dataList.innerHTML = ''
+		    		// 10개만 보여준다.
 		    		json.slice(0, 10).forEach(nm => {
 		    		   const option = document.createElement('option');
 		    		   option.innerText = nm
