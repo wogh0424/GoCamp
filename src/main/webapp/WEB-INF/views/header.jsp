@@ -130,8 +130,8 @@
 					</li>
 					<li><a href="">고객센터</a>
 						<ul>
-							<li><a href="">캠핑장정보 수정요청</a></li>
-							<li><a href="">등록 야영장 확인문의</a></li>
+							<li><a href="${cpath }/noticeBoard/view/32764">캠핑장정보 수정요청</a></li>
+							<li><a href="${cpath }/noticeBoard/view/32763">등록 야영장 확인문의</a></li>
 						</ul>
 					</li>
 				</ul>
