@@ -2,30 +2,41 @@
     pageEncoding="UTF-8"%>
 <%@include file="../header.jsp" %>
 
-<h3>이벤트게시글판읽기</h3>
+
+<div id="boardTitle" style="background-image: url('${cpath}/resources/image/board/flowers.jpg');">
+	<div id="boardBigTitle"><a href="${cpath}/eventBoard">Event</a></div>
+</div>
 
 <div id="boardView">
-
-		<h3>${dto.idx } | ${dto.title }</h3>
-		<h4>조회수 : ${dto.view_cnt }</h4>
-		<h4>작성날짜 : <fmt:formatDate value="${dto.postdate }"/></h4>
-		<pre>${dto.content }</pre>
+	<div class="boardViewHeader">
+		<div class="headerTitle"><c:if test="${dto.pin == 1}">⭐</c:if>${dto.title }</div>
+		<div class="headerRight">${dto.idx } | 관리자 | <fmt:formatDate value="${dto.postdate }"/> | 조회수 ${dto.view_cnt }</div>
+	</div>
+	
+	<div class="boardViewContent">
 		<c:forTokens var="filePath" items="${dto.filePath}" delims=",">
-			<img src="${cpath }/upload/${filePath}" height="200">
+			<div class=viewUpload><img src="${cpath }/upload/${filePath}"></div>
 		</c:forTokens>
-</div>
-<div id="eventBoardAdmin">
-		<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
-			 <h3><a href="${cpath }/eventBoard/modify/${dto.idx}">수정</a></h3> 
-			 <h3><a href="${cpath }/eventBoard/delete/${dto.idx}">삭제</a></h3> 
-		</c:if>
+			<div class=viewContent>${dto.content }</div>
+	</div>
 </div>
 
-<div class="menubar">
-		<div>
-		   <a href="${cpath }/eventBoard"><button>목록</button></a>
+
+
+<div id="viewMenubar">
+		<div class=goBoardList><a href="${cpath }/eventBoard"><button id="boardListBtn">목록</button></a></div>
+		<div class="authBtn">
+			<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
+				<a href="${cpath }/eventBoard/modify/${dto.idx}">
+					<button id="modifyBtn">수정</button></a>
+				<a href="${cpath }/eventBoard/delete/${dto.idx}">
+					<button id="deleteBtn">삭제</button></a>
+			</c:if>
 		</div>
 </div>
+
+
+<%@include file="../footer.jsp"%>
 
 </body>
 </html>

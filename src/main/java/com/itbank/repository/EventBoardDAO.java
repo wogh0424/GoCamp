@@ -31,7 +31,7 @@ public interface EventBoardDAO {
 
 	List<String> selectFileList(int idx);
 
-	int deleteFile(int idx);
+	int deleteFile(String filePath);
 
 	List<EventBoardDTO> searchByKeyWord(String srchKywrd);
 

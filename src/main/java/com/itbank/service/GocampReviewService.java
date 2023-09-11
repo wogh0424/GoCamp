@@ -7,6 +7,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +25,7 @@ public class GocampReviewService {
 
 	@Autowired private GocampReviewDAO dao;
 
-	private File dir = new File("C:\\Users/yeonji/git/GoCamp/src/main/webapp/resources/image");
+	private File dir = new File("/usr/local/tomcat/webapps/upload");
 
 	
 	// directory 없으면 만들어라
@@ -134,6 +137,35 @@ public class GocampReviewService {
 
 	public int countByKeyword(String srchKywrd) {
 		return dao.countByKeyword(srchKywrd);
+	}
+
+	public List<GocampReviewDTO> selectMainReview() {
+		return dao.selectMainReview();
+	}
+	
+	public void reduceViewCnt(int idx, HttpServletResponse response, HttpServletRequest request) {
+		Cookie[] cookies = request.getCookies();
+		boolean isVisited = true;
+
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if ("viewCount".equals(cookie.getName())) {
+					isVisited = false;
+					break;
+				}
+			}
+		}
+		if(isVisited) {
+			dao.updateViewCount(idx);
+			Cookie cookie = new Cookie("viewCount","true");
+			cookie.setMaxAge(20);
+			response.addCookie(cookie);
+		}
+		
+	}
+
+	public List<GocampReviewDTO> selectReview(String nick) {
+		return dao.selectReview(nick);
 	}
 
 }

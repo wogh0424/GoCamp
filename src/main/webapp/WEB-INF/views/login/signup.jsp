@@ -41,7 +41,8 @@
 		float: left; 
 	}
 	
-	#dupCheckBtn {
+	#dupCheckBtn,
+	#nicCheckBtn {
 		float: right;
 		margin-right: 15px;
 		background-color: #4476D5;
@@ -55,6 +56,7 @@
 	}
 	
 	#dupCheckBtn,
+	#nicCheckBtn,
 	#sendAuthNumber,
 	#checkAuthNumber,
 	input[type="submit"] {
@@ -69,7 +71,8 @@
 		margin-top: 20px;
 	}
 	
-	#dupCheckBtn {
+	#dupCheckBtn,
+	#nicCheckBtn {
 		float: right;
 		margin-right: 15px;
 	}
@@ -135,12 +138,14 @@
 				</p>
 				<p>
 					<input type="text" name="nickname" placeholder="닉네임 입력" required>
+					<input type="button" id="nicCheckBtn" value="중복확인">
 				</p>
+				<span id="checknicmsg"></span>
 				<p>
 					<input type="date" name="birth" placeholder="생일 입력" required>
 				</p>
 				<p>
-					<input type="text" name="pnum" placeholder="전화번호 입력" required>
+					<input type="text" name="pnum" placeholder="전화번호 입력" minlength="11" maxlength="11" required>
 				</p>
 		
 				<p>
@@ -149,8 +154,9 @@
 				</p>
 				<div class="hidden" id="authNumber_wrap">
 					<input type="number" name="authNumber" placeholder="인증번호 6자리" required>
-					<input id="checkAuthNumber" type="button" value="인증번호 확인" required> <br> 
+					<input id="checkAuthNumber" type="button" value="인증번호 확인" required> <br>
 				</div>
+				<span id="isNumber"></span> 
 				<p>
 					<span id="authMessage">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
 				</p>
@@ -161,43 +167,102 @@
 		</form>
 		</div>
 
-
+	<!-- 회원가입 Javascript -->
 	<script>
-		const dupCheckBtn = document.getElementById('dupCheckBtn')
-		const sendAuthNumber = document.getElementById('sendAuthNumber')
-		const userid = document.querySelector('input[name="userid"]')
-		// 계정 중복확인
-		async function dupCheckHandler() {
-			const dupMessage = document.getElementById('dubMessage')
-			
-			if(userid.value == ''){
-				dupCheckBtn.focus()
-				alert('먼저 사용할 ID를 입력해주세요')
-				return
-			}
-			const url = '${cpath}/dupCheck/' + userid.value
-			const count = await fetch(url).then(resp => resp.text())
-			
-			if(isNaN(count)){
-				alert('처리 도중 문제발생')
-				userid.focus()
-			}
-			if(count == 0) {
-				dupMessage.innerText = '사용 가능한 ID입니다'
-				dupMessage.classList.add('check')
-				dupMessage.style.color = 'blue'
-			}
-			else {
-				dupMessage.innerText = '이미 사용중인 ID입니다'
-				dupMessage.style.color = 'red'
-				userid.select()
-			}
-		}
-		dupCheckBtn.addEventListener('click', dupCheckHandler)
+	const userid = document.querySelector('input[name="userid"]');      // 유저id input
+	const dupCheckBtn = document.getElementById('dupCheckBtn');		    // 유저id 중복확인 버튼
+	const dupMessage = document.getElementById('dubMessage');		    // 중복체크 메시지
+	
+	const nickname = document.querySelector('input[name="nickname"]');  // 닉네임 input
+	const nicCheckBtn = document.getElementById('nicCheckBtn');		    // 닉네임 중복확인 버튼
+	const checknicmsg = document.getElementById('checknicmsg');			// 중복체크 메시지
+	
+	const sendAuthNumber = document.getElementById('sendAuthNumber');   // 인증코드
+	const isNumber = document.getElementById('isNumber'); 				// 인증코드 입력 여부 메시지
+	
+	const email = document.querySelector('input[name="email"]');		// email input
+	
+	
+	// 정규표현식 한글 및 특수문자 사용못하도록
+	function removeKoreanAndSpecialChars(inputElement) {
+	    inputElement.addEventListener('input', function() {
+	        inputElement.value = inputElement.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣|\W]/g, '');
+	    });
+	}
+	
+	// 정규표현식 이메일 전용(영어 + 숫자  + @ + . 까지만 가능 )
+	function removeKoreanExceptAtForEmail(inputElement) {
+	    inputElement.addEventListener('input', function() {
+	    	inputElement.value = inputElement.value.replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]|[^\w@.]/g, '');
+	    });
+	}
+	
+	removeKoreanAndSpecialChars(userid); // userid
+	removeKoreanExceptAtForEmail(email)  // email
+	
+	// 회원가입 핸들러
+	async function checkInputHandler() {
+	    // ID 검사
+	    if (userid.value == '') {
+	        dupCheckBtn.focus();
+	        alert('먼저 사용할 ID를 입력해주세요');
+	        return;
+	    }
+
+	    const idUrl = '${cpath}/dupCheck/' + userid.value;
+	    const idCount = await fetch(idUrl).then(resp => resp.text());
+
+	    if (idCount != 0) {
+	        dupMessage.innerText = '이미 사용중인 ID입니다';
+	        dupMessage.style.color = 'red';
+	        userid.select();
+	        return;  // ID가 중복될 경우 함수 종료
+	    }
+
+	    dupMessage.innerText = '사용 가능한 ID입니다';
+	    dupMessage.classList.add('check');
+	    dupMessage.style.color = 'blue'; 
+
+	    // 닉네임 검사
+	    if (nickname.value == '') {
+	        nicCheckBtn.focus();
+	        alert('사용 가능한 ID입니다. 사용하실 닉네임을 입력해주세요.');			// ID가 사용가능하면 메시지를 띄우고 닉네임 입력하라고 띄움
+	        return;
+	    }
+
+	    const nicUrl = '${cpath}/dupCheck/' + nickname.value;
+	    const nicCount = await fetch(nicUrl).then(resp => resp.text());
+
+	    if (isNaN(nicCount)) {
+	        alert('처리 도중 문제발생');
+	        nickname.focus();
+	        return;
+	    }
+
+	    if (nicCount != 0) {
+	        checknicmsg.innerText = '이미 사용중인 닉네임입니다';
+	        checknicmsg.style.color = 'red';
+	        nickname.select();
+	        return;
+	    }
+
+	    checknicmsg.innerText = '사용 가능한 닉네임입니다';
+	    checknicmsg.classList.add('check');
+	    checknicmsg.style.color = 'blue';
+	}
+
+	dupCheckBtn.addEventListener('click', checkInputHandler);	// ID중복확인 버튼클릭 이벤트
+	nicCheckBtn.addEventListener('click', checkInputHandler);   // 닉네임중복확인 버튼클릭 이벤트
+
 		
 		// 인증번호 발송
 		async function sendAuthNumberHandler(){
 			const email = document.querySelector('input[name="email"]')
+			
+			if (!userid.value || !nickname.value) {
+		        alert('사용할 ID와 닉네임을 먼저 입력해주세요.');
+		        return;
+		    }
 			const url = '${cpath}/sendAuthNumber/' + email.value + '/'
 			const json = await fetch(url).then(resp => resp.json())
 			alert(json.message)
@@ -206,31 +271,66 @@
 				document.querySelector('div.hidden').classList.remove('hidden')
 			}
 		}
-		sendAuthNumber.onclick = sendAuthNumberHandler
 		
 		// 이메일 인증번호 확인
-		const checkAuthNumber = document.getElementById('checkAuthNumber')
-		async function checkAuthNumberHandler(){
-			const authNumber = document.querySelector('input[name="authNumber"]')
-			if(authNumber.value == ''){
-				return
-			}
-			const url = '${cpath}/checkAuthNumber/' + authNumber.value
-			const row = await fetch(url).then(resp => resp.text())
-			const authMessage = document.getElementById('authMessage')
-			if(row != 0){
-				authMessage.innerText = '인증 성공'
-				authMessage.classList.add('check')
-				authMessage.style.color = 'blue'
-			}
-			else {
-				authMessage.innerText = '인증 실패'
-				authMessage.style.color = 'red'	
+		async function checkAuthNumberHandler() {
+		    const authNumber = document.querySelector('input[name="authNumber"]');
+		    if (authNumber.value === '') {
+		        isNumber.innerText = '인증코드를 입력하지 않았습니다.';
+		        isNumber.style.color = 'red';
+		
+		        setTimeout(() => {
+		            isNumber.innerText = ''; // 메시지가 3초 후 사라짐
+		        }, 3000);
+		
+		        return;
+		    }
+		    const url = '${cpath}/checkAuthNumber/' + authNumber.value;
+		    const row = await fetch(url).then(resp => resp.text());
+		    const authMessage = document.getElementById('authMessage');
+		    if (row !== '0') {
+		        authMessage.innerText = '인증 성공';
+		        authMessage.classList.add('check');
+		        authMessage.style.color = 'blue';
+		    } else {
+		        authMessage.innerText = '인증 실패';
+		        authMessage.style.color = 'red';
+		    }
 		}
-	}
+		
+		const submitBtn = document.getElementById('signupSubmitBtn');
+
+		submitBtn.addEventListener('click', async function(event) {
+		    event.preventDefault(); // 버튼의 기본 동작인 폼 제출을 중단
+
+		    const check = document.querySelectorAll('span.check');
+		    console.log(check);
+		    
+		    // 인증번호가 성공적으로 확인되었는지 확인
+		    const authMessage = document.querySelector('#authMessage.check');
+		    
+		    if (authMessage === null) {
+		        alert('인증번호 확인이 완료되지 않았습니다.');
+		        return;
+		    }
+
+		    if (check.length === 0) {
+		        alert('아이디, 인증번호 체크가 완료되지 않았습니다.');
+		    } else if (check.length === 1) {
+		        alert('필수 항목 인증이 완료되지 않았습니다.');
+		    } else {
+		        alert('회원가입이 성공하였습니다.');
+		        const signForm = document.getElementById('signForm');
+		        signForm.submit(); // 폼 제출
+		        // await couponHandler()
+		    }
+		});
+		
+		sendAuthNumber.onclick = sendAuthNumberHandler
 		checkAuthNumber.onclick = checkAuthNumberHandler		
 	</script>
 
+	<!-- 비밀번호 재확인 코드  -->
 	<script>		
 			const userpw = document.getElementById('userpw')
 			const confirmpw = document.getElementById('confirmpw')
@@ -250,30 +350,25 @@
 			// onkeyup : 사용자가 키보드의 키를 눌렀다가 땠을 때
 	</script>
 	
+	<!-- 전화번호 입력칸에 숫자만 사용가능하도록 하는 코드  -->
 	<script>
-		const signForm = document.getElementById('signForm')	
+	const pnum = document.querySelector('input[name="pnum"]');
+
+	// pnum 입력 필드에 숫자 외의 문자를 입력하지 못하게 하는 이벤트 리스너
+	pnum.addEventListener('input', function() {
+	    // 숫자 외의 문자를 찾는 정규 표현식
+	    const nonNumericRegex = /[^0-9]/g;
+
+	    // pnum에 숫자 외의 문자가 포함되어 있다면 제거
+	    if (nonNumericRegex.test(pnum.value)) {
+	        pnum.value = pnum.value.replace(nonNumericRegex, '');
+	    }
+	});
+	</script>
 	
-		signForm.addEventListener('submit', function(event) {
-			event.preventDefault();
-			const check = document.querySelectorAll('span.check')
-			console.log(check)
-			if (check.length == 0) {
-				alert('아이디, 인증번호 체크가 완료되지 않았습니다.')
-				return
-			}
-			else if (check.length == 1) {
-				alert('필수 항목 인증이 완료되지 않았습니다')
-				return
-			}
-			else {
-				alert('회원가입이 성공하였습니다.')
-// 				await couponHandler()
-			}
-			
-		})
+	<script>
 		
 		async function couponHandler() {
-			const url = cpath + '/coupon/' + userid.value
 			
 			await fetch(url)
 			.then(resp => resp.json())

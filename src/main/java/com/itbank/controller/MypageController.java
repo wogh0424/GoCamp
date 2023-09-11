@@ -10,9 +10,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.AdminDTO;
+
+import com.itbank.model.GocampReviewDTO;
+
+import com.itbank.model.CouponDTO;
+
+import com.itbank.model.ItemDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.service.AdminService;
 import com.itbank.service.FreeBoardService;
+import com.itbank.service.GocampReviewService;
+import com.itbank.service.LikeService;
+import com.itbank.service.LoginService;
 import com.itbank.service.MypageService;
 
 @Controller
@@ -22,20 +31,37 @@ public class MypageController {
 	@Autowired
 	private MypageService mypageService;
 
-	@Autowired FreeBoardService freeBoardService;
+	@Autowired private FreeBoardService freeBoardService;
+	@Autowired private AdminService adminService;
+	@Autowired private LoginService loginService;
 	
-	@Autowired AdminService adminService;
+	@Autowired private LikeService likeService;
+	@Autowired private GocampReviewService gocampReviewService;
+
 	
 	@GetMapping("/main")
 	public ModelAndView importMember(Principal principal) {
 		ModelAndView mav = new ModelAndView("/mypage/main");
 		String userid = principal.getName();
 		String nick = freeBoardService.getnick(userid);
+		
+		List<CouponDTO> couponlist = loginService.couponSelectAll(userid);
 		List<AdminDTO> deletedBoard = adminService.deletedBoard(nick);
 		MemberDTO dto = mypageService.importMember(userid);
+		int member = dto.getIdx();
+		
+		// 연지 내 찜 목록
+		List<ItemDTO> likes = likeService.selectLike(member);
+		mav.addObject("likes", likes);
+		
+		// 연지 내 후기 목록 
+		List<GocampReviewDTO> reviews = gocampReviewService.selectReview(nick);
+		mav.addObject("reviews", reviews);
+		
 		int startidx = 9;
 		int endidx = 12;
 		String pnum = dto.getPnum();
+		
 		// 전화번호에 - 이 있으면 그대로 replaceChar 함수 실행
 		if(pnum.length() == 13) {
 		String modifypnum = replaceChar(pnum, startidx, endidx);
@@ -51,8 +77,10 @@ public class MypageController {
 			String modifypnum = replaceChar(modifiedPnum, startidx, endidx);
 			dto.setPnum(modifypnum);
 		}
+		
 		mav.addObject("dto", dto);
 		mav.addObject("deleted",deletedBoard);
+		mav.addObject("couponlist", couponlist);
 		return mav;
 	}
 

@@ -43,26 +43,30 @@
 			</ul>
 		</div>
 		<div class="orderpay_delivery_address">
+<%-- 			<c:set value="${ }" var="member"> --%>
 			<ul>
 				<li id="deliveryInfo_title">주문자 및 배송지정보<li>
-				<li>홍길동</li>
-				<li>010-1234-5678</li>
-				<li>asd@asd.co.kr</li>
-				<li>부산시 해운대구</li>
-				<li>구매할 상품명</li>
+				<li>홍길동 ${member.username }</li>
+				<li>010-1234-5678 ${member.pnum }</li>
+				<li>asd@asd.co.kr ${memeber.email }</li>
+				<li>부산시 해운대구 (주소 입력 받아야 하나?)</li>
+				<li>구매할 상품명 ${product.pName }</li>
 				<li>
 					<input type="text" placeholder="요청사항을 입력">
 				</li>
 			</ul>
+<%-- 			</c:set> --%>
 		</div>
 		<div class="orderpay_details">
+<%-- 			<c:set var="product" value=""> --%>
 			<ul>
 				<li id="deliveryInfo_title">결제상세<li>
-				<li>주문금액 : </li>
-				<li>상품금액 : </li>
-				<li>할인 : </li>
-				<li>결제할 금액 : <li> 
+				<li>주문금액 : product.price * product.amount 연산</li>
+				<li>상품금액 : product.price</li>
+				<li>할인 : coupon.discnt 연산</li>
+				<li>결제할 금액 : 주문 - 할인 연산<li> 
 			</ul>
+<%-- 			</c:set> --%>
 		</div>
 			<p><a href="${cpath }/product/lastorder"><button id="orderpayBtn">결제하기</button></a></p>
 	</div>

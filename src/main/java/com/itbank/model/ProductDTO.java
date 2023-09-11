@@ -1,20 +1,20 @@
 package com.itbank.model;
 
 import java.sql.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class ProductDTO {
 	   private int idx;
 	   private String pName;
 	   private int price;
 	   private int amount;
-	   private int views;
 	   private String pCategory;
 	   private String pContent;
 	   private Date sDate;
-	   private int pick;
 	   private String image;
-	   private String userid;
-	   private int pStar;
+	   private List<MultipartFile> upload;
 	   
 	public int getIdx() {
 		return idx;
@@ -40,12 +40,6 @@ public class ProductDTO {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	public int getViews() {
-		return views;
-	}
-	public void setViews(int views) {
-		this.views = views;
-	}
 	public String getpCategory() {
 		return pCategory;
 	}
@@ -64,30 +58,16 @@ public class ProductDTO {
 	public void setsDate(Date sDate) {
 		this.sDate = sDate;
 	}
-	public int getPick() {
-		return pick;
-	}
-	public void setPick(int pick) {
-		this.pick = pick;
-	}
 	public String getImage() {
 		return image;
 	}
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getUserid() {
-		return userid;
+	public List<MultipartFile> getUpload() {
+		return upload;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
-	}
-	public int getpStar() {
-		return pStar;
-	}
-	public void setpStar(int pStar) {
-		this.pStar = pStar;
-	}
-	   
-	   
+	public void setUpload(List<MultipartFile> upload) {
+		this.upload = upload;
+	} 
 }

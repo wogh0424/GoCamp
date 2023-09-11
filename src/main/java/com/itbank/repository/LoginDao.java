@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
+import com.itbank.model.CouponDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.model.UserDetailsDto;
 
@@ -42,6 +43,8 @@ public interface LoginDao{
 
 	public List<MemberDTO> checkEnabled(String userid);
 
-	
+	public int couponcheck(CouponDTO dto);
+
+	public List<CouponDTO> couponSelectAll(String userid);
 
 }

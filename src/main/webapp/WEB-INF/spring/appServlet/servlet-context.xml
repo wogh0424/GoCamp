@@ -14,7 +14,7 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/upload/**" location="file:///usr/local/tomcat/webapps/ROOT/resources/" />  
+	<resources mapping="/upload/**" location="file:///usr/local/tomcat/webapps/upload/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -30,8 +30,23 @@
 	</beans:bean>
 	
 	
+<!-- LoginCheckInterceptor -->
+<!-- 	<interceptors> -->
+<!-- 		<interceptor> -->
+		<!-- 인터셉터 처리를 적용할 경로 나열 --> 
+<!-- 			<mapping path="/product/basket"/> -->
+<!-- 			<mapping path="/mypage/main"/> -->
+<!-- 			<mapping path="/admin/adminpage"/> -->
+			
+<!-- 			<beans:bean id="loginInterceptor" -->
+<!-- 						class="com.itbank.interceptor.LoginCheckInterceptor"/> -->
+<!-- 		</interceptor> -->
+<!-- 	</interceptors> -->
+	
+	
 	<context:component-scan base-package="com.itbank.controller" />
 	
 	
 	
 </beans:beans>
+

@@ -405,7 +405,7 @@
 							<img src="${item.firstImageUrl }" width="300px" height="200px" style="margin-right: 30px;">
 						</c:if>
 						<c:if test="${!fn:contains(item.firstImageUrl, 'gocamping') }">
-							<img src="${cpath }/resources/upload/camp/${item.firstImageUrl }" width="300px" height="200px" style="margin-right: 30px;">
+							<img src="${cpath }/upload/${item.firstImageUrl }" width="300px" height="200px" style="margin-right: 30px;">
 						</c:if>
 						</a>
 					</div>
@@ -449,6 +449,8 @@
 					</div> <!-- end of description -->
 				</div> <!-- end of item -->
 			</c:forEach>
+			
+			
 			<div class="main_paging">
 				<ul class="paging">
 				<c:if test="${paging.prev }">
@@ -466,6 +468,8 @@
 				</c:if>
 				</ul>
 			</div>
+			
+			
 		</div> <!-- end of mainList -->
 	</c:if>
 	
@@ -479,7 +483,7 @@
 					<ul id="mapList">
 						<c:forEach items="${list }" var="item" varStatus="st">
 							<li class="mapItem" x="${item.mapX }" y="${item.mapY }" cid="${item.contentId }" st="${st.index }" facltNm="${item.facltNm }" tel="${item.tel }">
-								<a href="${cpath }/main/camp?view/${item.contentId}">[${item.doNm } ${item.sigunguNm }] ${item.facltNm }</a><br>
+								<a href="${cpath }/main/view/${item.contentId}">[${item.doNm } ${item.sigunguNm }] ${item.facltNm }</a><br>
 								<b>${item.addr1 }</b><br>
 								<b>${item.tel }</b>
 							</li>

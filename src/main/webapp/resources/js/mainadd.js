@@ -42,7 +42,7 @@ async function imageRequestHandler(id) {
 				newimgUrl = arr[i]
 			}
 			else {
-				newimgUrl = cpath + '/resources/upload/camp/' + arr[i];
+				newimgUrl = cpath + '/upload/' + arr[i];
 			}
 			
 			// 이미지 url에 값이 들어왔을 때만 요소를 생성
@@ -77,8 +77,8 @@ async function imageDeleteHandler(ob, index) {
 		const url = cpath + "/deleteImageItem"
 		const src = ob.src
 		console.log(src)
-		// 내 사진과 gocamp에서 받아온 이미지 둘다 /upload/camp/ 를 포함하고 있기에 뒷부분만 전송해서 삭제하게 만든다.
-		const divStr = '/upload/camp/'
+		// 내 사진과 gocamp에서 받아온 이미지 둘다 /upload/ 를 포함하고 있기에 뒷부분만 전송해서 삭제하게 만든다.
+		const divStr = '/upload/'
 		const sub = src.substr(src.indexOf(divStr) + divStr.length, src.length)
 		
 		const requestParam = {

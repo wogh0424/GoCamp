@@ -3,43 +3,32 @@
 <%@include file="../header.jsp" %>
 
 
-<h3>이벤트글 작성</h3>
-<form id="insertForm" method="POST" enctype="multipart/form-data" >
-<div>
-	<p><input type="text" name="title" placeholder="제목" required autofocus> </p>
-		<label for="upload">첨부파일 미리보기:</label>
-		<div id="preview"></div>
-		<div><p><input name="upload" type="file" id="upload" accept="image/*" multiple ></p></div>
-	<p><textarea id="content" name="content" required></textarea> </p>
-	<p><input type="submit"></p>
+<div id=boardTitle style="background-image: url('${cpath}/resources/image/board/flowers.jpg');">
+	<div id=boardBigTitle><a href="${cpath}/eventBoard">Event</a></div>
 </div>
+
+
+<form class="insertBoardForm" method="POST" enctype="multipart/form-data" >
+
+<div class=insertBoardTitle><input type="text" name="title" placeholder="제목" required autofocus></div>
+	<label for="option">옵션 선택</label>
+	<select id="optionEvent" name="pin">
+	  <option value="0">일반</option>
+	  <option value="1">중요</option>
+	</select>
+
+		<div id="preview"></div>
+		<input name="upload" type="file"  class="insertBoardFile" accept="image/*" multiple >
+	<textarea id="content" name="content" required></textarea> 
+	<input type="submit" class="boardSubmit">
 </form>	
 
-    <script>
-        const input = document.querySelector('input[name="upload"]')
-        const preview = document.getElementById('preview')
-     
 
-       	function changeHandler(event) {
-  		preview.innerHTML = ''
-			
-		    if (event.target.files) {
-		        const files = event.target.files
-		        for (const file of files) {
-		            const reader = new FileReader()
-		            reader.onload = function(e) {
-		                const image = new Image()
-		                image.src = e.target.result
-		                image.style.height = '200px'
-		                preview.appendChild(image)
-		            }
-		            reader.readAsDataURL(file)
-		        }
-		      
-		    } 
-		}
-		
-		input.onchange = changeHandler
+    <script>
+    const input = document.querySelector('input[name="upload"]')
+    const preview = document.getElementById('preview')
+
+	input.onchange = changeHandler
     </script>
 
 
@@ -49,7 +38,7 @@
 
 
 
-
+<%@include file="../footer.jsp"%>
 
 
 </body>

@@ -33,6 +33,7 @@ import com.itbank.service.GocampReviewService;
 import com.itbank.service.LikeService;
 import com.itbank.service.MypageService;
 import com.itbank.service.NoticeBoardService;
+import com.itbank.service.RecommendService;
 
 @Controller
 @RequestMapping("/main")
@@ -46,6 +47,8 @@ public class MainController {
 	@Autowired private FreeBoardService freeService;
 	@Autowired private LikeService likeService;
 	@Autowired private MypageService mypageService;
+	@Autowired private RecommendService recommendService;
+
 	
 	@GetMapping("/camp")
 	public ModelAndView main(@RequestParam(value="page", defaultValue="1") int page, 
@@ -88,9 +91,14 @@ public class MainController {
 		 int member = dto.getIdx();
 		  
 		 boolean isLiked = likeService.isLiked(contentId, member);
-		 
 		 mav.addObject("isLiked", isLiked);
+		 
+		// 캠핑장 추천상태 확인(ㅇㅈ)	
+		 boolean isCampRecommended = recommendService.isCampRecommended(contentId, member);
+		 mav.addObject("isCampRecommended", isCampRecommended);
 		}
+		
+		
 		
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -124,6 +132,40 @@ public class MainController {
 
 	// 리뷰 끝 
 	
+	// 메인 캠핑장 추천수
+	
+		// 추천하기
+		@PostMapping("/recommend")
+		public ModelAndView insertRecommend(Principal principal, @RequestParam("gocamp") String gocamp) {
+			ModelAndView mav = new ModelAndView();
+		     String userid = principal.getName();
+			 MemberDTO dto = mypageService.importMember(userid);
+			 int member = dto.getIdx();
+			 
+			 int row = recommendService.insertRecommend(gocamp, member);
+			 System.out.println(row);
+			 mav.setViewName("redirect:/main/view/" + gocamp); 
+			    
+			 return mav;
+		}
+		
+		// 추천취소
+			@PostMapping("/disRecommend")
+			public ModelAndView deleteRecommend(Principal principal, @RequestParam("gocamp") String gocamp) {
+			    ModelAndView mav = new ModelAndView();
+			    String userid = principal.getName();
+			    MemberDTO dto = mypageService.importMember(userid);
+			    int member = dto.getIdx();
+
+			    int row = recommendService.deleteRecommend(gocamp, member); 
+			    System.out.println(row);
+			    mav.setViewName("redirect:/main/view/" + gocamp); 
+			    
+			    return mav;
+			}
+			
+		
+	
 	// 찜 추가
 	@PostMapping("/like")
 	public ModelAndView addLike(Principal principal, @RequestParam("gocamp") String gocamp) {
@@ -139,20 +181,20 @@ public class MainController {
 	    return mav;
 	}
 
-	// 찜 목록 조회
-	@GetMapping("/like")
-	public ModelAndView viewLikes(Principal principal) {
-		ModelAndView mav = new ModelAndView();
-		String userid = principal.getName();
-		MemberDTO dto = mypageService.importMember(userid);
-		int member = dto.getIdx();
-		
-		List<ItemDTO> likes = likeService.selectLike(member);
-		mav.addObject("likes", likes);
-		mav.setViewName("main/like"); // 찜 목록 페이지 뷰 이름
-		
-		return mav;
-	}
+//	// 찜 목록 조회
+//	@GetMapping("/like")
+//	public ModelAndView viewLikes(Principal principal) {
+//		ModelAndView mav = new ModelAndView();
+//		String userid = principal.getName();
+//		MemberDTO dto = mypageService.importMember(userid);
+//		int member = dto.getIdx();
+//		
+//		List<ItemDTO> likes = likeService.selectLike(member);
+//		mav.addObject("likes", likes);
+//		mav.setViewName("main/like"); // 찜 목록 페이지 뷰 이름
+//		
+//		return mav;
+//	}
 	// 찜 삭제
 	@PostMapping("/dislike")
 	public ModelAndView removeLike(Principal principal, @RequestParam("gocamp") String gocamp) {

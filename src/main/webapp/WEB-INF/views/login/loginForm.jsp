@@ -123,7 +123,7 @@ input {
 			<form:form name="f" action="${loginUrl}" method="POST">
 				<div class="form-wrap">
 					<c:if test="${param.error != null}">
-						<p>아이디와 비밀번호가 잘못되었습니다.</p>
+						<p id="errorMessage">아이디와 비밀번호가 잘못되었습니다.</p>
 					</c:if>
 					<div class="input_wrap">
 					
@@ -156,5 +156,15 @@ input {
 	</div>
 	</div>
 	<%@ include file="../footer.jsp" %>
+	
+	<!-- id가 errorMessage에서 메시지를 띄우면 3초후 사라짐  -->
+	<script>
+	    setTimeout(function() {
+	        var errorMessageElement = document.getElementById("errorMessage");
+	        if (errorMessageElement) {
+	            errorMessageElement.style.display = "none";
+	        }
+	    }, 3000); // 3000 milliseconds = 3 seconds
+	</script>
 </body>
 </html>

@@ -36,7 +36,7 @@ public interface FreeBoardDAO {
 
 	int selectMaxIdxFromUpload();
 
-	int deleteFile(int idx);
+	int deleteFile(String filePath);
 
 	List<String> selectFileList(int idx);
 
@@ -48,6 +48,6 @@ public interface FreeBoardDAO {
 
 	List<FreeBoardDTO> userboard(String nickname);
 
-//	List<MultipartFile> selectUpload(int idx);
+
 
 }

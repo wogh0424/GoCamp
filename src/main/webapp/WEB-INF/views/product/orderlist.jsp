@@ -11,6 +11,7 @@
 			</ul>	
 		</div>
 		<div class="orderlist_list">
+			<c:forEach items="${orderlist}" var="olist">
 			<ul>
 				<li>이미지</li>
 				<li>상품설명</li>
@@ -22,6 +23,7 @@
 					<p>10000원</p>
 				</li>
 			</ul>
+			</c:forEach>
 		</div>
 		<div class="orderlist_pay">
 			<ul>

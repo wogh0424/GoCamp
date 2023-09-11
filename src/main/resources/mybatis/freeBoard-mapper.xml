@@ -69,9 +69,6 @@
 			select view_cnt from free_board where idx = #{idx}
 		</select>
 		
-		<delete id="deleteFile" parameterType="int">
-				delete from free_board_file where free_board = #{idx }
-		</delete>
 		
 		<delete id="deleteFreeBoard" parameterType="int">
 				delete from free_board where idx=#{idx}
@@ -82,6 +79,10 @@
 					set title=#{title}, content=#{content} 
 						where idx=#{idx}
 		</update>
+		
+		<delete id="deleteFile" parameterType="string">
+				delete from free_board_file where filePath = #{filePath }
+		</delete>
 		
 		<select id="selectCount" parameterType="paging" resultType="int">
 				select count(*) from free_board where title like '%${order}%' or content like '%${order}%'

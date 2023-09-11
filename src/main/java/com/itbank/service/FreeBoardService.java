@@ -31,7 +31,7 @@ public class FreeBoardService{
 	
 	@Autowired AdminDAO adminDao;
 	
-	private File dir = new File("C:\\Users/yeonji/git/GoCamp/src/main/webapp/resources/image");
+	private File dir = new File("/usr/local/tomcat/webapps/upload");
 
 
 
@@ -103,22 +103,52 @@ public class FreeBoardService{
 	
 	// 게시글 삭제
 	public int deleteFreeBoard(int idx) {
-		List<String> fileList = dao.selectFileList(idx);
-		for(String fileName : fileList) {
-			File file = new File(dir, fileName);			
-			if(file.exists()) {				
-				file.delete();					
-			}
-		}
-		int row = 0;
-		row += dao.deleteFile(idx);
-		row += dao.deleteFreeBoard(idx);
-		return row;
+		return dao.deleteFreeBoard(idx);
+		
 	}
 	
 	// 게시글 수정
-	public int update(FreeBoardDTO dto) {
-		return dao.update(dto);
+	@Transactional
+	public int update(FreeBoardDTO dto){
+	    int row = 0;
+
+	    // 게시글 내용 수정
+	    row += dao.update(dto);
+	    
+	    // 체크된 이미지 삭제
+	    if(dto.getDeleteImages() != null && !dto.getDeleteImages().isEmpty()) {
+	    for (String filePath : dto.getDeleteImages()) { // deleteImages는 선택된 이미지의 경로 리스트
+	        File file = new File(dir, filePath);
+	        if(file.exists()) {				
+	            file.delete();					
+	        }
+	        dao.deleteFile(filePath);
+	    }
+	    }
+
+	    // 새로 업로드된 파일 처리
+	    List<MultipartFile> uploadList = dto.getUpload();
+	    for (MultipartFile file : uploadList) {
+	        String ymd = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+	        String fileName = file.getOriginalFilename();
+	        
+	        if (!fileName.equals("")) {
+	            ArrayList<String> fileNameList = new ArrayList<>();
+	            fileName = file.getOriginalFilename().substring(0, fileName.lastIndexOf("."));
+	            String ext = file.getContentType().substring(file.getContentType().indexOf("/") + 1);
+	            File dest = new File(dir, fileName + "_" + ymd + "." + ext);
+	            fileNameList.add(dest.getName());
+	            try {
+	                file.transferTo(dest);
+	            } catch (Exception e) {}				
+	            int fk = dto.getIdx(); // 현재 게시글의 idx를 가져옴
+	            HashMap<String, Object> param = new HashMap<>();
+	            param.put("upload", fk);
+	            param.put("list", fileNameList);
+	            row += dao.insertFile(param);
+	        }
+	    }
+	    return row;
 	}
 	
 	// 게시 글 작성자에 닉네임 받아오기

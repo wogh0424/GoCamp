@@ -18,7 +18,7 @@
 						<img src="${item.firstImageUrl }" width="100%" height="auto">
 					</c:if>
 					<c:if test="${!fn:contains(item.firstImageUrl, 'gocamping') }">
-						<img src="${cpath }/resources/upload/camp/${item.firstImageUrl }" width="100%" height="auto">
+						<img src="${cpath }/upload/${item.firstImageUrl }" width="100%" height="auto">
 					</c:if>
 					<p></p>
 					<label class="image" for="firstimage">이미지 넣기</label>
@@ -359,7 +359,7 @@
 			<div>
 			<p><strong class="green">현재 올라간 이미지</strong></p>
 				<div id="currentImagePreview">
-					<img >
+					
 				</div>
 			<p><strong class="green">풍경사진 업로드</strong>
 			<label class="image" for="featureImages">풍경 이미지 넣기</label></p>
@@ -410,8 +410,6 @@
         	    confirm('변경사항들을 적용하시겠습니까?')
         	    document.getElementById("modifyForm").submit()
         	});
-         
-         
     </script>
 
 </body>

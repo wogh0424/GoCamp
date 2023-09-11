@@ -1,6 +1,6 @@
 package com.itbank.controller;
 
-import java.util.Collections;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.BasketDTO;
+import com.itbank.model.CouponDTO;
 import com.itbank.model.ProductDTO;
 import com.itbank.model.ShopPagingDTO;
+import com.itbank.service.LoginService;
 import com.itbank.service.ProductService;
 
 @Controller
@@ -24,41 +26,20 @@ import com.itbank.service.ProductService;
 public class ProductController {
 
 	@Autowired private ProductService productService;
+	@Autowired private LoginService loginService;
 	
 	// 목록 - 페이징  - 단일검색
 	@GetMapping("/list")
 	public ModelAndView list(
 	    @RequestParam(value="page", defaultValue="1") int page,
-	    @RequestParam(value="sort", required=false) String sortType,
-	    @RequestParam(value="pName", required=false) String pName // 검색어를 받아옵니다.
+	    @RequestParam(value="sort", defaultValue="pName") String sort,
+	    @RequestParam(value="pName", defaultValue="") String pName // 검색어를 받아옵니다.
 	) {
-	    List<ProductDTO> list;
+		int boardCount = productService.selectCount(pName);
+		ShopPagingDTO dto = new ShopPagingDTO(page, boardCount);
+	    List<ProductDTO> list = productService.selecAll(page, sort, pName, dto);
 	    ModelAndView mav = new ModelAndView("/product/list");
-	    
-	    if (pName != null && !pName.isEmpty()) {
-	        // 검색어가 제공된 경우, 검색을 수행합니다.
-	        list = productService.selectOne(pName);
-	    } else {
-	        if ("price".equals(sortType)) {
-	            list = productService.priceSelectAll(); // 가격 오름차순으로 상품 목록 가져옴
-	        } else if ("price_desc".equals(sortType)) {
-	            list = productService.priceSelectAll(); // 가격 내림차순으로 상품 목록 가져옴
-	            Collections.reverse(list); // 가져온 목록을 뒤집어서 내림차순으로 정렬된 것처럼 처리
-	        } else if ("views_desc".equals(sortType)) {
-	            list = productService.viewsSelectAll(); // 조회수 오름차순으로 상품 목록 가져옴
-	        } else if ("sDate_desc".equals(sortType)) {
-	            list = productService.sDateSelectAll(); // 날짜 오름차순으로 상품 목록 가져옴
-	        } else if ("pStar_desc".equals(sortType)) {
-	            list = productService.pStarSelectAll(); // 별점 오름차순으로 상품 목록 가져옴
-	        } else {
-	            int productCount = productService.selectCount();
-	            ShopPagingDTO paging = new ShopPagingDTO(page, productCount);
-	            
-	            list = productService.selectAll(paging); // 일반적인 상품 목록 가져옴
-	            mav.addObject("paging", paging);
-	        }
-	    }
-	    
+	    mav.addObject("paging", dto);
 	    mav.addObject("list", list);
 	    return mav;
 	}
@@ -71,15 +52,42 @@ public class ProductController {
 		return "redirect:/product/list";
 	}
 	
-	   // 상품 상세페이지
-	   @GetMapping("/view/{idx}")
-	   public ModelAndView view(@PathVariable("idx") int idx) {
-	      ModelAndView mav = new ModelAndView("product/view");
-	      ProductDTO dto = productService.selectDetails(idx);
-	      mav.addObject("dto", dto);
-	      return mav;
-	      
-	   }
+    // 상품 상세페이지
+    @GetMapping("/view/{idx}")
+    public ModelAndView view(@PathVariable("idx") int idx) {
+       ModelAndView mav = new ModelAndView("product/view");
+       ProductDTO dto = productService.selectDetails(idx);
+       mav.addObject("dto", dto);
+       return mav;
+    }
+
+	// 상품 등록
+	@GetMapping("/addProduct")
+	public void addProduct() {	}
+	
+
+	@PostMapping("/addProduct")
+	public String addProduct(ProductDTO dto) {
+		int row = productService.addProduct(dto);
+		System.out.println(row != 0 ? "추가 성공" : "추가 실패");
+		return "redirect:/product/list";
+	}
+	
+	// 상품 수정
+	@GetMapping("/modify/{idx}")
+	public ModelAndView modify(@PathVariable("idx") int idx) {
+		ModelAndView mav = new ModelAndView("product/modify");
+		ProductDTO dto = productService.selectDetails(idx);
+		mav.addObject("dto", dto);
+		return mav;
+	}
+	
+	@PostMapping("/modify/{idx}")
+	public String modify(ProductDTO dto) {
+		int row = productService.update(dto);
+		System.out.println(row != 0 ? "수정 성공" : "수정 실패");
+		return "redirect:/product/view/{idx}";
+	}	 
 	   
 	   // 장바구니
 	   @GetMapping("/basket")
@@ -88,7 +96,7 @@ public class ProductController {
 		    // 1. 로그인된 사용자의 userid 얻기
 		    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		    String userId = null;
-
+		    
 		    if (principal instanceof UserDetails) {
 		        userId = ((UserDetails) principal).getUsername(); // getUsername()은 userid를 반환한다고 가정
 		    } else {
@@ -100,11 +108,13 @@ public class ProductController {
 		    }
 		    // 2. 해당 userid의 장바구니 항목 가져오기
 		    List<BasketDTO> basketlist = productService.basketSelectAll(userId);
-
+		    List<CouponDTO> coupon = loginService.couponSelectAll(userId);
 		    // 3. 결과를 ModelAndView 객체에 추가하고 반환
-		    mav.addObject("basketlist", basketlist); 
+		    mav.addObject("basketlist", basketlist);
+		    mav.addObject("coupon", coupon);
 		    return mav;
 		}
+
 	// 주문결제
 	@GetMapping("/orderpay")
 	public ModelAndView orderpay() {
@@ -121,8 +131,13 @@ public class ProductController {
 	
 	// 주문목록
 	@GetMapping("/orderlist")
-	public ModelAndView orderlist() {
+	public ModelAndView orderlist(Principal principal) {
 		ModelAndView mav = new ModelAndView("product/orderlist");
+//		String userid = principal.getName();
+//		
+//		List<MemberDTO> member = productService.userInfo(userid);
+//		mav.addObject("member", member);
+		
 		return mav;
 	}
 	

@@ -1,31 +1,40 @@
 package com.itbank.repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.itbank.model.BasketDTO;
 import com.itbank.model.ProductDTO;
-import com.itbank.model.ShopPagingDTO;
+import com.itbank.model.Product_fileDTO;
 
 @Repository
 public interface ProductDAO {
 
-	List<ProductDTO> selectAll(ShopPagingDTO paging);
-
 	int delete(int idx);
-
-	int selectCount();
 
 	ProductDTO selectDetails(int idx);
 
-	List<ProductDTO> priceSelectAll();
+	int selectMaxIdxFromUpload();
 
-	List<ProductDTO> viewsSelectAll();
+	int addFile(HashMap<String, Object> param);
 
-	List<ProductDTO> sDateSelectAll();
+	int update(ProductDTO dto);
 
-	List<ProductDTO> pStarSelectAll();
+	List<String> getImagePaths();
+
+	int deletefile(int idx);
+
+	int addProduct(ProductDTO dto);
+ 
+	List<ProductDTO> addProduct();
+
+	List<Product_fileDTO> showProductImages(int idx);
+
+	boolean deletefile(String filePath);
+
+	int updateFile(HashMap<String, Object> param);
 
 	int grocery(ProductDTO dto);
 
@@ -33,12 +42,15 @@ public interface ProductDAO {
 
 	int updatecurrentgrocery(ProductDTO dto);
 
-	List<ProductDTO> selectOne(String name);
 
 	List<BasketDTO> basketSelectAll(String userId);
 
 	int basketdelete(int idx);
 
 	int basketmodify(BasketDTO dto);
+
+	List<ProductDTO> selectAll(HashMap<String, Object> params);
+
+	int selectCount(String pName);
 
 }

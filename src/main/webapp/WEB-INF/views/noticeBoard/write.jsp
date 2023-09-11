@@ -2,58 +2,36 @@
     pageEncoding="UTF-8"%>
 <%@include file="../header.jsp" %>
 
+<div id=boardTitle style="background-image: url('${cpath}/resources/image/board/fireImg.jpg');">
+	<div id=boardBigTitle><a href="${cpath}/noticeBoard">Notice</a></div>
+</div>
 
-<h3>공지 작성</h3>
-<form id="insertForm" method="POST" enctype="multipart/form-data" >
-<div>
-	<p><input type="text" name="title" placeholder="제목" required autofocus> </p> 
-		<label for="option">옵션 선택:</label>
-	<select id="option" name="pin">
+
+
+<form class="insertBoardForm" method="POST" enctype="multipart/form-data" >
+
+	<div class=insertBoardTitle><input type="text" name="title" placeholder="제목" required autofocus> </div> 
+	<label for="option">옵션 선택</label>
+	<select id="optionNotice" name="pin">
 	  <option value="0">일반</option>
-	  <option value="1">필독</option>
+	  <option value="1">중요</option>
 	</select>
 
 		<div id="preview"></div>
-		<div><p><input name="upload" type="file" id="upload" accept="image/*" multiple ></p></div>
-	<p><textarea id="content" name="content" required></textarea> </p>
-	<p><input type="submit"></p>
-</div>
+		<input name="upload" type="file" class="insertBoardFile" accept="image/*" multiple >
+	<textarea id="content" name="content" required></textarea> 
+	<input type="submit" class="boardSubmit">
+
 </form>	
+
 
     <script>
         const input = document.querySelector('input[name="upload"]')
         const preview = document.getElementById('preview')
-     
-
-       	function changeHandler(event) {
-  		preview.innerHTML = ''
-			
-		    if (event.target.files) {
-		        const files = event.target.files
-		        for (const file of files) {
-		            const reader = new FileReader()
-		            reader.onload = function(e) {
-		                const image = new Image()
-		                image.src = e.target.result
-		                image.style.height = '200px'
-		                preview.appendChild(image)
-		            }
-		            reader.readAsDataURL(file)
-		        }
-		      
-		    } 
-		}
 		
 		input.onchange = changeHandler
     </script>
     
-    <script>
-    var selectedOption = document.querySelector('input[name="option"]:checked').value;
-
- 
-	 console.log(selectedOption);
-    
-    </script>
 
 
 
@@ -61,7 +39,7 @@
 
 
 
-
+<%@include file="../footer.jsp"%>
 
 
 

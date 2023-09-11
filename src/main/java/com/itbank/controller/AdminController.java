@@ -15,8 +15,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itbank.model.AdminDTO;
+import com.itbank.model.CampDTO;
 import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.MemberDTO;
+import com.itbank.service.AdminService;
+import com.itbank.service.CampService;
 import com.itbank.service.FreeBoardService;
 import com.itbank.service.LoginService;
 
@@ -26,8 +29,9 @@ public class AdminController {
 
 	@Autowired
 	private LoginService loginService;
-	
 	@Autowired private FreeBoardService freeBoardService;
+	@Autowired private AdminService adminService;
+	@Autowired private CampService campService;
 
 	@PostMapping("/modifyAuth")
 	public String modifyAuth(MemberDTO dto) {
@@ -35,9 +39,8 @@ public class AdminController {
 		System.out.println(dto.getEnabled());
 		System.out.println(dto.getAuthority());
 		System.out.println(row != 0 ? "수정성공" : "수정실패");
-		return "redirect:/admin/userData";
+		return "redirect:/admin/adminpage";
 	}
-
 
 	@GetMapping("/Sales")
 	public void Sales() {}
@@ -46,14 +49,17 @@ public class AdminController {
 	public ModelAndView requestData(HttpServletRequest request, Model model) {
 		ModelAndView mav = new ModelAndView("/admin/adminpage");
 		List<MemberDTO> list = loginService.adminpage();
+		List<AdminDTO> adminList = adminService.requestReport();
+
 		mav.addObject("list",list);
+		mav.addObject("adminList",adminList);
+
 		return mav;
 	}
 	
 	@GetMapping("/ControluserBoard")
-	public ModelAndView ControluserBoard(String nickname) {
+	public ModelAndView adminData(String nickname) {
 		ModelAndView mav = new ModelAndView("/admin/ControluserBoard");
-		System.out.println(nickname);
 		List<FreeBoardDTO> list = freeBoardService.userboard(nickname);
 		mav.addObject("list",list);
 		return mav;

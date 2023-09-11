@@ -31,7 +31,7 @@ public interface NoticeBoardDAO {
 
 	List<String> selectFileList(int idx);
 
-	int deleteFile(int idx);
+	int deleteFile(String filePath);
 
 	List<NoticeBoardDTO> searchByKeyWord(String srchKywrd);
 
