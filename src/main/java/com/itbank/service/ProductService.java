@@ -3,9 +3,11 @@ package com.itbank.service;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.itbank.model.BasketDTO;
+import com.itbank.model.CouponDTO;
+import com.itbank.model.MemberDTO;
+import com.itbank.model.PaylistDTO;
 import com.itbank.model.ProductDTO;
 import com.itbank.model.Product_fileDTO;
 import com.itbank.model.ShopPagingDTO;
@@ -160,6 +165,14 @@ public class ProductService {
 		return dao.basketmodify(dto);
 	}
 
-	
+	public List<MemberDTO> getuserInfo(String userId) {
+		return dao.getuserInfo(userId);
+	}
+
+	public int paylist(PaylistDTO dto) {
+		int row = 0;
+		row = dao.setPayList(dto);
+		return row;
+	}
 
 }

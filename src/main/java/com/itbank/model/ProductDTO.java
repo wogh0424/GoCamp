@@ -6,15 +6,16 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 public class ProductDTO {
-	   private int idx;
-	   private String pName;
-	   private int price;
-	   private int amount;
-	   private String pCategory;
-	   private String pContent;
-	   private Date sDate;
-	   private String image;
-	   private List<MultipartFile> upload;
+   private int idx;
+   private String pName;
+   private int price;
+   private int amount;
+   private String pCategory;
+   private String pContent;
+   private Date sDate;
+   private String image;
+   private String userid;
+   private List<MultipartFile> upload;
 	   
 	public int getIdx() {
 		return idx;
@@ -64,10 +65,18 @@ public class ProductDTO {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 	public List<MultipartFile> getUpload() {
 		return upload;
 	}
 	public void setUpload(List<MultipartFile> upload) {
 		this.upload = upload;
-	} 
+	}
+	   
+	   
 }

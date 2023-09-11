@@ -21,26 +21,18 @@
 			</ul>
 		</div>
 		<div class="basket_title">
-			<input type="checkbox">TheCamping Masket
+			<input type="checkbox">TheCamping Basket
 		</div>
 		<div class="basket_list">
 		<c:forEach var="dto" items="${basketlist }">
 			<ul>
-			<li>
-				<select name="couponSelect">
-				<option>적용할 쿠폰 선택</option>
-					<option value="">봄 맞이 쿠폰</option>
-					<option value="">신규 회원 가입 쿠폰</option>
-					<option value="">런칭 기념 쿠폰</option>					
-				</select></li>
 				<li><input type="checkbox" class="icheck"></li>
 				<li><input type="hidden" name="${dto.idx }"></li> <!-- 히든 처리된 dto.idx -->
-				<li><span id="currentImageOverView"></span>이미지</li>
 				<li>${dto.pName }</li>
 				<li><a href="${cpath }/product/basket/${dto.idx}"><button>X</button></a></li>
 				<li>상품설명</li>
 				<li class="product-number"><input type="number" value="${dto.amount }" readonly>
-<!-- 					<p><button>주문수정</button></p> -->
+	<!-- 					<p><button>주문수정</button></p> -->
 				</li>
 				<li>상품금액
 					<p class="product-price">${dto.price }원</p>
@@ -50,13 +42,15 @@
 					<p>2500원</p>
 				</li>
 			</ul>
-			</c:forEach>
+		</c:forEach>
 		</div>
 		<div class="basket_pay">
 			<ul>
-				<li>주문 예정 날짜 :[ ]</li>
-				<li>선택상품금액
-					<p>${dto.price }</p>
+				<li>주문 예정 날짜
+					<p id="orderDay"></p>
+				</li>
+				<li>선택상품금액 
+					<p id="totalOrderPrice">0원</p>
 				</li>
 				<li>+</li>
 				<li>총 배송비
@@ -68,7 +62,8 @@
 				</li>
 				<li></li>
 				<li id="totalOrderAmount">주문금액  0원</li>
-<%-- 				<li id="payAllBtn"> --%><li><a href="${cpath}/product/orderpay"><button>TheCamping Market 0건 주문하기</button></a></li>
+ 				<li><a href="${cpath}/product/orderpay"><button id="payAllBtn">TheCamping Market 0건 주문하기</button></a></li>
+				<li><a href="${cpath}/product/orderpay"><button id="payAllBtn">TheCamping Market 0건 주문하기</button></a></li>
 				<li><a href="${cpath }/product/orderpay"><button>임시 버튼</button></a></li>
 			</ul>
 		</div>
@@ -76,19 +71,25 @@
 </div>
 <script>
 // 전체체크 온/오프 기능
-var checkboxAll = document.getElementById('checkboxAll');  //  input checkbox id = "checkboxAll"
-
-checkboxAll.addEventListener('click', function() {			// checkboxAll을 클릭했을때 이벤트
-    var ichecks = document.querySelectorAll('.icheck');		// checkbox class = .icheck 인것에
-    for(var i = 0; i < ichecks.length; i++) {				// .icheck의 갯수만큼 반복해서
-        ichecks[i].checked = checkboxAll.checked;			
-    }
-});
+	var checkboxAll = document.getElementById('checkboxAll');  //  input checkbox id = "checkboxAll"
+	
+	checkboxAll.addEventListener('click', function() {			// checkboxAll을 클릭했을때 이벤트
+	    var ichecks = document.querySelectorAll('.icheck');		// checkbox class = .icheck 인것에
+	    for(var i = 0; i < ichecks.length; i++) {				// .icheck의 갯수만큼 반복해서
+	        ichecks[i].checked = checkboxAll.checked;			
+	    }
+	});
 </script>
 <script>
 	//모든 상품의 가격 요소를 가져옴
 	const prices = document.querySelectorAll('.product-price')	// product-price라는 클래스
 	const numbersInputs = document.querySelectorAll('.product-number input[type="number"]') // product-number 각각의 input이 number
+	const date = new Date();
+	
+	const year = date.getFullYear();
+	const month = ('0' + (date.getMonth() + 1)).slice(-2);
+	const day = ('0' + date.getDate()).slice(-2);
+	const dateStr = year + '-' + month + '-' + day;
 	
 	// 가격을 합산
 	let total = 0;	// 총 합계
@@ -102,37 +103,28 @@ checkboxAll.addEventListener('click', function() {			// checkboxAll을 클릭했
 	numbersInputs.forEach(numberElement => {
 		totalnumber += parseInt(numberElement.value)
 		console.log(totalnumber)
+		console.log(total)
 	})
 	
 	// 합산된 가격을 주문금액에 표시
 	document.getElementById('totalOrderAmount').innerText = '총 주문금액 ' + total + ' 원'
 	document.getElementById('payAllBtn').innerText = 'TheCamping Market ' + totalnumber + ' 건' + ' 주문하기'
+	document.getElementById('totalOrderPrice').innerText = total
+	document.getElementById('orderDay').innerText = dateStr
 	
-</script>
 
-<script>
-	const gotoOreder = document.getElementById('payAllBtn')
-	const pName = '${dto.pName}'
-	const pid = '${dto.idx}'
-	const price = '${dto.price}'
 	const userid = '${pageContext.request.userPrincipal.name}'
-	const amount = '1'    // amount만 수정
-
-	grocery.onclick = groceryAddHandler
+	const totalOrderPrice = document.getElementById('totalOrderPrice')
+	const totalOrderAmount = document.getElementById('totalOrderAmount')
 	
-	async function groceryAddHandler() {
-		if (userid == '') {
-			alert('로그인을 해야 장바구니 이용이 가능합니다')
-			return
-		}
-		else {
-			const url = cpath + '/grocery';
+	payAllBtn.onclick = payAllBtnHandler
+	
+	async function payAllBtnHandler() {
+			const url = cpath + '/gotopay';
 			const params = {
 				userid : userid,
-				idx : pid,
-				pName : pName,
-				price : price,
-				amount : amount
+				totalOrderPrice : totalOrderPrice,
+				totalOrderAmount : totalOrderAmount,
 			}
 			await fetch(url, {
 				method: 'POST',
@@ -143,14 +135,14 @@ checkboxAll.addEventListener('click', function() {			// checkboxAll을 클릭했
 			}).then(resp => resp.json())
 			.then(json => {
 				if (json) {
-					alert('장바구니에 ' + pName + '이(가) ' + amount + '개 추가되었습니다.')
+					alert('결제 페이지로 이동합니다')
 				}
 				else {
-					alert('장바구니에 추가되지 못했습니다.')				
+					alert('장바구니 재확인이 필요합니다')
+					return
 				}
 			})
 		}
-	}
 </script>
 
 </body>

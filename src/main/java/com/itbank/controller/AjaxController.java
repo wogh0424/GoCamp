@@ -24,6 +24,7 @@ import com.itbank.model.ImageDTO;
 import com.itbank.model.IncomeDTO;
 import com.itbank.model.ItemDTO;
 import com.itbank.model.MemberDTO;
+import com.itbank.model.PaylistDTO;
 import com.itbank.model.Product_fileDTO;
 import com.itbank.model.ReportDTO;
 import com.itbank.model.ProductDTO;
@@ -203,6 +204,11 @@ public class AjaxController {
 		return row;
 	}
 	
+	@PostMapping("/gotopay/{userid}")
+	public int gotopay (@RequestBody PaylistDTO dto) {
+		int row = productService.paylist(dto);
+		return row;
+	}
 	
 	
 	// 연지's AjaxController
@@ -219,6 +225,7 @@ public class AjaxController {
 			boolean isReviewRecommended = recommendService.isReviewRecommended(review, member);
 			int getReviewRecommendCount = recommendService.getReviewRecommendCount(review);
 
+	
 			map.put("isReviewRecommended", isReviewRecommended);
 			map.put("getReviewRecommendCount", getReviewRecommendCount);
 

@@ -33,7 +33,7 @@
 
 <!-- jquery 사용 위한 라이브러리 -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.8.1/slick.min.js"></script> -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.8.1/slick.min.js"></script>
 
 <!-- 	텍스트에디터 api - summernote -->
 	<!-- include libraries(jQuery, bootstrap) -->
@@ -98,7 +98,7 @@ $(document).ready(function() {
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<%-- 			<form:form action="${pageContext.request.contextPath}/logout" method="POST"> --%>
-					<li><a href="${cpath }/product/basket">장바구니</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/basket">장바구니</a></li>
 					<li><a href="${cpath }/logout">로그아웃</a></li>
 					<%-- 			</form:form> --%>
 				</sec:authorize>
@@ -110,7 +110,7 @@ $(document).ready(function() {
 				</c:if>
 				<c:if
 					test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }">
-						<li><a href="${cpath }/mypage/main">마이페이지</a></li>
+						<li><a href="${pageContext.request.contextPath}/mypage/main">마이페이지</a></li>
 				</c:if>
 			</ul>
 		</div>

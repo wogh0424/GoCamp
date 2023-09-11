@@ -130,12 +130,13 @@ public class LoginService implements UserDetailsService{
 			hexcode += generateRandomHex() + "-";
 		}
 		hexcode = hexcode.substring(0, hexcode.length() - 1 );
+		dto.setcName("가입 기념 10% 할인쿠폰");
 		dto.setCouponNum(hexcode);
 		dto.setUserid(userid);
 		dto.setDiscnt(0.9);
 		Calendar date = Calendar.getInstance();
-	    Date startDate = new Date(date.getTimeInMillis());
-	    dto.setcDate(startDate);
+	    Date cDate = new Date(date.getTimeInMillis());
+	    dto.setcDate(cDate);
 	    date.add(Calendar.DATE, 8);
 	    Date dueDate = new Date(date.getTimeInMillis());
 		dto.setDueDate(dueDate);

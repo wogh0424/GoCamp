@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itbank.model.AdminDTO;
+import com.itbank.model.CouponDTO;
 import com.itbank.model.CampDTO;
 import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.MemberDTO;
@@ -22,6 +23,7 @@ import com.itbank.service.AdminService;
 import com.itbank.service.CampService;
 import com.itbank.service.FreeBoardService;
 import com.itbank.service.LoginService;
+import com.itbank.service.ProductService;
 
 @Controller
 @RequestMapping("/admin")
@@ -80,4 +82,5 @@ public class AdminController {
 		System.out.println(row != 0 ? "삭제성공" : "삭제실패");
 		return "redirect:/admin/ControluserBoard";
 	}
+
 }
