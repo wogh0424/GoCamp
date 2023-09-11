@@ -33,6 +33,10 @@
 		update basket set amount = #{amount} where idx = #{idx}
 	</update>
 	
+	<select id="basketSelectAll" resultType="basket"> <!-- 장바구니 목록 불러오기 로그인이 되어있는 유저에 한하여 -->
+		select * from basket where userid = #{userid} order by idx;
+	</select>
+	
 	<select id="selectDetails" parameterType="int" resultType="product">
          SELECT * from product	where idx = ${idx}
     </select>
@@ -42,8 +46,8 @@
 	</select>
     
     <insert id="addProduct" parameterType="product">
-    	insert into product (pName, price, amount, pContent, pCategory) 
-    		values (#{pName}, #{price}, #{amount}, #{pContent}, #{pCategory})
+    	insert into product (pName, price, amount, pContent) 
+    		values (#{pName}, #{price}, #{amount}, #{pContent})
     </insert>
     
     <insert id="addFile" parameterType="hashmap">
@@ -55,7 +59,7 @@
 	
 	<update id="update" parameterType="product">
 		update product set pName = #{pName}, price = #{price}, amount = #{amount}, 
-							pContent = #{pContent}, pCategory = #{pCategory} where idx = #{idx}
+							pContent = #{pContent} where idx = #{idx}
 	</update>
 	
 	<delete id="deletefile" parameterType="string">
@@ -82,4 +86,21 @@
     <update id="updatecurrentgrocery" parameterType="product">
     	update basket set amount = amount + #{amount} where userid = #{userid} and pid = #{idx} and pName = #{pName}
     </update>
+    
+    <select id="getuserInfo" parameterType="product">
+		select username, pnum, email from member where userid = #{userid};    
+    </select>
+    
+    <insert id="gotopay" parameterType="product">
+    	insert into paylist (userid, totalOrderPrice, totalOrderAmount) values
+    		(#{userid}, #{totalOrderPrice}, #{totalOrderAmount})
+    </insert>
+    
+    <select id="searchByKeyWord" parameterType="string" resultType="product">
+    	select * from product where pName like '%${srchKywrd}%'
+    </select>
+    
+    <select id="countByKeyWord" parameterType="string" resultType="int">
+    	select count(*) from product where pName like '%${srchKywrd}%'
+    </select>
 </mapper>

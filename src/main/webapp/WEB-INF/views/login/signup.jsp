@@ -321,8 +321,8 @@
 		    } else {
 		        alert('회원가입이 성공하였습니다.');
 		        const signForm = document.getElementById('signForm');
+		        await couponHandler()
 		        signForm.submit(); // 폼 제출
-		        // await couponHandler()
 		    }
 		});
 		
@@ -368,21 +368,21 @@
 	
 	<script>
 		
-		async function couponHandler() {
-			
-			await fetch(url)
-			.then(resp => resp.json())
-			.then(json => {
-				if (json) {
-					alert('축하합니다! 가입기념쿠폰이 발급되었습니다. 마이페이지에서 확인하세요')
-					signForm.submit()
-				}
-				else {
-					alert('회원가입 중 문제가 발생하였습니다')
-					return
-				}
-			})
-		}
+	async function couponHandler() {
+		const url = cpath + '/coupon/' + userid.value;
+		await fetch(url)
+		.then(resp => resp.json())
+		.then(json => {
+			if (signForm != null) {
+				alert('축하합니다! 가입기념쿠폰이 발급되었습니다. 마이페이지에서 확인하세요')
+				signForm.submit();
+			}
+			else {
+				alert('회원가입 중 문제가 발생하였습니다')
+				return
+			}
+		})
+	}
 		
 	</script>
 

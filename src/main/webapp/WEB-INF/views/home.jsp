@@ -77,7 +77,7 @@
 <div class="camping_top_wrap" style="margin: 60px auto;">
 	<div class="camping_left_list" style="margin-right: 30px;">
 		<ul>
-			<li style="background-color: #c7ebf1;"><video src="${cpath }/resources/upload/camp/jaeho.mp4" width="100%" height="100%" controls loop></video></li>
+			<li style="background-color: #c7ebf1;"><video src="${cpath }/resources/image/jaeho.mp4" width="100%" height="100%" controls loop></video></li>
 			<li class="camping_left_content" style="text-align: center; border-radius: 0 0 0 40px;">
 			<h3>🏞️<span class="blue">ojm0827</span>의 여행후기</h3>
 				<div style="width: 250px; font-size: 16px; margin:80px auto 0; text-align: center; font-weight: bold;"><a href="${cpath }/main/view/1" style="color: black;">"김OO과 함께해서 아주 즐거운 여행이 되었던 것 같습니다 ^^b"</a></div>
@@ -88,7 +88,7 @@
 				<h3>🛣️<span class="blue">Jaeho1234</span>의 여행후기</h3>
 				<div style="width: 250px; font-size: 16px; margin:60px auto 0; text-align: center; font-weight: bold;"><a href="${cpath }/main/view/1" style="color: black;">"이곳은 자연의 아름다움과 문화의 조화가 빛나며, 푸르른 산과 맑은 계곡이 만들어내는 풍경은 그림 같이 아름다웠습니다. 이곳에서의 경험은 정말 잊지 못할 것입니다."</a></div>
 			</li>
-			<li style="background-color: #c7ebf1;"><video src="${cpath }/resources/upload/camp/jaeho2.mp4" width="100%" height="100%" controls loop></video></li>
+			<li style="background-color: #c7ebf1;"><video src="${cpath }/resources/image/jaeho2.mp4" width="100%" height="100%" controls loop></video></li>
 		</ul>
 	</div>
 	<div class="camping_right_items" style="margin-top: 20px;">
@@ -114,18 +114,18 @@
 
 <div class="bestReviewTitle">BEST REVIEW</div>
 
-<div class="reviewSlider"> 
 
     
     
- <div class="review_rank" style="background-image: url('${cpath}/resources/image/bg-img.jpg');">
-	<button class="prev">&lt;</button> <!-- 왼쪽 버튼 -->
-    <button class="next">&gt;</button> <!-- 오른쪽 버튼 -->
+<div class="review_rank" >
+    <img src="${cpath}/resources/image/bg-img.jpg" class="rankBackgroundimage">
+    	<button class="prev">◀</button> <!-- 왼쪽 버튼 -->
+    <button class="next">▶</button> <!-- 오른쪽 버튼 -->
+		<div class="reviewLoop">
 		<c:forEach items="${reviewList }" var="list">
 		
 				<div class="review_rank_items">	
 			<!-- 		사진 띄우는 부분 -->
-			<div class="sliderImg">
 						<div class="review_rank_image">
 						<c:choose>
 				       		  <c:when test="${empty list.filePath}">
@@ -147,47 +147,49 @@
 										<div class="review_rank_nickName">${list.writer }</div>
 							</a>
 						</div>
-						</div>
 				 </div>	
-				 
+				 <div style="width: 10px"></div>
 		</c:forEach>
+		
 	 </div>
 </div>
 
 
+
 <script>
 let currentIndex = 0;
-const reviewRank = document.querySelector('.review_rank');
-const reviewRankItems = document.querySelectorAll('.review_rank_items');
-const prevButton = document.querySelector('.prev');
-const nextButton = document.querySelector('.next');
+const reviewRank = document.querySelector('.review_rank')
+const reviewRankItems = document.querySelectorAll('.reviewLoop > .review_rank_items')
+const prevButton = document.querySelector('.prev')
+const nextButton = document.querySelector('.next')
 
 
 // 첫 3개의 아이템을 보이게 설정
 for (let i = 0; i < 3 && i < reviewRankItems.length; i++) {
-    reviewRankItems[i].style.display = 'block';
+    reviewRankItems[i].style.display = 'block'
 }
 
 prevButton.addEventListener('click', function() {
     for (let i = 0; i < 3; i++) {
-        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'none';
+        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'none'
     }
 
     currentIndex -= 3;
+    
     if (currentIndex < 0) {
         currentIndex = reviewRankItems.length - 3; // 마지막 그룹으로 이동
     }
 
     for (let i = 0; i < 3; i++) {
-        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'block';
+        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'block'
     }
 
-    reviewRank.style.transform = `translateX(-${currentIndex * 430}px)`;
-});
+    reviewRank.style.transform = `translateX(-${currentIndex * 430}px)`
+})
 
 nextButton.addEventListener('click', function() {
     for (let i = 0; i < 3; i++) {
-        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'none';
+        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'none'
     }
 
     currentIndex += 3;
@@ -196,15 +198,16 @@ nextButton.addEventListener('click', function() {
     }
 
     for (let i = 0; i < 3; i++) {
-        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'block';
+        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'block'
     }
 
-    reviewRank.style.transform = `translateX(-${currentIndex * 430}px)`;
-});
+    reviewRank.style.transform = `translateX(-${currentIndex * 430}px)`
+})
 
 
 
 </script>
+
 
 
 	

@@ -84,8 +84,8 @@
 	</select>
 		
 	<insert id="couponcheck" parameterType="coupon">
-		insert into coupon (couponNum, discnt, userid, cDate, dueDate)
-			values (#{couponNum}, #{discnt}, #{userid}, #{startDate}, #{dueDate})
+		insert into coupon (cName, couponNum, discnt, userid, cDate, dueDate)
+			values (#{cName}, #{couponNum}, #{discnt}, #{userid}, #{cDate}, #{dueDate})
 	</insert>
 	
 	<select id="couponSelectAll" parameterType="coupon">

@@ -12,17 +12,17 @@ public class CouponDTO {
 	private Date cDate;
 	private Date dueDate;
 	
-	public String getcName() {
-		return cName;
-	}
-	public void setcName(String cName) {
-		this.cName = cName;
-	}
 	public int getIdx() {
 		return idx;
 	}
 	public void setIdx(int idx) {
 		this.idx = idx;
+	}
+	public String getcName() {
+		return cName;
+	}
+	public void setcName(String cName) {
+		this.cName = cName;
 	}
 	public String getCouponNum() {
 		return couponNum;
@@ -36,7 +36,6 @@ public class CouponDTO {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
-	
 	public double getDiscnt() {
 		return discnt;
 	}
@@ -49,7 +48,6 @@ public class CouponDTO {
 	public void setUseava(int useava) {
 		this.useava = useava;
 	}
-	
 	public Date getcDate() {
 		return cDate;
 	}

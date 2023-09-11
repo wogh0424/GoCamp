@@ -18,7 +18,7 @@
 						<img src="${item.firstImageUrl }" width="100%" height="auto">
 					</c:if>
 					<c:if test="${!fn:contains(item.firstImageUrl, 'gocamping') }">
-						<img src="${cpath }/resources/upload/camp/${item.firstImageUrl }" width="100%" height="auto">
+						<img src="${cpath }/upload/${item.firstImageUrl }" width="100%" height="auto">
 					</c:if>
 					<p></p>
 					<label class="image" for="firstimage">이미지 넣기</label>

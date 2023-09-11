@@ -157,15 +157,20 @@
 		<!-- 쇼핑몰 -->
 		<div class="searchListBody">
 			<div class="searchListTT">
-				🛒 쇼핑몰 상품 검색결과 [총  <span class="blueT">n</span>건]
+				🛒 쇼핑몰 상품 검색결과 [총  <span class="blueT">${productCnt }</span>건]
 			</div>
 			<div class="searchListItem">
 				<ul>
-					<li>쇼핑몰 게시물</li>
+					<c:if test="${productlist.size() == 0 }">
+						<li>검색된 결과가 없습니다.</li>
+					</c:if>
+					<c:forEach items="${productlist }" var="product" begin="0" end="9">
+						<li><a href="${cpath }/product/view/${product.idx}" class="searchKey">${product.pName }</a></li>
+					</c:forEach>				
 				</ul>
 			</div>
 			<div style="width: 100%; display:flex; justify-content: center;">
-				<a href=""><button class="searchMoreBtn">더보기</button></a>		
+				<a href="${cpath }/product/list?pName=${param.srchKywrd}"><button class="searchMoreBtn">더보기</button></a>		
 			</div>
 		</div>
 	</div>
