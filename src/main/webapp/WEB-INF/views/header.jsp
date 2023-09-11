@@ -3,11 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.request.contextPath }" />
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +16,9 @@
 <title>GoCamping</title>
 
 
-<script> const cpath = '${cpath}' </script>
+<script>
+	const cpath = '${cpath}'
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 
@@ -31,10 +32,8 @@
 
 
 <!-- jquery 사용 위한 라이브러리 -->
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.8.1/slick.min.js"></script>
-
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.slick/1.8.1/slick.min.js"></script> -->
 
 <!-- 	텍스트에디터 api - summernote -->
 	<!-- include libraries(jQuery, bootstrap) -->
@@ -51,8 +50,32 @@
 
 </head>
 <body>
-<script src="${cpath }/resources/js/board.js"></script>
 
+<script>
+
+$(document).ready(function() {
+    $('#content').summernote({
+        toolbar: [
+        	// [groupName, [list of button]]
+    	    ['fontname', ['fontname']],
+    	    ['fontsize', ['fontsize']],
+    	    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+    	    ['color', ['forecolor','color']],
+    	    ['table', ['table']],
+    	    ['para', ['ul', 'ol', 'paragraph']],
+    	    ['height', ['height']],
+    	    ['view', ['fullscreen', 'help']]
+        ],
+        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
+        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+        
+        placeholder: '내용을 입력하세요',
+        tabsize: 2,
+        width: 800,
+        height: 200
+    });
+});
+</script>
 
 
 
@@ -66,7 +89,7 @@
 			<ul  style="margin-right: 10%;">
 				<c:if test="${pageContext.request.userPrincipal != null}">
 					<li>${pageContext.request.userPrincipal.name}님 환영합니다.</li>
-					접속된 아이디 표시를 원하면 여기에 el태그 삽입
+					<!-- 접속된 아이디 표시를 원하면 여기에 el태그 삽입 -->
 				</c:if>
 				<sec:authorize access="isAnonymous()">			
 					<li id="login_btn">
@@ -74,10 +97,10 @@
 					</li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-								<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+					<%-- 			<form:form action="${pageContext.request.contextPath}/logout" method="POST"> --%>
 					<li><a href="${cpath }/product/basket">장바구니</a></li>
 					<li><a href="${cpath }/logout">로그아웃</a></li>
-								</form:form>
+					<%-- 			</form:form> --%>
 				</sec:authorize>
 				<c:if test="${pageContext.request.userPrincipal == null}">
 					<li><a href="${cpath }/login/signup">회원가입</a></li>
@@ -85,7 +108,6 @@
 				<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
 						<li><a href="<c:url value="/admin/adminpage" />">관리자 홈</a></li>
 				</c:if>
-				
 				<c:if
 					test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }">
 						<li><a href="${cpath }/mypage/main">마이페이지</a></li>
@@ -126,6 +148,9 @@
 						<ul>
 							<li><a href="${cpath }/freeBoard">자유게시판(+ 댓글)</a></li>
 							<li><a href="${cpath }/reviewBoard">전체리뷰게시판</a></li>
+<%-- 					<c:if test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }"> --%>
+<%-- 							<li><a href="${cpath }/main/like">좋아요</a></li> --%>
+<%-- 					</c:if> --%>
 						</ul>
 					</li>
 					<li><a href="">고객센터</a>

@@ -49,7 +49,7 @@
 				<img src="${view.firstImageUrl }" style="margin-right: 30px;">
 			</c:if>
 			<c:if test="${!fn:contains(view.firstImageUrl, 'gocamping') }">
-				<img src="${cpath }/resources/upload/camp/${view.firstImageUrl }" style="margin-right: 30px;">
+				<img src="${cpath }/upload/${view.firstImageUrl }" style="margin-right: 30px;">
 			</c:if>
 		</div>
 		<div id="viewDescription">
@@ -556,8 +556,6 @@
         const viewShowMap = document.getElementById('viewShowMap')
         viewShowMap.addEventListener('click', viewMapHandler)
     </script>
-    
-    <%@include file="../footer.jsp"%>
     
 </body>
 </html>
