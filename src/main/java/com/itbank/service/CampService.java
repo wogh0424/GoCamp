@@ -26,7 +26,7 @@ public class CampService {
 	@Autowired
 	private CampDAO campDAO;
 
-	private File dir = new File("/usr/local/tomcat/webapps/upload/camp");
+	private File dir = new File("/usr/local/tomcat/webapps/upload");
 
 	
 	public int selectCnt(SearchDTO search) {
