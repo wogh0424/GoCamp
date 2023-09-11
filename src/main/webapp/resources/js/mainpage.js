@@ -34,13 +34,17 @@ function orderByHandler(event) {
 	   const keys = Array.from(new Set(urlParams.keys()))
 
 	   keys.forEach(ob => {
+		   // 만약 key가 searchTags 이면,
 		   if (ob == 'searchTags') {
+			   // url에서 searchTags에 해당하는 파라미터를 가져온다.
 			   const tagparams = urlParams.get(ob)
 			   if (tagparams != '') {
+				   // tagparams가 비어있지 않다면 구분자 ','를 사용해 분리한다
 				   let tags = tagparams.split(',')
 				   for (let j = 0; j < tags.length; j++) {
 					   tagOptList.forEach(a => {
 						   if (a.id == tags[j]) {
+						// tag 옵션들 중에서 해당 번호를 가지고 있는 태그들에 'ov' 클래스를 부여한다.
 							   a.classList.add('ov')
 						   }
 					   })					   
@@ -48,10 +52,17 @@ function orderByHandler(event) {
 			   }
 		   }
 		   if (ob != 'listTy' && ob != 'order' && ob != 'trlerAcmpnyAt' && ob != 'caravAcmpnyAt' && ob != 'animalCmgCl') {
+			   // 파라미터 중 listTy, order, trlerAcmpnyAt, caravAcmpnyAt, animalCmgcl은 
+			   // 파라미터 형태가 다르거나 필요가 없는 값이므로 제외
+			   
 			   const params = urlParams.getAll(ob)
+			   // 중복검색에서 파라미터가 여러개 들어가는 경우에 대해 전부 불러온다.
+			   
 			   let input = 'input[name=' + ob + ']'
 			   const check = document.querySelectorAll(input)
+			   // key값을 활용해서 input 태그들을 찾는다.
 			   check.forEach(i => {
+				   // 만일 각자의 check에 대해서 params가 이 값을 포함하고 있다면 checked 속성을 부여한다.
 				   if(params.includes(i.value)) {
 					   i.checked = 'checked'
 				   }
@@ -236,7 +247,9 @@ function orderByHandler(event) {
 		infoWindows[0].open(map, markers[0])
 	}
 	
+	// 태그 부분
 	function tagHandler(event) {
+		// 태그를 클릭하면 ov라는 클래스 부여
     	const ob = event.target.classList
     	if (ob.contains('ov')) {
     		ob.remove('ov')
@@ -257,9 +270,9 @@ function orderByHandler(event) {
     		if (a.classList.contains('ov')) {
     			tagList += ',' + a.id 
     		}
-    	})
-    	tagList = tagList.substring(1, tagList.length)
-    	console.log(tagList)
+    	}) // 태그 옵션에서 'ov'가 부여된 태그의 id만 가져와서 새로운 문자열을 만든다.
+    	tagList = tagList.substring(1, tagList.length) // 끝자리 , 제외
+    	// url을 통해 요청 전송
     	location.href = cpath + '/main/camp?listTy='+ listTy +'&searchTags=' + tagList
     }
     
