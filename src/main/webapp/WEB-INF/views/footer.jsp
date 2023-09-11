@@ -62,7 +62,7 @@ footer{
 	<ul>
 		<li>개발자소개</li>
 		<li>개인정보처리방침</li>
-		<li>캠핑장 등록안내</li>
+		<li><a href="${cpath}/noticeBoard/view/32763">캠핑장 등록안내</a></li>
 		<li>미등록야영장불법영업신고</li>
 	</ul>
 	<ul>

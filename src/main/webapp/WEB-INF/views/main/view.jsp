@@ -49,7 +49,7 @@
 				<img src="${view.firstImageUrl }" style="margin-right: 30px;">
 			</c:if>
 			<c:if test="${!fn:contains(view.firstImageUrl, 'gocamping') }">
-				<img src="${cpath }/resources/upload/camp/${view.firstImageUrl }" style="margin-right: 30px;">
+				<img src="${cpath }/upload/${view.firstImageUrl }" style="margin-right: 30px;">
 			</c:if>
 		</div>
 		<div id="viewDescription">
@@ -120,7 +120,7 @@
 				    <button id="mypickBtn" type="submit">${isLiked ? '찜취소❤️' : '찜하기🤍'}</button>					 
 				</form>
 
-				<button class="modifyRequest">정보수정요청</button>
+				<button class="modifyRequest"><a href="${cpath}/noticeBoard/view/32764">정보수정요청</a></button>
 			</div>
 
 		</div>
@@ -255,10 +255,10 @@
 
 					<c:if test="${pageContext.request.userPrincipal == null}">
 						<fieldset id="login-message">
-							<p>
+							<div class="isReview">
 								로그인해야 리뷰를 작성할 수 있습니다😄<a href="${cpath }/login/loginForm">
-									로그인go</a>
-							</p>
+									로그인go</a></div>
+							
 						</fieldset>
 					</c:if>
 				</div>
@@ -267,7 +267,7 @@
 					<c:choose>
 						<c:when
 							test="${empty list && pageContext.request.userPrincipal != null}">
-							<p>아직 등록된 리뷰가 없습니다.</p>
+							<div class="isReview">아직 등록된 리뷰가 없습니다.</div>
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="review" items="${list }">
@@ -403,6 +403,7 @@
 		const recommendReviewBtn = document.querySelectorAll('button.recommendReviewBtn')
 		const reviewIdx = document.querySelectorAll('div.reviewIdx')
 		
+		
 		// 새로고침해도 유지시켜주기 위해 추가
 		document.addEventListener('DOMContentLoaded', async function() {
 		    for (let i = 0; i < reviewIdx.length; i++) {
@@ -463,27 +464,7 @@
 <script>
         const input = document.querySelector('input[name="upload"]')
         const preview = document.getElementById('preview')
-     
-
-       	function changeHandler(event) {
-  		preview.innerHTML = ''
-			
-		    if (event.target.files) {
-		        const files = event.target.files
-		        for (const file of files) {
-		            const reader = new FileReader()
-		            reader.onload = function(e) {
-		                const image = new Image()
-		                image.src = e.target.result
-		                image.style.height = '200px'
-		                preview.appendChild(image)
-		            }
-		            reader.readAsDataURL(file)
-		        }
-		      
-		    } 
-		}
-		
+    
 		input.onchange = changeHandler
     </script>
 		
@@ -575,8 +556,6 @@
         const viewShowMap = document.getElementById('viewShowMap')
         viewShowMap.addEventListener('click', viewMapHandler)
     </script>
-    
-    <%@include file="../footer.jsp"%>
     
 </body>
 </html>

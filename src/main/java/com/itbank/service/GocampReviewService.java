@@ -25,7 +25,7 @@ public class GocampReviewService {
 
 	@Autowired private GocampReviewDAO dao;
 
-	private File dir = new File("C:\\Users/yeonji/git/GoCamp/src/main/webapp/resources/image");
+	private File dir = new File("/usr/local/tomcat/webapps/upload");
 
 	
 	// directory 없으면 만들어라

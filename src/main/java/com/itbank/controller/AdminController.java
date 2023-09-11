@@ -15,10 +15,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itbank.model.AdminDTO;
+<<<<<<< HEAD
 import com.itbank.model.CouponDTO;
+=======
+import com.itbank.model.CampDTO;
+>>>>>>> c38b43ed72a27927375025fe6ea7aad6397059f3
 import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.service.AdminService;
+import com.itbank.service.CampService;
 import com.itbank.service.FreeBoardService;
 import com.itbank.service.LoginService;
 import com.itbank.service.ProductService;
@@ -31,6 +36,7 @@ public class AdminController {
 	private LoginService loginService;
 	@Autowired private FreeBoardService freeBoardService;
 	@Autowired private AdminService adminService;
+	@Autowired private CampService campService;
 
 	@PostMapping("/modifyAuth")
 	public String modifyAuth(MemberDTO dto) {
@@ -49,15 +55,16 @@ public class AdminController {
 		ModelAndView mav = new ModelAndView("/admin/adminpage");
 		List<MemberDTO> list = loginService.adminpage();
 		List<AdminDTO> adminList = adminService.requestReport();
+
 		mav.addObject("list",list);
 		mav.addObject("adminList",adminList);
+
 		return mav;
 	}
 	
 	@GetMapping("/ControluserBoard")
-	public ModelAndView ControluserBoard(String nickname) {
+	public ModelAndView adminData(String nickname) {
 		ModelAndView mav = new ModelAndView("/admin/ControluserBoard");
-		System.out.println(nickname);
 		List<FreeBoardDTO> list = freeBoardService.userboard(nickname);
 		mav.addObject("list",list);
 		return mav;
@@ -78,5 +85,8 @@ public class AdminController {
 		System.out.println(row != 0 ? "삭제성공" : "삭제실패");
 		return "redirect:/admin/ControluserBoard";
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> c38b43ed72a27927375025fe6ea7aad6397059f3
 }

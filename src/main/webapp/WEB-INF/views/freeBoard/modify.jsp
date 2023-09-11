@@ -3,7 +3,7 @@
 <%@include file="../header.jsp" %>
 
 <div id=boardTitle style="background-image: url('${cpath}/resources/image/board/river.jpg');">
-	<div id=board><a href="${cpath}/freeBoard">Board</a></div>
+	<div id=boardBigTitle><a href="${cpath}/freeBoard">Board</a></div>
 </div>
 
 
@@ -31,27 +31,25 @@
    <input type="submit"  class="boardSubmit">
 </form>
 
-
 <script>
-  		 document.querySelector('input[name="upload"]').addEventListener('change', function(event) {
-        const previewModify = document.getElementById('previewModify')
-        previewModify.innerHTML = ''
-        
-        if (event.target.files) {
-            const files = event.target.files
-            for (const file of files) {
-                const reader = new FileReader()
-                reader.onload = function(e) {
-                    const image = new Image()
-                    image.src = e.target.result
-                  
-                    previewModify.appendChild(image)
-                    image.classList.add('previewImage');
-                }
-                reader.readAsDataURL(file)
+document.querySelector('input[name="upload"]').addEventListener('change', function(event) {
+    const previewModify = document.getElementById('previewModify')
+    previewModify.innerHTML = ''
+    
+    if (event.target.files) {
+        const files = event.target.files
+        for (const file of files) {
+            const reader = new FileReader()
+            reader.onload = function(e) {
+                const image = new Image()
+                image.src = e.target.result
+                previewModify.appendChild(image)
+                image.classList.add('previewImage');
             }
-        } 
-    })
+            reader.readAsDataURL(file)
+        }
+    } 
+})
 </script>
 
 

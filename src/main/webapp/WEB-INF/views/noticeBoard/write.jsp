@@ -3,7 +3,7 @@
 <%@include file="../header.jsp" %>
 
 <div id=boardTitle style="background-image: url('${cpath}/resources/image/board/fireImg.jpg');">
-	<div id=board><a href="${cpath}/noticeBoard">Notice</a></div>
+	<div id=boardBigTitle><a href="${cpath}/noticeBoard">Notice</a></div>
 </div>
 
 
@@ -28,38 +28,10 @@
     <script>
         const input = document.querySelector('input[name="upload"]')
         const preview = document.getElementById('preview')
-     
-
-       	function changeHandler(event) {
-  		preview.innerHTML = ''
-			
-		    if (event.target.files) {
-		        const files = event.target.files
-		        for (const file of files) {
-		            const reader = new FileReader()
-		            reader.onload = function(e) {
-		                const image = new Image()
-		                image.src = e.target.result
-		                image.style.height = '200px'
-		                preview.appendChild(image)
-		            }
-		            reader.readAsDataURL(file)
-		        }
-		      
-		    } 
-		}
 		
 		input.onchange = changeHandler
     </script>
     
-    <script>
-    var selectedOption = document.querySelector('input[name="option"]:checked').value;
-
- 
-	 console.log(selectedOption);
-    
-    </script>
-
 
 
 

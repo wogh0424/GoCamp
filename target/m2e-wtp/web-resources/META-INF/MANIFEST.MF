@@ -1,5 +1,10 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: capta
 Build-Jdk: 1.8.0_381
+=======
+Built-By: yeonji
+Build-Jdk: 1.8.0_361
+>>>>>>> c38b43ed72a27927375025fe6ea7aad6397059f3
 Created-By: Maven Integration for Eclipse
 

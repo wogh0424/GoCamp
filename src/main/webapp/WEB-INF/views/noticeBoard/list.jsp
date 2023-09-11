@@ -5,7 +5,7 @@
 
 <div id="boardContainer">
 <div id=boardTitle style="background-image: url('${cpath}/resources/image/board/fireImg.jpg');">
-	<div id=board><a href="${cpath}/noticeBoard">Notice</a></div>
+	<div id=boardBigTitle><a href="${cpath}/noticeBoard">Notice</a></div>
 </div>
 
 <form method="GET" class="boardSearchForm">
@@ -32,7 +32,7 @@
 			</div>
 			
 			<div class="boardTitlePrint">
-				<a href="${cpath}/noticeBoard/view/${dto.idx}" <c:if test="${dto.pin == 1}">style="font-weight: bold;"</c:if>>
+				<a href="${cpath}/noticeBoard/view/${dto.idx}" class="searchKey" <c:if test="${dto.pin == 1}">style="font-weight: bold;"</c:if>>
 				${dto.title }
 				</a>
 				
@@ -63,21 +63,15 @@
 </div>
 
 
-<%@include file="../footer.jsp"%>
+
 <script>
-	window.onload = keywordMarkHandler
-	const key = '${param.order}'
-	
-	function keywordMarkHandler() {
-		const links = document.querySelectorAll('a.searchKey')
-		links.forEach(a => {
-			if (a.innerText.includes(key)) {
-				let text = a.innerText.replace(key, '<span class="highlight">' + key + '</span>')
-				a.innerHTML = text				
-			}
-		})
-	}
+    window.onload = function() {
+        const key = '${param.order}';
+        keywordMarkHandler(key);
+    }
 </script>
+
+<%@include file="../footer.jsp"%>
 
 
 
