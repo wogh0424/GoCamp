@@ -1407,7 +1407,7 @@ aside {
 
 /*홈페이지 - 옥*/
 #camping_intro_search {
-	
+	background-size:cover;
 	background-repeat: no-repeat;
 	background-position: center;
 	width: 100%;
