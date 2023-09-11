@@ -18,11 +18,15 @@
         <s:intercept-url pattern="/login/loginForm" access="isAnonymous()" />
         <s:intercept-url pattern="/home" access="permitAll" />
         <s:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" /> 
+        <s:intercept-url pattern="/main/addcamp" access="hasRole('ROLE_ADMIN')" />
+        <s:intercept-url pattern="/main/modifycamp/**" access="hasRole('ROLE_ADMIN')" />
+        <s:intercept-url pattern="/main/deletecamp/**" access="hasRole('ROLE_ADMIN')" />   
         <s:intercept-url pattern="/**" access="permitAll" />
         <s:intercept-url pattern="/login/signup" access="permitAll "/>
         <s:intercept-url pattern="/resources/**" access="permitAll" />
         <s:intercept-url pattern="/freeBoard/**" access="permitAll"/>
         <s:intercept-url pattern="/mypage/main" access="isAnonymous()"/>
+
 
        <s:form-login login-page="/login/loginForm"
                     default-target-url="/"
@@ -34,7 +38,7 @@
                 invalidate-session="true"
                 delete-cookies="true"/>
                 
-        <s:access-denied-handler error-page="/login/accessDenied" />
+        <s:access-denied-handler error-page="/error/accessdenied" />
 <!--        	csrf는 토큰방식으로 보안에는 좋지만 복잡하기 때문에 이번에는 보류 -->
         <s:csrf disabled="true"/>
      <s:session-management>
