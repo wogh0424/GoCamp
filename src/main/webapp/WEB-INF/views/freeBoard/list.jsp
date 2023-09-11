@@ -6,7 +6,7 @@
 
 <div id="boardContainer" >
 <div id=boardTitle style="background-image: url('${cpath}/resources/image/board/river.jpg');">
-<div id=board><a href="${cpath}/freeBoard">Board</a></div>
+<div id=boardBigTitle><a href="${cpath}/freeBoard">Board</a></div>
 </div>
 
 
@@ -34,7 +34,9 @@
 				<a href="${cpath}/freeBoard/view/${dto.idx}" class="searchKey">${dto.title }  [${dto.replyCount}]</a>
 			 </c:if>
 			 <c:if test="${dto.replyCount == 0}">
-				<a href="${cpath}/freeBoard/view/${dto.idx}" class="searchKey">${dto.title }</a>
+				<a href="${cpath}/freeBoard/view/${dto.idx}" class="searchKey">${dto.title }
+				
+				</a>
 			 </c:if>
 			</div>
 			<div class="boardWriterPrint">${dto.writer }</div>
@@ -43,6 +45,8 @@
 		</div>
 	</c:forEach>
 </div>
+
+
 
 <div class="boardMenubar">
 	<c:if test="${pageContext.request.userPrincipal != null}">

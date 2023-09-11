@@ -255,10 +255,10 @@
 
 					<c:if test="${pageContext.request.userPrincipal == null}">
 						<fieldset id="login-message">
-							<p>
+							<div class="isReview">
 								로그인해야 리뷰를 작성할 수 있습니다😄<a href="${cpath }/login/loginForm">
-									로그인go</a>
-							</p>
+									로그인go</a></div>
+							
 						</fieldset>
 					</c:if>
 				</div>
@@ -267,7 +267,7 @@
 					<c:choose>
 						<c:when
 							test="${empty list && pageContext.request.userPrincipal != null}">
-							<p>아직 등록된 리뷰가 없습니다.</p>
+							<div class="isReview">아직 등록된 리뷰가 없습니다.</div>
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="review" items="${list }">
@@ -402,6 +402,7 @@
 		
 		const recommendReviewBtn = document.querySelectorAll('button.recommendReviewBtn')
 		const reviewIdx = document.querySelectorAll('div.reviewIdx')
+		
 		
 		// 새로고침해도 유지시켜주기 위해 추가
 		document.addEventListener('DOMContentLoaded', async function() {

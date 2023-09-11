@@ -4,7 +4,7 @@
 
 <div id="boardContainer">
 <div id=boardTitle style="background-image: url('${cpath}/resources/image/board/house.jpg');">
-	<div id=board><a href="${cpath}/reviewBoard">Review</a></div>
+	<div id=boardBigTitle><a href="${cpath}/reviewBoard">Review</a></div>
 </div>
 
 

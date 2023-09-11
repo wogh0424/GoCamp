@@ -114,18 +114,18 @@
 
 <div class="bestReviewTitle">BEST REVIEW</div>
 
-<div class="reviewSlider"> 
 
     
     
- <div class="review_rank" style="background-image: url('${cpath}/resources/image/bg-img.jpg');">
-	<button class="prev">&lt;</button> <!-- 왼쪽 버튼 -->
-    <button class="next">&gt;</button> <!-- 오른쪽 버튼 -->
+<div class="review_rank" >
+    <img src="${cpath}/resources/image/bg-img.jpg" class="rankBackgroundimage">
+    	<button class="prev">◀</button> <!-- 왼쪽 버튼 -->
+    <button class="next">▶</button> <!-- 오른쪽 버튼 -->
+		<div class="reviewLoop">
 		<c:forEach items="${reviewList }" var="list">
 		
 				<div class="review_rank_items">	
 			<!-- 		사진 띄우는 부분 -->
-			<div class="sliderImg">
 						<div class="review_rank_image">
 						<c:choose>
 				       		  <c:when test="${empty list.filePath}">
@@ -147,47 +147,48 @@
 										<div class="review_rank_nickName">${list.writer }</div>
 							</a>
 						</div>
-						</div>
 				 </div>	
-				 
+				 <div style="width: 10px"></div>
 		</c:forEach>
+		
 	 </div>
 </div>
 
 
 <script>
 let currentIndex = 0;
-const reviewRank = document.querySelector('.review_rank');
-const reviewRankItems = document.querySelectorAll('.review_rank_items');
-const prevButton = document.querySelector('.prev');
-const nextButton = document.querySelector('.next');
+const reviewRank = document.querySelector('.review_rank')
+const reviewRankItems = document.querySelectorAll('.reviewLoop > .review_rank_items')
+const prevButton = document.querySelector('.prev')
+const nextButton = document.querySelector('.next')
 
 
 // 첫 3개의 아이템을 보이게 설정
 for (let i = 0; i < 3 && i < reviewRankItems.length; i++) {
-    reviewRankItems[i].style.display = 'block';
+    reviewRankItems[i].style.display = 'block'
 }
 
 prevButton.addEventListener('click', function() {
     for (let i = 0; i < 3; i++) {
-        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'none';
+        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'none'
     }
 
     currentIndex -= 3;
+    
     if (currentIndex < 0) {
         currentIndex = reviewRankItems.length - 3; // 마지막 그룹으로 이동
     }
 
     for (let i = 0; i < 3; i++) {
-        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'block';
+        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'block'
     }
 
-    reviewRank.style.transform = `translateX(-${currentIndex * 430}px)`;
-});
+    reviewRank.style.transform = `translateX(-${currentIndex * 430}px)`
+})
 
 nextButton.addEventListener('click', function() {
     for (let i = 0; i < 3; i++) {
-        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'none';
+        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'none'
     }
 
     currentIndex += 3;
@@ -196,11 +197,11 @@ nextButton.addEventListener('click', function() {
     }
 
     for (let i = 0; i < 3; i++) {
-        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'block';
+        reviewRankItems[(currentIndex + i) % reviewRankItems.length].style.display = 'block'
     }
 
-    reviewRank.style.transform = `translateX(-${currentIndex * 430}px)`;
-});
+    reviewRank.style.transform = `translateX(-${currentIndex * 430}px)`
+})
 
 
 

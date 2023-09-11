@@ -23,7 +23,7 @@ public class ProductService {
 	
 	@Autowired private ProductDAO dao;
 	
-	private File dir = new File("C:\\Users/capta/git/GoCamp/src/main/webapp/resources/upload/");
+	private File dir = new File("/usr/local/tomcat/webapps/upload");
 		
 	public ProductService() {
 		if(dir.exists() == false) {

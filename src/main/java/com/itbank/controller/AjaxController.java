@@ -202,9 +202,11 @@ public class AjaxController {
 		int row = loginService.couponcheck(userid);
 		return row;
 	}
+	
+	
+	
 	// 연지's AjaxController
 
-	//
 	@GetMapping("/reviewRecommend/{reviewId}")
 	public HashMap<String, Object> recommend(@PathVariable("reviewId") int review, Principal principal) {
 		HashMap<String, Object> map = new HashMap<>();
