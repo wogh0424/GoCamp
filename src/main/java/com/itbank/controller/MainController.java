@@ -21,6 +21,7 @@ import com.itbank.model.FreeBoardDTO;
 import com.itbank.model.GocampReviewDTO;
 import com.itbank.model.ItemDTO;
 import com.itbank.model.PageAndSearchDTO;
+import com.itbank.model.ProductDTO;
 import com.itbank.model.MainPagingDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.model.NoticeBoardDTO;
@@ -33,6 +34,7 @@ import com.itbank.service.GocampReviewService;
 import com.itbank.service.LikeService;
 import com.itbank.service.MypageService;
 import com.itbank.service.NoticeBoardService;
+import com.itbank.service.ProductService;
 import com.itbank.service.RecommendService;
 
 @Controller
@@ -48,7 +50,7 @@ public class MainController {
 	@Autowired private LikeService likeService;
 	@Autowired private MypageService mypageService;
 	@Autowired private RecommendService recommendService;
-
+	@Autowired private ProductService productService;
 	
 	@GetMapping("/camp")
 	public ModelAndView main(@RequestParam(value="page", defaultValue="1") int page, 
@@ -229,7 +231,8 @@ public class MainController {
 		int reviewCnt = reviewService.countByKeyword(srchKywrd);
 		List<FreeBoardDTO> freelist = freeService.searchByKeyWord(srchKywrd);
 		int freeCnt = freeService.countByKeyword(srchKywrd);
-		
+		List<ProductDTO> productlist = productService.searchByKeyWord(srchKywrd);
+		int productCnt = productService.countByKeyWord(srchKywrd);
 		mav.addObject("keyword", srchKywrd);
 		mav.addObject("campList", camplist);
 		mav.addObject("campCnt", campCnt);
@@ -241,6 +244,8 @@ public class MainController {
 		mav.addObject("reviewCnt", reviewCnt);
 		mav.addObject("freelist", freelist);
 		mav.addObject("freeCnt", freeCnt);
+		mav.addObject("productlist", productlist);
+		mav.addObject("productCnt", productCnt);
 		return mav;
 	}
 	
