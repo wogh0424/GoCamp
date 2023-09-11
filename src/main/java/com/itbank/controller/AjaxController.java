@@ -204,16 +204,13 @@ public class AjaxController {
 		return row;
 	}
 	
-<<<<<<< HEAD
 	@PostMapping("/gotopay/{userid}")
 	public int gotopay (@RequestBody PaylistDTO dto) {
 		int row = productService.paylist(dto);
 		return row;
 	}
-=======
 	
 	
->>>>>>> c38b43ed72a27927375025fe6ea7aad6397059f3
 	// 연지's AjaxController
 
 	@GetMapping("/reviewRecommend/{reviewId}")
@@ -228,13 +225,7 @@ public class AjaxController {
 			boolean isReviewRecommended = recommendService.isReviewRecommended(review, member);
 			int getReviewRecommendCount = recommendService.getReviewRecommendCount(review);
 
-<<<<<<< HEAD
-			    row = recommendService.deleteReviewRecommend(review, member); 
-				}
-			    return row;
-			}
 	
-=======
 			map.put("isReviewRecommended", isReviewRecommended);
 			map.put("getReviewRecommendCount", getReviewRecommendCount);
 
@@ -280,7 +271,6 @@ public class AjaxController {
 		return row;
 	}
 
->>>>>>> c38b43ed72a27927375025fe6ea7aad6397059f3
 	@GetMapping("/admin/requestReportedData")
 	private List<ReportDTO> requestReportedData() {
 		List<ReportDTO> originalList = adminService.requestReportedData();
