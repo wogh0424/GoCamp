@@ -1,6 +1,5 @@
 package com.itbank.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.model.BasketDTO;
 import com.itbank.model.CouponDTO;
+import com.itbank.model.MemberDTO;
 import com.itbank.model.ProductDTO;
 import com.itbank.model.ShopPagingDTO;
 import com.itbank.service.LoginService;
@@ -96,14 +96,11 @@ public class ProductController {
 		    // 1. 로그인된 사용자의 userid 얻기
 		    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		    String userId = null;
-		    String userid = null;
 		    
 		    if (principal instanceof UserDetails) {
 		        userId = ((UserDetails) principal).getUsername(); // getUsername()은 userid를 반환한다고 가정
-		        userid = ((UserDetails) principal).getUsername();
 		    } else {
 		        userId = principal.toString();
-		        userid = principal.toString();
 		    }
 		    if (userId == null) {
 		    // 에러 처리 (예: 로그인 페이지로 리다이렉트)
@@ -111,7 +108,7 @@ public class ProductController {
 		    }
 		    // 2. 해당 userid의 장바구니 항목 가져오기
 		    List<BasketDTO> basketlist = productService.basketSelectAll(userId);
-		    List<CouponDTO> coupon = loginService.couponSelectAll(userid);
+		    List<CouponDTO> coupon = loginService.couponSelectAll(userId);
 		    // 3. 결과를 ModelAndView 객체에 추가하고 반환
 		    mav.addObject("basketlist", basketlist);
 		    mav.addObject("coupon", coupon);
@@ -122,6 +119,26 @@ public class ProductController {
 	@GetMapping("/orderpay")
 	public ModelAndView orderpay() {
 		ModelAndView mav = new ModelAndView("product/orderpay");
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userId = null;
+		
+		if (principal instanceof UserDetails) {
+	        userId = ((UserDetails) principal).getUsername(); // getUsername()은 userid를 반환한다고 가정
+	    } else {
+	        userId = principal.toString();
+	    }
+	    if (userId == null) {
+	    // 에러 처리 (예: 로그인 페이지로 리다이렉트)
+	        return new ModelAndView("redirect:/login");
+	    }
+	    // 2. 해당 userid의 장바구니 항목 가져오기]
+	    List<MemberDTO> userInfo = productService.getuserInfo(userId);
+	    List<BasketDTO> orderlist = productService.basketSelectAll(userId);
+	    List<CouponDTO> coupon = loginService.couponSelectAll(userId);
+	    // 3. 결과를 ModelAndView 객체에 추가하고 반환
+	    mav.addObject("userInfo", userInfo);
+	    mav.addObject("orderlist", orderlist);
+	    mav.addObject("coupon", coupon);
 		return mav;
 	}
 	
@@ -134,15 +151,29 @@ public class ProductController {
 	
 	// 주문목록
 	@GetMapping("/orderlist")
-	public ModelAndView orderlist(Principal principal) {
+	public ModelAndView orderlist() {
 		ModelAndView mav = new ModelAndView("product/orderlist");
-//		String userid = principal.getName();
-//		
-//		List<MemberDTO> member = productService.userInfo(userid);
-//		mav.addObject("member", member);
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userId = null;
 		
+		if (principal instanceof UserDetails) {
+	        userId = ((UserDetails) principal).getUsername(); // getUsername()은 userid를 반환한다고 가정
+	    } else {
+	        userId = principal.toString();
+	    }
+	    if (userId == null) {
+	    // 에러 처리 (예: 로그인 페이지로 리다이렉트)
+	        return new ModelAndView("redirect:/login");
+	    }
+	    // 2. 해당 userid의 장바구니 항목 가져오기
+	    List<BasketDTO> basketlist = productService.basketSelectAll(userId);
+	    List<CouponDTO> coupon = loginService.couponSelectAll(userId);
+	    // 3. 결과를 ModelAndView 객체에 추가하고 반환
+	    mav.addObject("basketlist", basketlist);
+	    mav.addObject("coupon", coupon);
 		return mav;
 	}
+	
 	
 	// 장바구니 삭제
 	@GetMapping("/basket/{idx}")
@@ -159,4 +190,5 @@ public class ProductController {
 		System.out.println(row + "행이 수정되었습니다");
 		return "redirect:/product/basket/{idx}";
 	}
+	
 }

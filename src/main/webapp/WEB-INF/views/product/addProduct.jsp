@@ -10,15 +10,7 @@
 			<p><input type="text" name="price" placeholder="상품 가격 입력" required></p>
 			<p><input type="text" name="amount" placeholder="상품 수량 입력" required></p>
 			<p><textarea rows="10" name="pContent" placeholder="상품 설명 입력" required></textarea></p>
-			<p><select name="pCategory" required>
-					<option value="텐트">식품</option>
-					<option value="침낭/매트">캠핑 용품</option>
-					<option value="화로">일반</option>
-					<option value="주방 도구">도구</option>
-					<option value="계절 용품">계절 용품</option>
-					<option value="식품">식품</option>
-					<option value="일반">일반</option>
-				</select></p>
+
 				<label class="image" for="thumbnail">상품 이미지 선택</label>
 			    <input type="file" name="upload" id="thumbnail" accept="image/*" multiple>
 			  	<div class="image-preview" id="imagePreview">썸네일 사진을 확인할 수 있습니다</div>

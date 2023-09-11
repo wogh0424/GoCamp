@@ -11,36 +11,23 @@
 			<ul>
 				<li class="view_pName"><strong>${dto.pName }</strong></li>
 				<li class="view_price">${dto.price }원</li>
-				<li>별점 : <strong class="view_pStar">${dto.pStar } / 5</strong></li>
+<%-- 				<li>별점 : <strong class="view_pStar">${dto.pStar } / 5</strong></li> --%>
 				<li><details class="view_pContent">${dto.pContent }</details></li>
 				<li class="view_amount">${dto.amount }개 구매 가능</li>
-				<li class="view_und"><button>-</button><input class="view_choice" type="text" name="choice" placeholder="1"><button>+</button></li>
-				<li class="view_btn"><button>💳 결제하기</button>&nbsp;<button>💕 찜 ${dto.pick }</button>&nbsp;<button id="grocery" class="view_cart" >🧺 장바구니</button></li>
+<!-- 				<li class="view_und"><button>-</button><input class="view_choice" type="text" name="choice" placeholder="1"><button>+</button></li> -->
+				<li class="view_btn"><button>💳 결제하기</button>&nbsp; <%-- <button>💕 찜 ${dto.pick }</button>&nbsp; --%><button id="grocery" class="view_cart" >🧺 장바구니</button></li>
 			</ul>
 		</div>
-	</div>
-	<div class="view_review">
-		<div class="review_user">
-			<ul>
-				<li>${dto.pStar } / 5</li>
-				<li>유저 아이디 | ${dto.sDate }</li> 
-				<li>리뷰 내용</li>
-			</ul> 
-		<div class="review_img">
-		</div>
-		</div>
-	</div>
-	<div class="view_longimg">
 	</div>
 </div>
 
 <script>
-const vid = '${dto.idx}'
+const pid = '${dto.idx}'
 	
 	window.onload = imageViewHandler()
 	
 	async function imageViewHandler() {
-		const url = cpath + "/showProductImage/" + vid
+		const url = cpath + "/showProductImage/" + pid
 		const currImageView = document.getElementById('currentImageOverView')
 		await fetch(url)
 		.then(resp => resp.json())
@@ -64,7 +51,7 @@ const vid = '${dto.idx}'
 <script>
 	const grocery = document.getElementById('grocery')
 	const pName = '${dto.pName}'
-	const pid = '${dto.idx}'
+//	const pid = '${dto.idx}'
 	const price = '${dto.price}'
 	const userid = '${pageContext.request.userPrincipal.name}'
 	const amount = '1'    // amount만 수정
@@ -103,5 +90,6 @@ const vid = '${dto.idx}'
 		}
 	}
 </script>
+
 </body>
 </html>
