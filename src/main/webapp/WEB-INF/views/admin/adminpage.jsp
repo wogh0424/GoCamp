@@ -260,7 +260,7 @@ article.selected {
         #campRoot {
             border: 2px solid black;
             width: 80%;
-            height: 70%;
+            height: 71%;
             margin: 10px auto;
             overflow-y: auto;
             position: relative;

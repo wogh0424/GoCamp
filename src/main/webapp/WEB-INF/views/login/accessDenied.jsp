@@ -43,18 +43,6 @@
 </style>
 
 
-<div id="errorHead">
-	<div id="errorBanner" style="background-image: url('${cpath}/resources/image/main/noaccess.jpg');">
-	</div>
-</div>
-<div id="errorNotice">
-	<div id="noResponse">
-		<p><img src="${cpath }/resources/image/main/404.png" width="100px" height="100px" style="margin: 0 auto;"></p>
-		<h4><b>사이트에 대한 권한이 없습니다.</b></h4>
-		<p>서비스 이용에 불편을 드려 죄송합니다.<br>메인페이지로 이동 후 원하는 정보에 대한 페이지로 연결해주시기 바랍니다.
-		<p><a href="${cpath }/"><button id="toMain">메인으로 돌아가기</button></a></p>
-	</div>
-</div>
 
 
 <%@ include file="../footer.jsp" %>
