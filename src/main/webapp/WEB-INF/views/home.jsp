@@ -155,6 +155,7 @@
 </div>
 
 
+
 <script>
 let currentIndex = 0;
 const reviewRank = document.querySelector('.review_rank')
@@ -206,6 +207,7 @@ nextButton.addEventListener('click', function() {
 
 
 </script>
+
 
 
 	

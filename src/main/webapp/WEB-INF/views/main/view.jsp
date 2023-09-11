@@ -224,7 +224,7 @@
             </div>
             
             
-			<!--               	  캠핑장 리뷰 페이지 - 연지 -->
+		<!--               	  캠핑장 리뷰 페이지 - 연지 -->
 
 			<div class="intro4">
 				<div id="reviewContainer">
@@ -244,10 +244,10 @@
 								<textarea name="review_content" placeholder="리뷰작성" required></textarea>
 							</p>
 							<input type="hidden" name="gocamp" value="${view.contentId }" />
-							<label for="upload">첨부파일 미리보기:</label>
+							<label for="upload">첨부파일 미리보기</label>
 								<div id="preview"></div>
-								<div><p><input name="upload" type="file" id="upload" accept="image/*" multiple ></p></div>
-							<p><input type="submit" id="reviewBtn" value="리뷰 등록"></p>
+								<div><input name="upload" type="file" id="upload" accept="image/*" multiple ></div>
+							<input type="submit" id="reviewBtn" value="리뷰 등록">
 						
 
 						</form>
@@ -326,6 +326,7 @@
 </div>
 
 
+		
 			<!--  캠핑장 리뷰 페이지 - 연지 -->
 <%@include file="../footer.jsp" %>  
 <a
@@ -465,6 +466,27 @@
         const input = document.querySelector('input[name="upload"]')
         const preview = document.getElementById('preview')
     
+        
+        	function changeHandler(event) {
+	preview.innerHTML = ''
+	
+    if (event.target.files) {
+        const files = event.target.files
+        for (const file of files) {
+            const reader = new FileReader()
+            reader.onload = function(e) {
+                const image = new Image()
+                image.src = e.target.result
+                preview.appendChild(image)
+                image.classList.add('previewImage');
+            }
+            reader.readAsDataURL(file)
+        }
+      
+    } 
+}
+	
+        
 		input.onchange = changeHandler
     </script>
 		
@@ -474,7 +496,7 @@
   
     
 
-<!--    연지 리뷰 보여주기  scipt -->
+<!--    연지 리뷰 보여주기  script -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     	 
