@@ -5,7 +5,7 @@
 
 <div id="boardContainer">
 <div id=boardTitle style="background-image: url('${cpath}/resources/image/board/fireImg.jpg');">
-	<div id=board><a href="${cpath}/noticeBoard">Notice</a></div>
+	<div id=boardBigTitle><a href="${cpath}/noticeBoard">Notice</a></div>
 </div>
 
 <form method="GET" class="boardSearchForm">

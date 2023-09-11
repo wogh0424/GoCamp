@@ -224,7 +224,7 @@
             </div>
             
             
-			<!--               	  캠핑장 리뷰 페이지 - 연지 -->
+		<!--               	  캠핑장 리뷰 페이지 - 연지 -->
 
 			<div class="intro4">
 				<div id="reviewContainer">
@@ -244,10 +244,10 @@
 								<textarea name="review_content" placeholder="리뷰작성" required></textarea>
 							</p>
 							<input type="hidden" name="gocamp" value="${view.contentId }" />
-							<label for="upload">첨부파일 미리보기:</label>
+							<label for="upload">첨부파일 미리보기</label>
 								<div id="preview"></div>
-								<div><p><input name="upload" type="file" id="upload" accept="image/*" multiple ></p></div>
-							<p><input type="submit" id="reviewBtn" value="리뷰 등록"></p>
+								<div><input name="upload" type="file" id="upload" accept="image/*" multiple ></div>
+							<input type="submit" id="reviewBtn" value="리뷰 등록">
 						
 
 						</form>
@@ -255,10 +255,10 @@
 
 					<c:if test="${pageContext.request.userPrincipal == null}">
 						<fieldset id="login-message">
-							<p>
+							<div class="isReview">
 								로그인해야 리뷰를 작성할 수 있습니다😄<a href="${cpath }/login/loginForm">
-									로그인go</a>
-							</p>
+									로그인go</a></div>
+							
 						</fieldset>
 					</c:if>
 				</div>
@@ -267,7 +267,7 @@
 					<c:choose>
 						<c:when
 							test="${empty list && pageContext.request.userPrincipal != null}">
-							<p>아직 등록된 리뷰가 없습니다.</p>
+							<div class="isReview">아직 등록된 리뷰가 없습니다.</div>
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="review" items="${list }">
@@ -326,6 +326,7 @@
 </div>
 
 
+		
 			<!--  캠핑장 리뷰 페이지 - 연지 -->
 <%@include file="../footer.jsp" %>  
 <a
@@ -403,6 +404,7 @@
 		const recommendReviewBtn = document.querySelectorAll('button.recommendReviewBtn')
 		const reviewIdx = document.querySelectorAll('div.reviewIdx')
 		
+		
 		// 새로고침해도 유지시켜주기 위해 추가
 		document.addEventListener('DOMContentLoaded', async function() {
 		    for (let i = 0; i < reviewIdx.length; i++) {
@@ -473,7 +475,7 @@
   
     
 
-<!--    연지 리뷰 보여주기  scipt -->
+<!--    연지 리뷰 보여주기  script -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     	 

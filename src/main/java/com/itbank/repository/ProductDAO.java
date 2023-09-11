@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.itbank.model.BasketDTO;
+import com.itbank.model.CouponDTO;
+import com.itbank.model.MemberDTO;
+import com.itbank.model.PaylistDTO;
 import com.itbank.model.ProductDTO;
 import com.itbank.model.Product_fileDTO;
 
@@ -52,5 +55,9 @@ public interface ProductDAO {
 	List<ProductDTO> selectAll(HashMap<String, Object> params);
 
 	int selectCount(String pName);
+
+	List<MemberDTO> getuserInfo(String userId);
+
+	int setPayList(PaylistDTO dto);
 
 }

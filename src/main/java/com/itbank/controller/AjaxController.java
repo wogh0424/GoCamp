@@ -24,6 +24,7 @@ import com.itbank.model.ImageDTO;
 import com.itbank.model.IncomeDTO;
 import com.itbank.model.ItemDTO;
 import com.itbank.model.MemberDTO;
+import com.itbank.model.PaylistDTO;
 import com.itbank.model.Product_fileDTO;
 import com.itbank.model.ReportDTO;
 import com.itbank.model.ProductDTO;
@@ -202,9 +203,16 @@ public class AjaxController {
 		int row = loginService.couponcheck(userid);
 		return row;
 	}
+	
+	@PostMapping("/gotopay/{userid}")
+	public int gotopay (@RequestBody PaylistDTO dto) {
+		int row = productService.paylist(dto);
+		return row;
+	}
+	
+	
 	// 연지's AjaxController
 
-	//
 	@GetMapping("/reviewRecommend/{reviewId}")
 	public HashMap<String, Object> recommend(@PathVariable("reviewId") int review, Principal principal) {
 		HashMap<String, Object> map = new HashMap<>();
@@ -217,6 +225,7 @@ public class AjaxController {
 			boolean isReviewRecommended = recommendService.isReviewRecommended(review, member);
 			int getReviewRecommendCount = recommendService.getReviewRecommendCount(review);
 
+	
 			map.put("isReviewRecommended", isReviewRecommended);
 			map.put("getReviewRecommendCount", getReviewRecommendCount);
 

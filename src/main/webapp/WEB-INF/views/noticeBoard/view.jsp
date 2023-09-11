@@ -4,7 +4,7 @@
 
 
 <div id=boardTitle style="background-image: url('${cpath}/resources/image/board/fireImg.jpg');">
-	<div id=board><a href="${cpath}/noticeBoard">Notice</a></div>
+	<div id=boardBigTitle><a href="${cpath}/noticeBoard">Notice</a></div>
 </div>
 
 <div id="boardView">
@@ -17,7 +17,7 @@
 		<c:forTokens var="filePath" items="${dto.filePath}" delims=",">
 			<c:choose>
 	        <c:when test="${fn:contains(filePath, '더캠핑 정보등록')}">
-	            <a href="${cpath}/upload/${filePath}" download>더캠핑 정보등록 양식 .xlsx</a>
+	            <a href="${cpath}/upload/${filePath}" download>💾 더캠핑 정보등록 양식 .xlsx</a>
 	        </c:when>
 	        <c:otherwise>
 	            <div class="viewUpload"><img src="${cpath}/upload/${filePath}"></div>

@@ -62,8 +62,8 @@
   	  select count(*) from recommend where review = #{review}
 	</select>
 	
-	<update id="reviewRecommend" parameterType="int">
-		update recommend set recommendReviewCnt = recommendReviewCnt + 1 where review = #{review}
-	</update>
+<!-- 	<update id="reviewRecommend" parameterType="int"> -->
+<!-- 		update recommend set recommendReviewCnt = recommendReviewCnt + 1 where review = #{review} -->
+<!-- 	</update> -->
 	
 </mapper>	

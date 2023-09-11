@@ -17,13 +17,12 @@
 			<p><input type="text" name="price" value="${dto.price }" placeholder="상품 가격 입력"></p>
 			<p><input type="text" name="amount" value="${dto.amount }" placeholder="상품 수량 입력"></p>
 			<p><textarea rows="10" name="pContent">${dto.pContent }</textarea></p>
-			<p><input type="text" name="pCategory" value="${dto.pCategory }" placeholder="상품 카테고리 입력"></p>
 			<input type="hidden" name="idx" value="${dto.idx }">
 			<div id="currentImageOverView"></div>
 			
 			<label class="image" for="thumbnail">상품 이미지 선택</label>
-			<input type="file" name="upload" id="thumbnail" accept="image/*" multiple>
-			<div class="image-preview" id="imagePreview">썸네일 사진을 확인할 수 있습니다</div>
+			<input type="file" name="upload" id="addImage" accept="image/*" multiple>
+			<div class="image-preview" id="imagePreview">추가된 사진을 확인할 수 있습니다</div>
 		    <input class="modify_submit" type="submit" value="상품 등록 수정">
 		</div>
 	</form>
@@ -32,11 +31,12 @@
 <script>
 
 	const pid = '${dto.idx}'
-	const imageInput = document.getElementById('thumbnail');
+	const imageInput = document.getElementById('addImage');
  	const imagePreview = document.getElementById('imagePreview');
 	
-	window.onload = imageViewHandler()
- 	imageInput.onchange = MultiImageViewHandler()
+ 	window.onload = MultiImageViewHandler()
+// 	imageInput.onchange = MultiImageViewHandler()
+ 	imageInput.onchange = imageViewHandler()
 	
 	async function imageViewHandler() {
 		const url = cpath + "/showProductImage/" + pid
@@ -63,7 +63,7 @@
 			
 			currImages.forEach((ob, index) => ob.addEventListener('click', () => imageDeleteHandler(ob, index)))
 		})
-	}
+ 	}
 	
 	async function imageDeleteHandler(ob, index) {
 		if(confirm = '이 이미지를 삭제하겠습니까?') {

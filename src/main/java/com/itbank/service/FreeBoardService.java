@@ -31,7 +31,7 @@ public class FreeBoardService{
 	
 	@Autowired AdminDAO adminDao;
 	
-	private File dir = new File("C:\\Users/yeonji/git/GoCamp/src/main/webapp/resources/image");
+	private File dir = new File("/usr/local/tomcat/webapps/upload");
 
 
 
