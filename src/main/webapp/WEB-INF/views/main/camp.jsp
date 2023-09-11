@@ -405,7 +405,7 @@
 							<img src="${item.firstImageUrl }" width="300px" height="200px" style="margin-right: 30px;">
 						</c:if>
 						<c:if test="${!fn:contains(item.firstImageUrl, 'gocamping') }">
-							<img src="${cpath }/resources/upload/camp/${item.firstImageUrl }" width="300px" height="200px" style="margin-right: 30px;">
+							<img src="${cpath }/resources/upload/${item.firstImageUrl }" width="300px" height="200px" style="margin-right: 30px;">
 						</c:if>
 						</a>
 					</div>
