@@ -111,6 +111,7 @@ public class ProductService {
 				try {
 					file.transferTo(dest);
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 				int fk = dao.selectMaxIdxFromUpload();
 
