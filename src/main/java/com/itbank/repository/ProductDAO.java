@@ -57,7 +57,9 @@ public interface ProductDAO {
 
 	List<MemberDTO> getuserInfo(String userId);
 
-	int setPayList(PaylistDTO dto);
+	PaylistDTO paylist(String userId);
+
+	int gotopay(PaylistDTO dto);
 
 	List<ProductDTO> searchByKeyWord(String srchKywrd);
 

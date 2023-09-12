@@ -25,7 +25,7 @@ public class ProductService {
 	
 	@Autowired private ProductDAO dao;
 	
-	private File dir = new File("/usr/local/tomcat/webapps/upload");
+	private File dir = new File("/upload");
 		
 	public ProductService() {
 		if(dir.exists() == false) {
@@ -166,9 +166,13 @@ public class ProductService {
 		return dao.getuserInfo(userId);
 	}
 
-	public int paylist(PaylistDTO dto) {
+	public PaylistDTO paylist(String userId) {
+		return dao.paylist(userId);
+	}
+
+	public int gotopay(PaylistDTO dto) {
 		int row = 0;
-		row = dao.setPayList(dto);
+		row =  dao.gotopay(dto);
 		return row;
 	}
 

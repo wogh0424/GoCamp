@@ -112,6 +112,29 @@
 		height: 52px;
 		background-color: #4476D5;
 	}
+	#chkpnummsg
+	{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 10px;
+		width: 380px;
+		height: 20px;
+		color: white;
+		font-weight: bold;
+		font-size: 12px;
+	}
+	#checkpasswordmsg {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 10px;
+		width: 380px;
+		height: 20px;
+		color: white;
+		font-weight: bold;
+		font-size: 12px;
+	}
 	
 	
 		</style>
@@ -133,6 +156,8 @@
 				<p>
 					<input type="password" name="confirmpw" id="confirmpw" placeholder="비밀번호 재확인" required>
 				</p>
+				<span id="chkpnummsg"></span>
+				<span id="checkpasswordmsg"></span>
 				<p>
 					<input type="text" name="username" placeholder="이름 입력" required>
 				</p>
@@ -173,6 +198,11 @@
 	const dupCheckBtn = document.getElementById('dupCheckBtn');		    // 유저id 중복확인 버튼
 	const dupMessage = document.getElementById('dubMessage');		    // 중복체크 메시지
 	
+	const pnum = document.querySelector('input[name="pnum"]');			// 전화번호
+	
+	const userpw = document.getElementById('userpw')					// 패스워드
+	const confirmpw = document.getElementById('confirmpw')				// 패스워드 확인
+	
 	const nickname = document.querySelector('input[name="nickname"]');  // 닉네임 input
 	const nicCheckBtn = document.getElementById('nicCheckBtn');		    // 닉네임 중복확인 버튼
 	const checknicmsg = document.getElementById('checknicmsg');			// 중복체크 메시지
@@ -182,7 +212,9 @@
 	
 	const email = document.querySelector('input[name="email"]');		// email input
 	
+	const submitBtn = document.getElementById('signupSubmitBtn');		// 메일인증 버튼
 	
+	// input에 넣어야 될 내용 외 막는 기능
 	// 정규표현식 한글 및 특수문자 사용못하도록
 	function removeKoreanAndSpecialChars(inputElement) {
 	    inputElement.addEventListener('input', function() {
@@ -197,8 +229,16 @@
 	    });
 	}
 	
-	removeKoreanAndSpecialChars(userid); // userid
-	removeKoreanExceptAtForEmail(email)  // email
+	// 정규표현식 전화번호 전용(숫자만 가능)
+	function removeNonNumericForPnum(inputElement) {
+	    inputElement.addEventListener('input', function() {
+	        inputElement.value = inputElement.value.replace(/[^0-9]/g, '');
+	    });
+	}
+	
+	removeKoreanAndSpecialChars(userid); 	// userid
+	removeKoreanExceptAtForEmail(email);  	// email
+	removeNonNumericForPnum(pnum);			// pnum
 	
 	// 회원가입 핸들러
 	async function checkInputHandler() {
@@ -226,7 +266,9 @@
 	    // 닉네임 검사
 	    if (nickname.value == '') {
 	        nicCheckBtn.focus();
-	        alert('사용 가능한 ID입니다. 사용하실 닉네임을 입력해주세요.');			// ID가 사용가능하면 메시지를 띄우고 닉네임 입력하라고 띄움
+	     	
+	        // ID가 사용가능하면 알림 표시
+	        alert('사용 가능한 ID입니다. 사용하실 닉네임을 입력해주세요.');			
 	        return;
 	    }
 
@@ -238,28 +280,33 @@
 	        nickname.focus();
 	        return;
 	    }
-
+		// 사용 불가능한 닉네임인 경우
 	    if (nicCount != 0) {
+	    	// span checknicmsg안에 메시지를 표시
 	        checknicmsg.innerText = '이미 사용중인 닉네임입니다';
+	    	// 빨간색으로 컬러를 변경
 	        checknicmsg.style.color = 'red';
 	        nickname.select();
 	        return;
 	    }
-
+		
+		// 사용가능한 닉네임인 경우
+		// span checknicmsg안에 메시지를 표시
 	    checknicmsg.innerText = '사용 가능한 닉네임입니다';
 	    checknicmsg.classList.add('check');
+	 	// 파란색으로 컬러를 변경
 	    checknicmsg.style.color = 'blue';
 	}
 
 	dupCheckBtn.addEventListener('click', checkInputHandler);	// ID중복확인 버튼클릭 이벤트
 	nicCheckBtn.addEventListener('click', checkInputHandler);   // 닉네임중복확인 버튼클릭 이벤트
-
 		
 		// 인증번호 발송
 		async function sendAuthNumberHandler(){
 			const email = document.querySelector('input[name="email"]')
-			
+			// input userid, uickname이 비어 있다면
 			if (!userid.value || !nickname.value) {
+				// 알림을 띄움
 		        alert('사용할 ID와 닉네임을 먼저 입력해주세요.');
 		        return;
 		    }
@@ -298,8 +345,7 @@
 		    }
 		}
 		
-		const submitBtn = document.getElementById('signupSubmitBtn');
-
+		// 회원가입 기본동작을 막는 리스터
 		submitBtn.addEventListener('click', async function(event) {
 		    event.preventDefault(); // 버튼의 기본 동작인 폼 제출을 중단
 
@@ -321,8 +367,8 @@
 		    } else {
 		        alert('회원가입이 성공하였습니다.');
 		        const signForm = document.getElementById('signForm');
-		        await couponHandler()
 		        signForm.submit(); // 폼 제출
+		        // await couponHandler()
 		    }
 		});
 		
@@ -331,61 +377,85 @@
 	</script>
 
 	<!-- 비밀번호 재확인 코드  -->
-	<script>		
-			const userpw = document.getElementById('userpw')
-			const confirmpw = document.getElementById('confirmpw')
-			
-			// 비밀번호 재확인 
-			function validatepw(){
-				if(userpw.value != confirmpw.value){
-					confirmpw.setCustomValidity("비밀번호가 일치하지 않습니다")
-					// setCustomValidity가 뜨면 함수의 진행을 막을수 있고 텍스트도 같이 뛰워줄수 있다
-				} else {
-					confirmpw.setCustomValidity('')
-				}
-			}
-			userpw.onchange = validatepw
-			// onchange : JS를 통해 변화가 일어났는지 감지한다. addEventListener와 같은 기능
-			confirmpw.onkeyup = validatepw
-			// onkeyup : 사용자가 키보드의 키를 눌렀다가 땠을 때
-	</script>
-	
-	<!-- 전화번호 입력칸에 숫자만 사용가능하도록 하는 코드  -->
-	<script>
-	const pnum = document.querySelector('input[name="pnum"]');
-
-	// pnum 입력 필드에 숫자 외의 문자를 입력하지 못하게 하는 이벤트 리스너
-	pnum.addEventListener('input', function() {
-	    // 숫자 외의 문자를 찾는 정규 표현식
-	    const nonNumericRegex = /[^0-9]/g;
-
-	    // pnum에 숫자 외의 문자가 포함되어 있다면 제거
-	    if (nonNumericRegex.test(pnum.value)) {
-	        pnum.value = pnum.value.replace(nonNumericRegex, '');
+	<script>					
+	// 비밀번호 재확인 
+	function validatepw() {
+	    if (userpw.value != confirmpw.value) {
+	        confirmpw.setCustomValidity("비밀번호가 일치하지 않습니다");
+	        checkpasswordmsg.textContent = "비밀번호가 서로 다릅니다";
+	        checkpasswordmsg.style.color = "orange";
+	    } else {
+	        confirmpw.setCustomValidity('');
+	        checkpasswordmsg.textContent = "비밀번호가 일치합니다";
+	        checkpasswordmsg.style.color = "blue";
 	    }
-	});
+	}
+	
+	function checkPasswordStrength() {
+	    const password = userpw.value;
+	    let count = 0;
+	
+	    // 숫자 체크
+	    if (/[0-9]/.test(password)) {
+	        count++;
+	    }
+	
+	    // 영어 체크
+	    if (/[a-zA-Z]/.test(password)) {
+	        count++;
+	    }
+	
+	    // 특수문자 체크
+	    if (/[^a-zA-Z0-9]/.test(password)) {
+	        count++;
+	    }
+	
+	    switch (count) {
+	        case 3:
+	            chkpnummsg.textContent = "보안 강도가 높음";
+	            chkpnummsg.style.color = "green";
+	            break;
+	        case 2:
+	            chkpnummsg.textContent = "보안 강도가 보통";
+	            chkpnummsg.style.color = "orange";
+	            break;
+	        default:
+	            chkpnummsg.textContent = "보안 강도가 낮음";
+	            chkpnummsg.style.color = "red";
+	            break;
+	    }
+	}
+	
+	userpw.oninput = function() {
+	    validatepw();
+	    checkPasswordStrength();
+	}
+	// onchange : JS를 통해 변화가 일어났는지 감지한다. addEventListener와 같은 기능
+	confirmpw.oninput = validatepw;
+	
+	// onkeyup : 사용자가 키보드의 키를 눌렀다가 땠을 때
+	confirmpw.onkeyup = validatepw
 	</script>
+
 	
 	<script>
 		
-	async function couponHandler() {
-		const url = cpath + '/coupon/' + userid.value;
-		await fetch(url)
-		.then(resp => resp.json())
-		.then(json => {
-			if (signForm != null) {
-				alert('축하합니다! 가입기념쿠폰이 발급되었습니다. 마이페이지에서 확인하세요')
-				signForm.submit();
-			}
-			else {
-				alert('회원가입 중 문제가 발생하였습니다')
-				return
-			}
-		})
-	}
+		async function couponHandler() {
+			
+			await fetch(url)
+			.then(resp => resp.json())
+			.then(json => {
+				if (json) {
+					alert('축하합니다! 가입기념쿠폰이 발급되었습니다. 마이페이지에서 확인하세요')
+					signForm.submit()
+				}
+				else {
+					alert('회원가입 중 문제가 발생하였습니다')
+					return
+				}
+			})
+		}
 		
 	</script>
-
-
 </body>
 </html>

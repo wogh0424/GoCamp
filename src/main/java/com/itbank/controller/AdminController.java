@@ -82,5 +82,4 @@ public class AdminController {
 		System.out.println(row != 0 ? "삭제성공" : "삭제실패");
 		return "redirect:/admin/ControluserBoard";
 	}
-
 }

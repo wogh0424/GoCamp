@@ -16,21 +16,17 @@
 		</div>
 		<div class="basket_checklist">
 			<ul>
-				<li><input type="checkbox" id="checkboxAll">전체선택</li>
-				<li><input type="reset" value="X선택삭제"></li>
+<!-- 				<li><input type="checkbox" id="checkboxAll">전체선택</li> -->
 			</ul>
 		</div>
-		<div class="basket_title">
-			<input type="checkbox">TheCamping Basket
-		</div>
+		<div class="basket_title">TheCamping Basket</div>
 		<div class="basket_list">
 		<c:forEach var="dto" items="${basketlist }">
 			<ul>
-				<li><input type="checkbox" class="icheck"></li>
+<!-- 				<li id="icheck"><input type="checkbox" class="icheck"></li> -->
 				<li><input type="hidden" name="${dto.idx }"></li> <!-- 히든 처리된 dto.idx -->
 				<li>${dto.pName }</li>
 				<li><a href="${cpath }/product/basket/${dto.idx}"><button>X</button></a></li>
-				<li>상품설명</li>
 				<li class="product-number"><input type="number" value="${dto.amount }" readonly>
 	<!-- 					<p><button>주문수정</button></p> -->
 				</li>
@@ -111,9 +107,10 @@
 	document.getElementById('orderDay').innerText = dateStr
 	
 
+	const payAllBtn = document.getElementById('payAllBtn')
 	const userid = '${pageContext.request.userPrincipal.name}'
-	const totalOrderPrice = document.getElementById('totalOrderPrice')
-	const totalOrderAmount = document.getElementById('totalOrderAmount')
+	const totalOrderPrice = document.getElementById('totalOrderPrice').innerText
+	const totalOrderAmount = document.getElementById('totalOrderAmount').innerText
 	
 	payAllBtn.onclick = payAllBtnHandler
 	

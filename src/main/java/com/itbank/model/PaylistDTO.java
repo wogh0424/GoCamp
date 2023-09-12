@@ -1,17 +1,10 @@
 package com.itbank.model;
 
-//idx 			int		auto_increment primary key,
-//userid		varchar(30)	not null,
-//totalOrderPrice			int		not null,
-//totalOrderAmount	int		default 0
-//);
-
-
 public class PaylistDTO {
 	private int idx;
 	private String userid;
 	private int totalOrderPrice;
-	private int totalOederAmount;
+	private int totalOrderAmount;
 	
 	public int getIdx() {
 		return idx;
@@ -32,10 +25,10 @@ public class PaylistDTO {
 		this.totalOrderPrice = totalOrderPrice;
 	}
 	public int getTotalOederAmount() {
-		return totalOederAmount;
+		return totalOrderAmount;
 	}
 	public void setTotalOederAmount(int totalOederAmount) {
-		this.totalOederAmount = totalOederAmount;
+		this.totalOrderAmount = totalOederAmount;
 	}
 	
 	

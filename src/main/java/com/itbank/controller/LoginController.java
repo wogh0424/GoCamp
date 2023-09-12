@@ -85,4 +85,7 @@ public class LoginController {
 			System.out.println(row != 0? "변경성공" : "변경실패");
 		return "/home";
 	}
+	
+	@GetMapping("/login/register")
+	public void register() {}
 }
