@@ -700,11 +700,28 @@ aside {
 
 /*메뉴 드랍 다운 끝*/
 /*장바구니 페이지 시작*/
+.basket_checklist {
+	background-color: #3C5944;
+	border-radius: 10px;
+}
+.basket_checklist > ul {
+	margin: 0;
+	padding: 5px;
+	color: white;
+	font-weight: bold;
+}
 .basket_status>ul {
 	display: flex;
 	justify-content: flex-end;
 }
-
+.basket_title {
+	background-color: #F4C752;
+	color: white;
+	font-weight: bold;
+	padding: 5px;
+	border-radius: 10px;
+	text-shadow: 1px 1px 1px black;
+}
 .basket_checklist>ul {
 	display: flex;
 	justify-content: space-between;
@@ -724,6 +741,9 @@ aside {
 .basket_list>ul {
 	display: flex;
 	justify-content: center;
+	border: 1px solid black;
+	border-radius: 10px;
+	box-shadow: 1px 1px 1px black;
 }
 
 .basket_list>ul>li {
@@ -777,7 +797,7 @@ aside {
 
 .orderpay_status {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	border-bottom: 1px solid black;
 }
 
@@ -787,21 +807,41 @@ aside {
 
 .orderpay_list_title>ul {
 	display: flex;
-	justify-content: space-around;
+	justify-content: flex-start;
 }
-
-.orderpay_list {
-	border-bottom: 1px dashed black;
+.orderpay_list_title>ul>li {
+	display: flex;
+	align-items: center;
+	width: 300px;
+	height: 30px;
+	color: white;
+	font-weight: bold;
+	padding: 10px;
 }
 
 .orderpay_list>ul {
 	display: flex;
-	justify-content: space-around;
+	justify-content: flex-start;
+	border: 1px solid black;
+	border-radius: 10px;
 }
-
+.orderpay_list>ul>li {
+	display: flex;
+	align-items: center;
+	width: 300px;
+	height: 30px;
+	font-weight: bold;
+	padding: 10px;
+}
+.orderpay_list_title > ul {
+	background-color: #3C5944;
+	border: 1px solid black;
+	
+}
 #orderpay_title, #deliveryInfo_title {
 	font-weight: bold;
 	font-size: 15px;
+	color: blue;
 }
 
 .orderpay_delivery_address {
@@ -809,8 +849,60 @@ aside {
 }
 
 .orderpay_details {
-	border-bottom: 1px dashed black;
+	border-bottom: 1px solid black;
 }
+.orderlist_items {
+	width: 1000px;
+	height: 1000px;
+	margin: auto;
+}
+.saleUl {
+	background-color: #F4C752;
+	border: 1px solid black;
+}
+.saleUl > ul {
+	display: flex;
+	justify-content: flex-start;
+}
+.saleUl > ul > li {
+	display: flex;
+	align-items: center;
+	width: 300px;
+	height: 20px;
+	color: white;
+	font-weight: bold;
+	padding: 10px;
+}
+.saleUl_list > ul {
+	border: 1px solid black;
+	border-radius: 10px;
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 10px;
+}
+.saleUl_list > ul > li {
+	display: flex;
+	align-items: center;
+	width: 300px;
+	height: 30px;
+	font-weight: bold;
+	padding: 10px;
+}
+.orderpay_delivery_address,
+.orderpay_details {
+	border: 1px solid black;
+	border-radius: 10px;
+	margin-top: 5px;
+	background-color: white;
+	box-shadow: 1px 1px 1px black;
+	font-weight: bold;
+}
+.orderpay_delivery_address > ul > li,
+.orderpay_details ul > li {
+	padding: 3px;
+}
+
+
 
 #orderpayBtn {
 	width: 250px;
@@ -843,11 +935,7 @@ aside {
 	justify-content: flex-end;
 }
 
-.orderlist_items {
-	width: 1000px;
-	height: 1000px;
-	margin: auto;
-}
+
 /*주무녈제 페이지 끝*/
 /* 쇼핑몰 상품 추가 페이지 시작 */
 .addProduct_wrap {

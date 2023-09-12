@@ -169,8 +169,8 @@ public class ProductService {
 		return dao.getuserInfo(userId);
 	}
 
-	public List<PaylistDTO> paylist(String userId) {
-		return dao.payList(userId);
+	public PaylistDTO paylist(String userId) {
+		return dao.paylist(userId);
 	}
 
 	public int gotopay(PaylistDTO dto) {

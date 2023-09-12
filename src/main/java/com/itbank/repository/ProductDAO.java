@@ -58,7 +58,7 @@ public interface ProductDAO {
 
 	List<MemberDTO> getuserInfo(String userId);
 
-	List<PaylistDTO> payList(String userId);
+	PaylistDTO paylist(String userId);
 
 	int gotopay(PaylistDTO dto);
 

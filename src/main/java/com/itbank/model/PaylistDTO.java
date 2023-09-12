@@ -4,7 +4,7 @@ public class PaylistDTO {
 	private int idx;
 	private String userid;
 	private int totalOrderPrice;
-	private int totalOederAmount;
+	private int totalOrderAmount;
 	
 	public int getIdx() {
 		return idx;
@@ -25,10 +25,10 @@ public class PaylistDTO {
 		this.totalOrderPrice = totalOrderPrice;
 	}
 	public int getTotalOederAmount() {
-		return totalOederAmount;
+		return totalOrderAmount;
 	}
 	public void setTotalOederAmount(int totalOederAmount) {
-		this.totalOederAmount = totalOederAmount;
+		this.totalOrderAmount = totalOederAmount;
 	}
 	
 	

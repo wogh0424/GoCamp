@@ -133,7 +133,7 @@ public class ProductController {
 	        return new ModelAndView("redirect:/login");
 	    }
 	    // 2. 해당 userid의 장바구니 항목 가져오기
-	    List<PaylistDTO> paylist = productService.paylist(userId);
+	    PaylistDTO paylist = productService.paylist(userId);
 	    List<MemberDTO> userInfo = productService.getuserInfo(userId);
 	    List<BasketDTO> orderlist = productService.basketSelectAll(userId);
 	    List<CouponDTO> coupon = loginService.couponSelectAll(userId);
