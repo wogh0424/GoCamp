@@ -6,83 +6,83 @@
 <mapper namespace="com.itbank.repository.CampDAO">
 	<select id="selectAll" resultType="item"
 		parameterType="searchPage">
-		select *, (select count(*) from recommend where gocamp = gocamp.contentId) as recmCnt from gocamp
-		where doNm like '%${search.sido}%'
-		and sigunguNm
-		like '%${search.gungu}%'
-		and facltNm like '%${search.keyword}%'
-		and
-		lctcl like '%${search.lctcl}%'
-		<if test='(search.dtl_sido) != null'>
-			and (
-			<foreach collection="search.dtl_sido" item="item1"
-				separator=" or ">
-				doNm = '${item1}'
-			</foreach>
-			)
-		</if>
-		<if test='(search.facltDivNm) != null'>
-			and (
-			<foreach collection="search.facltDivNm" item="item2"
-				separator=" or ">
-				facltDivNm = '${item2}'
-			</foreach>
-			)
-		</if>
-		<if test='(search.dtl_lctcl) != null'>
-			and (
-			<foreach collection="search.dtl_lctcl" item="item3"
-				separator=" or ">
-				lctcl like '%${item3}%'
-			</foreach>
-			)
-		</if>
-		<if test='(search.induty) != null'>
-			and (
-			<foreach collection="search.induty" item="item4"
-				separator=" or ">
-				induty like '%${item4}%'
-			</foreach>
-			)
-		</if>
-		<if test='(search.sbrsCl) != null'>
-			and (
-			<foreach collection="search.sbrsCl" item="item5"
-				separator=" or ">
-				sbrsCl like '%${item5}%'
-			</foreach>
-			)
-		</if>
-		<if test='(search.themaEnvrnCl) != null'>
-			and (
-			<foreach collection="search.themaEnvrnCl" item="item6"
-				separator=" or ">
-				themaEnvrnCl like '%${item6}%'
-			</foreach>
-			)
-		</if>
-		<if test='(search.trlerAcmpnyAt) != null'>
-			and trlerAcmpnyAt = 'Y'
-		</if>
-		<if test='(search.caravAcmpnyAt) != null'>
-			and caravAcmpnyAt = 'Y'
-		</if>
-		<if test='(search.animalCmgCl) != null'>
-			and animalCmgCl like '가능%'
-		</if>
-		<if test='(search.tags) != null'>
-			and (
-			<foreach collection="search.tags" item="item7"
-				separator=" or ">
-				tags like '%${item7}%'
-			</foreach>
-			)
-		</if>
-		order by
-		${page.order}
-		<if test="page.order != 'facltNm'">desc</if>
-		offset #{page.offset} rows
-		fetch next #{page.perPage} rows only;
+		select *, 
+			(select count(*) from recommend where gocamp = gocamp.contentId) as recmCnt 
+			from gocamp
+				where doNm like '%${search.sido}%'
+				and sigunguNm like '%${search.gungu}%'
+				and facltNm like '%${search.keyword}%'
+				and	lctcl like '%${search.lctcl}%'
+				<if test='(search.dtl_sido) != null'>
+					and (
+					<foreach collection="search.dtl_sido" item="item1"
+						separator=" or ">
+						doNm = '${item1}'
+					</foreach>
+					)
+				</if>
+				<if test='(search.facltDivNm) != null'>
+					and (
+					<foreach collection="search.facltDivNm" item="item2"
+						separator=" or ">
+						facltDivNm = '${item2}'
+					</foreach>
+					)
+				</if>
+				<if test='(search.dtl_lctcl) != null'>
+					and (
+					<foreach collection="search.dtl_lctcl" item="item3"
+						separator=" or ">
+						lctcl like '%${item3}%'
+					</foreach>
+					)
+				</if>
+				<if test='(search.induty) != null'>
+					and (
+					<foreach collection="search.induty" item="item4"
+						separator=" or ">
+						induty like '%${item4}%'
+					</foreach>
+					)
+				</if>
+				<if test='(search.sbrsCl) != null'>
+					and (
+					<foreach collection="search.sbrsCl" item="item5"
+						separator=" or ">
+						sbrsCl like '%${item5}%'
+					</foreach>
+					)
+				</if>
+				<if test='(search.themaEnvrnCl) != null'>
+					and (
+					<foreach collection="search.themaEnvrnCl" item="item6"
+						separator=" or ">
+						themaEnvrnCl like '%${item6}%'
+					</foreach>
+					)
+				</if>
+				<if test='(search.trlerAcmpnyAt) != null'>
+					and trlerAcmpnyAt = 'Y'
+				</if>
+				<if test='(search.caravAcmpnyAt) != null'>
+					and caravAcmpnyAt = 'Y'
+				</if>
+				<if test='(search.animalCmgCl) != null'>
+					and animalCmgCl like '가능%'
+				</if>
+				<if test='(search.tags) != null'>
+					and (
+					<foreach collection="search.tags" item="item7"
+						separator=" or ">
+						tags like '%${item7}%'
+					</foreach>
+					)
+				</if>
+				order by
+				${page.order}
+				<if test="page.order != 'facltNm'">desc</if>
+				offset #{page.offset} rows
+				fetch next #{page.perPage} rows only;
 	</select>
 
 	<select id="selectCnt" resultType="int" parameterType="search">

@@ -34,13 +34,17 @@ function orderByHandler(event) {
 	   const keys = Array.from(new Set(urlParams.keys()))
 
 	   keys.forEach(ob => {
+		   // 만약 key가 searchTags 이면,
 		   if (ob == 'searchTags') {
+			   // url에서 searchTags에 해당하는 파라미터를 가져온다.
 			   const tagparams = urlParams.get(ob)
 			   if (tagparams != '') {
+				   // tagparams가 비어있지 않다면 구분자 ','를 사용해 분리한다
 				   let tags = tagparams.split(',')
 				   for (let j = 0; j < tags.length; j++) {
 					   tagOptList.forEach(a => {
 						   if (a.id == tags[j]) {
+						// tag 옵션들 중에서 해당 번호를 가지고 있는 태그들에 'ov' 클래스를 부여한다.
 							   a.classList.add('ov')
 						   }
 					   })					   
@@ -48,10 +52,17 @@ function orderByHandler(event) {
 			   }
 		   }
 		   if (ob != 'listTy' && ob != 'order' && ob != 'trlerAcmpnyAt' && ob != 'caravAcmpnyAt' && ob != 'animalCmgCl') {
+			   // 파라미터 중 listTy, order, trlerAcmpnyAt, caravAcmpnyAt, animalCmgcl은 
+			   // 파라미터 형태가 다르거나 필요가 없는 값이므로 제외
+			   
 			   const params = urlParams.getAll(ob)
+			   // 중복검색에서 파라미터가 여러개 들어가는 경우에 대해 전부 불러온다.
+			   
 			   let input = 'input[name=' + ob + ']'
 			   const check = document.querySelectorAll(input)
+			   // key값을 활용해서 input 태그들을 찾는다.
 			   check.forEach(i => {
+				   // 만일 각자의 check에 대해서 params가 이 값을 포함하고 있다면 checked 속성을 부여한다.
 				   if(params.includes(i.value)) {
 					   i.checked = 'checked'
 				   }
@@ -236,7 +247,9 @@ function orderByHandler(event) {
 		infoWindows[0].open(map, markers[0])
 	}
 	
+	// 태그 부분
 	function tagHandler(event) {
+		// 태그를 클릭하면 ov라는 클래스 부여
     	const ob = event.target.classList
     	if (ob.contains('ov')) {
     		ob.remove('ov')
@@ -257,78 +270,11 @@ function orderByHandler(event) {
     		if (a.classList.contains('ov')) {
     			tagList += ',' + a.id 
     		}
-    	})
-    	tagList = tagList.substring(1, tagList.length)
-    	console.log(tagList)
+    	}) // 태그 옵션에서 'ov'가 부여된 태그의 id만 가져와서 새로운 문자열을 만든다.
+    	tagList = tagList.substring(1, tagList.length) // 끝자리 , 제외
+    	// url을 통해 요청 전송
     	location.href = cpath + '/main/camp?listTy='+ listTy +'&searchTags=' + tagList
     }
-    
-   
-    
-    async function autoCompletionHandler(event) {		
-    	const keyword = event.target.value
-		const requestParam = {
-			keyword : keyword,
-			sido : document.querySelector('select[name="sido"]').value,
-			gungu : document.querySelector('select[name="gungu"]').value,
-			lctcl : document.querySelector('select[name="lctcl"]').value
-		}
-		const url = cpath + '/autocompletion' 
-		autocomplete.style.display = 'block'
-		// 부를 때 한번 비워준다.
-		await fetch(url, {
-			method: 'POST',
-			headers: {
-				'Content-Type' : 'application/json'
-			},
-			body: JSON.stringify(requestParam)
-		})
-			.then(resp => resp.json())
-			.then(json => {
-				autocomplete.innerHTML = ''
-				json.forEach(ob => {
-					const tmp = ob.facltNm.replace(keyword, '<span class="highlight">' + keyword + '</span>')
-					autocomplete.innerHTML += '<div class="line">'+ tmp +'</div>'					
-				})
-			})
-		await arrowKeyHandler(event)
-	}
-	
-    
-	async function arrowKeyHandler(event) {
-		let lines = document.querySelectorAll('div.line')
-		if (lines.length != 0) {
-			lines.forEach(l => l.classList.remove('lineChoice'))
-			switch (event.keyCode) {
-			    // UP KEY
-			    case 38:
-			      nowIndex = Math.max(nowIndex - 1, 0);
-			      lines[nowIndex].classList.add('lineChoice')
-			      break;
-			
-			    // DOWN KEY
-			    case 40:
-			      nowIndex = Math.min(nowIndex + 1, lines.length - 1);
-			      lines[nowIndex].classList.add('lineChoice')
-			      break;
-			
-			    // ENTER KEY
-			    case 13:
-			      searchBar.value = lines[nowIndex].innerText;
-			      location.href = cpath + '/main/camp?listTy=LIST&sido='	
-			       			+ document.querySelector('select[name="sido"]').value 
-			       			+ '&gungu=' + document.querySelector('select[name="gungu"]').value
-			       			+ '&lctcl=' + document.querySelector('select[name="lctcl"]').value
-			       			+ '&keyword=' + lines[nowIndex].innerText;
-			      break;
-			    // 그외 다시 초기화
-			    default:
-			      nowIndex = 0;
-			   	  lines[nowIndex].classList.add('lineChoice')
-			      break;
-		  }
-		} 
-	}
     
 	// 검색어 자동완성
 	async function autoCompletionHandler() {
@@ -337,7 +283,7 @@ function orderByHandler(event) {
 		const lctcl = document.querySelector('select[name="lctcl"]').value
 		const key = search.value
 	   	if (key.length < 3) {
-	   		return
+	   		return    // 만약 입력된 search.value의 길이가 3보다 작으면 return
 	   	}
 				
 		const requestlist =  cpath + '/autocompletion'
@@ -347,6 +293,7 @@ function orderByHandler(event) {
 			lctcl: lctcl,
 			keyword: key
 		}
+		// 파라미터들을 수집해서 AJAX 요청을 보냄
 		await fetch(requestlist, {
 		      method: 'POST',
 		      headers: {
@@ -356,6 +303,7 @@ function orderByHandler(event) {
 		    }).then(resp => resp.json())
 		    .then(json => {
 		    	dataList.innerHTML = ''
+		    		// 10개만 보여준다.
 		    		json.slice(0, 10).forEach(nm => {
 		    		   const option = document.createElement('option');
 		    		   option.innerText = nm

@@ -18,11 +18,15 @@
         <s:intercept-url pattern="/login/loginForm" access="isAnonymous()" />
         <s:intercept-url pattern="/home" access="permitAll" />
         <s:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')" /> 
+        <s:intercept-url pattern="/main/addcamp" access="hasRole('ROLE_ADMIN')" />
+        <s:intercept-url pattern="/main/modifycamp/**" access="hasRole('ROLE_ADMIN')" />
+        <s:intercept-url pattern="/main/deletecamp/**" access="hasRole('ROLE_ADMIN')" />   
         <s:intercept-url pattern="/**" access="permitAll" />
         <s:intercept-url pattern="/login/signup" access="permitAll "/>
         <s:intercept-url pattern="/resources/**" access="permitAll" />
         <s:intercept-url pattern="/freeBoard/**" access="permitAll"/>
         <s:intercept-url pattern="/mypage/main" access="isAnonymous()"/>
+
 
        <s:form-login login-page="/login/loginForm"
                     default-target-url="/"

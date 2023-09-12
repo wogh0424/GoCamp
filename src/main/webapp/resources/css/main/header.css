@@ -1495,7 +1495,7 @@ aside {
 
 /*홈페이지 - 옥*/
 #camping_intro_search {
-	
+	background-size:cover;
 	background-repeat: no-repeat;
 	background-position: center;
 	width: 100%;
@@ -2003,3 +2003,48 @@ label[for="option"] {
 
 
 /* ===============freebaord reply end====================== */
+.register_items {
+	border-radius: 10px;
+	width: 550px;
+	height: 750px;
+	margin: auto;
+	background-color: #3C5944;
+	padding: 5px;
+	box-shadow: 2px 2px 2px black;
+}
+.register_list {
+	border-radius: 10px;
+	width: 500px;
+	height: 710px;
+	margin: 10px 0 0 20px;
+	padding: 10px;
+	background-color: #F4C752;
+}
+.register_list > div > ul {
+	display: flex;
+	justify-content: space-between;
+}
+.register_list > div > ul > li {
+	color: white;
+	font-weight: bold;
+	text-shadow: 2px 2px 2px grey;
+}
+.registerBtn_list {
+	display: flex;
+}
+.register_list > pre {
+	font-weight: bold;
+}
+.registerBtn_list > a > button {
+	border-radius: 10px;
+	width: 240px;
+	height: 30px;
+	font-weight: bold;
+	color: black;
+	transition-duration: 0.5s;
+}
+.registerBtn_list > a > button:hover {
+	transition-duration: 0.5s;
+	background-color: #3C5944;
+	color: white;
+}

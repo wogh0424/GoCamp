@@ -29,6 +29,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
+ <script src="${cpath }/resources/js/board.js"></script>
 
 
 <!-- jquery 사용 위한 라이브러리 -->
@@ -51,32 +52,6 @@
 </head>
 <body>
 
-<script>
-
-$(document).ready(function() {
-    $('#content').summernote({
-        toolbar: [
-        	// [groupName, [list of button]]
-    	    ['fontname', ['fontname']],
-    	    ['fontsize', ['fontsize']],
-    	    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-    	    ['color', ['forecolor','color']],
-    	    ['table', ['table']],
-    	    ['para', ['ul', 'ol', 'paragraph']],
-    	    ['height', ['height']],
-    	    ['view', ['fullscreen', 'help']]
-        ],
-        fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-        
-        placeholder: '내용을 입력하세요',
-        tabsize: 2,
-        width: 800,
-        height: 200
-    });
-});
-</script>
-
 
 
 
@@ -98,19 +73,19 @@ $(document).ready(function() {
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<%-- 			<form:form action="${pageContext.request.contextPath}/logout" method="POST"> --%>
-					<li><a href="${cpath }/product/basket">장바구니</a></li>
+					<li><a href="${pageContext.request.contextPath }/product/basket">장바구니</a></li>
 					<li><a href="${cpath }/logout">로그아웃</a></li>
 					<%-- 			</form:form> --%>
 				</sec:authorize>
 				<c:if test="${pageContext.request.userPrincipal == null}">
-					<li><a href="${cpath }/login/signup">회원가입</a></li>
+					<li><a href="${cpath }/login/register">회원가입</a></li>
 				</c:if>
 				<c:if test="${sessionScope.permission == 'ROLE_ADMIN'}">
 						<li><a href="<c:url value="/admin/adminpage" />">관리자 홈</a></li>
 				</c:if>
 				<c:if
 					test="${sessionScope.permission == 'ROLE_USER' && pageContext.request.userPrincipal != null }">
-						<li><a href="${cpath }/mypage/main">마이페이지</a></li>
+						<li><a href="${pageContext.request.contextPath}/mypage/main">마이페이지</a></li>
 				</c:if>
 			</ul>
 		</div>
@@ -155,8 +130,8 @@ $(document).ready(function() {
 					</li>
 					<li><a href="">고객센터</a>
 						<ul>
-							<li><a href="">캠핑장정보 수정요청</a></li>
-							<li><a href="">등록 야영장 확인문의</a></li>
+							<li><a href="${cpath }/noticeBoard/view/32764">캠핑장정보 수정요청</a></li>
+							<li><a href="${cpath }/noticeBoard/view/32763">등록 야영장 확인문의</a></li>
 						</ul>
 					</li>
 				</ul>

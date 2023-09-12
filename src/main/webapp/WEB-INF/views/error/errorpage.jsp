@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <style>
 	#errorHead {
 		width: 100%;
@@ -52,7 +54,7 @@
 		<p><img src="${cpath }/resources/image/main/404.png" width="100px" height="100px" style="margin: 0 auto;"></p>
 		<h4><b>요청하신 페이지를 찾을 수 없습니다.</b></h4>
 		<p>서비스 이용에 불편을 드려 죄송합니다.<br>메인페이지로 이동 후 원하는 정보에 대한 페이지로 연결해주시기 바랍니다.
-		<p><a href="${cpath }"><button id="toMain">메인으로 돌아가기</button></a></p>
+		<p><a href="${cpath }/"><button id="toMain">메인으로 돌아가기</button></a></p>
 	</div>
 </div>
 

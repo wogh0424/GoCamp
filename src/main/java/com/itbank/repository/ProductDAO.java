@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.itbank.model.BasketDTO;
-import com.itbank.model.CouponDTO;
 import com.itbank.model.MemberDTO;
 import com.itbank.model.PaylistDTO;
 import com.itbank.model.ProductDTO;
@@ -61,5 +60,9 @@ public interface ProductDAO {
 	PaylistDTO paylist(String userId);
 
 	int gotopay(PaylistDTO dto);
+
+	List<ProductDTO> searchByKeyWord(String srchKywrd);
+
+	int countByKeyWord(String srchKywrd);
 
 }

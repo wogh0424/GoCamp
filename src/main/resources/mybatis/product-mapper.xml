@@ -100,4 +100,13 @@
 		select userid, totalOrderPrice from paylist where userid = #{userid} limit 1
 	</select>
     
+
+    <select id="searchByKeyWord" parameterType="string" resultType="product">
+    	select * from product where pName like '%${srchKywrd}%'
+    </select>
+    
+    <select id="countByKeyWord" parameterType="string" resultType="int">
+    	select count(*) from product where pName like '%${srchKywrd}%'
+    </select>
+
 </mapper>

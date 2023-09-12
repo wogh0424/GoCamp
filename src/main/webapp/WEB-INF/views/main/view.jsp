@@ -224,7 +224,7 @@
             </div>
             
             
-			<!--               	  캠핑장 리뷰 페이지 - 연지 -->
+		<!--               	  캠핑장 리뷰 페이지 - 연지 -->
 
 			<div class="intro4">
 				<div id="reviewContainer">
@@ -244,10 +244,10 @@
 								<textarea name="review_content" placeholder="리뷰작성" required></textarea>
 							</p>
 							<input type="hidden" name="gocamp" value="${view.contentId }" />
-							<label for="upload">첨부파일 미리보기:</label>
+							<label for="upload">첨부파일 미리보기</label>
 								<div id="preview"></div>
-								<div><p><input name="upload" type="file" id="upload" accept="image/*" multiple ></p></div>
-							<p><input type="submit" id="reviewBtn" value="리뷰 등록"></p>
+								<div><input name="upload" type="file" id="upload" accept="image/*" multiple ></div>
+							<input type="submit" id="reviewBtn" value="리뷰 등록">
 						
 
 						</form>
@@ -326,6 +326,7 @@
 </div>
 
 
+		
 			<!--  캠핑장 리뷰 페이지 - 연지 -->
 <%@include file="../footer.jsp" %>  
 <a
@@ -474,7 +475,7 @@
   
     
 
-<!--    연지 리뷰 보여주기  scipt -->
+<!--    연지 리뷰 보여주기  script -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     	 
