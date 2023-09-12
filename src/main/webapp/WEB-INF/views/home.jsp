@@ -140,7 +140,7 @@
 				    	</c:choose>
 						</div>
 						
-						<div class="review_rank_content">				
+						<div class="review_ranks">				
 				 			<a href="${cpath }/reviewBoard/view/${list.idx}">
 										<div class="review_rank_content">${list.review_content }</div>
 										<div class="review_rank_campingName">${list.title }</div>
@@ -186,6 +186,8 @@ prevButton.addEventListener('click', function() {
 
     reviewRank.style.transform = `translateX(-${currentIndex * 430}px)`
 })
+
+
 
 nextButton.addEventListener('click', function() {
     for (let i = 0; i < 3; i++) {
