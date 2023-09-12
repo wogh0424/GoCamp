@@ -367,8 +367,8 @@
 		    } else {
 		        alert('회원가입이 성공하였습니다.');
 		        const signForm = document.getElementById('signForm');
-		        signForm.submit(); // 폼 제출
-		        // await couponHandler()
+		        await couponHandler()
+			signForm.submit(); // 폼 제출
 		    }
 		});
 		
@@ -441,11 +441,11 @@
 	<script>
 		
 		async function couponHandler() {
-			
+			const url = cpath + '/coupon/' + userid.value;	
 			await fetch(url)
 			.then(resp => resp.json())
 			.then(json => {
-				if (json) {
+				if (signForm != null) {
 					alert('축하합니다! 가입기념쿠폰이 발급되었습니다. 마이페이지에서 확인하세요')
 					signForm.submit()
 				}
