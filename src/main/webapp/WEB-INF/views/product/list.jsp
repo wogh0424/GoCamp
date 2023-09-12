@@ -42,7 +42,7 @@
 		<c:forEach var="dao" items="${list }">
 			<div class="product_items">
 				<div style="flex: 1;">
-					<a href="${cpath }/product/view/${dao.idx}"><img src="${cpath }/usr/local/tomcat/webapps/upload/${dao.image}" width="150px" height="150px"></a>
+					<a href="${cpath }/product/view/${dao.idx}"><img src="${cpath }/upload/${dao.image}" width="150px" height="150px"></a>
 				</div>
 				<div style="flex: 3;">
 					<p class="product_pName"><a href="${cpath }/product/view/${dao.idx}">상품이름 : ${dao.pName }</a></p>
@@ -91,7 +91,7 @@ async function imageRequestHandler(id) {
 	else {
 		viewImage.innerHTML = ''
 			let newimgUrl = ''
-			newimgUrl = cpath + '/resources/upload/camp/' + arr[0];
+			newimgUrl = cpath + '/resources/upload/' + arr[0];
 
 	};
 
