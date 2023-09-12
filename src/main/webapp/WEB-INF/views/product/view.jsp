@@ -34,7 +34,7 @@ const pid = '${dto.idx}'
 			currImageView.innerHTML = ''
 			json.forEach(ob => {
 				const img = document.createElement('img')
-				img.src = cpath + '/usr/local/tomcat/webapps/upload/' + ob.filePath
+				img.src = cpath + '/upload/' + ob.filePath
 				img.classList.add('currImages')
 				img.style.width = '300px';
 				img.style.height = '300px';
