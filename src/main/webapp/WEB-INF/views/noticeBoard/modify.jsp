@@ -21,12 +21,14 @@
 	  <option value="0" ${dto.pin == 0 ? 'selected' : ''}>일반</option>
 	  <option value="1" ${dto.pin == 1 ? 'selected' : ''}>중요</option>
 	</select>
-</div>    
+</div> 
+   
  <div class="modifyFile">
     <c:forEach var="filePath" items="${dto.filePath}">
 	    <div class="boardImageContainer">
         	<img class="modifyImage" src="${cpath}/upload/${filePath}" >
        		<div class="boardSelectImage">삭제 <input type="checkbox" name="deleteImages" value="${filePath}"></div>
+<!--        		체크박스의 값은 현재 파일의 경로 -->
  		</div>
     </c:forEach>
 </div>   

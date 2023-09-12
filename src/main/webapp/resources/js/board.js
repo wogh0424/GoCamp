@@ -46,12 +46,12 @@ function keywordMarkHandler(key) {
 	preview.innerHTML = ''
 	
     if (event.target.files) {
-        const files = event.target.files
+        const files = event.target.files  
         for (const file of files) {
-            const reader = new FileReader()
+            const reader = new FileReader() 
             reader.onload = function(e) {
-                const image = new Image()
-                image.src = e.target.result
+                const image = new Image() 
+                image.src = e.target.result 
                 preview.appendChild(image)
                 image.classList.add('previewImage');
             }

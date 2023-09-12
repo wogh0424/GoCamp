@@ -36,8 +36,6 @@ public interface RecommendDAO {
 	int increaseReviewRecommendCount(int review);
 	
 	int isReviewRecommended(RecommendDTO recommend);
-
-	
 	
 	int getReviewRecommendCount(int review);
 

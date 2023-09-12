@@ -56,7 +56,7 @@
                     input.type = 'number';
                     input.name = 'imageId';
                     input.value = ob.idx;
-                    img.src = cpath + '/resources/upload/' + ob.filePath;
+                    img.src = cpath + '/upload/' + ob.filePath;
                     img.classList.add('currImages');
                     img.style.width = '200px';
                     img.style.height = '200px';

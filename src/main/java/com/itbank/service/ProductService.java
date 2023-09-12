@@ -26,13 +26,7 @@ public class ProductService {
 	@Autowired private ProductDAO dao;
 	
 	private File dir = new File("/usr/local/tomcat/webapps/upload");
-		
-	public ProductService() {
-		if(dir.exists() == false) {
-			dir.mkdirs();
-		}
-	}
-	
+
 	public int selectCount(String pName) {
 		return dao.selectCount(pName);
 	}
@@ -118,6 +112,7 @@ public class ProductService {
 				try {
 					file.transferTo(dest);
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 				int fk = dao.selectMaxIdxFromUpload();
 

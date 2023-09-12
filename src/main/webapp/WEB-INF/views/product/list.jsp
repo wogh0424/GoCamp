@@ -91,7 +91,7 @@ async function imageRequestHandler(id) {
 	else {
 		viewImage.innerHTML = ''
 			let newimgUrl = ''
-			newimgUrl = cpath + '/resources/upload/' + arr[0];
+			newimgUrl = cpath + '/upload/' + arr[0];
 
 	};
 
