@@ -49,7 +49,7 @@
 				<img src="${view.firstImageUrl }" style="margin-right: 30px;">
 			</c:if>
 			<c:if test="${!fn:contains(view.firstImageUrl, 'gocamping') }">
-				<img src="${cpath }/upload/${view.firstImageUrl }" style="margin-right: 30px;">
+				<img src="${cpath }/resources/upload/camp/${view.firstImageUrl }" style="margin-right: 30px;">
 			</c:if>
 		</div>
 		<div id="viewDescription">
@@ -224,7 +224,7 @@
             </div>
             
             
-		<!--               	  캠핑장 리뷰 페이지 - 연지 -->
+			<!--               	  캠핑장 리뷰 페이지 - 연지 -->
 
 			<div class="intro4">
 				<div id="reviewContainer">
@@ -244,10 +244,10 @@
 								<textarea name="review_content" placeholder="리뷰작성" required></textarea>
 							</p>
 							<input type="hidden" name="gocamp" value="${view.contentId }" />
-							<label for="upload">첨부파일 미리보기</label>
+							<label for="upload">첨부파일 미리보기:</label>
 								<div id="preview"></div>
-								<div><input name="upload" type="file" id="upload" accept="image/*" multiple ></div>
-							<input type="submit" id="reviewBtn" value="리뷰 등록">
+								<div><p><input name="upload" type="file" id="upload" accept="image/*" multiple ></p></div>
+							<p><input type="submit" id="reviewBtn" value="리뷰 등록"></p>
 						
 
 						</form>
@@ -301,7 +301,7 @@
 											</c:forTokens>
 										</div>
 										
-										<div id="btnReviewRecommendReview">
+											<div id="btnReviewRecommendReview">
 										    <button class="recommendReviewBtn" >${isReviewRecommended ? '추천취소🥲' : '추천하기👍'}</button>
 										</div>
 										
@@ -326,7 +326,6 @@
 </div>
 
 
-		
 			<!--  캠핑장 리뷰 페이지 - 연지 -->
 <%@include file="../footer.jsp" %>  
 <a
@@ -403,7 +402,7 @@
 		
 		const recommendReviewBtn = document.querySelectorAll('button.recommendReviewBtn')
 		const reviewIdx = document.querySelectorAll('div.reviewIdx')
-		const loginId = '${pageContext.request.userPrincipal.name}'
+		
 		
 		// 새로고침해도 유지시켜주기 위해 추가
 		document.addEventListener('DOMContentLoaded', async function() {
@@ -439,14 +438,14 @@
 		        const reviewId = reviewIdx[index].innerText.trim()
 		        let url = cpath + '/reviewRecommend/' + reviewId
 		
-		        let response = await fetch(url) // fetch 함수를 사용해 비동기 요청을 보내고 결과를 받아와서 처리
-		        let json = await response.json() 
+		        let response = await fetch(url)
+		        let json = await response.json()
 		        console.log(json)
 		
 		        let requestUrl = btn.innerHTML === '추천하기👍' ? cpath + '/reviewRecommend/' + reviewId : cpath + '/reviewDisRecommend/' + reviewId
 		        let successMessage = btn.innerHTML === '추천하기👍' ? '추천완료❤️' : '추천 취소🥲완료'
 		
-		        $.post(requestUrl, {review: reviewId}, function(data) {  // 서버에 post  요청을 보내는 방식
+		        $.post(requestUrl, {review: reviewId}, function(data) {
 		            alert(successMessage)
 		            btn.innerHTML = btn.innerHTML === '추천하기👍' ? '추천 취소🥲' : '추천하기👍'
 		        })
@@ -475,7 +474,7 @@
   
     
 
-<!--    연지 리뷰 보여주기  script -->
+<!--    연지 리뷰 보여주기  scipt -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
     	 
@@ -557,6 +556,8 @@
         const viewShowMap = document.getElementById('viewShowMap')
         viewShowMap.addEventListener('click', viewMapHandler)
     </script>
+    
+    <%@include file="../footer.jsp"%>
     
 </body>
 </html>
