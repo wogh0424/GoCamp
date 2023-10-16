@@ -21,11 +21,7 @@ public interface CampDAO {
 
 	ItemDTO selectOne(String contentId);
 
-	List<TagDTO> selectTags();
-
 	int plusViewCount(String contentId);
-
-	int plusTagChooseCnt(List<String> tags);
 
 	List<ItemDTO> searchByKeyWord(String srchKywrd);
 
