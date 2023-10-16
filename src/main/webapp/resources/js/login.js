@@ -1,3 +1,0 @@
-/**
- * Naver-api login script 
- */
