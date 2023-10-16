@@ -165,25 +165,9 @@
 		from gocamp where contentId = #{contentId}
 	</select>
 
-	<select id="selectTags" resultType="tag">
-		select * from tagLibrary
-		order by chooseCnt desc, tagNum
-	</select>
-
 	<update id="plusViewCount" parameterType="string">
 		update gocamp set
 		clickCnt = clickCnt + 1 where contentId = #{contentId}
-	</update>
-
-	<update id="plusTagChooseCnt" parameterType="list">
-		update tagLibrary
-		set
-		chooseCnt = chooseCnt + 1
-		where tagNum in
-		<foreach collection="list" item="item" open="(" separator=","
-			close=")">
-			${item}
-		</foreach>
 	</update>
 
 	<select id="searchByKeyWord" parameterType="string"
