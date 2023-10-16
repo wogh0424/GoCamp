@@ -62,11 +62,9 @@ public class MainController {
 		MainPagingDTO paging = new MainPagingDTO(page, campCnt, order);
 		PageAndSearchDTO searchPage = new PageAndSearchDTO(paging, search);
 		List<ItemDTO> list = campService.selectAll(searchPage);
-		List<TagDTO> tags = campService.selectTags();
 		mav.addObject("list", list);
 		mav.addObject("paging", paging);
 		mav.addObject("listTy", listTy);
-		mav.addObject("tags", tags);
 		return mav;
 	}
 	
