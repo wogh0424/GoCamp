@@ -56,7 +56,6 @@ public class CampService {
 			if (searchPage.getSearch().getSearchTags() != "") {
 				List<String> tmp = Arrays.asList(searchPage.getSearch().getSearchTags().split(","));
 				searchPage.getSearch().setTags(tmp);
-				campDAO.plusTagChooseCnt(tmp);
 			}
 		}
 		return campDAO.selectAll(searchPage);
@@ -68,10 +67,6 @@ public class CampService {
 
 	public ItemDTO selectOne(String contentId) {
 		return campDAO.selectOne(contentId);
-	}
-
-	public List<TagDTO> selectTags() {
-		return campDAO.selectTags();
 	}
 
 	public int plusViewCount(String contentId) {
