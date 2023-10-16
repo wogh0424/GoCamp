@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC 
+	"-//mybatis.org//DTD Config 3.0//EN" 
+	"https://mybatis.org/dtd/mybatis-3-config.dtd">
+	
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="mapUnderscoreToCamelCase" value="false"/>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.itbank.model.ShopPagingDTO" alias="shopPaging"/>
+		<typeAlias type="com.itbank.model.MemberDTO" alias="member"/>
+		<typeAlias type="com.itbank.model.ProductDTO" alias="product"/>
+		<typeAlias type="com.itbank.model.Product_fileDTO" alias="product_file"/>
+		<typeAlias type="com.itbank.model.BasketDTO" alias="basket"/>
+		<typeAlias type="com.itbank.model.PaylistDTO" alias="paylist"/>
+		
+		
+		<typeAlias type="com.itbank.model.FreeBoardDTO" alias="freeboard"/>
+		<typeAlias type="com.itbank.model.FreeBoardReplyDTO" alias="freeboardreply"/>
+		<typeAlias type="com.itbank.model.NoticeBoardDTO" alias="noticeboard"/>
+		<typeAlias type="com.itbank.model.EventBoardDTO" alias="eventboard"/>
+		<typeAlias type="com.itbank.model.GocampReviewDTO" alias="gocampreview"/>
+		<typeAlias type="com.itbank.model.LikesDTO" alias="like"/>
+		<typeAlias type="com.itbank.model.RecommendDTO" alias="recommend"/>
+		<typeAlias type="com.itbank.model.CouponDTO" alias="coupon"/>
+		
+		
+		
+		<typeAlias type="com.itbank.model.AdminDTO" alias="admin"/>
+		<typeAlias type="com.itbank.model.SalesDTO" alias="sales"/>
+		<typeAlias type="com.itbank.model.IncomeDTO" alias="income"/>
+		<typeAlias type="com.itbank.model.ReportDTO" alias="report"/>
+		
+
+		
+		<!-- 정민 -->
+		<typeAlias type="com.itbank.model.ItemDTO" alias="item"/>
+		<typeAlias type="com.itbank.model.MainPagingDTO" alias="paging"/>
+		<typeAlias type="com.itbank.model.SearchDTO" alias="search"/>
+		<typeAlias type="com.itbank.model.PageAndSearchDTO" alias="searchPage"/>
+		<typeAlias type="com.itbank.model.TagDTO" alias="tag"/>
+		<typeAlias type="com.itbank.model.CampDTO" alias="camp"/>
+		<typeAlias type="com.itbank.model.ImageDTO" alias="image"/>
+	</typeAliases>
+	
+</configuration>

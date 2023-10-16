@@ -1,0 +1,315 @@
+@charset "UTF-8";
+
+#mypageBanner {
+	width: 100%;
+	height: 240px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+
+#mypageFrame {
+	max-width: 1200px;
+	height: 600px;
+	margin: 50px auto;
+	border-radius: 30px;
+	display: flex;
+	box-shadow: 7px 7px 7px grey;
+}
+
+#mypageNav {
+	flex: 1;
+	padding: 20px 0 20px 30px;
+	border-radius: 15px 0 0 15px;
+	background-color: #3C5944;
+	color: white;
+	text-align: center;
+}
+
+#mypageShow {
+	flex: 2.5;
+	padding: 10px;
+	border-radius: 0 15px 15px 0;
+	background-color: #E8E289;
+}
+
+li.mypageSection {
+	font-weight: bold;
+	cursor: pointer;
+	padding: 20px 0;
+	font-size: 20px;
+	height: 60px;
+	border-radius: 10px 0 0 10px;
+	border-left: 1px solid #3C5944;
+}
+
+li.mypageSection.selected {
+	background-color: #E8E289;
+	color: black;
+}
+
+li.mypageSection:hover {
+	background-color: #E8E289;
+	color: #4476D5;
+	transition: ease 0.3s;
+}
+
+.mypageItems {
+	display: none;
+}
+
+.mypageItems.selected {
+	display: block;
+}
+
+.mypage_items {
+	background-color: white;
+}
+
+#personalInfor {
+	width: 100%;
+	margin: 20px auto;
+	border-collapse: collapse;
+	border: 1px solid #ccc;
+}
+
+#personalInfor th, #personalInfor td {
+	padding: 10px;
+	text-align: left;
+	border-bottom: 1px solid #ccc;
+}
+
+#personalInfor th {
+	background-color: #f2f2f2;
+	font-weight: bold;
+}
+
+#personalInfor input[type="password"] {
+	width: 100%;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+#mypage_form input[type="submit"], #mypage_form input[type="reset"] {
+	background-color: #007BFF;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+#mypage_form input[type="submit"]:hover, #mypage_form input[type="reset"]:hover
+	{
+	background-color: #0056b3;
+}
+
+.deleted_board {
+	margin-top: 10px;
+	background-color: white;
+	max-height: 200px;
+	height: 200px;
+	overflow-y: scroll;
+	border: 1px solid #ccc;
+	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.deleted_list {
+	position: absolute;
+	top: 0;
+}
+
+/* 자식 요소인 .banned_content */
+.banned_content {
+	margin: 10px 0;
+	padding: 10px;
+	width: 450px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+}
+
+#title {
+	font-weight: bold;
+}
+
+#reason {
+	margin-top: 5px;
+}
+
+#date {
+	font-size: 12px;
+	color: #777;
+}
+
+.red {
+	color: red;
+}
+/*  여기  로그인 폼용*/
+#mypageWrap {
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+
+#likesContainer {
+	overflow-y: scroll;
+	width: 100%;
+	height: 570px;
+	padding: 10px;
+	position: absolute;
+	top: 0;
+}
+
+.likesImage {
+	width: 190px;
+}
+
+.likesImage>a>img {
+	width: 170px;
+	height: 120px;
+}
+
+.likesItem {
+	position: relative;
+	display: flex;
+	margin-bottom: 10px;
+	background-color: #d4f0c1;
+	padding: 10px;
+	border: 1px dashed grey;
+}
+
+.likesRemove {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background-color: black;
+	color: white;
+	border-radius: 5px;
+}
+
+#zzim {
+	margin: 30px 240px;
+	width: 300px;
+	height: 50px;
+	border-radius: 10px;
+	background-color: #226FB3;
+	color: white;
+}
+
+#zzim:hover {
+	background-color: #0056b3;
+}
+/*리뷰*/
+#myReviewBox {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+#myReviews {
+	overflow-y: scroll;
+	width: 100%;
+	height: 570px;
+	padding: 10px 40px;
+	position: absolute;
+	top: 0;
+	text-align: center;
+}
+
+.myReviewItem {
+	border-bottom: 1px dashed grey;
+	padding: 10px 0;
+	display: flex;
+}
+
+.tomyReview {
+	color: black;
+}
+
+.tomyReview:hover {
+	text-decoration: none;
+}
+
+/*쿠폰*/
+#couponBox {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+#myCoupon {
+	overflow-y: scroll;
+	width: 100%;
+	height: 570px;
+	padding: 10px 40px;
+	position: absolute;
+	top: 0;
+}
+
+.couponItem {
+	border: 1px dashed grey;
+	display: flex;
+	height: 200px;
+}
+
+.couponimg {
+	width: 100px;
+	height: 198px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.discount {
+	background-color: white;
+	text-align: center;
+	padding: 20px;
+	flex: 1.5;
+}
+
+.saleRate {
+	color: black;
+	text-shadow: 1px 2px 2px grey;
+	font-size: 90px;
+}
+
+.couponNumber {
+	font-size: 16px;
+}
+
+.couponDetails {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background-color: #d5e9c8;
+	flex: 1;
+}
+
+.dueDate {
+	background-color: black;
+	color: white;
+	width: 120px;
+	padding: 10px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.couponNm {
+	margin-top: 10px;
+}
+
+.leftDate {
+	position: absolute;
+	top: 10px;
+	background-color: pink;
+	width: 100px;
+	height: 20px;
+}

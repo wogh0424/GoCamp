@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+		"-//mybatis.org//DTD Mapper 3.0//EN"
+		"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		
+<mapper namespace="com.itbank.repository.EventBoardDAO">
+		<select id="selectAll" resultType="eventboard" parameterType="paging">
+			select * from event_board 		
+				where title like '%${order}%' or content like '%${order}%'
+				order by 
+					pin desc, idx desc
+				offset #{offset} rows
+				fetch next #{perPage} rows only
+		</select>
+		
+		<update id="updateViewCount" parameterType="int">
+				update event_board 
+					set
+						view_cnt = view_cnt + 1
+					where
+						idx = #{idx}
+		</update>
+
+		
+		<select id="selectOne" parameterType="int" resultType="eventboard">
+				 SELECT 
+		        event_board.*,
+		        (SELECT GROUP_CONCAT(filePath SEPARATOR ',')
+		         FROM event_board_file
+		         WHERE event_board_file.event_board = event_board.idx) AS filePath 
+	 		  FROM event_board where idx = #{idx}
+	   		  ORDER BY idx
+		</select>
+		
+		<select id="selectCount" parameterType="paging" resultType="int">
+				select count(*) from event_board where title like '%${order}%' or content like '%${order}%'
+		</select>
+		
+		<insert id="insertBoard" parameterType="eventboard">
+			insert into event_board
+				(title, content, pin) 
+					values (#{title}, #{content}, #{pin})
+		</insert>
+		
+		<insert id="insertFile" parameterType="hashmap">
+			insert into event_board_file (event_board, filePath) 
+			
+				<foreach item="item" collection="list" separator="  UNION ALL  " >
+					select #{upload}, #{item} from dual
+			</foreach>
+		</insert>
+		
+		<select id="selectMaxIdxFromUpload" resultType="int">   
+		select max(idx) from event_board
+	</select>
+		
+		<delete id="delete" parameterType="int">
+				delete from event_board where idx=#{idx}
+		</delete>
+		
+		
+		<update id="update"  parameterType="eventboard" >
+				update event_board
+					set title=#{title}, content=#{content}, pin=#{pin} 
+						where idx=#{idx}
+		</update>
+		<delete id="deleteFile" parameterType="string">
+				delete from event_board_file where filePath = #{filePath }
+		</delete>
+		
+		<select id="searchByKeyWord" parameterType="string" resultType="eventboard">
+			select * from event_board where title like '%${srchKywrd}%' or content like '%${srchKywrd}%'
+		</select>
+		
+		<select id="countByKeyword" parameterType="string" resultType="int">
+			select count(*) from event_board where title like '%${srchKywrd}%' or content like '%${srchKywrd}%'
+		</select>
+</mapper>
+		

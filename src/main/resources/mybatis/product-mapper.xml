@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.itbank.repository.ProductDAO">
+	<select id="selectAll" resultType="product" parameterType="HashMap"> <!-- 쇼핑몰 페이징 10개씩 -->
+		select *, (SELECT filePath 
+	        FROM product_file 
+	         WHERE product_file.product_idx = product.idx limit 1) AS image 
+	         from product 
+	         where pName like '%${pName}%' order by ${sort} desc 
+	         limit #{paging.offset}, #{paging.perPage}
+	</select>
+	
+	<select id="selectCount" parameterType="String" resultType="int"> <!-- 페이징 카운트 -->
+		select count(*) from product where pName like '%${pName}%'
+	</select>
+	
+	<select id="selectOne" resultType="product" parameterType="String"> <!-- 상품이름 검색  -->
+		select * from product where pName like #{%pname%};
+	</select>
+	
+	<delete id="delete" parameterType="int"> <!-- 상품 삭제 기능 -->
+    	delete from product where idx = #{idx}
+	</delete>
+	
+	<delete id="basketdelete" parameterType="int"> <!-- 장바구니 삭제 기능 -->
+		delete from basket where idx = #{idx}
+	</delete>
+	
+	<update id="basketmodify" parameterType="basket">
+		update basket set amount = #{amount} where idx = #{idx}
+	</update>
+	
+	<select id="basketSelectAll" resultType="basket"> <!-- 장바구니 목록 불러오기 로그인이 되어있는 유저에 한하여 -->
+		select * from basket where userid = #{userid} order by idx;
+	</select>
+	
+	<select id="selectDetails" parameterType="int" resultType="product">
+         SELECT * from product	where idx = ${idx}
+    </select>
+    
+    <select id="selectMaxIdxFromUpload" resultType="int">   
+		select max(idx) from product
+	</select>
+    
+    <insert id="addProduct" parameterType="product">
+    	insert into product (pName, price, amount, pContent) 
+    		values (#{pName}, #{price}, #{amount}, #{pContent})
+    </insert>
+    
+    <insert id="addFile" parameterType="hashmap">
+			insert into product_file (product_idx, filePath) 
+		<foreach item="item" collection="list" separator="  UNION ALL  " >
+			select #{upload}, #{item} from dual
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterType="product">
+		update product set pName = #{pName}, price = #{price}, amount = #{amount}, 
+							pContent = #{pContent} where idx = #{idx}
+	</update>
+	
+	<delete id="deletefile" parameterType="string">
+		delete from product_file where filePath = #{filePath};
+	</delete>
+	
+	<select id="getImageList" parameterType="string" resultType="string">
+		select filePath from product_file where product_idx = #{product_idx}
+	</select>
+	
+	<select id="showProductImages" parameterType="int" resultType="product_file">
+		select * from product_file where product_idx = #{idx}
+	</select>
+	
+    <insert id="grocery" parameterType="product">
+    	insert into basket (userid, pid, pName, price, amount) values 
+    		(#{userid}, #{idx}, #{pName}, #{price}, #{amount})
+    </insert>
+    
+    <select id="validategrocery" parameterType="product">
+    	select count(*) from basket where userid = #{userid} and pid = #{idx} and pName = #{pName}
+    </select>
+    
+    <update id="updatecurrentgrocery" parameterType="product">
+    	update basket set amount = amount + #{amount} where userid = #{userid} and pid = #{idx} and pName = #{pName}
+    </update>
+    
+    <select id="getuserInfo" parameterType="product">
+		select username, pnum, email from member where userid = #{userid};    
+    </select>
+    
+    <insert id="gotopay" parameterType="paylist">
+    	insert into paylist (userid, totalOrderPrice, totalOrderAmount) values
+    		(#{userid}, #{totalOrderPrice}, #{totalOrderAmount})
+    </insert>
+    
+    <select id="paylist" parameterType="string" resultType="paylist">
+		select userid, totalOrderPrice from paylist where userid = #{userid} limit 1
+	</select>
+    
+
+    <select id="searchByKeyWord" parameterType="string" resultType="product">
+    	select * from product where pName like '%${srchKywrd}%'
+    </select>
+    
+    <select id="countByKeyWord" parameterType="string" resultType="int">
+    	select count(*) from product where pName like '%${srchKywrd}%'
+    </select>
+
+</mapper>

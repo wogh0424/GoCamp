@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+	"-//mybatis.org//DTD Mapper 3.0//EN" 
+	"https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.itbank.repository.LoginDao">
+	
+	<select id="selectUser" resultType="com.itbank.model.UserDetailsDto">
+		select userid,userpw,enabled from member where userid=#{userid}
+	</select>
+	
+	<select id="getAuthList" resultType="String">
+		select AUTHORITY from member_auth where userid=#{userid}
+	</select>
+	
+	<select id="checkAdmin" parameterType="member" resultType="member">
+		select userid, userpw from member
+			where
+				userid = #{adminid}
+	</select>
+	<select id="checkDup" parameterType="string" resultType="int">
+		select count(*) from member where userid = #{userid}
+	</select>
+	
+	<insert id="signup" parameterType="member">
+		insert into member (userid, userpw, username, nickname, email, pnum, birth)
+			values (#{userid}, #{userpw}, #{username}, #{nickname}, #{email}, #{pnum}, #{birth})
+	</insert>
+	<insert id="setAuth" parameterType="string">
+		insert into member_auth (userid) values (#{userid})
+	</insert>
+	
+	<select id="adminpage" resultType="member">
+		select * from member mem join member_auth au on mem.userid = au.userid
+	</select>
+	
+	<select id="importMember" resultType="member" parameterType="string">
+		select * from member where userid = #{userid}
+	</select>
+	
+<!-- 	찜 기능을 위한 member idx 불러오기 -->
+	<select id="getMemberIdx" resultType="int" parameterType="string">
+		select idx from member where userid = #{userid}
+	</select>
+	
+	<select id="checkPw" parameterType="string" resultType="string">
+		select userpw from member where userid = #{userid}
+	</select>
+	
+	<update id="changePw" parameterType="map">
+		update member set userpw = #{userpw} where userid = #{userid}
+	</update>
+	
+	<select id="getPermission" parameterType="string" resultType="string">
+		select authority from member_auth where userid = #{userid}
+	</select>
+	
+	<update id="changeAuth" parameterType="member">
+		update member_auth set authority = #{authority} where userid = #{userid}
+	</update>
+	
+	<update id="banUser" parameterType="member">
+		update member set enabled = #{enabled} where userid = #{userid}
+	</update>
+	
+	<insert id="signupBusiness" parameterType="member">
+		insert into business_member (userid, userpw) values (#{userid}, #{userpw})
+	</insert>
+	
+	<insert id="setBusinessAuth" parameterType="string">
+		insert into business_member_auth (userid) values (#{userid})
+	</insert>
+	
+	<select id="checkBusiness" parameterType="member" resultType="int">
+	  	select count(business_number) from business_member where business_number = #{businessID} and userid = #{userid}
+	</select>
+	
+	<select id="getUserpw" resultType="string" parameterType="string">
+		select userpw from member where userid = #{userid}
+	</select>
+
+	<select id="checkEnabled" parameterType="string" resultType="member">
+		select enabled from member where userid = #{userid}
+	</select>
+		
+	<insert id="couponcheck" parameterType="coupon">
+		insert into coupon (cName, couponNum, discnt, userid, cDate, dueDate)
+			values (#{cName}, #{couponNum}, #{discnt}, #{userid}, #{cDate}, #{dueDate})
+	</insert>
+	
+	<select id="couponSelectAll" parameterType="coupon">
+		select * from coupon where userid = #{userid}
+	</select>
+</mapper>
+
+
