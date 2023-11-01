@@ -25,7 +25,8 @@ jobs:
       with:
         java-version: '8'
         distribution: 'temurin'
-    
+
+    # Maven캐시정리
     - name: Clean Maven target directory
       run: mvn clean
 
