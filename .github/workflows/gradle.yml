@@ -25,11 +25,10 @@ jobs:
       with:
         java-version: '8'
         distribution: 'temurin'
-    # 파일권한
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+    
+    - name: Clean Maven target directory
+      run: mvn clean
+
     # 스프링 프로젝트를 컴파일후 war파일로 build
     - run: mvn --batch-mode --update-snapshots verify
     - run: mkdir webapps && cp target/GoCamping-1.0.0-BUILD-SNAPSHOT.war webapps/ROOT.war
