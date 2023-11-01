@@ -16,7 +16,6 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -31,14 +30,11 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
-  # 스프링 프로젝트를 컴파일후 war파일로 build해서 아키텍트에 업로드
+    # 스프링 프로젝트를 컴파일후 war파일로 build
     - run: mvn --batch-mode --update-snapshots verify
     - run: mkdir webapps && cp target/GoCamping-1.0.0-BUILD-SNAPSHOT.war webapps/ROOT.war
-    - uses: actions/upload-artifact@v3
-      with:
-        name: Package
-        path: webapps
-        
+    
+    # 바로 서버로 ROOT.war 파일 전송
     - name: Deploy ROOT.war to Server
       uses: appleboy/scp-action@master
       with:
@@ -48,3 +44,4 @@ jobs:
         port: ${{ secrets.SERVER_PORT }}
         source: webapps/ROOT.war
         target: /volume1/docker/LastProject/Hosting
+
