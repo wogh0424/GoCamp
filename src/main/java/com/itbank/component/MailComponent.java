@@ -26,9 +26,6 @@ public class MailComponent {
 	@Value("classpath:mailAccount.txt")
 	private Resource mailAccount;
 	
-	private String serverId = "";	// 네이버 혹은 구글의 사용자 계정
-	private String serverPw = "";	// 계정의 비밀번호
-	
 	private String host = "smtp.naver.com";
 	private int port = 465;
 	private String serverId = "";	// 네이버 혹은 구글의 사용자 계정
