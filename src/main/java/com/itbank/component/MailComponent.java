@@ -28,19 +28,13 @@ public class MailComponent {
 	
 	private String host = "smtp.naver.com";
 	private int port = 465;
-	private String serverId = "";	// 네이버 혹은 구글의 사용자 계정
-	private String serverPw = "";	// 계정의 비밀번호
+	private String serverId = "yamahost0424";	// 네이버 혹은 구글의 사용자 계정
+	private String serverPw = "yamahost!!";	// 계정의 비밀번호
 	
 	private Properties props = new Properties();
 
 	public int sendMail(String email, String content) throws IOException {
 		// 메일 계정 정보 불러오기
-		Scanner sc = new Scanner(mailAccount.getFile());
-		while(sc.hasNextLine()) {
-			String text = sc.nextLine();
-			serverId = text.split("/")[0];
-			serverPw = text.split("/")[1];
-		}
 		sc.close();
 		
 		// 메일 보내기 환경 설정
