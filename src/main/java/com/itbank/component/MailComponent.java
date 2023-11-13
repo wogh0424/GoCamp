@@ -22,6 +22,8 @@ import jakarta.mail.internet.MimeMessage;
 
 @Component
 public class MailComponent {
+	@Value("classpath:mailAccount.txt")
+	private Resource mailAccount;
 
 	
 	private String host = "smtp.naver.com";
@@ -33,6 +35,12 @@ public class MailComponent {
 
 	public int sendMail(String email, String content) throws IOException {
 		// 메일 계정 정보 불러오기
+		Scanner sc = new Scanner(mailAccount.getFile());
+		while(sc.hasNextLine()) {
+			String text = sc.nextLine();
+			serverId = text.split("/")[0];
+			serverPw = text.split("/")[1];
+		}
 		sc.close();
 		
 		// 메일 보내기 환경 설정
