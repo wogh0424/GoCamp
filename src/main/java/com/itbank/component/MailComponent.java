@@ -23,8 +23,6 @@ import jakarta.mail.internet.MimeMessage;
 @Component
 public class MailComponent {
 
-	@Value("classpath:mailAccount.txt")
-	private Resource mailAccount;
 	
 	private String host = "smtp.naver.com";
 	private int port = 465;
