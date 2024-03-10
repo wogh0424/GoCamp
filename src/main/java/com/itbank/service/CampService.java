@@ -4,9 +4,11 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -196,13 +198,14 @@ public class CampService {
 		return campDAO.selectBest5();
 	}
 
-	public List<ItemDTO> requestCamp(int page) {
-		int offset = (page - 1) * 50 + 1;
-		int perPage = (page) * 50;
+	public List<ItemDTO> requestCamp(Map<String, Integer> params) {
+		int page = params.get("pageNo");
+		int maxId = params.get("maxId");
+		System.out.println(page + "page테스트");
+		int perPage = (page - 1) * 50 + 1;
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("offset", offset);
+		map.put("maxId", maxId);
 		map.put("perPage", perPage);		
 		return campDAO.requestCamp(map);
 	}
-
 }
