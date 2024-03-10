@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -296,9 +297,18 @@ public class AjaxController {
 	}
 	
 	@GetMapping("/admin/getCampList/{pageNo}")
-	public List<ItemDTO> requestCamp (@PathVariable("pageNo") int page) {
-		List<ItemDTO> list = campService.requestCamp(page);
+	public List<ItemDTO> requestCamp (@PathVariable("pageNo") int page,
+										@RequestParam(value = "maxId", required = false) Integer maxId) {
+		Map<String, Integer> params = new HashMap<>();
+		params.put("pageNo", page);
+		params.put("maxId", maxId);
+		List<ItemDTO> list = campService.requestCamp(params);
 		return list;
+	}
+	
+	@GetMapping("/testcase")
+	public String test() {
+		return "test Complited";
 	}
 }
 
