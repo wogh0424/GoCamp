@@ -2,9 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.request.contextPath }" />
-<script src="https://code.jquery.com/jquery-3.7.1.js"
-	integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-	crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -499,36 +497,49 @@ article.selected {
 	async function loadHandler() {
 		const contents = document.querySelector('div.content')
 		const pageNo = +contents.getAttribute('pageNo') + 1
+		let defaultIDX = 100001
 		contents.setAttribute('pageNo', pageNo)
 		let arr = []
+		let ids = []
+		document.querySelectorAll('.id').forEach(element => {
+			ids.push(+element.textContent)
+		})
+		let idslength = ids.length
+		console.log (idslength) 
+		let maxId = idslength === 0 ? defaultIDX : Math.max(...ids) + pageNo
 		let url = cpath +  '/admin/getCampList/' + pageNo
-		await fetch(url)
-		.then(resp => resp.json())
-		.then(json => {
-			let tag = ''
-			json.forEach(ob => {
-				tag += '<div class="managementCamps">' 
-				tag += '	<div class="id">' + ob.contentId  + '</div>'
-				tag += '	<div class="nm">' + ob.facltNm  + '</div>'
-				tag += '	<div class="addr">' + ob.addr1  + '</div>'
-				tag += '	<div class="campManageButtons">'
-				tag += '<div class="modify_btn">'
-				tag += '		<a href="' + cpath +  '/main/modifycamp/' + ob.contentId + '">'
-				tag += '			<button id="modify_button">수정하기</button>'			
-				tag += '		</a>'
-				tag += '</div>'
-				tag += '<div class="delete_btn">'
-				tag += '		<a href="' + cpath +  '/main/deletecamp/' + ob.contentId + '">'
-				tag += '			<button id="delete_button">삭제하기</button>'			
-				tag += '		</a>'
-				tag += '</div>'
-				tag += '	</div>'
-				tag += '</div>'
-			})
-			contents.innerHTML += tag
-			arr = json
-		})	
-	}
+		$.ajax({
+			type: 'GET',
+			url: cpath + '/admin/getCampList/' + pageNo + '?maxId=' + maxId,
+			async: true,
+			success: function(data){
+				let tag = ''
+				data.forEach(ob => {
+					tag += '<div class="managementCamps">' 
+					tag += '	<div class="lastID">' + maxId + ' ' +'</div>'
+					tag += '	<div class="lastID">' + '-----' + ' ' +'</div>'
+					tag += '	<div class="id">' + ob.contentId  + '</div>'
+					tag += '	<div class="nm">' + ob.facltNm  + '</div>'
+					tag += '	<div class="addr">' + ob.addr1  + '</div>'
+					tag += '	<div class="campManageButtons">'
+					tag += '<div class="modify_btn">'
+					tag += '		<a href="' + cpath +  '/main/modifycamp/' + ob.contentId + '">'
+					tag += '			<button id="modify_button">수정하기</button>'			
+					tag += '		</a>'
+					tag += '</div>'
+					tag += '<div class="delete_btn">'
+					tag += '		<a href="' + cpath +  '/main/deletecamp/' + ob.contentId + '">'
+					tag += '			<button id="delete_button">삭제하기</button>'			
+					tag += '		</a>'
+					tag += '</div>'
+					tag += '	</div>'
+					tag += '</div>'
+				})	
+				contents.innerHTML += tag
+			}		
+		})		
+	}	
+			
 	
 	function scrollHandler(event) {
 		const root = document.getElementById('campRoot')
@@ -538,13 +549,11 @@ article.selected {
                 clientHeight: event.target.clientHeight,
                 scrollHeight: event.target.scrollHeight
             }
-            console.log(ob)
 
     const a = Math.round((ob.scrollTop + ob.clientHeight + 0.5) / 2)
     const b = Math.round(ob.scrollHeight / 2)
 
 
-    console.log(a, b)
     const flag = a == b
     const scrollable = contents.getAttribute('scrollable')
 
