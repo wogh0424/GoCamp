@@ -318,8 +318,10 @@
 	</select>
 	
 	<select id="requestCamp" resultType="item" parameterType="map">
-		select * from gocamp order by contentId limit ${offset}, ${perPage}
-	</select>
+	<![CDATA[
+			select * from gocamp where contentId > ${maxId} order by contentId limit 50
+	]]>
+		</select>
 </mapper>
 
 
