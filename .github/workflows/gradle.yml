@@ -40,7 +40,8 @@ jobs:
       with:
         host: ${{ secrets.SERVER_HOST }}
         port: ${{ secrets.SERVER_PORT }}
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
         source: webapps/ROOT.war
         target: /home/yamahost0424/LastProject/Hosting
 
