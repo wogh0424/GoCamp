@@ -15,7 +15,7 @@
 <bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
    		 <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<property name="jdbcUrl" value="jdbc:log4jdbc:mariadb://172.17.0.2:3306/LastProject" />
+		<property name="jdbcUrl" value="jdbc:log4jdbc:mariadb://mysql.yamahosts.com:7445/LastProject" />
 		<property name="username" value="root" />
 		<property name="password" value="aa7218091" />
 	</bean>
