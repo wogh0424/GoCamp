@@ -43,5 +43,5 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}
         port: ${{ secrets.SERVER_PORT }}
         source: webapps/ROOT.war
-        target: /volume1/docker/LastProject/Hosting
+        target: /home/yamahost0424/LastProject/Hosting
 
